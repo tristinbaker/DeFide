@@ -1,0 +1,150 @@
+[
+  {
+    "id": "joyful",
+    "name": "Joyful Mysteries",
+    "traditional_days": "Monday, Saturday",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "The Annunciation",
+        "scripture": "Luke 1:26–38",
+        "meditation": "The Angel Gabriel announces to Mary that she will conceive and bear the Son of God. Mary humbly accepts the will of God: 'Behold the handmaid of the Lord; be it done to me according to thy word.' Pray for the virtue of humility."
+      },
+      {
+        "number": 2,
+        "title": "The Visitation",
+        "scripture": "Luke 1:39–56",
+        "meditation": "Mary hastens to visit her cousin Elizabeth, who is filled with the Holy Spirit and cries out: 'Blessed art thou among women, and blessed is the fruit of thy womb!' The infant John leaps for joy in the womb. Pray for the virtue of charity toward our neighbor."
+      },
+      {
+        "number": 3,
+        "title": "The Nativity",
+        "scripture": "Luke 2:1–20",
+        "meditation": "Jesus is born in a stable in Bethlehem, wrapped in swaddling clothes and laid in a manger, because there was no room at the inn. Angels announce the good news to poor shepherds. Pray for the virtue of poverty of spirit and detachment from worldly things."
+      },
+      {
+        "number": 4,
+        "title": "The Presentation in the Temple",
+        "scripture": "Luke 2:22–38",
+        "meditation": "Mary and Joseph present the infant Jesus in the Temple according to the Law of Moses. The holy man Simeon takes the child in his arms and prophesies that He will be a light to the nations, and that a sword will pierce Mary's soul. Pray for the virtue of obedience and fidelity to the Law of God."
+      },
+      {
+        "number": 5,
+        "title": "The Finding of Jesus in the Temple",
+        "scripture": "Luke 2:41–52",
+        "meditation": "The twelve-year-old Jesus, having stayed behind in Jerusalem, is found by Mary and Joseph after three days in the Temple, sitting among the teachers, listening and asking questions. He tells them He must be about His Father's business. Pray for the virtue of zeal for the things of God."
+      }
+    ]
+  },
+  {
+    "id": "sorrowful",
+    "name": "Sorrowful Mysteries",
+    "traditional_days": "Tuesday, Friday",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "The Agony in the Garden",
+        "scripture": "Luke 22:39–46",
+        "meditation": "Jesus prays in the Garden of Gethsemane, His soul sorrowful unto death. He sweats blood and an angel comes to strengthen Him. Yet He says: 'Not my will, but Thine be done.' Pray for the virtue of contrition for our sins."
+      },
+      {
+        "number": 2,
+        "title": "The Scourging at the Pillar",
+        "scripture": "John 19:1; Isaiah 53:5",
+        "meditation": "Jesus is bound to a pillar and cruelly scourged by Roman soldiers. By His stripes we are healed. He endures this for love of us and for the reparation of sins of impurity. Pray for the virtue of purity and mortification."
+      },
+      {
+        "number": 3,
+        "title": "The Crowning with Thorns",
+        "scripture": "Matthew 27:28–29",
+        "meditation": "The soldiers weave a crown of thorns and press it upon Jesus's head, place a reed in His hand, and mock Him as King of the Jews. He accepts this humiliation for us. Pray for the virtue of courage and moral fortitude."
+      },
+      {
+        "number": 4,
+        "title": "The Carrying of the Cross",
+        "scripture": "John 19:17; Luke 23:26–31",
+        "meditation": "Jesus carries His Cross through the streets of Jerusalem to Calvary, falling beneath its weight. He meets His Mother along the way. Simon of Cyrene is compelled to help Him carry the Cross. Pray for the virtue of patience in bearing our daily crosses."
+      },
+      {
+        "number": 5,
+        "title": "The Crucifixion and Death",
+        "scripture": "John 19:18–30",
+        "meditation": "Jesus is nailed to the Cross between two thieves. From the Cross He forgives His enemies, entrusts His Mother to the beloved disciple, and commends His spirit into the Father's hands. With a loud cry He breathes His last. Pray for the virtue of final perseverance and a holy death."
+      }
+    ]
+  },
+  {
+    "id": "glorious",
+    "name": "Glorious Mysteries",
+    "traditional_days": "Wednesday, Sunday",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "The Resurrection",
+        "scripture": "Mark 16:1–8; John 20:1–18",
+        "meditation": "On the third day Jesus rises from the dead, victorious over sin, death, and the devil. The tomb is empty. He appears first to Mary Magdalene and then to the disciples. Death has been conquered forever. Pray for the virtue of faith in the resurrection."
+      },
+      {
+        "number": 2,
+        "title": "The Ascension",
+        "scripture": "Luke 24:50–51; Acts 1:9–11",
+        "meditation": "Forty days after the Resurrection, Jesus leads His disciples to Bethany, blesses them, and is taken up into Heaven. Two angels tell the disciples He will come again in the same way. Pray for the virtue of hope and longing for Heaven."
+      },
+      {
+        "number": 3,
+        "title": "The Descent of the Holy Spirit",
+        "scripture": "Acts 2:1–11",
+        "meditation": "On the day of Pentecost, the Apostles and Mary are gathered in prayer when suddenly there comes a mighty wind and tongues of fire rest upon each of them. They are filled with the Holy Spirit and begin to speak in many tongues. The Church is born. Pray for the gifts of the Holy Spirit."
+      },
+      {
+        "number": 4,
+        "title": "The Assumption of Mary",
+        "scripture": "Revelation 12:1; (traditional)",
+        "meditation": "At the end of her earthly life, the Blessed Virgin Mary, preserved from the corruption of the grave, is assumed body and soul into heavenly glory, to reign as Queen beside her Son. Pray for the virtue of devotion to Mary and the grace of a holy death."
+      },
+      {
+        "number": 5,
+        "title": "The Coronation of Mary",
+        "scripture": "Revelation 12:1; Judith 15:9",
+        "meditation": "Mary is crowned Queen of Heaven and Earth, Queen of Angels and Saints, by her Son Jesus Christ. She intercedes for us unceasingly before the throne of God. Pray for the grace of perseverance to share in her glory."
+      }
+    ]
+  },
+  {
+    "id": "luminous",
+    "name": "Luminous Mysteries (Mysteries of Light)",
+    "traditional_days": "Thursday",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "The Baptism of Jesus in the Jordan",
+        "scripture": "Matthew 3:13–17",
+        "meditation": "Jesus comes to John at the Jordan and is baptized. The heavens open, the Holy Spirit descends as a dove, and the Father's voice is heard: 'This is my beloved Son, in whom I am well pleased.' Jesus consecrates the waters of baptism. Pray for fidelity to your own baptismal promises."
+      },
+      {
+        "number": 2,
+        "title": "The Wedding Feast at Cana",
+        "scripture": "John 2:1–11",
+        "meditation": "At the wedding feast at Cana, Mary tells Jesus, 'They have no wine,' and instructs the servants: 'Do whatever He tells you.' Jesus turns water into wine, His first miracle, revealing His glory. Pray for the grace to trust Mary's intercession and obey the Lord's commands."
+      },
+      {
+        "number": 3,
+        "title": "The Proclamation of the Kingdom",
+        "scripture": "Mark 1:14–15; Matthew 5–7",
+        "meditation": "Jesus proclaims the coming of the Kingdom of God and calls all to repentance and belief in the Gospel. He teaches the Beatitudes and the way of mercy. Pray for openness to conversion and the courage to live the Gospel."
+      },
+      {
+        "number": 4,
+        "title": "The Transfiguration",
+        "scripture": "Luke 9:28–36",
+        "meditation": "Jesus takes Peter, James, and John to Mount Tabor, where He is transfigured before them, His face shining like the sun and His garments white as light. Moses and Elijah appear with Him. The Father says: 'This is my beloved Son; listen to Him.' Pray for the grace of contemplation and a desire for eternal glory."
+      },
+      {
+        "number": 5,
+        "title": "The Institution of the Eucharist",
+        "scripture": "Matthew 26:26–28; Luke 22:19–20",
+        "meditation": "At the Last Supper, Jesus takes bread and wine and says: 'This is my Body... This is my Blood.' He commands the Apostles: 'Do this in memory of me.' He gives us Himself — His Body, Blood, Soul, and Divinity — as food for our souls. Pray for reverence for the Eucharist and frequent, worthy Communion."
+      }
+    ]
+  }
+]

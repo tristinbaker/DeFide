@@ -1,0 +1,78 @@
+package app.defide.ui.bible
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import app.defide.data.model.Book
+import app.defide.data.model.Translation
+import app.defide.data.model.Verse
+import app.defide.data.preferences.UserPreferencesRepository
+import app.defide.data.repository.BibleRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class BibleViewModel @Inject constructor(
+    private val repository: BibleRepository,
+    private val prefsRepository: UserPreferencesRepository,
+) : ViewModel() {
+
+    private val _translations = MutableStateFlow<List<Translation>>(emptyList())
+    val translations: StateFlow<List<Translation>> = _translations.asStateFlow()
+
+    private val _selectedTranslationId = MutableStateFlow("dra")
+    val selectedTranslationId: StateFlow<String> = _selectedTranslationId.asStateFlow()
+
+    private val _books = MutableStateFlow<List<Book>>(emptyList())
+    val books: StateFlow<List<Book>> = _books.asStateFlow()
+
+    private val _chapterCount = MutableStateFlow(0)
+    val chapterCount: StateFlow<Int> = _chapterCount.asStateFlow()
+
+    private val _verses = MutableStateFlow<List<Verse>>(emptyList())
+    val verses: StateFlow<List<Verse>> = _verses.asStateFlow()
+
+    private val _searchResults = MutableStateFlow<List<Verse>>(emptyList())
+    val searchResults: StateFlow<List<Verse>> = _searchResults.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            _translations.value = repository.getTranslations()
+        }
+        // React to translation preference changes (covers initial load + Settings changes)
+        viewModelScope.launch {
+            prefsRepository.preferences
+                .map { it.bibleTranslationId }
+                .distinctUntilChanged()
+                .collect { id ->
+                    _selectedTranslationId.value = id
+                    _books.value = repository.getBooks(id)
+                }
+        }
+    }
+
+    fun loadChapterCount(bookId: Int) {
+        viewModelScope.launch {
+            _chapterCount.value = repository.getChapterCount(bookId)
+        }
+    }
+
+    fun loadVerses(bookId: Int, chapter: Int) {
+        viewModelScope.launch {
+            _verses.value = repository.getVerses(bookId, chapter)
+            _chapterCount.value = repository.getChapterCount(bookId)
+        }
+    }
+
+    fun search(query: String) {
+        if (query.isBlank()) { _searchResults.value = emptyList(); return }
+        viewModelScope.launch {
+            _searchResults.value = repository.search(_selectedTranslationId.value, query)
+        }
+    }
+}

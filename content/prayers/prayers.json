@@ -1,0 +1,210 @@
+[
+  {
+    "id": "apostles-creed",
+    "title": "Apostles' Creed",
+    "body": "I believe in God, the Father Almighty, Creator of Heaven and earth; and in Jesus Christ, His only Son, Our Lord, Who was conceived by the Holy Ghost, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, died, and was buried. He descended into Hell; the third day He arose again from the dead; He ascended into Heaven, sitteth at the right hand of God the Father Almighty; from thence He shall come to judge the living and the dead. I believe in the Holy Ghost, the Lord and Giver of Life, Who proceeds from the Father and the Son, Who with the Father and the Son is worshipped and glorified, Who spoke by the Prophets. And I believe in one, holy, Catholic and Apostolic Church. I acknowledge one Baptism for the remission of sins. And I look for the Resurrection of the dead, and the Life of the world to come. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "creed", "faith"]
+  },
+  {
+    "id": "our-father",
+    "title": "Our Father (Lord's Prayer)",
+    "body": "Our Father, Who art in heaven, hallowed be Thy Name. Thy Kingdom come. Thy Will be done, on earth as it is in Heaven. Give us this day our daily bread. And forgive us our trespasses, as we forgive those who trespass against us. And lead us not into temptation, but deliver us from evil. Amen.",
+    "source": "Matthew 6:9–13",
+    "category": "rosary",
+    "tags": ["rosary", "morning", "evening", "meals"]
+  },
+  {
+    "id": "hail-mary",
+    "title": "Hail Mary",
+    "body": "Hail Mary, full of grace, the Lord is with thee; blessed art thou amongst women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.",
+    "source": "Luke 1:28, 42",
+    "category": "rosary",
+    "tags": ["rosary", "marian"]
+  },
+  {
+    "id": "glory-be",
+    "title": "Glory Be (Doxology)",
+    "body": "Glory be to the Father, and to the Son, and to the Holy Ghost. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "morning", "evening"]
+  },
+  {
+    "id": "fatima-prayer",
+    "title": "Fatima Prayer (O My Jesus)",
+    "body": "O my Jesus, forgive us our sins, save us from the fires of Hell, lead all souls to Heaven, especially those in most need of Thy mercy. Amen.",
+    "source": "Given by Our Lady of Fatima, 1917",
+    "category": "rosary",
+    "tags": ["rosary", "marian", "mercy"]
+  },
+  {
+    "id": "hail-holy-queen",
+    "title": "Hail Holy Queen (Salve Regina)",
+    "body": "Hail, Holy Queen, Mother of Mercy, our life, our sweetness and our hope! To thee do we cry, poor banished children of Eve; to thee do we send up our sighs, mourning and weeping in this valley of tears. Turn then, most gracious advocate, thine eyes of mercy toward us; and after this, our exile, show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary! Pray for us, O holy Mother of God, that we may be made worthy of the promises of Christ. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "marian"]
+  },
+  {
+    "id": "morning-offering",
+    "title": "Morning Offering",
+    "body": "O Jesus, through the Immaculate Heart of Mary, I offer Thee my prayers, works, joys, and sufferings of this day in union with the Holy Sacrifice of the Mass throughout the world. I offer them for all the intentions of Thy Sacred Heart: the salvation of souls, reparation for sin, and the reunion of all Christians. I offer them for the intentions of our bishops and of all Apostles of Prayer, and in particular for those recommended by our Holy Father this month. Amen.",
+    "source": null,
+    "category": "morning",
+    "tags": ["morning", "offering", "daily"]
+  },
+  {
+    "id": "act-of-contrition",
+    "title": "Act of Contrition",
+    "body": "O my God, I am heartily sorry for having offended Thee, and I detest all my sins because of Thy just punishments, but most of all because they offend Thee, my God, Who art all good and deserving of all my love. I firmly resolve, with the help of Thy grace, to sin no more and to avoid the near occasions of sin. Amen.",
+    "source": null,
+    "category": "penitential",
+    "tags": ["penitential", "confession", "evening", "contrition"]
+  },
+  {
+    "id": "act-of-faith",
+    "title": "Act of Faith",
+    "body": "O my God, I firmly believe that Thou art one God in three Divine Persons, Father, Son, and Holy Ghost. I believe that Thy Divine Son became man and died for our sins, and that He will come to judge the living and the dead. I believe these and all the truths which the Holy Catholic Church teaches, because Thou hast revealed them, Who canst neither deceive nor be deceived. Amen.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["faith", "daily", "devotional"]
+  },
+  {
+    "id": "act-of-hope",
+    "title": "Act of Hope",
+    "body": "O my God, relying on Thy almighty power and infinite mercy and promises, I hope to obtain pardon of my sins, the help of Thy grace, and life everlasting, through the merits of Jesus Christ, my Lord and Redeemer. Amen.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["hope", "daily", "devotional", "anxiety", "depression"]
+  },
+  {
+    "id": "act-of-love",
+    "title": "Act of Love (Act of Charity)",
+    "body": "O my God, I love Thee above all things, with my whole heart and soul, because Thou art all good and worthy of all love. I love my neighbor as myself for the love of Thee. I forgive all who have injured me and ask pardon of all whom I have injured. Amen.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["love", "charity", "daily", "devotional", "forgiveness"]
+  },
+  {
+    "id": "memorare",
+    "title": "Memorare",
+    "body": "Remember, O most gracious Virgin Mary, that never was it known that anyone who fled to thy protection, implored thy help, or sought thy intercession, was left unaided. Inspired with this confidence, I fly to thee, O Virgin of virgins, my Mother. To thee do I come; before thee I stand, sinful and sorrowful. O Mother of the Word Incarnate, despise not my petitions, but in thy mercy hear and answer me. Amen.",
+    "source": "Attributed to St. Bernard of Clairvaux",
+    "category": "marian",
+    "tags": ["marian", "intercession", "anxiety", "grief", "hope"]
+  },
+  {
+    "id": "anima-christi",
+    "title": "Anima Christi (Soul of Christ)",
+    "body": "Soul of Christ, sanctify me. Body of Christ, save me. Blood of Christ, inebriate me. Water from the side of Christ, wash me. Passion of Christ, strengthen me. O good Jesus, hear me. Within Thy wounds hide me. Separated from Thee let me never be. From the malignant enemy defend me. At the hour of my death call me. And bid me come to Thee, that with Thy Saints I may praise Thee forever and ever. Amen.",
+    "source": "14th century, attributed to various",
+    "category": "devotional",
+    "tags": ["eucharist", "passion", "devotional", "after-communion"]
+  },
+  {
+    "id": "prayer-before-meals",
+    "title": "Blessing Before Meals",
+    "body": "Bless us, O Lord, and these Thy gifts, which we are about to receive from Thy bounty, through Christ our Lord. Amen.",
+    "source": null,
+    "category": "meals",
+    "tags": ["meals", "gratitude", "daily"]
+  },
+  {
+    "id": "grace-after-meals",
+    "title": "Thanksgiving After Meals",
+    "body": "We give Thee thanks for all Thy benefits, O Almighty God, Who livest and reignest forever; and may the souls of the faithful departed, through the mercy of God, rest in peace. Amen.",
+    "source": null,
+    "category": "meals",
+    "tags": ["meals", "gratitude", "daily"]
+  },
+  {
+    "id": "guardian-angel",
+    "title": "Prayer to One's Guardian Angel",
+    "body": "Angel of God, my guardian dear, to whom God's love commits me here, ever this day be at my side, to light and guard, to rule and guide. Amen.",
+    "source": null,
+    "category": "morning",
+    "tags": ["morning", "guardian-angel", "protection", "daily", "children"]
+  },
+  {
+    "id": "prayer-st-michael",
+    "title": "Prayer to St. Michael the Archangel",
+    "body": "Saint Michael the Archangel, defend us in battle. Be our protection against the wickedness and snares of the devil. May God rebuke him, we humbly pray; and do thou, O Prince of the heavenly host, by the power of God, cast into hell Satan and all the evil spirits who prowl throughout the world seeking the ruin of souls. Amen.",
+    "source": "Pope Leo XIII, 1886",
+    "category": "saints",
+    "tags": ["spiritual-warfare", "protection", "saints", "evening"]
+  },
+  {
+    "id": "eternal-rest",
+    "title": "Eternal Rest (De Profundis)",
+    "body": "Eternal rest grant unto them, O Lord, and let perpetual light shine upon them. May they rest in peace. Amen. May their souls and the souls of all the faithful departed, through the mercy of God, rest in peace. Amen.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["dead", "grief", "mourning", "purgatory", "mercy"]
+  },
+  {
+    "id": "prayer-for-the-sick",
+    "title": "Prayer for the Sick",
+    "body": "O Father of mercies and God of all comfort, look with compassion upon Thy servant in his/her time of illness. Grant wisdom and skill to those who care for him/her. Comfort him/her with Thy presence and renew his/her strength. May this suffering serve for the increase of grace, and may Thy holy will be done. Through Christ our Lord. Amen.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["sick", "healing", "suffering", "hospital"]
+  },
+  {
+    "id": "prayer-for-vocations",
+    "title": "Prayer for Vocations",
+    "body": "Lord of the harvest, send laborers into Your harvest. Inspire men and women to offer themselves for service as priests and religious. Give them the courage to follow Your call, the wisdom to discern Your will, and the faith to persevere. Strengthen those who serve, console those who suffer, and renew in all of us a willingness to serve where we are needed. Through Christ our Lord. Amen.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["vocations", "priesthood", "religious-life", "discernment"]
+  },
+  {
+    "id": "prayer-in-anxiety",
+    "title": "Prayer in Time of Anxiety",
+    "body": "O Lord, I am troubled and burdened beyond what I can bear alone. Cast all my cares upon Thee, for Thou carest for me. Grant me the grace to trust in Thy Providence, knowing that nothing is beyond Thy power and mercy. Still my anxious heart as once Thou stilled the waves upon the sea. Let Thy peace, which surpasses all understanding, guard my heart and mind in Christ Jesus. Amen.",
+    "source": "cf. 1 Peter 5:7; Philippians 4:7",
+    "category": "devotional",
+    "tags": ["anxiety", "peace", "trust", "suffering", "mental-health"]
+  },
+  {
+    "id": "prayer-in-grief",
+    "title": "Prayer in Time of Grief",
+    "body": "O God of all consolation, I bring before Thee my grief and sorrow. Thou knowest my pain, for Thou art no stranger to loss — Thy Son wept at the grave of Lazarus. Hold me now in my mourning. Give me the faith to believe in the resurrection and the hope that those who die in Thee are not lost but transformed. Until that day of reunion, comfort me with Thy presence. Amen.",
+    "source": "cf. John 11:35; 1 Thessalonians 4:13–14",
+    "category": "devotional",
+    "tags": ["grief", "mourning", "loss", "death", "suffering"]
+  },
+  {
+    "id": "prayer-in-depression",
+    "title": "Prayer in Time of Darkness",
+    "body": "Lord Jesus, who cried out from the Cross, I too feel forsaken. The darkness around me is heavy and the light seems far. Do not let me go, even when I cannot feel Thee near. As the Psalmist cried to Thee from the depths, so do I cry. Hear my voice. Remind me that Thou dost not despise the afflicted, nor hide Thy face from him. Let me know Thy presence even here, in the valley of shadow. Amen.",
+    "source": "cf. Psalm 22; Psalm 130",
+    "category": "devotional",
+    "tags": ["depression", "suffering", "darkness", "mental-health", "loneliness"]
+  },
+  {
+    "id": "prayer-for-the-family",
+    "title": "Prayer for the Family",
+    "body": "Lord God, from Whom every family receives its name, look upon our family with love. Keep us faithful to one another in times of trial. Help us forgive as Thou hast forgiven us. Fill our home with Thy peace, our hearts with Thy love, and our lives with Thy grace. May the Holy Family of Nazareth be our model and patron. Through Christ our Lord. Amen.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["family", "marriage", "home", "children", "peace"]
+  },
+  {
+    "id": "prayer-compline",
+    "title": "Night Prayer (Compline)",
+    "body": "Visit, we beseech Thee, O Lord, this dwelling, and drive far from it all the snares of the enemy. Let Thy holy angels dwell herein to keep us in peace, and may Thy blessing be always upon us. Through Christ our Lord. Amen.",
+    "source": "From the Divine Office",
+    "category": "evening",
+    "tags": ["evening", "night", "protection", "daily"]
+  },
+  {
+    "id": "prayer-st-joseph",
+    "title": "Prayer to St. Joseph",
+    "body": "O Blessed Joseph, faithful guardian and foster father of the Son of God, remember the tender charity with which you embraced the Infant Jesus and the diligent care with which you guarded the Holy Family. Through the love you bore them, protect the faithful who come to you in their trials. Intercede for us before the throne of God, that we may be granted your strength, your prudence, and your trust in Providence. Amen.",
+    "source": null,
+    "category": "saints",
+    "tags": ["st-joseph", "saints", "fathers", "workers", "protection", "family", "vocations"]
+  }
+]
