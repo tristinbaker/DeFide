@@ -20,4 +20,7 @@ interface RosarySessionDao {
 
     @Query("SELECT * FROM rosary_sessions ORDER BY started_at DESC LIMIT :limit")
     fun getRecent(limit: Int = 10): Flow<List<RosarySessionEntity>>
+
+    @Query("SELECT * FROM rosary_sessions WHERE completed = 1 ORDER BY completed_at DESC")
+    fun getAllCompleted(): Flow<List<RosarySessionEntity>>
 }

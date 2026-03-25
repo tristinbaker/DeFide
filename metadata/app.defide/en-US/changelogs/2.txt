@@ -1,0 +1,8 @@
+Added:
+- Bible reading progress: pressing Next on a chapter marks it as read; the chapter selector shows filled chips for completed chapters
+- Long-press a read chapter chip to unmark it; overflow menu to reset all progress for a book
+- Bible streak and Rosary streak widgets on the Home screen
+- Bible streak goal setting (1–10 chapters per day) in Settings
+
+Fixed:
+- Removed debug test notification button from Settings

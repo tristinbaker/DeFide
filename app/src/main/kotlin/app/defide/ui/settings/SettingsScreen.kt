@@ -130,6 +130,7 @@ fun SettingsScreen(
             item {
                 val translations = listOf(
                     Triple("dra",        "Douay-Rheims (1899)",               "Traditional Catholic translation"),
+                    Triple("web-c",      "World English Bible (Catholic)",    "Modern English, public domain"),
                     Triple("vulgate",    "Latin Vulgate",                     "Original Latin text of St. Jerome"),
                     Triple("vulgate-et", "Latin Vulgate (English)",           "English translation of the Latin Vulgate"),
                 )
@@ -172,13 +173,43 @@ fun SettingsScreen(
                         Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
-                // TODO: remove before release ↓
-                Button(
-                    onClick = { viewModel.sendTestNotification() },
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
-                ) { Text("Test notification") }
-                // TODO: remove before release ↑
                 HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
+            }
+            item {
+                SectionHeader("Bible Streak")
+            }
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text("Chapters per day", style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            "How many chapters you need to read each day to keep your streak going",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        androidx.compose.material3.FilledIconButton(
+                            onClick = { if (prefs.bibleStreakGoal > 1) viewModel.setBibleStreakGoal(prefs.bibleStreakGoal - 1) },
+                            enabled = prefs.bibleStreakGoal > 1,
+                        ) { Text("−") }
+                        Text(
+                            text = "${prefs.bibleStreakGoal}",
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.padding(horizontal = 12.dp),
+                        )
+                        androidx.compose.material3.FilledIconButton(
+                            onClick = { if (prefs.bibleStreakGoal < 10) viewModel.setBibleStreakGoal(prefs.bibleStreakGoal + 1) },
+                            enabled = prefs.bibleStreakGoal < 10,
+                        ) { Text("+") }
+                    }
+                }
+                HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
             item {
                 SectionHeader("About")

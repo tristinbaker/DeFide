@@ -24,6 +24,7 @@ object DatabaseModule {
     @Singleton
     fun provideUserDatabase(@ApplicationContext context: Context): UserDatabase =
         Room.databaseBuilder(context, UserDatabase::class.java, "defide_user.db")
+            .addMigrations(UserDatabase.MIGRATION_1_2)
             .build()
 
     @Provides
@@ -51,6 +52,9 @@ object DatabaseModule {
 
     @Provides
     fun provideBibleHighlightDao(db: UserDatabase) = db.bibleHighlightDao()
+
+    @Provides
+    fun provideBibleChapterReadDao(db: UserDatabase) = db.bibleChapterReadDao()
 
     @Provides
     fun provideNovenaProgressDao(db: UserDatabase) = db.novenaProgressDao()

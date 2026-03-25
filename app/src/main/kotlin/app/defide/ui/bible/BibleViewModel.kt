@@ -9,11 +9,14 @@ import app.defide.data.model.Verse
 import app.defide.data.preferences.UserPreferencesRepository
 import app.defide.data.repository.BibleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -36,6 +39,18 @@ class BibleViewModel @Inject constructor(
 
     private val _chapterCount = MutableStateFlow(0)
     val chapterCount: StateFlow<Int> = _chapterCount.asStateFlow()
+
+    // (translationId, bookNumber) key driving the read-chapters flow
+    private val _readKey = MutableStateFlow<Pair<String, Int>?>(null)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val readChapters: StateFlow<Set<Int>> = _readKey
+        .flatMapLatest { key ->
+            if (key == null) kotlinx.coroutines.flow.flowOf(emptyList())
+            else repository.getReadChapters(key.first, key.second)
+        }
+        .map { it.toSet() }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
 
     private val _verses = MutableStateFlow<List<Verse>>(emptyList())
     val verses: StateFlow<List<Verse>> = _verses.asStateFlow()
@@ -71,6 +86,22 @@ class BibleViewModel @Inject constructor(
         viewModelScope.launch {
             _chapterCount.value = repository.getChapterCount(bookId)
         }
+    }
+
+    fun loadReadChapters(translationId: String, bookNumber: Int) {
+        _readKey.value = translationId to bookNumber
+    }
+
+    fun markChapterRead(translationId: String, bookNumber: Int, chapter: Int) {
+        viewModelScope.launch { repository.markChapterRead(translationId, bookNumber, chapter) }
+    }
+
+    fun unmarkChapterRead(translationId: String, bookNumber: Int, chapter: Int) {
+        viewModelScope.launch { repository.unmarkChapterRead(translationId, bookNumber, chapter) }
+    }
+
+    fun resetBookProgress(translationId: String, bookNumber: Int) {
+        viewModelScope.launch { repository.resetBookProgress(translationId, bookNumber) }
     }
 
     fun loadVerses(bookId: Int, chapter: Int) {

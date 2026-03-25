@@ -2,8 +2,10 @@ package app.defide.data.repository
 
 import app.defide.data.db.content.dao.BibleDao
 import app.defide.data.db.user.dao.BibleBookmarkDao
+import app.defide.data.db.user.dao.BibleChapterReadDao
 import app.defide.data.db.user.dao.BibleHighlightDao
 import app.defide.data.db.user.entity.BibleBookmarkEntity
+import app.defide.data.db.user.entity.BibleChapterReadEntity
 import app.defide.data.db.user.entity.BibleHighlightEntity
 import app.defide.data.model.Book
 import app.defide.data.model.Translation
@@ -11,7 +13,9 @@ import app.defide.data.model.Verse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,6 +25,7 @@ class BibleRepository @Inject constructor(
     private val bibleDao: BibleDao,
     private val bookmarkDao: BibleBookmarkDao,
     private val highlightDao: BibleHighlightDao,
+    private val chapterReadDao: BibleChapterReadDao,
 ) {
     suspend fun getTranslations(): List<Translation> =
         withContext(Dispatchers.IO) { bibleDao.getTranslations() }
@@ -103,4 +108,42 @@ class BibleRepository @Inject constructor(
 
     suspend fun deleteHighlight(id: String) =
         withContext(Dispatchers.IO) { highlightDao.delete(id) }
+
+    // Chapter read tracking
+    fun getReadChapters(translationId: String, bookNumber: Int): Flow<List<Int>> =
+        chapterReadDao.getReadChapters(translationId, bookNumber)
+
+    suspend fun markChapterRead(translationId: String, bookNumber: Int, chapter: Int) =
+        withContext(Dispatchers.IO) {
+            chapterReadDao.markRead(BibleChapterReadEntity(translationId, bookNumber, chapter))
+        }
+
+    suspend fun unmarkChapterRead(translationId: String, bookNumber: Int, chapter: Int) =
+        withContext(Dispatchers.IO) { chapterReadDao.unmarkRead(translationId, bookNumber, chapter) }
+
+    suspend fun resetBookProgress(translationId: String, bookNumber: Int) =
+        withContext(Dispatchers.IO) { chapterReadDao.resetBook(translationId, bookNumber) }
+
+    fun getAllReadHistory(): Flow<List<BibleChapterReadEntity>> = chapterReadDao.getAll()
+
+    companion object {
+        fun computeBibleStreak(
+            readHistory: List<BibleChapterReadEntity>,
+            goalPerDay: Int,
+        ): Int {
+            val zone = ZoneId.systemDefault()
+            val byDate = readHistory
+                .groupBy { Instant.ofEpochMilli(it.readAt).atZone(zone).toLocalDate() }
+                .filterValues { it.size >= goalPerDay }
+                .keys
+            val today = LocalDate.now()
+            var streak = 0
+            var day = today
+            while (byDate.contains(day)) {
+                streak++
+                day = day.minusDays(1)
+            }
+            return streak
+        }
+    }
 }

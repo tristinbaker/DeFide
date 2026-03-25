@@ -29,7 +29,11 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -160,10 +164,15 @@ fun BibleChapterScreen(
 ) {
     val books by viewModel.books.collectAsState()
     val chapterCount by viewModel.chapterCount.collectAsState()
+    val readChapters by viewModel.readChapters.collectAsState()
     val book = books.firstOrNull { it.bookNumber == bookNumber }
+    var menuExpanded by remember { mutableStateOf(false) }
 
     LaunchedEffect(books, bookNumber) {
         books.firstOrNull { it.bookNumber == bookNumber }?.let { viewModel.loadChapterCount(it.id) }
+    }
+    LaunchedEffect(translationId, bookNumber) {
+        viewModel.loadReadChapters(translationId, bookNumber)
     }
 
     Scaffold(
@@ -173,6 +182,25 @@ fun BibleChapterScreen(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                actions = {
+                    Box {
+                        IconButton(onClick = { menuExpanded = true }) {
+                            Icon(Icons.Default.MoreVert, contentDescription = "More")
+                        }
+                        DropdownMenu(
+                            expanded = menuExpanded,
+                            onDismissRequest = { menuExpanded = false },
+                        ) {
+                            DropdownMenuItem(
+                                text = { Text("Reset reading progress") },
+                                onClick = {
+                                    menuExpanded = false
+                                    viewModel.resetBookProgress(translationId, bookNumber)
+                                },
+                            )
+                        }
                     }
                 },
             )
@@ -192,15 +220,34 @@ fun BibleChapterScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 repeat(chapterCount) { i ->
-                    OutlinedCard(
-                        modifier = Modifier.clickable {
-                            onChapterSelected(translationId, bookNumber, i + 1)
-                        },
-                    ) {
-                        Text(
-                            text = "${i + 1}",
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
-                        )
+                    val chapterNum = i + 1
+                    val isRead = chapterNum in readChapters
+                    if (isRead) {
+                        Card(
+                            modifier = Modifier.pointerInput(chapterNum) {
+                                detectTapGestures(
+                                    onTap = { onChapterSelected(translationId, bookNumber, chapterNum) },
+                                    onLongPress = { viewModel.unmarkChapterRead(translationId, bookNumber, chapterNum) },
+                                )
+                            },
+                        ) {
+                            Text(
+                                text = "$chapterNum",
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            )
+                        }
+                    } else {
+                        OutlinedCard(
+                            modifier = Modifier.clickable {
+                                onChapterSelected(translationId, bookNumber, chapterNum)
+                            },
+                        ) {
+                            Text(
+                                text = "$chapterNum",
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                            )
+                        }
                     }
                 }
             }
@@ -331,7 +378,10 @@ fun BibleReaderScreen(
             }
             if (chapterCount > 0 && chapter < chapterCount) {
                 SmallFloatingActionButton(
-                    onClick = onNextChapter,
+                    onClick = {
+                        viewModel.markChapterRead(translationId, bookNumber, chapter)
+                        onNextChapter()
+                    },
                     modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp),
                 ) {
                     Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Next chapter")

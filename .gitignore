@@ -12,5 +12,6 @@ local.properties
 .externalNativeBuild/
 .cxx/
 *.keystore
+*.jks
 !debug.keystore
 app/build/

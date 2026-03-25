@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import app.defide.data.preferences.AppTheme
@@ -75,10 +74,7 @@ class SettingsViewModel @Inject constructor(
         WorkManager.getInstance(context).cancelUniqueWork(NovenaReminderWorker.WORK_NAME)
     }
 
-    // TODO: remove before release
-    fun sendTestNotification() {
-        WorkManager.getInstance(context).enqueue(
-            OneTimeWorkRequestBuilder<NovenaReminderWorker>().build()
-        )
+    fun setBibleStreakGoal(goal: Int) {
+        viewModelScope.launch { prefsRepository.setBibleStreakGoal(goal) }
     }
 }

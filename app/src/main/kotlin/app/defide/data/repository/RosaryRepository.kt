@@ -8,6 +8,9 @@ import app.defide.data.model.MysteryBead
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -47,4 +50,25 @@ class RosaryRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             rosarySessionDao.markComplete(sessionId, System.currentTimeMillis())
         }
+
+    fun getCompletedSessions(): Flow<List<RosarySessionEntity>> =
+        rosarySessionDao.getAllCompleted()
+
+    companion object {
+        fun computeRosaryStreak(sessions: List<RosarySessionEntity>): Int {
+            val zone = ZoneId.systemDefault()
+            val datesWithSession = sessions
+                .mapNotNull { it.completedAt }
+                .map { Instant.ofEpochMilli(it).atZone(zone).toLocalDate() }
+                .toSet()
+            val today = LocalDate.now()
+            var streak = 0
+            var day = today
+            while (datesWithSession.contains(day)) {
+                streak++
+                day = day.minusDays(1)
+            }
+            return streak
+        }
+    }
 }

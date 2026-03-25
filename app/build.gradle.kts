@@ -14,8 +14,8 @@ android {
         applicationId = "app.defide"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,10 +27,17 @@ android {
             keyAlias = "androiddebugkey"
             keyPassword = "android"
         }
+        create("release") {
+            storeFile = file("${System.getProperty("user.home")}/.android/defide-release.jks")
+            storePassword = System.getenv("DEFIDE_STORE_PASSWORD") ?: ""
+            keyAlias = "defide"
+            keyPassword = System.getenv("DEFIDE_KEY_PASSWORD") ?: ""
+        }
     }
 
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

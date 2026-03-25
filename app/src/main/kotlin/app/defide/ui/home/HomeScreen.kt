@@ -12,7 +12,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.Row
+import androidx.compose.ui.Alignment
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -46,6 +49,8 @@ fun HomeScreen(
 ) {
     val verseOfDay by viewModel.verseOfDay.collectAsState()
     val todaysMystery by viewModel.todaysMystery.collectAsState()
+    val bibleStreak by viewModel.bibleStreak.collectAsState()
+    val rosaryStreak by viewModel.rosaryStreak.collectAsState()
 
     val today = LocalDate.now()
     val dateText = today.format(DateTimeFormatter.ofPattern("EEEE, MMMM d"))
@@ -162,7 +167,51 @@ fun HomeScreen(
                     }
                 }
 
+                Spacer(Modifier.height(12.dp))
+
+                // Streaks
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+                ) {
+                    StreakCard(label = "Bible Streak", days = bibleStreak, modifier = Modifier.weight(1f))
+                    StreakCard(label = "Rosary Streak", days = rosaryStreak, modifier = Modifier.weight(1f))
+                }
+
                 Spacer(Modifier.height(24.dp))
+            }
+        }
+    }
+}
+
+@Composable
+private fun StreakCard(label: String, days: Int, modifier: Modifier = Modifier) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = label.uppercase(),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary,
+                letterSpacing = androidx.compose.ui.unit.TextUnit(1.5f, androidx.compose.ui.unit.TextUnitType.Sp),
+            )
+            Spacer(Modifier.height(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    Icons.Default.LocalFireDepartment,
+                    contentDescription = null,
+                    tint = if (days > 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(end = 4.dp),
+                )
+                Text(
+                    text = "$days day${if (days != 1) "s" else ""}",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (days > 0) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
         }
     }
