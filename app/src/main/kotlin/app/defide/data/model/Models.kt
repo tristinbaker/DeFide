@@ -1,5 +1,8 @@
 package app.defide.data.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class Translation(
     val id: String,
     val name: String,
@@ -7,6 +10,7 @@ data class Translation(
     val license: String,
 )
 
+@Immutable
 data class Book(
     val id: Int,
     val translationId: String,
@@ -17,6 +21,7 @@ data class Book(
     val drName: String,
 )
 
+@Immutable
 data class Verse(
     val id: Int,
     val bookId: Int,
@@ -25,16 +30,7 @@ data class Verse(
     val text: String,
 )
 
-data class CccSection(
-    val id: Int,
-    val part: Int?,
-    val section: Int?,
-    val chapter: Int?,
-    val article: Int?,
-    val heading: String?,
-    val body: String,
-)
-
+@Immutable
 data class Prayer(
     val id: String,
     val title: String,
@@ -44,6 +40,7 @@ data class Prayer(
     val tags: List<String> = emptyList(),
 )
 
+@Immutable
 data class Novena(
     val id: String,
     val title: String,
@@ -52,6 +49,7 @@ data class Novena(
     val feastDay: String?,
 )
 
+@Immutable
 data class NovenaDay(
     val id: Int,
     val novenaId: String,
@@ -60,12 +58,14 @@ data class NovenaDay(
     val body: String,
 )
 
+@Immutable
 data class Mystery(
     val id: String,
     val name: String,
     val traditionalDays: String?,
 )
 
+@Immutable
 data class MysteryBead(
     val id: Int,
     val mysteryId: String,

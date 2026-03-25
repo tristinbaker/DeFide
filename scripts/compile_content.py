@@ -11,6 +11,7 @@ Output:
 Expected source layout:
     content/bible/dra/metadata.json
     content/bible/dra/books/<BookName>.json   (one per book, DR naming)
+    content/bible/web-c/books/<BookName>.json (one per book, DR naming)
     content/prayers/prayers.json
     content/novenas/novenas.json
     content/catechism/ccc_paragraphs.json
@@ -326,11 +327,12 @@ def create_schema(conn: sqlite3.Connection) -> None:
 
 
 # Starting book_id offsets per translation so IDs never collide across translations.
-# DRA: 1–999, NRSVCE: 1001–1999, Vulgate: 2001–2999, Vulgate-ET: 3001–3999
+# DRA: 1–999, NRSVCE: 1001–1999, Vulgate: 2001–2999, Vulgate-ET: 3001–3999, WEB-C: 4001–4999
 _TRANSLATION_BOOK_ID_OFFSET = {
     "dra":        1,
     "vulgate":    2001,
     "vulgate-et": 3001,
+    "web-c":      4001,
 }
 
 
@@ -630,6 +632,9 @@ def main() -> None:
 
         print("Compiling Bible (Latin Vulgate — English Translation)...")
         compile_dr_format(conn, "vulgate-et")
+
+        print("Compiling Bible (World English Bible — Catholic Edition)...")
+        compile_dr_format(conn, "web-c")
 
         print("Compiling Catechism...")
         compile_catechism(conn)

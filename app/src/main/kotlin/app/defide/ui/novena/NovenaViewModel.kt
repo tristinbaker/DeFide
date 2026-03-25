@@ -70,11 +70,16 @@ class NovenaViewModel @Inject constructor(
         }
     }
 
-    fun startNovena(novenaId: String, startDate: String = LocalDate.now().toString()) {
+    fun startNovena(novenaId: String, startDate: String = LocalDate.now().toString(), onStarted: (String) -> Unit = {}) {
         viewModelScope.launch {
-            repository.startNovena(novenaId, startDate)
+            val progressId = repository.startNovena(novenaId, startDate)
             loadProgress(novenaId)
+            onStarted(progressId)
         }
+    }
+
+    fun abandonNovena(progressId: String) {
+        viewModelScope.launch { repository.abandonNovena(progressId) }
     }
 
     fun completeDay(novenaId: String) {

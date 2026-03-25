@@ -4,8 +4,8 @@ A free, open-source Catholic app for Android. No tracking, no accounts, no inter
 
 ## Features
 
-- **Bible** — Douay-Rheims (1899), Latin Vulgate, and Latin Vulgate (English Translation)
-- **Catechism** — Full Catechism of the Catholic Church with paragraph navigation
+- **Bible** — Douay-Rheims (1899), World English Bible (Catholic), Latin Vulgate, and Latin Vulgate (English Translation)
+- **Catechism** — Links to the Catechism of the Catholic Church on the USCCB website (opens in browser)
 - **Rosary** — Guided sessions for all four mysteries with bead indicator and scripture references
 - **Prayers** — Traditional Catholic prayers with tag-based browsing
 - **Novenas** — Nine-day prayer tracker with progress persistence

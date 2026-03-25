@@ -1,5 +1,7 @@
 package app.defide.ui
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.LibraryBooks
@@ -9,6 +11,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -17,11 +20,16 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -31,11 +39,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import app.defide.ui.bible.BibleBookmarksScreen
 import app.defide.ui.bible.BibleChapterScreen
 import app.defide.ui.bible.BibleHomeScreen
 import app.defide.ui.bible.BibleReaderScreen
-import app.defide.ui.catechism.CatechismDetailScreen
-import app.defide.ui.catechism.CatechismHomeScreen
 import app.defide.ui.home.HomeScreen
 import app.defide.ui.novena.NovenaDetailScreen
 import app.defide.ui.novena.NovenaListScreen
@@ -65,17 +72,38 @@ private val drawerItems = listOf(
     DrawerItem("novena",    "Novenas",   Icons.Default.Book),
 )
 
+private const val CCC_URL = "https://usccb.cld.bz/Catechism-of-the-Catholic-Church2/7"
+
 @Composable
 fun DeFideApp() {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    var showCatechismDialog by remember { mutableStateOf(false) }
 
     val openDrawer: () -> Unit = { scope.launch { drawerState.open() } }
     val closeDrawer: () -> Unit = { scope.launch { drawerState.close() } }
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
+
+    if (showCatechismDialog) {
+        AlertDialog(
+            onDismissRequest = { showCatechismDialog = false },
+            title = { Text("Open Catechism") },
+            text = { Text("This will open the Catechism of the Catholic Church on the USCCB website in your browser.") },
+            confirmButton = {
+                TextButton(onClick = {
+                    showCatechismDialog = false
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(CCC_URL)))
+                }) { Text("Open") }
+            },
+            dismissButton = {
+                TextButton(onClick = { showCatechismDialog = false }) { Text("Cancel") }
+            },
+        )
+    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -95,10 +123,14 @@ fun DeFideApp() {
                         selected = currentRoute == item.route,
                         onClick = {
                             closeDrawer()
-                            navController.navigate(item.route) {
-                                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                                launchSingleTop = true
-                                restoreState = true
+                            if (item.route == "catechism") {
+                                showCatechismDialog = true
+                            } else {
+                                navController.navigate(item.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
                             }
                         },
                         modifier = Modifier.padding(horizontal = 12.dp),
@@ -205,7 +237,16 @@ private fun DeFideNavHost(
                 onBookSelected = { translationId, bookNumber ->
                     navController.navigate("bible/$translationId/book/$bookNumber")
                 },
+                onBookmarksSelected = { navController.navigate("bible/bookmarks") },
                 onOpenDrawer = openDrawer,
+            )
+        }
+        composable("bible/bookmarks") {
+            BibleBookmarksScreen(
+                onBookmarkSelected = { translationId, bookNumber, chapter, verse ->
+                    navController.navigate("bible/$translationId/book/$bookNumber/chapter/$chapter?verse=$verse")
+                },
+                onBack = { navController.popBackStack() },
             )
         }
         composable(
@@ -253,35 +294,6 @@ private fun DeFideNavHost(
                         popUpTo("bible/$translationId/book/$bookNumber/chapter/$chapter") { inclusive = true }
                     }
                 },
-            )
-        }
-
-        // Catechism
-        composable("catechism") {
-            CatechismHomeScreen(
-                onSectionSelected = { id -> navController.navigate("catechism/section/$id") },
-                onOpenDrawer = openDrawer,
-            )
-        }
-        composable(
-            "catechism/section/{id}",
-            arguments = listOf(navArgument("id") { type = NavType.IntType }),
-        ) { backStack ->
-            val sectionId = backStack.arguments?.getInt("id") ?: 1
-            CatechismDetailScreen(
-                sectionId = sectionId,
-                onNavigateTo = { id -> navController.navigate("catechism/section/$id") },
-                onPrevSection = { id ->
-                    navController.navigate("catechism/section/$id") {
-                        popUpTo("catechism/section/$sectionId") { inclusive = true }
-                    }
-                },
-                onNextSection = { id ->
-                    navController.navigate("catechism/section/$id") {
-                        popUpTo("catechism/section/$sectionId") { inclusive = true }
-                    }
-                },
-                onBack = { navController.popBackStack() },
             )
         }
 

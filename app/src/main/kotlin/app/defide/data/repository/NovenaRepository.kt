@@ -41,17 +41,22 @@ class NovenaRepository @Inject constructor(
         startDate: String,
         notificationsEnabled: Boolean = false,
         notificationTime: String? = null,
-    ) = withContext(Dispatchers.IO) {
+    ): String = withContext(Dispatchers.IO) {
+        val progressId = UUID.randomUUID().toString()
         novenaProgressDao.insert(
             NovenaProgressEntity(
-                id = UUID.randomUUID().toString(),
+                id = progressId,
                 novenaId = novenaId,
                 startDate = startDate,
                 notificationsEnabled = notificationsEnabled,
                 notificationTime = notificationTime,
             )
         )
+        progressId
     }
+
+    suspend fun abandonNovena(progressId: String) =
+        withContext(Dispatchers.IO) { novenaProgressDao.delete(progressId) }
 
     suspend fun completeDay(progressId: String, day: Int) =
         withContext(Dispatchers.IO) { novenaProgressDao.advanceDay(progressId, day) }

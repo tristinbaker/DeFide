@@ -2,7 +2,6 @@ package app.defide.data.db.content
 
 import android.database.Cursor
 import app.defide.data.model.Book
-import app.defide.data.model.CccSection
 import app.defide.data.model.MysteryBead
 import app.defide.data.model.Mystery
 import app.defide.data.model.Novena
@@ -34,16 +33,6 @@ fun Cursor.toVerse() = Verse(
     chapter = getInt(getColumnIndexOrThrow("chapter")),
     verse = getInt(getColumnIndexOrThrow("verse")),
     text = getString(getColumnIndexOrThrow("text")),
-)
-
-fun Cursor.toCccSection() = CccSection(
-    id = getInt(getColumnIndexOrThrow("id")),
-    part = getIntOrNull("part"),
-    section = getIntOrNull("section"),
-    chapter = getIntOrNull("chapter"),
-    article = getIntOrNull("article"),
-    heading = getStringOrNull("heading"),
-    body = getString(getColumnIndexOrThrow("body")),
 )
 
 fun Cursor.toPrayer() = Prayer(

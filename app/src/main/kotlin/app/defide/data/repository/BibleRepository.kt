@@ -80,11 +80,14 @@ class BibleRepository @Inject constructor(
         withContext(Dispatchers.IO) { bookmarkDao.delete(id) }
 
     // Highlights
+    fun getAllHighlights(): Flow<List<BibleHighlightEntity>> = highlightDao.getAll()
+
     fun getHighlightsForVerse(verseId: Int): Flow<List<BibleHighlightEntity>> =
         highlightDao.getForVerse(verseId)
 
-    suspend fun addHighlight(verseId: Int, color: String = "yellow") =
+    suspend fun addHighlight(verseId: Int, color: String) =
         withContext(Dispatchers.IO) {
+            highlightDao.deleteByVerseId(verseId)
             highlightDao.insert(
                 BibleHighlightEntity(
                     id = UUID.randomUUID().toString(),
@@ -94,6 +97,9 @@ class BibleRepository @Inject constructor(
                 )
             )
         }
+
+    suspend fun removeHighlight(verseId: Int) =
+        withContext(Dispatchers.IO) { highlightDao.deleteByVerseId(verseId) }
 
     suspend fun deleteHighlight(id: String) =
         withContext(Dispatchers.IO) { highlightDao.delete(id) }

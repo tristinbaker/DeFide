@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.room.Room
 import app.defide.data.db.content.ContentDatabase
 import app.defide.data.db.content.dao.BibleDao
-import app.defide.data.db.content.dao.CatechismDao
 import app.defide.data.db.content.dao.NovenaContentDao
 import app.defide.data.db.content.dao.PrayerDao
 import app.defide.data.db.content.dao.RosaryContentDao
@@ -34,9 +33,6 @@ object DatabaseModule {
 
     @Provides
     fun provideBibleDao(db: SQLiteDatabase) = BibleDao(db)
-
-    @Provides
-    fun provideCatechismDao(db: SQLiteDatabase) = CatechismDao(db)
 
     @Provides
     fun providePrayerDao(db: SQLiteDatabase) = PrayerDao(db)

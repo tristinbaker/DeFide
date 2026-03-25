@@ -10,7 +10,7 @@ import javax.inject.Singleton
 private const val DB_NAME = "defide_content.db"
 private const val ASSET_PATH = "databases/$DB_NAME"
 // Bump this whenever the compiled content DB changes so the new asset is re-copied on next launch.
-private const val CONTENT_VERSION = 8
+private const val CONTENT_VERSION = 11
 
 /**
  * Wraps the pre-populated, read-only content SQLite database.

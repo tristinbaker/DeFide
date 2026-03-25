@@ -2,6 +2,7 @@ package app.defide.ui.bible
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.defide.data.db.user.entity.BibleHighlightEntity
 import app.defide.data.model.Book
 import app.defide.data.model.Translation
 import app.defide.data.model.Verse
@@ -9,10 +10,12 @@ import app.defide.data.preferences.UserPreferencesRepository
 import app.defide.data.repository.BibleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,6 +42,14 @@ class BibleViewModel @Inject constructor(
 
     private val _searchResults = MutableStateFlow<List<Verse>>(emptyList())
     val searchResults: StateFlow<List<Verse>> = _searchResults.asStateFlow()
+
+    // verseId -> color, live from DB
+    val highlights: StateFlow<Map<Int, String>> = repository.getAllHighlights()
+        .map { list -> list.associate { it.verseId to it.color } }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyMap())
+
+    val bookmarks = repository.getBookmarks()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     init {
         viewModelScope.launch {
@@ -74,5 +85,28 @@ class BibleViewModel @Inject constructor(
         viewModelScope.launch {
             _searchResults.value = repository.search(_selectedTranslationId.value, query)
         }
+    }
+
+    fun deleteBookmark(id: String) {
+        viewModelScope.launch { repository.deleteBookmark(id) }
+    }
+
+    fun addBookmark(bookNumber: Int, chapter: Int, verse: Int) {
+        viewModelScope.launch {
+            repository.addBookmark(
+                translationId = _selectedTranslationId.value,
+                bookNumber = bookNumber,
+                chapter = chapter,
+                verse = verse,
+            )
+        }
+    }
+
+    fun addHighlight(verseId: Int, color: String) {
+        viewModelScope.launch { repository.addHighlight(verseId, color) }
+    }
+
+    fun removeHighlight(verseId: Int) {
+        viewModelScope.launch { repository.removeHighlight(verseId) }
     }
 }
