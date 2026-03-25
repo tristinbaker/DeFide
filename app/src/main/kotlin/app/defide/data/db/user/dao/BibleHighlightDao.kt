@@ -18,6 +18,9 @@ interface BibleHighlightDao {
     @Query("SELECT * FROM bible_highlights WHERE verse_id = :verseId")
     fun getForVerse(verseId: Int): Flow<List<BibleHighlightEntity>>
 
+    @Query("DELETE FROM bible_highlights WHERE verse_id = :verseId")
+    suspend fun deleteByVerseId(verseId: Int)
+
     @Query("SELECT * FROM bible_highlights ORDER BY created_at DESC")
     fun getAll(): Flow<List<BibleHighlightEntity>>
 }

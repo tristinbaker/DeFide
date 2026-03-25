@@ -30,4 +30,7 @@ interface NovenaProgressDao {
 
     @Query("UPDATE novena_progress SET completed = 1 WHERE id = :id")
     suspend fun markComplete(id: String)
+
+    @Query("DELETE FROM novena_progress WHERE id = :id")
+    suspend fun delete(id: String)
 }

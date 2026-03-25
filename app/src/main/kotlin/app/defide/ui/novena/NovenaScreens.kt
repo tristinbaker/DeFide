@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -119,7 +120,7 @@ fun NovenaDetailScreen(
             Spacer(Modifier.height(24.dp))
 
             if (progress == null) {
-                Button(onClick = { viewModel.startNovena(novenaId) }) { Text("Begin Novena") }
+                Button(onClick = { viewModel.startNovena(novenaId) { progressId -> onStartSession(novenaId, progressId) } }) { Text("Begin Novena") }
             } else {
                 Button(onClick = { onStartSession(novenaId, progress!!.id) }) {
                     Text(if (progress!!.completed) "View Novena" else "Continue (Day ${progress!!.lastCompletedDay + 1})")
@@ -208,11 +209,17 @@ fun NovenaProgressScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { onNovenaSelected(prog.novenaId, prog.id) }
-                            .padding(16.dp),
+                            .padding(start = 16.dp, top = 4.dp, bottom = 4.dp, end = 4.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
                     ) {
-                        Text(titles[prog.novenaId] ?: prog.novenaId, style = MaterialTheme.typography.bodyMedium)
-                        Text("Day ${prog.lastCompletedDay + 1}", style = MaterialTheme.typography.bodySmall)
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(titles[prog.novenaId] ?: prog.novenaId, style = MaterialTheme.typography.bodyMedium)
+                            Text("Day ${prog.lastCompletedDay + 1}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        IconButton(onClick = { viewModel.abandonNovena(prog.id) }) {
+                            Icon(Icons.Default.Delete, contentDescription = "Abandon", tint = MaterialTheme.colorScheme.error)
+                        }
                     }
                     HorizontalDivider()
                 }
