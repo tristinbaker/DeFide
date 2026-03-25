@@ -1,13 +1,13 @@
 Categories:
   - Religion
 License: AGPL-3.0-only
-SourceCode: https://PLACEHOLDER/your-repo-url
-IssueTracker: https://PLACEHOLDER/your-repo-url/issues
+SourceCode: https://github.com/tristinbaker/DeFide
+IssueTracker: https://github.com/tristinbaker/DeFide/issues
 
 AutoName: De Fide
 
 RepoType: git
-Repo: https://PLACEHOLDER/your-repo-url
+Repo: https://github.com/tristinbaker/DeFide
 
 Builds:
   - versionName: 1.0.0
