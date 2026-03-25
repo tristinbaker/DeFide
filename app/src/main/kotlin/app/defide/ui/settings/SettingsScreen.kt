@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
@@ -50,6 +51,7 @@ import app.defide.data.preferences.AppTheme
 @Composable
 fun SettingsScreen(
     onBack: () -> Unit,
+    onHowToUse: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val prefs by viewModel.preferences.collectAsState()
@@ -210,6 +212,22 @@ fun SettingsScreen(
                     }
                 }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
+            }
+            item {
+                SectionHeader("Help")
+            }
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onHowToUse() }
+                        .padding(horizontal = 16.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text("How to Use", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                    Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                HorizontalDivider()
             }
             item {
                 SectionHeader("About")

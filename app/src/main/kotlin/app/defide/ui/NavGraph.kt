@@ -53,6 +53,7 @@ import app.defide.ui.prayers.PrayerSearchScreen
 import app.defide.ui.bible.BibleViewModel
 import app.defide.ui.rosary.RosaryHomeScreen
 import app.defide.ui.rosary.RosarySessionScreen
+import app.defide.ui.settings.HowToUseScreen
 import app.defide.ui.settings.SettingsScreen
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -198,7 +199,13 @@ private fun DeFideNavHost(
 
         // Settings
         composable("settings") {
-            SettingsScreen(onBack = { navController.popBackStack() })
+            SettingsScreen(
+                onBack = { navController.popBackStack() },
+                onHowToUse = { navController.navigate("how_to_use") },
+            )
+        }
+        composable("how_to_use") {
+            HowToUseScreen(onBack = { navController.popBackStack() })
         }
 
         // Rosary
