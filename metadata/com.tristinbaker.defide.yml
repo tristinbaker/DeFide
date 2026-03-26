@@ -8,6 +8,7 @@ AutoName: De Fide
 
 RepoType: git
 Repo: https://github.com/tristinbaker/DeFide
+Binaries: https://github.com/tristinbaker/DeFide/releases/download/v%v/app-release.apk
 
 Builds:
   - versionName: 1.1.0
@@ -16,8 +17,6 @@ Builds:
     subdir: app
     gradle:
       - yes
-
-Binaries: https://github.com/tristinbaker/DeFide/releases/download/v%v/app-release.apk
 
 AllowedAPKSigningKeys: 99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010
 
