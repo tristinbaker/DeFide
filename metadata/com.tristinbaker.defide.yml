@@ -13,7 +13,7 @@ Binaries: https://github.com/tristinbaker/DeFide/releases/download/v%v/app-relea
 Builds:
   - versionName: 1.1.0
     versionCode: 2
-    commit: 9c30eef64d45b1e190d9b8e7edc15c3d70293cf0
+    commit: 3ebe1df010ac466d6b9872706bb6e00025561f1c
     subdir: app
     gradle:
       - yes
