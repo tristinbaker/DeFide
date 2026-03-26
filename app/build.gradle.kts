@@ -8,6 +8,11 @@ plugins {
 
 android {
     namespace = "com.tristinbaker.defide"
+
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
     compileSdk = 35
 
     defaultConfig {
