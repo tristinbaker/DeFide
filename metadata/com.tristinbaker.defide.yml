@@ -11,9 +11,9 @@ Repo: https://github.com/tristinbaker/DeFide
 Binaries: https://github.com/tristinbaker/DeFide/releases/download/v%v/app-release.apk
 
 Builds:
-  - versionName: 1.1.0
-    versionCode: 2
-    commit: 3ebe1df010ac466d6b9872706bb6e00025561f1c
+  - versionName: 1.1.1
+    versionCode: 3
+    commit: 1b757ace7d0211ae0f3c50a11292e538f347763a
     subdir: app
     gradle:
       - yes
@@ -22,5 +22,5 @@ AllowedAPKSigningKeys: 99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4fee
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 1.1.0
-CurrentVersionCode: 2
+CurrentVersion: 1.1.1
+CurrentVersionCode: 3
