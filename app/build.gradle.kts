@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "app.defide"
+    namespace = "com.tristinbaker.defide"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "app.defide"
+        applicationId = "com.tristinbaker.defide"
         minSdk = 26
         targetSdk = 35
         versionCode = 2

@@ -15,3 +15,4 @@ local.properties
 *.jks
 !debug.keystore
 app/build/
+pipeline.log
