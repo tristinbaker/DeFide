@@ -24,7 +24,7 @@ object DatabaseModule {
     @Singleton
     fun provideUserDatabase(@ApplicationContext context: Context): UserDatabase =
         Room.databaseBuilder(context, UserDatabase::class.java, "defide_user.db")
-            .addMigrations(UserDatabase.MIGRATION_1_2)
+            .addMigrations(UserDatabase.MIGRATION_1_2, UserDatabase.MIGRATION_2_3)
             .build()
 
     @Provides

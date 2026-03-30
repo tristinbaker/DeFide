@@ -1,0 +1,36 @@
+Fixed:
+- Bible reading progress is now shared across translations, marking a chapter as read in one translation no longer shows it as unread when switching translations
+- Returning to the Bible section now reopens the last chapter you were reading instead of the books list
+- Prayer and novena detail screens now correctly show the selected language instead of always showing English
+
+Updated:
+- Novena prayers (Sacred Heart, Holy Spirit, St. Joseph, St. Therese, St. Anthony, Our Lady of Guadalupe) replaced with accurate traditional texts
+- Added Portuguese novenas (Sagrado Coração, Espírito Santo, São José, Santa Teresinha, Santo Antônio)
+- Added Bíblia Ave-Maria as the default Portuguese Bible translation
+- Added Portuguese prayers
+- Added language setting (English / Português) in Settings
+- Rosary mysteries, meditations, and prayer intentions now translated into Portuguese
+- Settings screen, prayer screen, and catechism dialog fully translated via Android string resources (scalable to additional languages)
+- Catechism dialog translated into Portuguese
+- Switching to Portuguese now automatically selects Bíblia Ave-Maria; both Ave-Maria and Vulgata Latina shown for Portuguese users
+- Navigation drawer labels (Home, Rosary, Bible, Catechism, Prayers, Novenas, Settings) now translated
+- Home screen titles (Verse of the Day, Today's Rosary, Bible Streak, Rosary Streak) now translated
+- Rosary screen titles, mystery ordinals (First–Fifth), and navigation buttons (Back, Next, Complete) now translated
+- Rosary prayer names now come from the database so they display in the correct language instead of being derived from English IDs
+- Prayer category labels (Rosary, Morning, Evening, Marian, etc.) now translated
+- Today's Rosary on the Home screen now shows the mystery name in the selected language
+- Today's Rosary and Verse of the Day on the Home screen now update immediately when you change language or Bible translation in Settings
+- Bible screen title, Bookmarks button, Old/New Testament section headers now translated
+- Home screen date now displays in the selected language (e.g. "segunda-feira, março 30" in Portuguese)
+- Catechism dialog title, description, and buttons now correctly display in the selected language
+- Verse of the Day now cycles through all books in canonical order (previously could repeat books near the end of certain translations)
+- Fixed rosary intro intentions ("For an increase in Faith/Hope/Charity") showing in English regardless of language — caused by a race condition where the session loaded beads before the language preference was read; now reads language directly at session start
+- Novena screens fully translated: Begin/Continue/View/Mark Day Complete buttons, Day title, In Progress/Completed sections, feast day labels, and empty state
+- Bible bookmarks screen title and empty state now translated
+- Prayer category dropdown now shows translated category names (was showing English identifiers)
+- Removed Latin Vulgate (English) from the Bible translation list when Portuguese is selected
+- Switching to Portuguese now always switches to Vulgata Latina (previously allowed Latin Vulgate English to remain selected)
+- How to Use screen fully translated into Portuguese
+
+Technical:
+- Content database rebuilt and versioned (v17)

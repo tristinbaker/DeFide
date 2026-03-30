@@ -9,6 +9,7 @@ import androidx.work.WorkManager
 import com.tristinbaker.defide.data.preferences.AppTheme
 import com.tristinbaker.defide.data.preferences.UserPreferences
 import com.tristinbaker.defide.data.preferences.UserPreferencesRepository
+import kotlinx.coroutines.flow.first
 import com.tristinbaker.defide.worker.NovenaReminderWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -31,6 +32,18 @@ class SettingsViewModel @Inject constructor(
 
     fun setTheme(theme: AppTheme) {
         viewModelScope.launch { prefsRepository.setTheme(theme) }
+    }
+
+    fun setAppLanguage(language: String) {
+        viewModelScope.launch {
+            prefsRepository.setAppLanguage(language)
+            if (language == "pt") {
+                val currentTrans = prefsRepository.preferences.first().bibleTranslationId
+                if (currentTrans != "ave-maria") {
+                    prefsRepository.setBibleTranslation("ave-maria")
+                }
+            }
+        }
     }
 
     fun setBibleTranslation(translationId: String) {

@@ -1,4 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">De Fide</string>
+
+    <!-- Common actions -->
+    <string name="action_open">Open</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_turn_off">Turn off</string>
+    <string name="action_all">All</string>
+
+    <!-- Catechism dialog -->
+    <string name="catechism_dialog_title">Open Catechism</string>
+    <string name="catechism_dialog_text">This will open the Catechism of the Catholic Church on the USCCB website in your browser.</string>
+
+    <!-- Prayers -->
+    <string name="prayers_title">Prayers</string>
+    <string name="search_prayers_hint">Search prayers…</string>
+    <string name="tag_label">Tag</string>
+    <string name="mark_as_prayed">Mark as Prayed</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="section_appearance">Appearance</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="section_language">Language</string>
+    <string name="section_bible_translation">Bible Translation</string>
+    <string name="section_notifications">Notifications</string>
+    <string name="novena_reminder_label">Novena reminder</string>
+    <string name="daily_at">Daily at %s</string>
+    <string name="status_off">Off</string>
+    <string name="section_bible_streak">Bible Streak</string>
+    <string name="chapters_per_day_label">Chapters per day</string>
+    <string name="chapters_per_day_desc">How many chapters you need to read each day to keep your streak going</string>
+    <string name="section_help">Help</string>
+    <string name="how_to_use_label">How to Use</string>
+    <string name="section_about">About</string>
+    <string name="about_tagline">Free and open-source. No tracking, no accounts, no internet required.</string>
+    <string name="about_bible_note">All included Bible translations are public domain or license-free, keeping De Fide fully FOSS-compatible.</string>
+
+    <!-- Novena reminder dialog -->
+    <string name="novena_reminder_dialog_title">Novena reminder time</string>
+    <string name="novena_reminder_dialog_desc">Choose the hour for your daily novena reminder.</string>
+    <string name="hour_label">Hour</string>
+
+    <!-- Bible -->
+    <string name="bible_bookmarks">Bookmarks</string>
+    <string name="bible_old_testament">Old Testament</string>
+    <string name="bible_new_testament">New Testament</string>
+    <string name="bible_bookmarks_empty">No bookmarks yet.</string>
+    <string name="bible_bookmarks_hint">Long-press any verse in the reader to add one.</string>
+
+    <!-- Novena -->
+    <string name="novena_title">Novenas</string>
+    <string name="novena_my_novenas">My Novenas</string>
+    <string name="novena_feast_label">Feast: %s</string>
+    <string name="novena_feast_traditional">Traditional feast: %s</string>
+    <string name="novena_begin">Begin Novena</string>
+    <string name="novena_continue">Continue (Day %d)</string>
+    <string name="novena_view">View Novena</string>
+    <string name="novena_day">Day %d</string>
+    <string name="novena_mark_complete">Mark Day Complete</string>
+    <string name="novena_complete_msg">Novena complete!</string>
+    <string name="novena_in_progress">In Progress</string>
+    <string name="novena_section_completed">Completed</string>
+    <string name="novena_empty">No novenas started yet.</string>
+
+    <!-- Navigation drawer -->
+    <string name="nav_home">Home</string>
+    <string name="nav_rosary">Rosary</string>
+    <string name="nav_bible">Bible</string>
+    <string name="nav_catechism">Catechism</string>
+    <string name="nav_prayers">Prayers</string>
+    <string name="nav_novenas">Novenas</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Prayer categories -->
+    <string name="category_rosary">Rosary</string>
+    <string name="category_morning">Morning</string>
+    <string name="category_evening">Evening</string>
+    <string name="category_marian">Marian</string>
+    <string name="category_meals">Meals</string>
+    <string name="category_penitential">Penitential</string>
+    <string name="category_devotional">Devotional</string>
+    <string name="category_saints">Saints</string>
+
+    <!-- Home screen -->
+    <string name="verse_of_the_day">Verse of the Day</string>
+    <string name="todays_rosary">Today\'s Rosary</string>
+    <string name="pray_the_rosary">Pray the Rosary</string>
+    <string name="loading">Loading\u2026</string>
+    <string name="bible_streak">Bible Streak</string>
+    <string name="rosary_streak">Rosary Streak</string>
+
+    <!-- Rosary screen -->
+    <string name="rosary_title">Rosary</string>
+    <string name="select_mystery">Select a Mystery</string>
+    <string name="today_mystery_prefix">✦ Today — %s</string>
+    <string name="the_nth_mystery">The %s Mystery</string>
+    <string name="ordinal_first">First</string>
+    <string name="ordinal_second">Second</string>
+    <string name="ordinal_third">Third</string>
+    <string name="ordinal_fourth">Fourth</string>
+    <string name="ordinal_fifth">Fifth</string>
+    <string name="action_back">Back</string>
+    <string name="action_complete">Complete</string>
+    <string name="action_next">Next</string>
+
+    <!-- How to Use -->
+    <string name="htu_bible_1">Open the Bible from the drawer and select a translation in Settings.</string>
+    <string name="htu_bible_2">Tap a book, then a chapter to start reading.</string>
+    <string name="htu_bible_3">Press the → button at the bottom right to go to the next chapter. This also marks the current chapter as read.</string>
+    <string name="htu_bible_4">Chapters you\'ve read appear as filled chips in the chapter selector. Long-press a chip to unmark it, or use the ⋮ menu to reset all progress for a book.</string>
+    <string name="htu_bible_5">Long-press any verse to bookmark it or apply a highlight color.</string>
+    <string name="htu_bible_6">Use the search bar at the top of the Bible screen to search across the full text of the selected translation.</string>
+    <string name="htu_bible_7">View all bookmarks with the Bookmarks button in the top bar.</string>
+    <string name="htu_rosary_1">Open Rosary from the drawer or tap Pray the Rosary on the Home screen.</string>
+    <string name="htu_rosary_2">Select a mystery set to begin a guided session.</string>
+    <string name="htu_rosary_3">Swipe or tap the arrow buttons to move through each bead.</string>
+    <string name="htu_rosary_4">Scripture references for each mystery are shown below the prayer text. Tap them to open the verse in the Bible.</string>
+    <string name="htu_rosary_5">Completing a session extends your Rosary streak on the Home screen.</string>
+    <string name="htu_prayers_1">Open Prayers from the drawer to browse or search traditional Catholic prayers.</string>
+    <string name="htu_prayers_2">Tap any prayer to read it in full.</string>
+    <string name="htu_prayers_3">Use the search bar to find prayers by title, text, or tag.</string>
+    <string name="htu_novenas_1">Open Novenas from the drawer and select a novena to begin.</string>
+    <string name="htu_novenas_2">Tap Begin Novena to start — you\'ll go straight to Day 1.</string>
+    <string name="htu_novenas_3">Return each day and tap Continue to pray the next day\'s prayer.</string>
+    <string name="htu_novenas_4">View active novenas under My Novenas. Tap the trash icon to abandon one.</string>
+    <string name="htu_streaks_1">Your Bible and Rosary streaks appear as widgets on the Home screen.</string>
+    <string name="htu_streaks_2">The Bible streak counts consecutive days where you\'ve read at least N chapters (set N in Settings → Bible Streak).</string>
+    <string name="htu_streaks_3">The Rosary streak counts consecutive days where you completed at least one Rosary session.</string>
+    <string name="htu_streaks_4">A streak resets if you miss a day.</string>
+    <string name="htu_settings_1">Change the app theme (Light, Dark, or System) under Appearance.</string>
+    <string name="htu_settings_2">Switch Bible translations under Bible Translation.</string>
+    <string name="htu_settings_3">Set your Bible streak goal (chapters per day) under Bible Streak.</string>
+    <string name="htu_settings_4">Enable daily novena reminders under Notifications.</string>
+
+    <plurals name="days">
+        <item quantity="one">%d day</item>
+        <item quantity="other">%d days</item>
+    </plurals>
 </resources>

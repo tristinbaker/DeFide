@@ -5,10 +5,10 @@ import android.net.Uri
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.LibraryBooks
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Circle
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AlertDialog
@@ -55,8 +55,15 @@ import com.tristinbaker.defide.ui.rosary.RosaryHomeScreen
 import com.tristinbaker.defide.ui.rosary.RosarySessionScreen
 import com.tristinbaker.defide.ui.settings.HowToUseScreen
 import com.tristinbaker.defide.ui.settings.SettingsScreen
+import com.tristinbaker.defide.ui.settings.SettingsViewModel
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
+import com.tristinbaker.defide.R
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 private data class DrawerItem(
     val route: String,
@@ -64,16 +71,36 @@ private data class DrawerItem(
     val icon: androidx.compose.ui.graphics.vector.ImageVector,
 )
 
-private val drawerItems = listOf(
-    DrawerItem("home",      "Home",      Icons.Default.Home),
-    DrawerItem("rosary",    "Rosary",    Icons.Default.Circle),
-    DrawerItem("bible",     "Bible",     Icons.Default.MenuBook),
-    DrawerItem("catechism", "Catechism", Icons.AutoMirrored.Filled.LibraryBooks),
-    DrawerItem("prayers",   "Prayers",   Icons.Default.Star),
-    DrawerItem("novena",    "Novenas",   Icons.Default.Book),
+@Composable
+private fun rememberDrawerItems() = listOf(
+    DrawerItem("home",      stringResource(R.string.nav_home),      Icons.Default.Home),
+    DrawerItem("rosary",    stringResource(R.string.nav_rosary),    Icons.Default.Circle),
+    DrawerItem("bible",     stringResource(R.string.nav_bible),     Icons.AutoMirrored.Filled.MenuBook),
+    DrawerItem("catechism", stringResource(R.string.nav_catechism), Icons.AutoMirrored.Filled.LibraryBooks),
+    DrawerItem("prayers",   stringResource(R.string.nav_prayers),   Icons.Default.Star),
+    DrawerItem("novena",    stringResource(R.string.nav_novenas),   Icons.Default.Book),
 )
 
 private const val CCC_URL = "https://usccb.cld.bz/Catechism-of-the-Catholic-Church2/7"
+
+@Composable
+private fun LocaleWrapper(language: String, content: @Composable () -> Unit) {
+    val context = LocalContext.current
+    val localizedContext = remember(language, context) {
+        val locale = Locale(language)
+        val config = android.content.res.Configuration(context.resources.configuration)
+        config.setLocale(locale)
+        val localizedResources = context.createConfigurationContext(config).resources
+        // Wrap in a ContextWrapper so hiltViewModel() can still traverse the chain
+        // and find the ComponentActivity via baseContext.
+        object : android.content.ContextWrapper(context) {
+            override fun getResources() = localizedResources
+        }
+    }
+    CompositionLocalProvider(LocalContext provides localizedContext) {
+        content()
+    }
+}
 
 @Composable
 fun DeFideApp() {
@@ -82,26 +109,57 @@ fun DeFideApp() {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     var showCatechismDialog by remember { mutableStateOf(false) }
+    val settingsViewModel: SettingsViewModel = androidx.hilt.navigation.compose.hiltViewModel()
+    val prefs by settingsViewModel.preferences.collectAsState()
 
+    LocaleWrapper(prefs.appLanguage) {
+        DeFideAppContent(
+            navController = navController,
+            drawerState = drawerState,
+            scope = scope,
+            context = context,
+            showCatechismDialog = showCatechismDialog,
+            onShowCatechismDialog = { showCatechismDialog = it },
+        )
+    }
+}
+
+@Composable
+private fun DeFideAppContent(
+    navController: androidx.navigation.NavHostController,
+    drawerState: androidx.compose.material3.DrawerState,
+    scope: kotlinx.coroutines.CoroutineScope,
+    context: android.content.Context,
+    showCatechismDialog: Boolean,
+    onShowCatechismDialog: (Boolean) -> Unit,
+) {
     val openDrawer: () -> Unit = { scope.launch { drawerState.open() } }
     val closeDrawer: () -> Unit = { scope.launch { drawerState.close() } }
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
+    val drawerItems = rememberDrawerItems()
+
+    // Resolve dialog strings here (in LocaleWrapper scope) so the AlertDialog,
+    // which creates its own composition root, receives already-resolved Strings.
+    val catechismTitle = stringResource(R.string.catechism_dialog_title)
+    val catechismText = stringResource(R.string.catechism_dialog_text)
+    val openLabel = stringResource(R.string.action_open)
+    val cancelLabel = stringResource(R.string.action_cancel)
 
     if (showCatechismDialog) {
         AlertDialog(
-            onDismissRequest = { showCatechismDialog = false },
-            title = { Text("Open Catechism") },
-            text = { Text("This will open the Catechism of the Catholic Church on the USCCB website in your browser.") },
+            onDismissRequest = { onShowCatechismDialog(false) },
+            title = { Text(catechismTitle) },
+            text = { Text(catechismText) },
             confirmButton = {
                 TextButton(onClick = {
-                    showCatechismDialog = false
+                    onShowCatechismDialog(false)
                     context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(CCC_URL)))
-                }) { Text("Open") }
+                }) { Text(openLabel) }
             },
             dismissButton = {
-                TextButton(onClick = { showCatechismDialog = false }) { Text("Cancel") }
+                TextButton(onClick = { onShowCatechismDialog(false) }) { Text(cancelLabel) }
             },
         )
     }
@@ -125,7 +183,7 @@ fun DeFideApp() {
                         onClick = {
                             closeDrawer()
                             if (item.route == "catechism") {
-                                showCatechismDialog = true
+                                onShowCatechismDialog(true)
                             } else {
                                 navController.navigate(item.route) {
                                     popUpTo(navController.graph.findStartDestination().id) { saveState = true }
@@ -140,7 +198,7 @@ fun DeFideApp() {
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 NavigationDrawerItem(
                     icon = { Icon(Icons.Default.Settings, contentDescription = null) },
-                    label = { Text("Settings") },
+                    label = { Text(stringResource(R.string.nav_settings)) },
                     selected = currentRoute == "settings",
                     onClick = {
                         closeDrawer()
@@ -180,6 +238,16 @@ private fun DeFideNavHost(
     // Shared BibleViewModel for scripture → Bible navigation (books read lazily, not collected as state)
     val bibleViewModel: BibleViewModel = androidx.hilt.navigation.compose.hiltViewModel()
     val navScope = rememberCoroutineScope()
+
+    // Reset the restore flag whenever the user leaves the Bible section so that
+    // returning to Bible from another section always auto-navigates to the last chapter.
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    LaunchedEffect(currentBackStackEntry) {
+        val route = currentBackStackEntry?.destination?.route
+        if (route != null && !route.startsWith("bible")) {
+            bibleViewModel.hasRestoredPosition = false
+        }
+    }
 
     NavHost(
         navController = navController,
@@ -240,6 +308,16 @@ private fun DeFideNavHost(
 
         // Bible
         composable("bible") {
+            LaunchedEffect(Unit) {
+                if (!bibleViewModel.hasRestoredPosition) {
+                    bibleViewModel.hasRestoredPosition = true
+                    val pos = bibleViewModel.getLastBiblePosition()
+                    if (pos != null) {
+                        val (tid, bn, ch) = pos
+                        navController.navigate("bible/$tid/book/$bn/chapter/$ch")
+                    }
+                }
+            }
             BibleHomeScreen(
                 onBookSelected = { translationId, bookNumber ->
                     navController.navigate("bible/$translationId/book/$bookNumber")

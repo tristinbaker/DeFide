@@ -14,9 +14,13 @@ enum class AppTheme { SYSTEM, LIGHT, DARK }
 
 data class UserPreferences(
     val theme: AppTheme = AppTheme.SYSTEM,
+    val appLanguage: String = "en",
     val bibleTranslationId: String = "dra",
     val novenaNotificationTime: String = "",   // "HH:MM" or empty = disabled
     val bibleStreakGoal: Int = 1,              // chapters per day to maintain streak
+    val bibleLastTranslationId: String = "",
+    val bibleLastBookNumber: Int = 0,
+    val bibleLastChapter: Int = 0,
 )
 
 @Singleton
@@ -25,22 +29,34 @@ class UserPreferencesRepository @Inject constructor(
 ) {
     companion object {
         private val KEY_THEME = stringPreferencesKey("theme")
+        private val KEY_APP_LANGUAGE = stringPreferencesKey("app_language")
         private val KEY_BIBLE_TRANSLATION = stringPreferencesKey("bible_translation")
         private val KEY_NOVENA_NOTIFICATION_TIME = stringPreferencesKey("novena_notification_time")
         private val KEY_BIBLE_STREAK_GOAL = intPreferencesKey("bible_streak_goal")
+        private val KEY_BIBLE_LAST_TRANSLATION = stringPreferencesKey("bible_last_translation")
+        private val KEY_BIBLE_LAST_BOOK = intPreferencesKey("bible_last_book")
+        private val KEY_BIBLE_LAST_CHAPTER = intPreferencesKey("bible_last_chapter")
     }
 
     val preferences: Flow<UserPreferences> = dataStore.data.map { prefs ->
         UserPreferences(
             theme = prefs[KEY_THEME]?.let { runCatching { AppTheme.valueOf(it) }.getOrNull() } ?: AppTheme.SYSTEM,
+            appLanguage = prefs[KEY_APP_LANGUAGE] ?: "en",
             bibleTranslationId = prefs[KEY_BIBLE_TRANSLATION] ?: "dra",
             novenaNotificationTime = prefs[KEY_NOVENA_NOTIFICATION_TIME] ?: "",
             bibleStreakGoal = prefs[KEY_BIBLE_STREAK_GOAL] ?: 1,
+            bibleLastTranslationId = prefs[KEY_BIBLE_LAST_TRANSLATION] ?: "",
+            bibleLastBookNumber = prefs[KEY_BIBLE_LAST_BOOK] ?: 0,
+            bibleLastChapter = prefs[KEY_BIBLE_LAST_CHAPTER] ?: 0,
         )
     }
 
     suspend fun setTheme(theme: AppTheme) {
         dataStore.edit { it[KEY_THEME] = theme.name }
+    }
+
+    suspend fun setAppLanguage(language: String) {
+        dataStore.edit { it[KEY_APP_LANGUAGE] = language }
     }
 
     suspend fun setBibleTranslation(translationId: String) {
@@ -53,5 +69,13 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setBibleStreakGoal(goal: Int) {
         dataStore.edit { it[KEY_BIBLE_STREAK_GOAL] = goal.coerceIn(1, 10) }
+    }
+
+    suspend fun setBibleLastPosition(translationId: String, bookNumber: Int, chapter: Int) {
+        dataStore.edit { prefs ->
+            prefs[KEY_BIBLE_LAST_TRANSLATION] = translationId
+            prefs[KEY_BIBLE_LAST_BOOK] = bookNumber
+            prefs[KEY_BIBLE_LAST_CHAPTER] = chapter
+        }
     }
 }

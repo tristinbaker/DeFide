@@ -26,7 +26,7 @@ import com.tristinbaker.defide.data.db.user.entity.RosarySessionEntity
         NovenaProgressEntity::class,
         PrayerLogEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 abstract class UserDatabase : RoomDatabase() {
@@ -49,6 +49,27 @@ abstract class UserDatabase : RoomDatabase() {
                         PRIMARY KEY(`translation_id`, `book_number`, `chapter`)
                     )"""
                 )
+            }
+        }
+
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """CREATE TABLE IF NOT EXISTS `bible_chapter_read_new` (
+                        `book_number` INTEGER NOT NULL,
+                        `chapter` INTEGER NOT NULL,
+                        `read_at` INTEGER NOT NULL,
+                        PRIMARY KEY(`book_number`, `chapter`)
+                    )"""
+                )
+                db.execSQL(
+                    """INSERT OR IGNORE INTO `bible_chapter_read_new` (`book_number`, `chapter`, `read_at`)
+                       SELECT `book_number`, `chapter`, MIN(`read_at`)
+                       FROM `bible_chapter_read`
+                       GROUP BY `book_number`, `chapter`"""
+                )
+                db.execSQL("DROP TABLE `bible_chapter_read`")
+                db.execSQL("ALTER TABLE `bible_chapter_read_new` RENAME TO `bible_chapter_read`")
             }
         }
     }

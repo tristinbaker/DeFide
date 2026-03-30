@@ -35,8 +35,26 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.tristinbaker.defide.R
+
+@Composable
+private fun localizedCategory(category: String): String {
+    val resId = when (category) {
+        "rosary"      -> R.string.category_rosary
+        "morning"     -> R.string.category_morning
+        "evening"     -> R.string.category_evening
+        "marian"      -> R.string.category_marian
+        "meals"       -> R.string.category_meals
+        "penitential" -> R.string.category_penitential
+        "devotional"  -> R.string.category_devotional
+        "saints"      -> R.string.category_saints
+        else          -> return category
+    }
+    return stringResource(resId)
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +71,7 @@ fun PrayerSearchScreen(
 
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text("Prayers") },
+            title = { Text(stringResource(R.string.prayers_title)) },
             navigationIcon = {
                 IconButton(onClick = onOpenDrawer) {
                     Icon(Icons.Default.Menu, contentDescription = "Menu")
@@ -73,13 +91,16 @@ fun PrayerSearchScreen(
                         selectedTag = null
                         viewModel.search(it)
                     },
-                    placeholder = { Text("Search prayers…") },
+                    placeholder = { Text(stringResource(R.string.search_prayers_hint)) },
                     modifier = Modifier.weight(1f),
                     singleLine = true,
                 )
                 Box(modifier = Modifier.padding(start = 8.dp)) {
                     OutlinedButton(onClick = { tagDropdownExpanded = true }) {
-                        Text(selectedTag ?: "Tag", maxLines = 1)
+                        Text(
+                            if (selectedTag != null) localizedCategory(selectedTag!!) else stringResource(R.string.tag_label),
+                            maxLines = 1,
+                        )
                         Icon(Icons.Default.ArrowDropDown, contentDescription = null)
                     }
                     DropdownMenu(
@@ -87,7 +108,7 @@ fun PrayerSearchScreen(
                         onDismissRequest = { tagDropdownExpanded = false },
                     ) {
                         DropdownMenuItem(
-                            text = { Text("All") },
+                            text = { Text(stringResource(R.string.action_all)) },
                             onClick = {
                                 selectedTag = null
                                 searchQuery = ""
@@ -97,7 +118,7 @@ fun PrayerSearchScreen(
                         )
                         tags.forEach { tag ->
                             DropdownMenuItem(
-                                text = { Text(tag) },
+                                text = { Text(localizedCategory(tag)) },
                                 onClick = {
                                     selectedTag = tag
                                     searchQuery = ""
@@ -118,7 +139,7 @@ fun PrayerSearchScreen(
                             .padding(16.dp),
                     ) {
                         Text(prayer.title, style = MaterialTheme.typography.titleSmall)
-                        Text(prayer.category, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(localizedCategory(prayer.category), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     HorizontalDivider()
                 }
@@ -159,7 +180,7 @@ fun PrayerDetailScreen(
                         onClick = { viewModel.logPrayer(it.id) },
                         modifier = Modifier.padding(top = 24.dp),
                     ) {
-                        Text("Mark as Prayed")
+                        Text(stringResource(R.string.mark_as_prayed))
                     }
                 }
             }

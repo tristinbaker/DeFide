@@ -34,10 +34,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.tristinbaker.defide.R
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,10 +55,12 @@ fun HomeScreen(
     val todaysMystery by viewModel.todaysMystery.collectAsState()
     val bibleStreak by viewModel.bibleStreak.collectAsState()
     val rosaryStreak by viewModel.rosaryStreak.collectAsState()
+    val appLanguage by viewModel.appLanguage.collectAsState()
 
     val today = LocalDate.now()
-    val dateText = today.format(DateTimeFormatter.ofPattern("EEEE, MMMM d"))
-    val yearText = today.format(DateTimeFormatter.ofPattern("yyyy"))
+    val dateLocale = Locale(appLanguage)
+    val dateText = today.format(DateTimeFormatter.ofPattern("EEEE, MMMM d", dateLocale))
+    val yearText = today.format(DateTimeFormatter.ofPattern("yyyy", dateLocale))
 
     Scaffold(
         topBar = {
@@ -118,7 +124,7 @@ fun HomeScreen(
 
                 // Verse of the day
                 SectionCard(
-                    title = "Verse of the Day",
+                    title = stringResource(R.string.verse_of_the_day),
                     onClick = verseOfDay?.let { v ->
                         { onVerseClicked(v.translationId, v.bookNumber, v.chapter, v.verse) }
                     },
@@ -136,14 +142,14 @@ fun HomeScreen(
                             color = MaterialTheme.colorScheme.secondary,
                         )
                     } else {
-                        Text("Loading…", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.loading), style = MaterialTheme.typography.bodyMedium)
                     }
                 }
 
                 Spacer(Modifier.height(12.dp))
 
                 // Today's mystery
-                SectionCard(title = "Today's Rosary") {
+                SectionCard(title = stringResource(R.string.todays_rosary)) {
                     if (todaysMystery != null) {
                         Text(
                             text = todaysMystery!!.name,
@@ -160,10 +166,10 @@ fun HomeScreen(
                         }
                         Spacer(Modifier.height(16.dp))
                         Button(onClick = { onPrayRosary(todaysMystery!!.id) }) {
-                            Text("Pray the Rosary")
+                            Text(stringResource(R.string.pray_the_rosary))
                         }
                     } else {
-                        Text("Loading…", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.loading), style = MaterialTheme.typography.bodyMedium)
                     }
                 }
 
@@ -174,8 +180,8 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
                 ) {
-                    StreakCard(label = "Bible Streak", days = bibleStreak, modifier = Modifier.weight(1f))
-                    StreakCard(label = "Rosary Streak", days = rosaryStreak, modifier = Modifier.weight(1f))
+                    StreakCard(label = stringResource(R.string.bible_streak), days = bibleStreak, modifier = Modifier.weight(1f))
+                    StreakCard(label = stringResource(R.string.rosary_streak), days = rosaryStreak, modifier = Modifier.weight(1f))
                 }
 
                 Spacer(Modifier.height(24.dp))
@@ -208,7 +214,7 @@ private fun StreakCard(label: String, days: Int, modifier: Modifier = Modifier) 
                     modifier = Modifier.padding(end = 4.dp),
                 )
                 Text(
-                    text = "$days day${if (days != 1) "s" else ""}",
+                    text = pluralStringResource(R.plurals.days, days, days),
                     style = MaterialTheme.typography.titleMedium,
                     color = if (days > 0) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                 )

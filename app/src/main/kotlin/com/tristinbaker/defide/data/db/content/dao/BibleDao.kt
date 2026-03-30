@@ -57,7 +57,7 @@ class BibleDao @Inject constructor(private val db: SQLiteDatabase) {
         if (count == 0L) return null
         val offset = epochDay % count
         return db.rawQuery(
-            "SELECT v.* FROM verses v JOIN books b ON v.book_id = b.id WHERE b.translation_id = ? LIMIT 1 OFFSET ?",
+            "SELECT v.* FROM verses v JOIN books b ON v.book_id = b.id WHERE b.translation_id = ? ORDER BY b.id, v.chapter, v.verse LIMIT 1 OFFSET ?",
             arrayOf(translationId, offset.toString()),
         ).firstOrNull { toVerse() }
     }

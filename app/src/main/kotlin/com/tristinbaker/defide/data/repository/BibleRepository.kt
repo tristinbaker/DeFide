@@ -110,19 +110,19 @@ class BibleRepository @Inject constructor(
         withContext(Dispatchers.IO) { highlightDao.delete(id) }
 
     // Chapter read tracking
-    fun getReadChapters(translationId: String, bookNumber: Int): Flow<List<Int>> =
-        chapterReadDao.getReadChapters(translationId, bookNumber)
+    fun getReadChapters(bookNumber: Int): Flow<List<Int>> =
+        chapterReadDao.getReadChapters(bookNumber)
 
-    suspend fun markChapterRead(translationId: String, bookNumber: Int, chapter: Int) =
+    suspend fun markChapterRead(bookNumber: Int, chapter: Int) =
         withContext(Dispatchers.IO) {
-            chapterReadDao.markRead(BibleChapterReadEntity(translationId, bookNumber, chapter))
+            chapterReadDao.markRead(BibleChapterReadEntity(bookNumber, chapter))
         }
 
-    suspend fun unmarkChapterRead(translationId: String, bookNumber: Int, chapter: Int) =
-        withContext(Dispatchers.IO) { chapterReadDao.unmarkRead(translationId, bookNumber, chapter) }
+    suspend fun unmarkChapterRead(bookNumber: Int, chapter: Int) =
+        withContext(Dispatchers.IO) { chapterReadDao.unmarkRead(bookNumber, chapter) }
 
-    suspend fun resetBookProgress(translationId: String, bookNumber: Int) =
-        withContext(Dispatchers.IO) { chapterReadDao.resetBook(translationId, bookNumber) }
+    suspend fun resetBookProgress(bookNumber: Int) =
+        withContext(Dispatchers.IO) { chapterReadDao.resetBook(bookNumber) }
 
     fun getAllReadHistory(): Flow<List<BibleChapterReadEntity>> = chapterReadDao.getAll()
 

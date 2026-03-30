@@ -20,14 +20,14 @@ class RosaryRepository @Inject constructor(
     private val rosaryContentDao: RosaryContentDao,
     private val rosarySessionDao: RosarySessionDao,
 ) {
-    suspend fun getMysteries(): List<Mystery> =
-        withContext(Dispatchers.IO) { rosaryContentDao.getMysteries() }
+    suspend fun getMysteries(language: String = "en"): List<Mystery> =
+        withContext(Dispatchers.IO) { rosaryContentDao.getMysteries(language) }
 
-    suspend fun getMystery(id: String): Mystery? =
-        withContext(Dispatchers.IO) { rosaryContentDao.getMystery(id) }
+    suspend fun getMystery(id: String, language: String = "en"): Mystery? =
+        withContext(Dispatchers.IO) { rosaryContentDao.getMystery(id, language) }
 
-    suspend fun getBeads(mysteryId: String): List<MysteryBead> =
-        withContext(Dispatchers.IO) { rosaryContentDao.getBeads(mysteryId) }
+    suspend fun getBeads(mysteryId: String, language: String = "en"): List<MysteryBead> =
+        withContext(Dispatchers.IO) { rosaryContentDao.getBeads(mysteryId, language) }
 
     fun getRecentSessions(limit: Int = 10): Flow<List<RosarySessionEntity>> =
         rosarySessionDao.getRecent(limit)

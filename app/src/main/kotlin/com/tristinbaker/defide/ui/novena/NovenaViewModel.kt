@@ -5,12 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.tristinbaker.defide.data.db.user.entity.NovenaProgressEntity
 import com.tristinbaker.defide.data.model.Novena
 import com.tristinbaker.defide.data.model.NovenaDay
+import com.tristinbaker.defide.data.preferences.UserPreferencesRepository
 import com.tristinbaker.defide.data.repository.NovenaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -19,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NovenaViewModel @Inject constructor(
     private val repository: NovenaRepository,
+    private val prefsRepository: UserPreferencesRepository,
 ) : ViewModel() {
 
     private val _novenas = MutableStateFlow<List<Novena>>(emptyList())
@@ -45,16 +50,27 @@ class NovenaViewModel @Inject constructor(
         .getCompletedProgress()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
+    private var currentLanguage: String = "en"
+
     init {
         viewModelScope.launch {
-            val all = repository.getAll()
-            _novenas.value = all
-            _novenaTitles.value = all.associate { it.id to it.title }
+            prefsRepository.preferences
+                .map { it.appLanguage }
+                .distinctUntilChanged()
+                .collect { lang ->
+                    currentLanguage = lang
+                    val all = repository.getAll(lang)
+                    _novenas.value = all
+                    _novenaTitles.value = all.associate { it.id to it.title }
+                }
         }
     }
 
     fun loadDetail(novenaId: String) {
-        viewModelScope.launch { _detail.value = repository.getById(novenaId) }
+        viewModelScope.launch {
+            val lang = prefsRepository.preferences.first().appLanguage
+            _detail.value = repository.getById(novenaId, lang)
+        }
     }
 
     fun loadProgress(novenaId: String) {
@@ -66,7 +82,8 @@ class NovenaViewModel @Inject constructor(
             val prog = repository.getProgressForNovena(novenaId) ?: return@launch
             _progress.value = prog
             val nextDay = prog.lastCompletedDay + 1
-            _currentDay.value = repository.getDay(novenaId, nextDay)
+            val lang = prefsRepository.preferences.first().appLanguage
+            _currentDay.value = repository.getDay(novenaId, nextDay, lang)
         }
     }
 

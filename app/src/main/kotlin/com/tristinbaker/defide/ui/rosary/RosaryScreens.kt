@@ -38,10 +38,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.tristinbaker.defide.R
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -59,7 +61,7 @@ fun RosaryHomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Rosary") },
+                title = { Text(stringResource(R.string.rosary_title)) },
                 navigationIcon = {
                     IconButton(onClick = onOpenDrawer) {
                         Icon(Icons.Default.Menu, contentDescription = "Menu")
@@ -74,7 +76,7 @@ fun RosaryHomeScreen(
         ) {
             item {
                 Text(
-                    text = "Select a Mystery",
+                    text = stringResource(R.string.select_mystery),
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(16.dp),
                 )
@@ -96,7 +98,7 @@ fun RosaryHomeScreen(
                         Text(mystery.name, style = MaterialTheme.typography.titleSmall)
                         mystery.traditionalDays?.let { days ->
                             Text(
-                                text = if (isToday) "✦ Today — $days" else days,
+                                text = if (isToday) stringResource(R.string.today_mystery_prefix, days) else days,
                                 style = MaterialTheme.typography.bodySmall,
                                 color = if (isToday)
                                     MaterialTheme.colorScheme.primary
@@ -123,6 +125,7 @@ fun RosarySessionScreen(
     val beads by viewModel.beads.collectAsState()
     val position by viewModel.currentPosition.collectAsState()
     val prayerTexts by viewModel.prayerTexts.collectAsState()
+    val prayerTitles by viewModel.prayerTitles.collectAsState()
 
     LaunchedEffect(mysteryId) { viewModel.startSession(mysteryId) }
 
@@ -130,11 +133,7 @@ fun RosarySessionScreen(
     val isLast = position == beads.lastIndex && beads.isNotEmpty()
     val isAnnouncementBead = currentBead?.prayerId == null && currentBead?.mysteryTitle != null
 
-    val prayerName = currentBead?.prayerId
-        ?.replace('-', ' ')
-        ?.split(' ')
-        ?.joinToString(" ") { it.replaceFirstChar { c -> c.uppercase() } }
-        ?: ""
+    val prayerName = currentBead?.prayerId?.let { prayerTitles[it] } ?: ""
     val prayerBody = currentBead?.prayerId?.let { prayerTexts[it] }
 
     Scaffold(
@@ -166,8 +165,16 @@ fun RosarySessionScreen(
                 if (isAnnouncementBead) {
                     // Dedicated mystery page
                     currentBead.mysteryNumber?.let { num ->
+                        val ordinalStr = when (num) {
+                            1 -> stringResource(R.string.ordinal_first)
+                            2 -> stringResource(R.string.ordinal_second)
+                            3 -> stringResource(R.string.ordinal_third)
+                            4 -> stringResource(R.string.ordinal_fourth)
+                            5 -> stringResource(R.string.ordinal_fifth)
+                            else -> "$num."
+                        }
                         Text(
-                            text = "The ${ordinal(num)} Mystery",
+                            text = stringResource(R.string.the_nth_mystery, ordinalStr),
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.primary,
                             textAlign = TextAlign.Center,
@@ -265,15 +272,15 @@ fun RosarySessionScreen(
                     .padding(horizontal = 24.dp, vertical = 16.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
-                OutlinedButton(onClick = { viewModel.back() }) { Text("Back") }
+                OutlinedButton(onClick = { viewModel.back() }) { Text(stringResource(R.string.action_back)) }
                 if (isLast) {
                     Button(onClick = { viewModel.completeSession(onFinished) }) {
-                        Text("Complete")
+                        Text(stringResource(R.string.action_complete))
                     }
                 } else {
                     Button(onClick = { viewModel.advance() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
-                        Text(" Next")
+                        Text(" ${stringResource(R.string.action_next)}")
                     }
                 }
             }
@@ -379,7 +386,3 @@ private fun RosaryBeadIndicator(
     }
 }
 
-private fun ordinal(n: Int): String = when (n) {
-    1 -> "First"; 2 -> "Second"; 3 -> "Third"; 4 -> "Fourth"; 5 -> "Fifth"
-    else -> "$n."
-}

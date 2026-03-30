@@ -42,9 +42,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.tristinbaker.defide.R
 import com.tristinbaker.defide.data.preferences.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -92,7 +94,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings") },
+                title = { Text(stringResource(R.string.settings_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -103,7 +105,7 @@ fun SettingsScreen(
     ) { padding ->
         LazyColumn(modifier = Modifier.fillMaxSize().padding(padding)) {
             item {
-                SectionHeader("Appearance")
+                SectionHeader(stringResource(R.string.section_appearance))
             }
             item {
                 Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
@@ -117,7 +119,11 @@ fun SettingsScreen(
                                 onClick = { viewModel.setTheme(theme) },
                             )
                             Text(
-                                text = theme.name.lowercase().replaceFirstChar { it.uppercase() },
+                                text = stringResource(when (theme) {
+                                    AppTheme.SYSTEM -> R.string.theme_system
+                                    AppTheme.LIGHT  -> R.string.theme_light
+                                    AppTheme.DARK   -> R.string.theme_dark
+                                }),
                                 style = MaterialTheme.typography.bodyMedium,
                                 modifier = Modifier.padding(start = 8.dp),
                             )
@@ -127,14 +133,46 @@ fun SettingsScreen(
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
             item {
-                SectionHeader("Bible Translation")
+                SectionHeader(stringResource(R.string.section_language))
             }
             item {
-                val translations = listOf(
-                    Triple("dra",        "Douay-Rheims (1899)",               "Traditional Catholic translation"),
-                    Triple("web-c",      "World English Bible (Catholic)",    "Modern English, public domain"),
-                    Triple("vulgate",    "Latin Vulgate",                     "Original Latin text of St. Jerome"),
-                    Triple("vulgate-et", "Latin Vulgate (English)",           "English translation of the Latin Vulgate"),
+                val languages = listOf(
+                    "en" to "English",
+                    "pt" to "Português",
+                )
+                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+                    languages.forEach { (code, label) ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            RadioButton(
+                                selected = prefs.appLanguage == code,
+                                onClick = { viewModel.setAppLanguage(code) },
+                            )
+                            Text(
+                                text = label,
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.padding(start = 8.dp),
+                            )
+                        }
+                    }
+                }
+                HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
+            }
+            item {
+                SectionHeader(stringResource(R.string.section_bible_translation))
+            }
+            item {
+                // Content-level decision: which translations are relevant per language
+                val translations = if (prefs.appLanguage == "pt") listOf(
+                    Triple("ave-maria",  "Bíblia Ave-Maria",  "Tradução católica brasileira"),
+                    Triple("vulgate",    "Vulgata Latina",    "Texto latino original de São Jerônimo"),
+                ) else listOf(
+                    Triple("dra",        "Douay-Rheims (1899)",            "Traditional Catholic translation"),
+                    Triple("web-c",      "World English Bible (Catholic)", "Modern English, public domain"),
+                    Triple("vulgate",    "Latin Vulgate",                  "Original Latin text of St. Jerome"),
+                    Triple("vulgate-et", "Latin Vulgate (English)",        "English translation of the Latin Vulgate"),
                 )
                 Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
                     translations.forEach { (id, label, subtitle) ->
@@ -156,13 +194,13 @@ fun SettingsScreen(
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
             item {
-                SectionHeader("Notifications")
+                SectionHeader(stringResource(R.string.section_notifications))
             }
             item {
                 val label = if (prefs.novenaNotificationTime.isNotEmpty())
-                    "Daily at ${prefs.novenaNotificationTime}"
+                    stringResource(R.string.daily_at, prefs.novenaNotificationTime)
                 else
-                    "Off"
+                    stringResource(R.string.status_off)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -171,14 +209,14 @@ fun SettingsScreen(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("Novena reminder", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.novena_reminder_label), style = MaterialTheme.typography.bodyMedium)
                         Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
                 HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
             }
             item {
-                SectionHeader("Bible Streak")
+                SectionHeader(stringResource(R.string.section_bible_streak))
             }
             item {
                 Row(
@@ -188,9 +226,9 @@ fun SettingsScreen(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("Chapters per day", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.chapters_per_day_label), style = MaterialTheme.typography.bodyMedium)
                         Text(
-                            "How many chapters you need to read each day to keep your streak going",
+                            stringResource(R.string.chapters_per_day_desc),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -214,7 +252,7 @@ fun SettingsScreen(
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
             item {
-                SectionHeader("Help")
+                SectionHeader(stringResource(R.string.section_help))
             }
             item {
                 Row(
@@ -224,20 +262,30 @@ fun SettingsScreen(
                         .padding(horizontal = 16.dp, vertical = 14.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text("How to Use", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                    Text(stringResource(R.string.how_to_use_label), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
                     Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 HorizontalDivider()
             }
             item {
-                SectionHeader("About")
+                SectionHeader(stringResource(R.string.section_about))
             }
             item {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("De Fide", style = MaterialTheme.typography.bodyMedium)
                     Text("Version 1.0.0", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text("Free and open-source. No tracking, no accounts, no internet required.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp))
-                    Text("All included Bible translations are public domain or license-free, keeping De Fide fully FOSS-compatible.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp))
+                    Text(
+                        stringResource(R.string.about_tagline),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                    Text(
+                        stringResource(R.string.about_bible_note),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
                 }
             }
         }
@@ -257,11 +305,11 @@ private fun NotificationTimeDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Novena reminder time") },
+        title = { Text(stringResource(R.string.novena_reminder_dialog_title)) },
         text = {
             Column {
                 Text(
-                    "Choose the hour for your daily novena reminder.",
+                    stringResource(R.string.novena_reminder_dialog_desc),
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(bottom = 12.dp),
                 )
@@ -273,7 +321,7 @@ private fun NotificationTimeDialog(
                         value = formatHour(selectedHour),
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("Hour") },
+                        label = { Text(stringResource(R.string.hour_label)) },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -294,11 +342,11 @@ private fun NotificationTimeDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = { onConfirm("%02d:00".format(selectedHour)) }) { Text("Save") }
+            TextButton(onClick = { onConfirm("%02d:00".format(selectedHour)) }) { Text(stringResource(R.string.action_save)) }
         },
         dismissButton = {
-            TextButton(onClick = { onConfirm("") }) { Text("Turn off") }
-            TextButton(onClick = onDismiss) { Text("Cancel") }
+            TextButton(onClick = { onConfirm("") }) { Text(stringResource(R.string.action_turn_off)) }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_cancel)) }
         },
     )
 }

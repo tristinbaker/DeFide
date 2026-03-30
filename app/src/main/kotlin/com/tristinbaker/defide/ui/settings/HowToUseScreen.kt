@@ -18,66 +18,69 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tristinbaker.defide.R
 
 private data class HowToSection(val title: String, val steps: List<String>)
 
-private val sections = listOf(
+@Composable
+private fun rememberHowToSections() = listOf(
     HowToSection(
-        title = "Bible",
+        title = stringResource(R.string.nav_bible),
         steps = listOf(
-            "Open the Bible from the drawer and select a translation in Settings.",
-            "Tap a book, then a chapter to start reading.",
-            "Press the → button at the bottom right to go to the next chapter. This also marks the current chapter as read.",
-            "Chapters you've read appear as filled chips in the chapter selector. Long-press a chip to unmark it, or use the ⋮ menu to reset all progress for a book.",
-            "Long-press any verse to bookmark it or apply a highlight color.",
-            "Use the search bar at the top of the Bible screen to search across the full text of the selected translation.",
-            "View all bookmarks with the Bookmarks button in the top bar.",
+            stringResource(R.string.htu_bible_1),
+            stringResource(R.string.htu_bible_2),
+            stringResource(R.string.htu_bible_3),
+            stringResource(R.string.htu_bible_4),
+            stringResource(R.string.htu_bible_5),
+            stringResource(R.string.htu_bible_6),
+            stringResource(R.string.htu_bible_7),
         ),
     ),
     HowToSection(
-        title = "Rosary",
+        title = stringResource(R.string.nav_rosary),
         steps = listOf(
-            "Open Rosary from the drawer or tap Pray the Rosary on the Home screen.",
-            "Select a mystery set to begin a guided session.",
-            "Swipe or tap the arrow buttons to move through each bead.",
-            "Scripture references for each mystery are shown below the prayer text. Tap them to open the verse in the Bible.",
-            "Completing a session extends your Rosary streak on the Home screen.",
+            stringResource(R.string.htu_rosary_1),
+            stringResource(R.string.htu_rosary_2),
+            stringResource(R.string.htu_rosary_3),
+            stringResource(R.string.htu_rosary_4),
+            stringResource(R.string.htu_rosary_5),
         ),
     ),
     HowToSection(
-        title = "Prayers",
+        title = stringResource(R.string.nav_prayers),
         steps = listOf(
-            "Open Prayers from the drawer to browse or search traditional Catholic prayers.",
-            "Tap any prayer to read it in full.",
-            "Use the search bar to find prayers by title, text, or tag.",
+            stringResource(R.string.htu_prayers_1),
+            stringResource(R.string.htu_prayers_2),
+            stringResource(R.string.htu_prayers_3),
         ),
     ),
     HowToSection(
-        title = "Novenas",
+        title = stringResource(R.string.nav_novenas),
         steps = listOf(
-            "Open Novenas from the drawer and select a novena to begin.",
-            "Tap Begin Novena to start — you'll go straight to Day 1.",
-            "Return each day and tap Continue to pray the next day's prayer.",
-            "View active novenas under My Novenas. Tap the trash icon to abandon one.",
+            stringResource(R.string.htu_novenas_1),
+            stringResource(R.string.htu_novenas_2),
+            stringResource(R.string.htu_novenas_3),
+            stringResource(R.string.htu_novenas_4),
         ),
     ),
     HowToSection(
-        title = "Streaks",
+        title = stringResource(R.string.section_bible_streak),
         steps = listOf(
-            "Your Bible and Rosary streaks appear as widgets on the Home screen.",
-            "The Bible streak counts consecutive days where you've read at least N chapters (set N in Settings → Bible Streak).",
-            "The Rosary streak counts consecutive days where you completed at least one Rosary session.",
-            "A streak resets if you miss a day.",
+            stringResource(R.string.htu_streaks_1),
+            stringResource(R.string.htu_streaks_2),
+            stringResource(R.string.htu_streaks_3),
+            stringResource(R.string.htu_streaks_4),
         ),
     ),
     HowToSection(
-        title = "Settings",
+        title = stringResource(R.string.nav_settings),
         steps = listOf(
-            "Change the app theme (Light, Dark, or System) under Appearance.",
-            "Switch Bible translations under Bible Translation.",
-            "Set your Bible streak goal (chapters per day) under Bible Streak.",
-            "Enable daily novena reminders under Notifications.",
+            stringResource(R.string.htu_settings_1),
+            stringResource(R.string.htu_settings_2),
+            stringResource(R.string.htu_settings_3),
+            stringResource(R.string.htu_settings_4),
         ),
     ),
 )
@@ -85,10 +88,12 @@ private val sections = listOf(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HowToUseScreen(onBack: () -> Unit) {
+    val sections = rememberHowToSections()
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("How to Use") },
+                title = { Text(stringResource(R.string.how_to_use_label)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")

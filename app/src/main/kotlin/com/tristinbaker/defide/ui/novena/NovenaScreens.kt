@@ -30,8 +30,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.tristinbaker.defide.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +49,7 @@ fun NovenaListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Novenas") },
+                title = { Text(stringResource(R.string.novena_title)) },
                 navigationIcon = {
                     IconButton(onClick = onOpenDrawer) {
                         Icon(Icons.Default.Menu, contentDescription = "Menu")
@@ -56,7 +59,7 @@ fun NovenaListScreen(
                     OutlinedButton(
                         onClick = onProgressSelected,
                         modifier = Modifier.padding(end = 8.dp),
-                    ) { Text("My Novenas") }
+                    ) { Text(stringResource(R.string.novena_my_novenas)) }
                 },
             )
         },
@@ -71,7 +74,7 @@ fun NovenaListScreen(
                 ) {
                     Text(novena.title, style = MaterialTheme.typography.titleSmall)
                     novena.feastDay?.let {
-                        Text("Feast: $it", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(R.string.novena_feast_label, it), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
                 HorizontalDivider()
@@ -114,16 +117,16 @@ fun NovenaDetailScreen(
                 Spacer(Modifier.height(8.dp))
             }
             novena?.let {
-                Text("${it.totalDays} days", style = MaterialTheme.typography.bodySmall)
-                it.feastDay?.let { day -> Text("Traditional feast: $day", style = MaterialTheme.typography.bodySmall) }
+                Text(pluralStringResource(R.plurals.days, it.totalDays, it.totalDays), style = MaterialTheme.typography.bodySmall)
+                it.feastDay?.let { day -> Text(stringResource(R.string.novena_feast_traditional, day), style = MaterialTheme.typography.bodySmall) }
             }
             Spacer(Modifier.height(24.dp))
 
             if (progress == null) {
-                Button(onClick = { viewModel.startNovena(novenaId) { progressId -> onStartSession(novenaId, progressId) } }) { Text("Begin Novena") }
+                Button(onClick = { viewModel.startNovena(novenaId) { progressId -> onStartSession(novenaId, progressId) } }) { Text(stringResource(R.string.novena_begin)) }
             } else {
                 Button(onClick = { onStartSession(novenaId, progress!!.id) }) {
-                    Text(if (progress!!.completed) "View Novena" else "Continue (Day ${progress!!.lastCompletedDay + 1})")
+                    Text(if (progress!!.completed) stringResource(R.string.novena_view) else stringResource(R.string.novena_continue, progress!!.lastCompletedDay + 1))
                 }
             }
         }
@@ -146,7 +149,7 @@ fun NovenaSessionScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Day ${(progress?.lastCompletedDay ?: 0) + 1}") },
+                title = { Text(stringResource(R.string.novena_day, (progress?.lastCompletedDay ?: 0) + 1)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -169,9 +172,9 @@ fun NovenaSessionScreen(
                     Button(
                         onClick = { viewModel.completeDay(novenaId) },
                         modifier = Modifier.fillMaxWidth(),
-                    ) { Text("Mark Day Complete") }
+                    ) { Text(stringResource(R.string.novena_mark_complete)) }
                 } else if (progress?.completed == true) {
-                    Text("Novena complete!", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+                    Text(stringResource(R.string.novena_complete_msg), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
                 }
             }
         }
@@ -192,7 +195,7 @@ fun NovenaProgressScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("My Novenas") },
+                title = { Text(stringResource(R.string.novena_my_novenas)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -203,7 +206,7 @@ fun NovenaProgressScreen(
     ) { padding ->
         LazyColumn(contentPadding = padding) {
             if (active.isNotEmpty()) {
-                item { Text("In Progress", style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(16.dp)) }
+                item { Text(stringResource(R.string.novena_in_progress), style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(16.dp)) }
                 items(active) { prog ->
                     Row(
                         modifier = Modifier
@@ -215,7 +218,7 @@ fun NovenaProgressScreen(
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(titles[prog.novenaId] ?: prog.novenaId, style = MaterialTheme.typography.bodyMedium)
-                            Text("Day ${prog.lastCompletedDay + 1}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(stringResource(R.string.novena_day, prog.lastCompletedDay + 1), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         IconButton(onClick = { viewModel.abandonNovena(prog.id) }) {
                             Icon(Icons.Default.Delete, contentDescription = "Abandon", tint = MaterialTheme.colorScheme.error)
@@ -225,7 +228,7 @@ fun NovenaProgressScreen(
                 }
             }
             if (completed.isNotEmpty()) {
-                item { Text("Completed", style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(16.dp)) }
+                item { Text(stringResource(R.string.novena_section_completed), style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(16.dp)) }
                 items(completed) { prog ->
                     Text(
                         titles[prog.novenaId] ?: prog.novenaId,
@@ -238,7 +241,7 @@ fun NovenaProgressScreen(
             if (active.isEmpty() && completed.isEmpty()) {
                 item {
                     Text(
-                        "No novenas started yet.",
+                        stringResource(R.string.novena_empty),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(32.dp),
                     )

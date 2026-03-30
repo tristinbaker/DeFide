@@ -2,7 +2,6 @@ package com.tristinbaker.defide.ui.bible
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tristinbaker.defide.data.db.user.entity.BibleHighlightEntity
 import com.tristinbaker.defide.data.model.Book
 import com.tristinbaker.defide.data.model.Translation
 import com.tristinbaker.defide.data.model.Verse
@@ -14,9 +13,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -40,14 +39,14 @@ class BibleViewModel @Inject constructor(
     private val _chapterCount = MutableStateFlow(0)
     val chapterCount: StateFlow<Int> = _chapterCount.asStateFlow()
 
-    // (translationId, bookNumber) key driving the read-chapters flow
-    private val _readKey = MutableStateFlow<Pair<String, Int>?>(null)
+    // bookNumber key driving the read-chapters flow
+    private val _readKey = MutableStateFlow<Int?>(null)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val readChapters: StateFlow<Set<Int>> = _readKey
-        .flatMapLatest { key ->
-            if (key == null) kotlinx.coroutines.flow.flowOf(emptyList())
-            else repository.getReadChapters(key.first, key.second)
+        .flatMapLatest { bookNumber ->
+            if (bookNumber == null) kotlinx.coroutines.flow.flowOf(emptyList())
+            else repository.getReadChapters(bookNumber)
         }
         .map { it.toSet() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
@@ -65,6 +64,9 @@ class BibleViewModel @Inject constructor(
 
     val bookmarks = repository.getBookmarks()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    // Tracks whether we've already auto-navigated to the last position this session
+    var hasRestoredPosition = false
 
     init {
         viewModelScope.launch {
@@ -88,20 +90,20 @@ class BibleViewModel @Inject constructor(
         }
     }
 
-    fun loadReadChapters(translationId: String, bookNumber: Int) {
-        _readKey.value = translationId to bookNumber
+    fun loadReadChapters(bookNumber: Int) {
+        _readKey.value = bookNumber
     }
 
-    fun markChapterRead(translationId: String, bookNumber: Int, chapter: Int) {
-        viewModelScope.launch { repository.markChapterRead(translationId, bookNumber, chapter) }
+    fun markChapterRead(bookNumber: Int, chapter: Int) {
+        viewModelScope.launch { repository.markChapterRead(bookNumber, chapter) }
     }
 
-    fun unmarkChapterRead(translationId: String, bookNumber: Int, chapter: Int) {
-        viewModelScope.launch { repository.unmarkChapterRead(translationId, bookNumber, chapter) }
+    fun unmarkChapterRead(bookNumber: Int, chapter: Int) {
+        viewModelScope.launch { repository.unmarkChapterRead(bookNumber, chapter) }
     }
 
-    fun resetBookProgress(translationId: String, bookNumber: Int) {
-        viewModelScope.launch { repository.resetBookProgress(translationId, bookNumber) }
+    fun resetBookProgress(bookNumber: Int) {
+        viewModelScope.launch { repository.resetBookProgress(bookNumber) }
     }
 
     fun loadVerses(bookId: Int, chapter: Int) {
@@ -139,5 +141,19 @@ class BibleViewModel @Inject constructor(
 
     fun removeHighlight(verseId: Int) {
         viewModelScope.launch { repository.removeHighlight(verseId) }
+    }
+
+    // Last position persistence for restore-on-reenter
+    fun saveLastBiblePosition(translationId: String, bookNumber: Int, chapter: Int) {
+        viewModelScope.launch {
+            prefsRepository.setBibleLastPosition(translationId, bookNumber, chapter)
+        }
+    }
+
+    suspend fun getLastBiblePosition(): Triple<String, Int, Int>? {
+        val prefs = prefsRepository.preferences.first()
+        return if (prefs.bibleLastBookNumber > 0) {
+            Triple(prefs.bibleLastTranslationId, prefs.bibleLastBookNumber, prefs.bibleLastChapter)
+        } else null
     }
 }

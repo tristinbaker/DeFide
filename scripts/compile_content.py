@@ -262,18 +262,20 @@ def create_schema(conn: sqlite3.Connection) -> None:
 
         -- Prayers
         CREATE TABLE IF NOT EXISTS prayers (
-            id       TEXT PRIMARY KEY,
+            id       TEXT NOT NULL,
+            language TEXT NOT NULL DEFAULT 'en',
             title    TEXT NOT NULL,
             body     TEXT NOT NULL,
             source   TEXT,
-            category TEXT NOT NULL
+            category TEXT NOT NULL,
+            PRIMARY KEY (id, language)
         );
 
         CREATE TABLE IF NOT EXISTS prayer_tags (
             prayer_id TEXT NOT NULL,
+            language  TEXT NOT NULL DEFAULT 'en',
             tag       TEXT NOT NULL,
-            PRIMARY KEY (prayer_id, tag),
-            FOREIGN KEY (prayer_id) REFERENCES prayers(id)
+            PRIMARY KEY (prayer_id, language, tag)
         );
 
         CREATE VIRTUAL TABLE IF NOT EXISTS prayers_fts USING fts4(
@@ -283,67 +285,158 @@ def create_schema(conn: sqlite3.Connection) -> None:
 
         -- Novenas
         CREATE TABLE IF NOT EXISTS novenas (
-            id          TEXT PRIMARY KEY,
+            id          TEXT NOT NULL,
+            language    TEXT NOT NULL DEFAULT 'en',
             title       TEXT NOT NULL,
             description TEXT,
             total_days  INTEGER NOT NULL DEFAULT 9,
-            feast_day   TEXT
+            feast_day   TEXT,
+            PRIMARY KEY (id, language)
         );
 
         CREATE TABLE IF NOT EXISTS novena_days (
             id         INTEGER PRIMARY KEY,
             novena_id  TEXT NOT NULL,
+            language   TEXT NOT NULL DEFAULT 'en',
             day_number INTEGER NOT NULL,
             title      TEXT,
-            body       TEXT NOT NULL,
-            FOREIGN KEY (novena_id) REFERENCES novenas(id)
+            body       TEXT NOT NULL
         );
 
         -- Rosary
         CREATE TABLE IF NOT EXISTS mysteries (
-            id               TEXT PRIMARY KEY,
+            id               TEXT NOT NULL,
+            language         TEXT NOT NULL DEFAULT 'en',
             name             TEXT NOT NULL,
-            traditional_days TEXT
+            traditional_days TEXT,
+            PRIMARY KEY (id, language)
         );
 
         CREATE TABLE IF NOT EXISTS mystery_beads (
             id                 INTEGER PRIMARY KEY,
             mystery_id         TEXT NOT NULL,
+            language           TEXT NOT NULL DEFAULT 'en',
             position           INTEGER NOT NULL,
             prayer_id          TEXT,
             mystery_number     INTEGER,
             mystery_title      TEXT,
             mystery_scripture  TEXT,
-            mystery_meditation TEXT,
-            FOREIGN KEY (mystery_id) REFERENCES mysteries(id)
+            mystery_meditation TEXT
         );
 
         -- Indexes for fast chapter / book lookups
         CREATE INDEX IF NOT EXISTS idx_verses_book_chapter ON verses(book_id, chapter);
         CREATE INDEX IF NOT EXISTS idx_books_translation ON books(translation_id, book_number);
-        CREATE INDEX IF NOT EXISTS idx_mystery_beads_mystery ON mystery_beads(mystery_id, position);
+        CREATE INDEX IF NOT EXISTS idx_mystery_beads_mystery ON mystery_beads(mystery_id, language, position);
         CREATE INDEX IF NOT EXISTS idx_novena_days_novena ON novena_days(novena_id, day_number);
     """)
 
 
 # Starting book_id offsets per translation so IDs never collide across translations.
 # DRA: 1–999, NRSVCE: 1001–1999, Vulgate: 2001–2999, Vulgate-ET: 3001–3999, WEB-C: 4001–4999
+# Ave-Maria (PT): 5001–5999
 _TRANSLATION_BOOK_ID_OFFSET = {
     "dra":        1,
     "vulgate":    2001,
     "vulgate-et": 3001,
     "web-c":      4001,
+    "ave-maria":  5001,
+}
+
+# Portuguese display names for Ave-Maria, keyed by DR filename (no extension).
+_PT_BOOK_NAMES = {
+    "Genesis":          "Gênesis",
+    "Exodus":           "Êxodo",
+    "Leviticus":        "Levítico",
+    "Numbers":          "Números",
+    "Deuteronomy":      "Deuteronômio",
+    "Josue":            "Josué",
+    "Judges":           "Juízes",
+    "Ruth":             "Rute",
+    "1 Kings":          "I Samuel",
+    "2 Kings":          "II Samuel",
+    "3 Kings":          "I Reis",
+    "4 Kings":          "II Reis",
+    "1 Paralipomenon":  "I Crônicas",
+    "2 Paralipomenon":  "II Crônicas",
+    "1 Esdras":         "Esdras",
+    "2 Esdras":         "Neemias",
+    "Tobias":           "Tobias",
+    "Judith":           "Judite",
+    "Esther":           "Ester",
+    "Job":              "Jó",
+    "Psalms":           "Salmos",
+    "1 Machabees":      "I Macabeus",
+    "2 Machabees":      "II Macabeus",
+    "Proverbs":         "Provérbios",
+    "Ecclesiastes":     "Eclesiastes",
+    "Canticles":        "Cântico dos Cânticos",
+    "Wisdom":           "Sabedoria",
+    "Ecclesiasticus":   "Eclesiástico",
+    "Isaias":           "Isaías",
+    "Jeremias":         "Jeremias",
+    "Lamentations":     "Lamentações",
+    "Baruch":           "Baruc",
+    "Ezechiel":         "Ezequiel",
+    "Daniel":           "Daniel",
+    "Osee":             "Oséias",
+    "Joel":             "Joel",
+    "Amos":             "Amós",
+    "Abdias":           "Abdias",
+    "Jonas":            "Jonas",
+    "Micheas":          "Miquéias",
+    "Nahum":            "Naum",
+    "Habacuc":          "Habacuc",
+    "Sophonias":        "Sofonias",
+    "Aggeus":           "Ageu",
+    "Zacharias":        "Zacarias",
+    "Malachias":        "Malaquias",
+    "Matthew":          "São Mateus",
+    "Mark":             "São Marcos",
+    "Luke":             "São Lucas",
+    "John":             "São João",
+    "Acts":             "Atos dos Apóstolos",
+    "Romans":           "Romanos",
+    "1 Corinthians":    "I Coríntios",
+    "2 Corinthians":    "II Coríntios",
+    "Galatians":        "Gálatas",
+    "Ephesians":        "Efésios",
+    "Philippians":      "Filipenses",
+    "Colossians":       "Colossenses",
+    "1 Thessalonians":  "I Tessalonicenses",
+    "2 Thessalonians":  "II Tessalonicenses",
+    "1 Timothy":        "I Timóteo",
+    "2 Timothy":        "II Timóteo",
+    "Titus":            "Tito",
+    "Philemon":         "Filêmon",
+    "Hebrews":          "Hebreus",
+    "James":            "São Tiago",
+    "1 Peter":          "I São Pedro",
+    "2 Peter":          "II São Pedro",
+    "1 John":           "I São João",
+    "2 John":           "II São João",
+    "3 John":           "III São João",
+    "Jude":             "São Judas",
+    "Apocalypse":       "Apocalipse",
 }
 
 
-def compile_dr_format(conn: sqlite3.Connection, translation_id: str) -> None:
+def compile_dr_format(
+    conn: sqlite3.Connection,
+    translation_id: str,
+    lang: str = "en",
+    book_full_names: dict | None = None,
+) -> None:
     """
     Ingests any translation stored in the DRA per-book folder format:
-        content/bible/<translation_id>/metadata.json
-        content/bible/<translation_id>/books/<DR-name>.json
+        content/bible/<lang>/<translation_id>/metadata.json
+        content/bible/<lang>/<translation_id>/books/<DR-name>.json
     Book files must be named using BOOK_MANIFEST keys.
+
+    book_full_names: optional dict mapping DR filename (no extension) → display name override.
+                     Use this for non-English translations so the full_name column is localized.
     """
-    translation_dir = os.path.join(CONTENT_DIR, "bible", translation_id)
+    translation_dir = os.path.join(CONTENT_DIR, "bible", lang, translation_id)
     books_dir = os.path.join(translation_dir, "books")
     meta_path = os.path.join(translation_dir, "metadata.json")
 
@@ -374,6 +467,8 @@ def compile_dr_format(conn: sqlite3.Connection, translation_id: str) -> None:
             continue
 
         book_number, testament, short_name, full_name = BOOK_MANIFEST[dr_name]
+        if book_full_names and dr_name in book_full_names:
+            full_name = book_full_names[dr_name]
         book_id = book_id_counter
         book_id_counter += 1
 
@@ -478,65 +573,74 @@ def compile_catechism(conn: sqlite3.Connection) -> None:
     print(f"  Catechism: {len(paragraphs)} paragraphs indexed.")
 
 
-def compile_prayers(conn: sqlite3.Connection) -> None:
-    path = os.path.join(CONTENT_DIR, "prayers", "prayers.json")
+def compile_prayers(conn: sqlite3.Connection, lang: str) -> None:
+    path = os.path.join(CONTENT_DIR, "prayers", lang, "prayers.json")
+    if not os.path.exists(path):
+        print(f"  SKIP: {path} not found.")
+        return
     with open(path) as f:
         prayers = json.load(f)
 
     if not prayers:
-        print("  SKIP: prayers.json is empty.")
+        print(f"  SKIP: prayers.json ({lang}) is empty.")
         return
 
     for p in prayers:
         conn.execute(
-            "INSERT INTO prayers VALUES (?, ?, ?, ?, ?)",
-            (p["id"], p["title"], p["body"], p.get("source"), p["category"]),
+            "INSERT INTO prayers (id, language, title, body, source, category) VALUES (?, ?, ?, ?, ?, ?)",
+            (p["id"], lang, p["title"], p["body"], p.get("source"), p["category"]),
         )
         for tag in p.get("tags", []):
-            conn.execute("INSERT INTO prayer_tags VALUES (?, ?)", (p["id"], tag))
+            conn.execute(
+                "INSERT INTO prayer_tags (prayer_id, language, tag) VALUES (?, ?, ?)",
+                (p["id"], lang, tag),
+            )
 
     conn.execute("INSERT INTO prayers_fts(prayers_fts) VALUES('rebuild')")
-    print(f"  Prayers: {len(prayers)} entries indexed.")
+    print(f"  Prayers ({lang}): {len(prayers)} entries indexed.")
 
 
-def compile_novenas(conn: sqlite3.Connection) -> None:
-    path = os.path.join(CONTENT_DIR, "novenas", "novenas.json")
+def compile_novenas(conn: sqlite3.Connection, lang: str) -> None:
+    path = os.path.join(CONTENT_DIR, "novenas", lang, "novenas.json")
+    if not os.path.exists(path):
+        print(f"  SKIP: {path} not found.")
+        return
     with open(path) as f:
         novenas = json.load(f)
 
     if not novenas:
-        print("  SKIP: novenas.json is empty.")
+        print(f"  SKIP: novenas.json ({lang}) is empty.")
         return
 
     for n in novenas:
         conn.execute(
-            "INSERT INTO novenas VALUES (?, ?, ?, ?, ?)",
-            (n["id"], n["title"], n.get("description"),
+            "INSERT INTO novenas (id, language, title, description, total_days, feast_day) VALUES (?, ?, ?, ?, ?, ?)",
+            (n["id"], lang, n["title"], n.get("description"),
              n.get("total_days", 9), n.get("feast_day")),
         )
         for day in n["days"]:
             conn.execute(
-                "INSERT INTO novena_days (novena_id, day_number, title, body) VALUES (?, ?, ?, ?)",
-                (n["id"], day["day"], day.get("title"), day["body"]),
+                "INSERT INTO novena_days (novena_id, language, day_number, title, body) VALUES (?, ?, ?, ?, ?)",
+                (n["id"], lang, day["day"], day.get("title"), day["body"]),
             )
-    print(f"  Novenas: {len(novenas)} entries loaded.")
+    print(f"  Novenas ({lang}): {len(novenas)} entries loaded.")
 
 
-def compile_rosary(conn: sqlite3.Connection) -> None:
-    path = os.path.join(CONTENT_DIR, "rosary", "mysteries.json")
+def compile_rosary(conn: sqlite3.Connection, lang: str) -> None:
+    path = os.path.join(CONTENT_DIR, "rosary", lang, "mysteries.json")
     if not os.path.exists(path):
-        print("  SKIP: content/rosary/mysteries.json not found.")
+        print(f"  SKIP: content/rosary/{lang}/mysteries.json not found.")
         return
 
     with open(path) as f:
         mystery_sets = json.load(f)
 
     # Rosary bead sequence per mystery set:
-    # Intro (6 beads): Apostles' Creed, Our Father, 3× Hail Mary (with intentions), Glory Be
-    # Per mystery (14 beads): Mystery announcement (no prayer), Our Father, 10× Hail Mary, Glory Be, Fatima Prayer
+    # Intro (6 beads): Apostles' Creed, Our Father, 3x Hail Mary (with intentions), Glory Be
+    # Per mystery (14 beads): Mystery announcement (no prayer), Our Father, 10x Hail Mary, Glory Be, Fatima Prayer
     # Closing (1 bead): Hail Holy Queen
     # (prayer_id, mystery_title / intention)
-    INTRO = [
+    INTRO_EN = [
         ("apostles-creed", None),
         ("our-father",     None),
         ("hail-mary",      "For an increase in Faith"),
@@ -544,19 +648,28 @@ def compile_rosary(conn: sqlite3.Connection) -> None:
         ("hail-mary",      "For an increase in Charity"),
         ("glory-be",       None),
     ]
+    INTRO_PT = [
+        ("apostles-creed", None),
+        ("our-father",     None),
+        ("hail-mary",      "Por um aumento em Fé"),
+        ("hail-mary",      "Por um aumento em Esperança"),
+        ("hail-mary",      "Por um aumento em Caridade"),
+        ("glory-be",       None),
+    ]
+    INTRO = INTRO_PT if lang == "pt" else INTRO_EN
 
     total_beads = 0
     for ms in mystery_sets:
         conn.execute(
-            "INSERT INTO mysteries VALUES (?, ?, ?)",
-            (ms["id"], ms["name"], ms.get("traditional_days")),
+            "INSERT INTO mysteries (id, language, name, traditional_days) VALUES (?, ?, ?, ?)",
+            (ms["id"], lang, ms["name"], ms.get("traditional_days")),
         )
 
         position = 1
         for prayer_id, intention in INTRO:
             conn.execute(
-                "INSERT INTO mystery_beads (mystery_id, position, prayer_id, mystery_title) VALUES (?, ?, ?, ?)",
-                (ms["id"], position, prayer_id, intention),
+                "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_title) VALUES (?, ?, ?, ?, ?)",
+                (ms["id"], lang, position, prayer_id, intention),
             )
             position += 1
 
@@ -564,51 +677,51 @@ def compile_rosary(conn: sqlite3.Connection) -> None:
             # Mystery announcement bead — dedicated page, no prayer
             conn.execute(
                 """INSERT INTO mystery_beads
-                   (mystery_id, position, prayer_id, mystery_number, mystery_title,
+                   (mystery_id, language, position, prayer_id, mystery_number, mystery_title,
                     mystery_scripture, mystery_meditation)
-                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
-                (ms["id"], position, None, m["number"],
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                (ms["id"], lang, position, None, m["number"],
                  m["title"], m.get("scripture"), m.get("meditation")),
             )
             position += 1
 
             # Our Father bead — prayer only
             conn.execute(
-                "INSERT INTO mystery_beads (mystery_id, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?)",
-                (ms["id"], position, "our-father", m["number"]),
+                "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
+                (ms["id"], lang, position, "our-father", m["number"]),
             )
             position += 1
 
             for _ in range(10):
                 conn.execute(
-                    "INSERT INTO mystery_beads (mystery_id, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?)",
-                    (ms["id"], position, "hail-mary", m["number"]),
+                    "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
+                    (ms["id"], lang, position, "hail-mary", m["number"]),
                 )
                 position += 1
 
             conn.execute(
-                "INSERT INTO mystery_beads (mystery_id, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?)",
-                (ms["id"], position, "glory-be", m["number"]),
+                "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
+                (ms["id"], lang, position, "glory-be", m["number"]),
             )
             position += 1
 
             conn.execute(
-                "INSERT INTO mystery_beads (mystery_id, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?)",
-                (ms["id"], position, "fatima-prayer", m["number"]),
+                "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
+                (ms["id"], lang, position, "fatima-prayer", m["number"]),
             )
             position += 1
 
         # Closing
         conn.execute(
-            "INSERT INTO mystery_beads (mystery_id, position, prayer_id) VALUES (?, ?, ?)",
-            (ms["id"], position, "hail-holy-queen"),
+            "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id) VALUES (?, ?, ?, ?)",
+            (ms["id"], lang, position, "hail-holy-queen"),
         )
         position += 1
 
         total_beads += position - 1
         print(f"  {ms['name']}: {position - 1} beads")
 
-    print(f"  Rosary: {len(mystery_sets)} mystery sets, {total_beads} total beads.")
+    print(f"  Rosary ({lang}): {len(mystery_sets)} mystery sets, {total_beads} total beads.")
 
 
 def main() -> None:
@@ -625,28 +738,34 @@ def main() -> None:
         print("Schema created.")
 
         print("Compiling Bible (DRA)...")
-        compile_dr_format(conn, "dra")
+        compile_dr_format(conn, "dra", lang="en")
 
         print("Compiling Bible (Latin Vulgate)...")
-        compile_dr_format(conn, "vulgate")
+        compile_dr_format(conn, "vulgate", lang="la")
 
         print("Compiling Bible (Latin Vulgate — English Translation)...")
-        compile_dr_format(conn, "vulgate-et")
+        compile_dr_format(conn, "vulgate-et", lang="en")
 
         print("Compiling Bible (World English Bible — Catholic Edition)...")
-        compile_dr_format(conn, "web-c")
+        compile_dr_format(conn, "web-c", lang="en")
+
+        print("Compiling Bible (Bíblia Ave-Maria — Portuguese)...")
+        compile_dr_format(conn, "ave-maria", lang="pt", book_full_names=_PT_BOOK_NAMES)
 
         print("Compiling Catechism...")
         compile_catechism(conn)
 
         print("Compiling Prayers...")
-        compile_prayers(conn)
+        compile_prayers(conn, "en")
+        compile_prayers(conn, "pt")
 
         print("Compiling Novenas...")
-        compile_novenas(conn)
+        compile_novenas(conn, "en")
+        compile_novenas(conn, "pt")
 
         print("Compiling Rosary...")
-        compile_rosary(conn)
+        compile_rosary(conn, "en")
+        compile_rosary(conn, "pt")
 
         conn.commit()
         size_kb = os.path.getsize(OUT_DB) // 1024

@@ -13,14 +13,14 @@ interface BibleChapterReadDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun markRead(entity: BibleChapterReadEntity)
 
-    @Query("DELETE FROM bible_chapter_read WHERE translation_id = :translationId AND book_number = :bookNumber AND chapter = :chapter")
-    suspend fun unmarkRead(translationId: String, bookNumber: Int, chapter: Int)
+    @Query("DELETE FROM bible_chapter_read WHERE book_number = :bookNumber AND chapter = :chapter")
+    suspend fun unmarkRead(bookNumber: Int, chapter: Int)
 
-    @Query("SELECT chapter FROM bible_chapter_read WHERE translation_id = :translationId AND book_number = :bookNumber")
-    fun getReadChapters(translationId: String, bookNumber: Int): Flow<List<Int>>
+    @Query("SELECT chapter FROM bible_chapter_read WHERE book_number = :bookNumber")
+    fun getReadChapters(bookNumber: Int): Flow<List<Int>>
 
-    @Query("DELETE FROM bible_chapter_read WHERE translation_id = :translationId AND book_number = :bookNumber")
-    suspend fun resetBook(translationId: String, bookNumber: Int)
+    @Query("DELETE FROM bible_chapter_read WHERE book_number = :bookNumber")
+    suspend fun resetBook(bookNumber: Int)
 
     @Query("SELECT * FROM bible_chapter_read ORDER BY read_at DESC")
     fun getAll(): Flow<List<BibleChapterReadEntity>>

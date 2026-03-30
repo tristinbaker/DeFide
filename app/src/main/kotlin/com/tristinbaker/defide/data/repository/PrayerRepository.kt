@@ -16,26 +16,26 @@ class PrayerRepository @Inject constructor(
     private val prayerDao: PrayerDao,
     private val prayerLogDao: PrayerLogDao,
 ) {
-    suspend fun getAll(): List<Prayer> =
-        withContext(Dispatchers.IO) { prayerDao.getAll() }
+    suspend fun getAll(language: String = "en"): List<Prayer> =
+        withContext(Dispatchers.IO) { prayerDao.getAll(language) }
 
-    suspend fun getCategories(): List<String> =
-        withContext(Dispatchers.IO) { prayerDao.getCategories() }
+    suspend fun getCategories(language: String = "en"): List<String> =
+        withContext(Dispatchers.IO) { prayerDao.getCategories(language) }
 
-    suspend fun getTags(): List<String> =
-        withContext(Dispatchers.IO) { prayerDao.getTags() }
+    suspend fun getTags(language: String = "en"): List<String> =
+        withContext(Dispatchers.IO) { prayerDao.getTags(language) }
 
-    suspend fun getByCategory(category: String): List<Prayer> =
-        withContext(Dispatchers.IO) { prayerDao.getByCategory(category) }
+    suspend fun getByCategory(category: String, language: String = "en"): List<Prayer> =
+        withContext(Dispatchers.IO) { prayerDao.getByCategory(category, language) }
 
-    suspend fun getByTag(tag: String): List<Prayer> =
-        withContext(Dispatchers.IO) { prayerDao.getByTag(tag) }
+    suspend fun getByTag(tag: String, language: String = "en"): List<Prayer> =
+        withContext(Dispatchers.IO) { prayerDao.getByTag(tag, language) }
 
-    suspend fun getById(id: String): Prayer? =
-        withContext(Dispatchers.IO) { prayerDao.getById(id) }
+    suspend fun getById(id: String, language: String = "en"): Prayer? =
+        withContext(Dispatchers.IO) { prayerDao.getById(id, language) }
 
-    suspend fun search(query: String): List<Prayer> =
-        withContext(Dispatchers.IO) { prayerDao.search(query) }
+    suspend fun search(query: String, language: String = "en"): List<Prayer> =
+        withContext(Dispatchers.IO) { prayerDao.search(query, language) }
 
     fun getRecentLog(limit: Int = 20): Flow<List<PrayerLogEntity>> =
         prayerLogDao.getRecent(limit)

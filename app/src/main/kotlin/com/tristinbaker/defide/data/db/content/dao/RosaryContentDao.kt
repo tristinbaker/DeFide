@@ -13,17 +13,17 @@ import javax.inject.Singleton
 @Singleton
 class RosaryContentDao @Inject constructor(private val db: SQLiteDatabase) {
 
-    fun getMysteries(): List<Mystery> =
-        db.rawQuery("SELECT * FROM mysteries ORDER BY id", null)
+    fun getMysteries(language: String = "en"): List<Mystery> =
+        db.rawQuery("SELECT * FROM mysteries WHERE language = ? ORDER BY id", arrayOf(language))
             .mapRows { toMystery() }
 
-    fun getMystery(id: String): Mystery? =
-        db.rawQuery("SELECT * FROM mysteries WHERE id = ?", arrayOf(id))
+    fun getMystery(id: String, language: String = "en"): Mystery? =
+        db.rawQuery("SELECT * FROM mysteries WHERE id = ? AND language = ?", arrayOf(id, language))
             .firstOrNull { toMystery() }
 
-    fun getBeads(mysteryId: String): List<MysteryBead> =
+    fun getBeads(mysteryId: String, language: String = "en"): List<MysteryBead> =
         db.rawQuery(
-            "SELECT * FROM mystery_beads WHERE mystery_id = ? ORDER BY position",
-            arrayOf(mysteryId),
+            "SELECT * FROM mystery_beads WHERE mystery_id = ? AND language = ? ORDER BY position",
+            arrayOf(mysteryId, language),
         ).mapRows { toMysteryBead() }
 }

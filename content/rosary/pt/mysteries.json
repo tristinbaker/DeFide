@@ -1,0 +1,150 @@
+[
+  {
+    "id": "joyful",
+    "name": "Mistérios Gozosos",
+    "traditional_days": "Segunda-feira, Sábado",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "A Anunciação",
+        "scripture": "Lucas 1:26-38",
+        "meditation": "O Anjo Gabriel anuncia a Maria que ela conceberá e dará à luz o Filho de Deus. Maria humildemente aceita a vontade de Deus: 'Eis aqui a serva do Senhor; faça-se em mim segundo a tua palavra.' Rezai pela virtude da humildade."
+      },
+      {
+        "number": 2,
+        "title": "A Visitação",
+        "scripture": "Lucas 1:39-56",
+        "meditation": "Maria apressa-se a visitar sua prima Isabel, que, cheia do Espírito Santo, exclama: 'Bendita és tu entre as mulheres, e bendito é o fruto do teu ventre!' O infante João saltou de alegria no seio materno. Rezai pela virtude da caridade para com o próximo."
+      },
+      {
+        "number": 3,
+        "title": "O Nascimento de Jesus",
+        "scripture": "Lucas 2:1-20",
+        "meditation": "Jesus nasce num estábulo em Belém, envolto em faixas e deitado numa manjedoura, pois não havia lugar na estalagem. Os anjos anunciam a boa nova aos pobres pastores. Rezai pela virtude da pobreza de espírito e do desapego das coisas mundanas."
+      },
+      {
+        "number": 4,
+        "title": "A Apresentação no Templo",
+        "scripture": "Lucas 2:22-38",
+        "meditation": "Maria e José apresentam o menino Jesus no Templo conforme a Lei de Moisés. O santo ancião Simeão toma a criança nos braços e profetiza que Ele será luz para as nações, e que uma espada traspassará a alma de Maria. Rezai pela virtude da obediência e fidelidade à Lei de Deus."
+      },
+      {
+        "number": 5,
+        "title": "O Encontro de Jesus no Templo",
+        "scripture": "Lucas 2:41-52",
+        "meditation": "O menino Jesus, com doze anos, ficou para trás em Jerusalém e foi encontrado por Maria e José, após três dias, no Templo, sentado entre os doutores, ouvindo-os e interrogando-os. Ele diz que deve ocupar-se das coisas do Pai. Rezai pela virtude do zelo pelas coisas de Deus."
+      }
+    ]
+  },
+  {
+    "id": "sorrowful",
+    "name": "Mistérios Dolorosos",
+    "traditional_days": "Terça-feira, Sexta-feira",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "A Agonia no Horto",
+        "scripture": "Lucas 22:39-46",
+        "meditation": "Jesus ora no Jardim do Getsêmani, com a alma angustiada até a morte. Sua suda sangue, e um anjo vem confortá-Lo. Mas Ele diz: 'Não se faça a minha vontade, mas a Tua.' Rezai pela virtude da contrição pelos nossos pecados."
+      },
+      {
+        "number": 2,
+        "title": "A Flagelação",
+        "scripture": "João 19:1; Isaías 53:5",
+        "meditation": "Jesus é amarrado a uma coluna e cruelmente açoitado pelos soldados romanos. Pelas Suas chagas somos curados. Ele suporta isso por amor a nós e pela reparação dos pecados de impureza. Rezai pela virtude da pureza e da mortificação."
+      },
+      {
+        "number": 3,
+        "title": "A Coroação de Espinhos",
+        "scripture": "Mateus 27:28-29",
+        "meditation": "Os soldados trançam uma coroa de espinhos e a impõem sobre a cabeça de Jesus, põem uma cana em Sua mão e O escarnece como Rei dos Judeus. Ele aceita essa humilhação por nós. Rezai pela virtude da coragem e da fortaleza moral."
+      },
+      {
+        "number": 4,
+        "title": "Jesus Carrega a Cruz",
+        "scripture": "João 19:17; Lucas 23:26-31",
+        "meditation": "Jesus carrega a Sua Cruz pelas ruas de Jerusalém até o Calvário, caindo sob o seu peso. Ele encontra Sua Mãe pelo caminho. Simão de Cirene é obrigado a ajudá-Lo a carregar a Cruz. Rezai pela virtude da paciência no suporte das nossas cruzes diárias."
+      },
+      {
+        "number": 5,
+        "title": "A Crucificação e Morte",
+        "scripture": "João 19:18-30",
+        "meditation": "Jesus é pregado na Cruz entre dois ladrões. Da Cruz Ele perdoa Seus inimigos, confia Sua Mãe ao discípulo amado e entrega Seu espírito nas mãos do Pai. Com um grande grito, expira. Rezai pela virtude da perseverança final e de uma morte santa."
+      }
+    ]
+  },
+  {
+    "id": "glorious",
+    "name": "Mistérios Gloriosos",
+    "traditional_days": "Quarta-feira, Domingo",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "A Ressurreição",
+        "scripture": "Marcos 16:1-8; João 20:1-18",
+        "meditation": "No terceiro dia, Jesus ressuscita dos mortos, vitorioso sobre o pecado, a morte e o demônio. O túmulo está vazio. Ele aparece primeiro a Maria Madalena e depois aos discípulos. A morte foi vencida para sempre. Rezai pela virtude da fé na ressurreição."
+      },
+      {
+        "number": 2,
+        "title": "A Ascensão",
+        "scripture": "Lucas 24:50-51; Atos 1:9-11",
+        "meditation": "Quarenta dias após a Ressurreição, Jesus leva Seus discípulos a Betânia, abençoa-os e é elevado ao Céu. Dois anjos dizem aos discípulos que Ele voltará da mesma forma. Rezai pela virtude da esperança e do anseio pelo Céu."
+      },
+      {
+        "number": 3,
+        "title": "A Descida do Espírito Santo",
+        "scripture": "Atos 2:1-11",
+        "meditation": "No dia de Pentecostes, os Apóstolos e Maria estão reunidos em oração quando, de repente, vem um vento forte e línguas de fogo pousam sobre cada um deles. Ficam cheios do Espírito Santo e começam a falar em várias línguas. A Igreja nasce. Rezai pelos dons do Espírito Santo."
+      },
+      {
+        "number": 4,
+        "title": "A Assunção de Maria",
+        "scripture": "Apocalipse 12:1; (tradição)",
+        "meditation": "Ao fim de sua vida terrena, a Santíssima Virgem Maria, preservada da corrupção do sepulcro, é assumida em corpo e alma para a glória celestial, para reinar como Rainha ao lado de Seu Filho. Rezai pela virtude da devoção a Maria e pela graça de uma morte santa."
+      },
+      {
+        "number": 5,
+        "title": "A Coroação de Maria",
+        "scripture": "Apocalipse 12:1; Judite 15:9",
+        "meditation": "Maria é coroada Rainha do Céu e da Terra, Rainha dos Anjos e dos Santos, por Seu Filho Jesus Cristo. Ela intercede por nós incessantemente perante o trono de Deus. Rezai pela graça da perseverança para participar da Sua glória."
+      }
+    ]
+  },
+  {
+    "id": "luminous",
+    "name": "Mistérios Luminosos",
+    "traditional_days": "Quinta-feira",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "O Batismo de Jesus no Jordão",
+        "scripture": "Mateus 3:13-17",
+        "meditation": "Jesus vem até João no Jordão e é batizado. Os céus se abrem, o Espírito Santo desce como pomba e a voz do Pai é ouvida: 'Este é o meu Filho amado, em quem me comprazo.' Jesus consagra as águas do batismo. Rezai pela fidelidade às suas promessas batismais."
+      },
+      {
+        "number": 2,
+        "title": "As Bodas de Caná",
+        "scripture": "João 2:1-11",
+        "meditation": "No banquete de casamento em Caná, Maria diz a Jesus: 'Eles não têm vinho,' e instrui os serventes: 'Fazei tudo o que Ele vos disser.' Jesus transforma água em vinho, o Seu primeiro milagre, revelando a Sua glória. Rezai pela graça de confiar na intercessão de Maria e obedecer aos mandamentos do Senhor."
+      },
+      {
+        "number": 3,
+        "title": "O Anúncio do Reino de Deus",
+        "scripture": "Marcos 1:14-15; Mateus 5-7",
+        "meditation": "Jesus proclama a vinda do Reino de Deus e convida todos à penitência e à fé no Evangelho. Ele ensina as Bem-aventuranças e o caminho da misericórdia. Rezai pela abertura à conversão e a coragem de viver o Evangelho."
+      },
+      {
+        "number": 4,
+        "title": "A Transfiguração",
+        "scripture": "Lucas 9:28-36",
+        "meditation": "Jesus leva Pedro, Tiago e João ao Monte Tabor, onde Se transfigura diante deles, com o rosto brilhando como o sol e as vestes brancas como a luz. Moisés e Elias aparecem com Ele. O Pai diz: 'Este é o meu Filho amado; ouvi-O.' Rezai pela graça da contemplação e o desejo da glória eterna."
+      },
+      {
+        "number": 5,
+        "title": "A Instituição da Eucaristia",
+        "scripture": "Mateus 26:26-28; Lucas 22:19-20",
+        "meditation": "Na Última Ceia, Jesus toma o pão e o vinho e diz: 'Isto é o meu Corpo... Este é o meu Sangue.' Ele manda os Apóstolos: 'Fazei isto em memória de mim.' Ele Se dá a nós, o Seu Corpo, Sangue, Alma e Divindade, como alimento para as nossas almas. Rezai pela reverência à Eucaristia e a Comunhão frequente e digna."
+      }
+    ]
+  }
+]

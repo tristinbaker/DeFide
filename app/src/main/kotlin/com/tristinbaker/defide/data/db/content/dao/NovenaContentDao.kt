@@ -13,23 +13,23 @@ import javax.inject.Singleton
 @Singleton
 class NovenaContentDao @Inject constructor(private val db: SQLiteDatabase) {
 
-    fun getAll(): List<Novena> =
-        db.rawQuery("SELECT * FROM novenas ORDER BY title", null)
+    fun getAll(language: String = "en"): List<Novena> =
+        db.rawQuery("SELECT * FROM novenas WHERE language = ? ORDER BY title", arrayOf(language))
             .mapRows { toNovena() }
 
-    fun getById(id: String): Novena? =
-        db.rawQuery("SELECT * FROM novenas WHERE id = ?", arrayOf(id))
+    fun getById(id: String, language: String = "en"): Novena? =
+        db.rawQuery("SELECT * FROM novenas WHERE id = ? AND language = ?", arrayOf(id, language))
             .firstOrNull { toNovena() }
 
-    fun getDay(novenaId: String, dayNumber: Int): NovenaDay? =
+    fun getDay(novenaId: String, dayNumber: Int, language: String = "en"): NovenaDay? =
         db.rawQuery(
-            "SELECT * FROM novena_days WHERE novena_id = ? AND day_number = ?",
-            arrayOf(novenaId, dayNumber.toString()),
+            "SELECT * FROM novena_days WHERE novena_id = ? AND language = ? AND day_number = ?",
+            arrayOf(novenaId, language, dayNumber.toString()),
         ).firstOrNull { toNovenaDay() }
 
-    fun getDays(novenaId: String): List<NovenaDay> =
+    fun getDays(novenaId: String, language: String = "en"): List<NovenaDay> =
         db.rawQuery(
-            "SELECT * FROM novena_days WHERE novena_id = ? ORDER BY day_number",
-            arrayOf(novenaId),
+            "SELECT * FROM novena_days WHERE novena_id = ? AND language = ? ORDER BY day_number",
+            arrayOf(novenaId, language),
         ).mapRows { toNovenaDay() }
 }

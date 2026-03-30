@@ -65,8 +65,10 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.tristinbaker.defide.R
 import com.tristinbaker.defide.data.model.Verse
 import kotlinx.coroutines.launch
 
@@ -86,7 +88,7 @@ fun BibleHomeScreen(
 
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text("Bible") },
+            title = { Text(stringResource(R.string.nav_bible)) },
             navigationIcon = {
                 IconButton(onClick = onOpenDrawer) {
                     Icon(Icons.Default.Menu, contentDescription = "Menu")
@@ -96,7 +98,7 @@ fun BibleHomeScreen(
                 OutlinedButton(
                     onClick = onBookmarksSelected,
                     modifier = Modifier.padding(end = 8.dp),
-                ) { Text("Bookmarks") }
+                ) { Text(stringResource(R.string.bible_bookmarks)) }
             },
         )
     }) { padding ->
@@ -104,7 +106,7 @@ fun BibleHomeScreen(
             if (otBooks.isNotEmpty()) {
                 item {
                     Text(
-                        text = "Old Testament",
+                        text = stringResource(R.string.bible_old_testament),
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
@@ -128,7 +130,7 @@ fun BibleHomeScreen(
             if (ntBooks.isNotEmpty()) {
                 item {
                     Text(
-                        text = "New Testament",
+                        text = stringResource(R.string.bible_new_testament),
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
@@ -171,8 +173,8 @@ fun BibleChapterScreen(
     LaunchedEffect(books, bookNumber) {
         books.firstOrNull { it.bookNumber == bookNumber }?.let { viewModel.loadChapterCount(it.id) }
     }
-    LaunchedEffect(translationId, bookNumber) {
-        viewModel.loadReadChapters(translationId, bookNumber)
+    LaunchedEffect(bookNumber) {
+        viewModel.loadReadChapters(bookNumber)
     }
 
     Scaffold(
@@ -197,7 +199,7 @@ fun BibleChapterScreen(
                                 text = { Text("Reset reading progress") },
                                 onClick = {
                                     menuExpanded = false
-                                    viewModel.resetBookProgress(translationId, bookNumber)
+                                    viewModel.resetBookProgress(bookNumber)
                                 },
                             )
                         }
@@ -227,7 +229,7 @@ fun BibleChapterScreen(
                             modifier = Modifier.pointerInput(chapterNum) {
                                 detectTapGestures(
                                     onTap = { onChapterSelected(translationId, bookNumber, chapterNum) },
-                                    onLongPress = { viewModel.unmarkChapterRead(translationId, bookNumber, chapterNum) },
+                                    onLongPress = { viewModel.unmarkChapterRead(bookNumber, chapterNum) },
                                 )
                             },
                         ) {
@@ -278,6 +280,9 @@ fun BibleReaderScreen(
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
 
+    LaunchedEffect(translationId, bookNumber, chapter) {
+        viewModel.saveLastBiblePosition(translationId, bookNumber, chapter)
+    }
     LaunchedEffect(book?.id, chapter) {
         book?.let { viewModel.loadVerses(it.id, chapter) }
     }
@@ -379,7 +384,7 @@ fun BibleReaderScreen(
             if (chapterCount > 0 && chapter < chapterCount) {
                 SmallFloatingActionButton(
                     onClick = {
-                        viewModel.markChapterRead(translationId, bookNumber, chapter)
+                        viewModel.markChapterRead(bookNumber, chapter)
                         onNextChapter()
                     },
                     modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp),
@@ -475,7 +480,7 @@ fun BibleBookmarksScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Bookmarks") },
+                title = { Text(stringResource(R.string.bible_bookmarks)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -497,12 +502,12 @@ fun BibleBookmarksScreen(
                         modifier = Modifier.size(48.dp).padding(bottom = 8.dp),
                     )
                     Text(
-                        "No bookmarks yet.",
+                        stringResource(R.string.bible_bookmarks_empty),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     Text(
-                        "Long-press any verse in the reader to add one.",
+                        stringResource(R.string.bible_bookmarks_hint),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

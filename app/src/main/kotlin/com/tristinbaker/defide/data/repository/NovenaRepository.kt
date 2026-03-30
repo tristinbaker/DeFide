@@ -17,14 +17,14 @@ class NovenaRepository @Inject constructor(
     private val novenaContentDao: NovenaContentDao,
     private val novenaProgressDao: NovenaProgressDao,
 ) {
-    suspend fun getAll(): List<Novena> =
-        withContext(Dispatchers.IO) { novenaContentDao.getAll() }
+    suspend fun getAll(language: String = "en"): List<Novena> =
+        withContext(Dispatchers.IO) { novenaContentDao.getAll(language) }
 
-    suspend fun getById(id: String): Novena? =
-        withContext(Dispatchers.IO) { novenaContentDao.getById(id) }
+    suspend fun getById(id: String, language: String = "en"): Novena? =
+        withContext(Dispatchers.IO) { novenaContentDao.getById(id, language) }
 
-    suspend fun getDay(novenaId: String, dayNumber: Int): NovenaDay? =
-        withContext(Dispatchers.IO) { novenaContentDao.getDay(novenaId, dayNumber) }
+    suspend fun getDay(novenaId: String, dayNumber: Int, language: String = "en"): NovenaDay? =
+        withContext(Dispatchers.IO) { novenaContentDao.getDay(novenaId, dayNumber, language) }
 
     // Progress
     fun getActiveProgress(): Flow<List<NovenaProgressEntity>> =
