@@ -19,7 +19,7 @@ Builds:
       - yes
   - versionName: 1.2.0
     versionCode: 4
-    commit: REPLACE_WITH_RELEASE_COMMIT_HASH
+    commit: 6714cb6bc50b236ee7403b6372c7fff16fbc7c50
     subdir: app
     gradle:
       - yes
