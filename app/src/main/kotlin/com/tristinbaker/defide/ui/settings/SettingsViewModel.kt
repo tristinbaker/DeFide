@@ -37,10 +37,14 @@ class SettingsViewModel @Inject constructor(
     fun setAppLanguage(language: String) {
         viewModelScope.launch {
             prefsRepository.setAppLanguage(language)
-            if (language == "pt") {
-                val currentTrans = prefsRepository.preferences.first().bibleTranslationId
-                if (currentTrans != "ave-maria") {
-                    prefsRepository.setBibleTranslation("ave-maria")
+            when (language) {
+                "pt-BR" -> {
+                    val currentTrans = prefsRepository.preferences.first().bibleTranslationId
+                    if (currentTrans != "ave-maria") prefsRepository.setBibleTranslation("ave-maria")
+                }
+                "pt-PT" -> {
+                    val currentTrans = prefsRepository.preferences.first().bibleTranslationId
+                    if (currentTrans != "porcap") prefsRepository.setBibleTranslation("porcap")
                 }
             }
         }

@@ -58,7 +58,7 @@ fun HomeScreen(
     val appLanguage by viewModel.appLanguage.collectAsState()
 
     val today = LocalDate.now()
-    val dateLocale = Locale(appLanguage)
+    val dateLocale = Locale.forLanguageTag(appLanguage)
     val dateText = today.format(DateTimeFormatter.ofPattern("EEEE, MMMM d", dateLocale))
     val yearText = today.format(DateTimeFormatter.ofPattern("yyyy", dateLocale))
 

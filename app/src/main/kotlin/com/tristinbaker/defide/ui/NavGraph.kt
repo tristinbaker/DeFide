@@ -87,7 +87,7 @@ private const val CCC_URL = "https://usccb.cld.bz/Catechism-of-the-Catholic-Chur
 private fun LocaleWrapper(language: String, content: @Composable () -> Unit) {
     val context = LocalContext.current
     val localizedContext = remember(language, context) {
-        val locale = Locale(language)
+        val locale = Locale.forLanguageTag(language)
         val config = android.content.res.Configuration(context.resources.configuration)
         config.setLocale(locale)
         val localizedResources = context.createConfigurationContext(config).resources

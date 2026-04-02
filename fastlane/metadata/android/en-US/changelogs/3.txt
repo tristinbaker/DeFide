@@ -34,3 +34,11 @@ Updated:
 
 Technical:
 - Content database rebuilt and versioned (v17)
+- Portuguese locale corrected from generic `pt` to `pt-BR` throughout (strings, content dirs, database language column, preferences)
+- Added Português (Portugal) as a new selectable language (pt-PT)
+- Added European Portuguese string resources with key regional differences (Guardar, Pesquisar, Definições, ecrã, sítio, etc.)
+- Added "Ó Maria concebida sem pecado" bead after each Glory Be in the pt-PT Rosary sequence, per Portuguese tradition
+- pt-PT prayers, novenas, and rosary content seeded from pt-BR as a starting point (pending community review)
+- Added Bíblia dos Capuchinhos (PorCap) as the pt-PT Bible translation; extracted from SWORD module via scripts/extract_porcap.py
+- Switching to Português (Portugal) now automatically selects Bíblia dos Capuchinhos
+- Added European Portuguese book name table (_PORCAP_BOOK_NAMES) with regional orthography (Génesis, Deuteronómio, Crónicas, Filémon, etc.)

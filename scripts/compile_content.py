@@ -341,6 +341,7 @@ _TRANSLATION_BOOK_ID_OFFSET = {
     "vulgate-et": 3001,
     "web-c":      4001,
     "ave-maria":  5001,
+    "porcap":     6001,
 }
 
 # Portuguese display names for Ave-Maria, keyed by DR filename (no extension).
@@ -417,6 +418,85 @@ _PT_BOOK_NAMES = {
     "2 John":           "II São João",
     "3 John":           "III São João",
     "Jude":             "São Judas",
+    "Apocalypse":       "Apocalipse",
+}
+
+
+# European Portuguese display names for PorCap (Bíblia dos Capuchinhos).
+# Key differences from pt-BR: Génesis, Deuteronómio, Crónicas, Filémon, etc.
+_PORCAP_BOOK_NAMES = {
+    "Genesis":          "Génesis",
+    "Exodus":           "Êxodo",
+    "Leviticus":        "Levítico",
+    "Numbers":          "Números",
+    "Deuteronomy":      "Deuteronómio",
+    "Josue":            "Josué",
+    "Judges":           "Juízes",
+    "Ruth":             "Rute",
+    "1 Kings":          "1 Samuel",
+    "2 Kings":          "2 Samuel",
+    "3 Kings":          "1 Reis",
+    "4 Kings":          "2 Reis",
+    "1 Paralipomenon":  "1 Crónicas",
+    "2 Paralipomenon":  "2 Crónicas",
+    "1 Esdras":         "Esdras",
+    "2 Esdras":         "Neemias",
+    "Tobias":           "Tobite",
+    "Judith":           "Judite",
+    "Esther":           "Ester",
+    "Job":              "Job",
+    "Psalms":           "Salmos",
+    "1 Machabees":      "1 Macabeus",
+    "2 Machabees":      "2 Macabeus",
+    "Proverbs":         "Provérbios",
+    "Ecclesiastes":     "Eclesiastes",
+    "Canticles":        "Cântico dos Cânticos",
+    "Wisdom":           "Sabedoria",
+    "Ecclesiasticus":   "Eclesiástico",
+    "Isaias":           "Isaías",
+    "Jeremias":         "Jeremias",
+    "Lamentations":     "Lamentações",
+    "Baruch":           "Baruc",
+    "Ezechiel":         "Ezequiel",
+    "Daniel":           "Daniel",
+    "Osee":             "Oseias",
+    "Joel":             "Joel",
+    "Amos":             "Amós",
+    "Abdias":           "Abdias",
+    "Jonas":            "Jonas",
+    "Micheas":          "Miqueias",
+    "Nahum":            "Naum",
+    "Habacuc":          "Habacuc",
+    "Sophonias":        "Sofonias",
+    "Aggeus":           "Ageu",
+    "Zacharias":        "Zacarias",
+    "Malachias":        "Malaquias",
+    "Matthew":          "Mateus",
+    "Mark":             "Marcos",
+    "Luke":             "Lucas",
+    "John":             "João",
+    "Acts":             "Atos dos Apóstolos",
+    "Romans":           "Romanos",
+    "1 Corinthians":    "1 Coríntios",
+    "2 Corinthians":    "2 Coríntios",
+    "Galatians":        "Gálatas",
+    "Ephesians":        "Efésios",
+    "Philippians":      "Filipenses",
+    "Colossians":       "Colossenses",
+    "1 Thessalonians":  "1 Tessalonicenses",
+    "2 Thessalonians":  "2 Tessalonicenses",
+    "1 Timothy":        "1 Timóteo",
+    "2 Timothy":        "2 Timóteo",
+    "Titus":            "Tito",
+    "Philemon":         "Filémon",
+    "Hebrews":          "Hebreus",
+    "James":            "Tiago",
+    "1 Peter":          "1 Pedro",
+    "2 Peter":          "2 Pedro",
+    "1 John":           "1 João",
+    "2 John":           "2 João",
+    "3 John":           "3 João",
+    "Jude":             "Judas",
     "Apocalypse":       "Apocalipse",
 }
 
@@ -656,7 +736,7 @@ def compile_rosary(conn: sqlite3.Connection, lang: str) -> None:
         ("hail-mary",      "Por um aumento em Caridade"),
         ("glory-be",       None),
     ]
-    INTRO = INTRO_PT if lang == "pt" else INTRO_EN
+    INTRO = INTRO_PT if lang in ("pt-BR", "pt-PT") else INTRO_EN
 
     total_beads = 0
     for ms in mystery_sets:
@@ -705,6 +785,13 @@ def compile_rosary(conn: sqlite3.Connection, lang: str) -> None:
             )
             position += 1
 
+            if lang == "pt-PT":
+                conn.execute(
+                    "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
+                    (ms["id"], lang, position, "oh-maria-concebida", m["number"]),
+                )
+                position += 1
+
             conn.execute(
                 "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
                 (ms["id"], lang, position, "fatima-prayer", m["number"]),
@@ -750,22 +837,28 @@ def main() -> None:
         compile_dr_format(conn, "web-c", lang="en")
 
         print("Compiling Bible (Bíblia Ave-Maria — Portuguese)...")
-        compile_dr_format(conn, "ave-maria", lang="pt", book_full_names=_PT_BOOK_NAMES)
+        compile_dr_format(conn, "ave-maria", lang="pt-BR", book_full_names=_PT_BOOK_NAMES)
+
+        print("Compiling Bible (Bíblia dos Capuchinhos — European Portuguese)...")
+        compile_dr_format(conn, "porcap", lang="pt-PT", book_full_names=_PORCAP_BOOK_NAMES)
 
         print("Compiling Catechism...")
         compile_catechism(conn)
 
         print("Compiling Prayers...")
         compile_prayers(conn, "en")
-        compile_prayers(conn, "pt")
+        compile_prayers(conn, "pt-BR")
+        compile_prayers(conn, "pt-PT")
 
         print("Compiling Novenas...")
         compile_novenas(conn, "en")
-        compile_novenas(conn, "pt")
+        compile_novenas(conn, "pt-BR")
+        compile_novenas(conn, "pt-PT")
 
         print("Compiling Rosary...")
         compile_rosary(conn, "en")
-        compile_rosary(conn, "pt")
+        compile_rosary(conn, "pt-BR")
+        compile_rosary(conn, "pt-PT")
 
         conn.commit()
         size_kb = os.path.getsize(OUT_DB) // 1024

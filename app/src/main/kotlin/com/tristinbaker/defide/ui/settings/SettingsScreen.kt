@@ -138,7 +138,8 @@ fun SettingsScreen(
             item {
                 val languages = listOf(
                     "en" to "English",
-                    "pt" to "Português",
+                    "pt-BR" to "Português (Brasil)",
+                    "pt-PT" to "Português (Portugal)",
                 )
                 Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
                     languages.forEach { (code, label) ->
@@ -165,15 +166,22 @@ fun SettingsScreen(
             }
             item {
                 // Content-level decision: which translations are relevant per language
-                val translations = if (prefs.appLanguage == "pt") listOf(
-                    Triple("ave-maria",  "Bíblia Ave-Maria",  "Tradução católica brasileira"),
-                    Triple("vulgate",    "Vulgata Latina",    "Texto latino original de São Jerônimo"),
-                ) else listOf(
-                    Triple("dra",        "Douay-Rheims (1899)",            "Traditional Catholic translation"),
-                    Triple("web-c",      "World English Bible (Catholic)", "Modern English, public domain"),
-                    Triple("vulgate",    "Latin Vulgate",                  "Original Latin text of St. Jerome"),
-                    Triple("vulgate-et", "Latin Vulgate (English)",        "English translation of the Latin Vulgate"),
-                )
+                val translations = when (prefs.appLanguage) {
+                    "pt-BR" -> listOf(
+                        Triple("ave-maria", "Bíblia Ave-Maria",             "Tradução católica brasileira"),
+                        Triple("vulgate",   "Vulgata Latina",               "Texto latino original de São Jerônimo"),
+                    )
+                    "pt-PT" -> listOf(
+                        Triple("porcap",   "Bíblia dos Capuchinhos",        "Tradução da Difusora Bíblica (Capuchinhos)"),
+                        Triple("vulgate",  "Vulgata Latina",                "Texto latino original de São Jerónimo"),
+                    )
+                    else -> listOf(
+                        Triple("dra",        "Douay-Rheims (1899)",            "Traditional Catholic translation"),
+                        Triple("web-c",      "World English Bible (Catholic)", "Modern English, public domain"),
+                        Triple("vulgate",    "Latin Vulgate",                  "Original Latin text of St. Jerome"),
+                        Triple("vulgate-et", "Latin Vulgate (English)",        "English translation of the Latin Vulgate"),
+                    )
+                }
                 Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
                     translations.forEach { (id, label, subtitle) ->
                         Row(
