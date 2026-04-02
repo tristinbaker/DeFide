@@ -32,8 +32,10 @@ Updated:
 - Switching to Portuguese now always switches to Vulgata Latina (previously allowed Latin Vulgate English to remain selected)
 - How to Use screen fully translated into Portuguese
 
+- Added Novena a Nossa Senhora de Fátima for pt-PT (9 days, feast May 13)
+
 Technical:
-- Content database rebuilt and versioned (v17)
+- Content database rebuilt and versioned (v19)
 - Portuguese locale corrected from generic `pt` to `pt-BR` throughout (strings, content dirs, database language column, preferences)
 - Added Português (Portugal) as a new selectable language (pt-PT)
 - Added European Portuguese string resources with key regional differences (Guardar, Pesquisar, Definições, ecrã, sítio, etc.)
