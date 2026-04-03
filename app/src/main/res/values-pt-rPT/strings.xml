@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">De Fide</string>
-
     <!-- Common actions -->
     <string name="action_open">Abrir</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_save">Guardar</string>
     <string name="action_turn_off">Desligar</string>
     <string name="action_all">Todos</string>
-
     <!-- Catechism dialog -->
     <string name="catechism_dialog_title">Abrir Catecismo</string>
     <string name="catechism_dialog_text">Isto abrirá o Catecismo da Igreja Católica no sítio da USCCB no seu navegador.</string>
-
     <!-- Prayers -->
     <string name="prayers_title">Orações</string>
-    <string name="search_prayers_hint">Pesquisar orações...</string>
+    <string name="search_prayers_hint">Pesquisar orações…</string>
     <string name="tag_label">Categoria</string>
     <string name="mark_as_prayed">Marcar como Rezada</string>
-
     <!-- Settings -->
     <string name="settings_title">Definições</string>
     <string name="section_appearance">Aparência</string>
@@ -39,19 +35,16 @@
     <string name="section_about">Sobre</string>
     <string name="about_tagline">Gratuito e de código aberto. Sem rastreamento, sem contas, sem necessidade de internet.</string>
     <string name="about_bible_note">Todas as traduções bíblicas incluídas são de domínio público ou sem licença, mantendo De Fide totalmente compatível com FOSS.</string>
-
     <!-- Novena reminder dialog -->
     <string name="novena_reminder_dialog_title">Horário do lembrete de novena</string>
     <string name="novena_reminder_dialog_desc">Escolha a hora para o seu lembrete diário de novena.</string>
     <string name="hour_label">Hora</string>
-
     <!-- Bible -->
     <string name="bible_bookmarks">Marcadores</string>
     <string name="bible_old_testament">Antigo Testamento</string>
     <string name="bible_new_testament">Novo Testamento</string>
     <string name="bible_bookmarks_empty">Nenhum marcador ainda.</string>
     <string name="bible_bookmarks_hint">Toque longo em qualquer versículo no leitor para adicionar um.</string>
-
     <!-- Novena -->
     <string name="novena_title">Novenas</string>
     <string name="novena_my_novenas">As Minhas Novenas</string>
@@ -66,7 +59,6 @@
     <string name="novena_in_progress">Em Curso</string>
     <string name="novena_section_completed">Concluída</string>
     <string name="novena_empty">Nenhuma novena iniciada ainda.</string>
-
     <!-- Navigation drawer -->
     <string name="nav_home">Início</string>
     <string name="nav_rosary">Rosário</string>
@@ -75,7 +67,6 @@
     <string name="nav_prayers">Orações</string>
     <string name="nav_novenas">Novenas</string>
     <string name="nav_settings">Definições</string>
-
     <!-- Prayer categories -->
     <string name="category_rosary">Rosário</string>
     <string name="category_morning">Manhã</string>
@@ -85,7 +76,6 @@
     <string name="category_penitential">Penitencial</string>
     <string name="category_devotional">Devocional</string>
     <string name="category_saints">Santos</string>
-
     <!-- Home screen -->
     <string name="verse_of_the_day">Versículo do Dia</string>
     <string name="todays_rosary">Rosário de Hoje</string>
@@ -93,7 +83,6 @@
     <string name="loading">A carregar\u2026</string>
     <string name="bible_streak">Sequência Bíblica</string>
     <string name="rosary_streak">Sequência do Rosário</string>
-
     <!-- Rosary screen -->
     <string name="rosary_title">Rosário</string>
     <string name="select_mystery">Selecionar um Mistério</string>
@@ -107,7 +96,6 @@
     <string name="action_back">Voltar</string>
     <string name="action_complete">Concluir</string>
     <string name="action_next">Seguinte</string>
-
     <!-- How to Use -->
     <string name="htu_bible_1">Abra a Bíblia no menu lateral e selecione uma tradução em Definições.</string>
     <string name="htu_bible_2">Toque num livro e depois num capítulo para começar a ler.</string>
@@ -136,9 +124,9 @@
     <string name="htu_settings_2">Mude as traduções da Bíblia em Tradução da Bíblia.</string>
     <string name="htu_settings_3">Defina o seu objetivo de sequência bíblica (capítulos por dia) em Sequência Bíblica.</string>
     <string name="htu_settings_4">Ative os lembretes diários de novena em Notificações.</string>
-
     <plurals name="days">
         <item quantity="one">%d dia</item>
+        <item quantity="many">%d dias</item>
         <item quantity="other">%d dias</item>
     </plurals>
 </resources>
