@@ -291,7 +291,7 @@ fun SettingsScreen(
             item {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("De Fide", style = MaterialTheme.typography.bodyMedium)
-                    Text("Version 1.0.0", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Version 1.3.0", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(
                         stringResource(R.string.about_tagline),
                         style = MaterialTheme.typography.bodySmall,
