@@ -1,0 +1,15 @@
+Added:
+- Português (Portugal) as a new language option (separate from Português (Brasil))
+- Bíblia dos Capuchinhos (Difusora Bíblica) as the default Bible translation for pt-PT
+- "Ó Maria concebida sem pecado" bead after each Glory Be in the pt-PT Rosary, per Portuguese tradition
+- Novena a Nossa Senhora de Fátima (pt-PT, 9 days, feast May 13)
+- Weblate link in Settings → Language for community translation contributions
+- Catechism now opens the Vatican website for Portuguese users instead of the USCCB
+
+Fixed:
+- UI strings, Bible book names, prayers, and novenas now correctly display in European Portuguese when pt-PT is selected (locale resolution bug)
+
+Technical:
+- Content database rebuilt and versioned (v19)
+- Portuguese locale corrected from generic pt to pt-BR throughout
+- European Portuguese string resources added with regional differences (Guardar, Definições, ecrã, Seguinte, etc.)
