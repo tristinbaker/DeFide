@@ -42,6 +42,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -159,7 +160,16 @@ fun SettingsScreen(
                         }
                     }
                 }
-                HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
+                val uriHandler = LocalUriHandler.current
+                Text(
+                    text = stringResource(R.string.translate_cta),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .clickable { uriHandler.openUri("https://hosted.weblate.org/projects/de-fide/app-strings/") },
+                )
+                HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
             }
             item {
                 SectionHeader(stringResource(R.string.section_bible_translation))

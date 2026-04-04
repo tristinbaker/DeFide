@@ -81,7 +81,8 @@ private fun rememberDrawerItems() = listOf(
     DrawerItem("novena",    stringResource(R.string.nav_novenas),   Icons.Default.Book),
 )
 
-private const val CCC_URL = "https://usccb.cld.bz/Catechism-of-the-Catholic-Church2/7"
+private const val CCC_URL_EN = "https://usccb.cld.bz/Catechism-of-the-Catholic-Church2/7"
+private const val CCC_URL_PT = "https://www.vatican.va/archive/cathechism_po/index_new/prima-pagina-cic_po.html"
 
 @Composable
 private fun LocaleWrapper(language: String, content: @Composable () -> Unit) {
@@ -112,6 +113,8 @@ fun DeFideApp() {
     val settingsViewModel: SettingsViewModel = androidx.hilt.navigation.compose.hiltViewModel()
     val prefs by settingsViewModel.preferences.collectAsState()
 
+    val cccUrl = if (prefs.appLanguage.startsWith("pt")) CCC_URL_PT else CCC_URL_EN
+
     LocaleWrapper(prefs.appLanguage) {
         DeFideAppContent(
             navController = navController,
@@ -120,6 +123,7 @@ fun DeFideApp() {
             context = context,
             showCatechismDialog = showCatechismDialog,
             onShowCatechismDialog = { showCatechismDialog = it },
+            cccUrl = cccUrl,
         )
     }
 }
@@ -132,6 +136,7 @@ private fun DeFideAppContent(
     context: android.content.Context,
     showCatechismDialog: Boolean,
     onShowCatechismDialog: (Boolean) -> Unit,
+    cccUrl: String,
 ) {
     val openDrawer: () -> Unit = { scope.launch { drawerState.open() } }
     val closeDrawer: () -> Unit = { scope.launch { drawerState.close() } }
@@ -155,7 +160,7 @@ private fun DeFideAppContent(
             confirmButton = {
                 TextButton(onClick = {
                     onShowCatechismDialog(false)
-                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(CCC_URL)))
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(cccUrl)))
                 }) { Text(openLabel) }
             },
             dismissButton = {

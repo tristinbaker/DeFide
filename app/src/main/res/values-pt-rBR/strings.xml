@@ -11,7 +11,7 @@
 
     <!-- Catechism dialog -->
     <string name="catechism_dialog_title">Abrir Catecismo</string>
-    <string name="catechism_dialog_text">Isso abrirá o Catecismo da Igreja Católica no site da USCCB em seu navegador.</string>
+    <string name="catechism_dialog_text">Isso abrirá o Catecismo da Igreja Católica no sítio do Vaticano em seu navegador.</string>
 
     <!-- Prayers -->
     <string name="prayers_title">Orações</string>
@@ -26,6 +26,7 @@
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Escuro</string>
     <string name="section_language">Idioma</string>
+    <string name="translate_cta">Quer adicionar ou melhorar uma tradução? Contribua no Weblate.</string>
     <string name="section_bible_translation">Tradução da Bíblia</string>
     <string name="section_notifications">Notificações</string>
     <string name="novena_reminder_label">Lembrete de novena</string>

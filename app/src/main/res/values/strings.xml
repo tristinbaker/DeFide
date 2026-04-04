@@ -26,6 +26,7 @@
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="section_language">Language</string>
+    <string name="translate_cta">Want to add or improve a translation? Contribute on Weblate.</string>
     <string name="section_bible_translation">Bible Translation</string>
     <string name="section_notifications">Notifications</string>
     <string name="novena_reminder_label">Novena reminder</string>
