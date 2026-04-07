@@ -60,6 +60,7 @@ fun HomeScreen(
     val today = LocalDate.now()
     val dateLocale = Locale.forLanguageTag(appLanguage)
     val dateText = today.format(DateTimeFormatter.ofPattern("EEEE, MMMM d", dateLocale))
+        .replaceFirstChar { it.uppercase() }
     val yearText = today.format(DateTimeFormatter.ofPattern("yyyy", dateLocale))
 
     Scaffold(

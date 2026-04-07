@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
-enum class AppTheme { SYSTEM, LIGHT, DARK }
+enum class AppTheme { SYSTEM, LIGHT, DARK, AMOLED }
 
 data class UserPreferences(
     val theme: AppTheme = AppTheme.SYSTEM,
@@ -21,6 +21,7 @@ data class UserPreferences(
     val bibleLastTranslationId: String = "",
     val bibleLastBookNumber: Int = 0,
     val bibleLastChapter: Int = 0,
+    val keepScreenOn: Boolean = false,
 )
 
 @Singleton
@@ -36,6 +37,7 @@ class UserPreferencesRepository @Inject constructor(
         private val KEY_BIBLE_LAST_TRANSLATION = stringPreferencesKey("bible_last_translation")
         private val KEY_BIBLE_LAST_BOOK = intPreferencesKey("bible_last_book")
         private val KEY_BIBLE_LAST_CHAPTER = intPreferencesKey("bible_last_chapter")
+        private val KEY_KEEP_SCREEN_ON = androidx.datastore.preferences.core.booleanPreferencesKey("keep_screen_on")
     }
 
     val preferences: Flow<UserPreferences> = dataStore.data.map { prefs ->
@@ -48,6 +50,7 @@ class UserPreferencesRepository @Inject constructor(
             bibleLastTranslationId = prefs[KEY_BIBLE_LAST_TRANSLATION] ?: "",
             bibleLastBookNumber = prefs[KEY_BIBLE_LAST_BOOK] ?: 0,
             bibleLastChapter = prefs[KEY_BIBLE_LAST_CHAPTER] ?: 0,
+            keepScreenOn = prefs[KEY_KEEP_SCREEN_ON] ?: false,
         )
     }
 
@@ -69,6 +72,10 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setBibleStreakGoal(goal: Int) {
         dataStore.edit { it[KEY_BIBLE_STREAK_GOAL] = goal.coerceIn(1, 10) }
+    }
+
+    suspend fun setKeepScreenOn(enabled: Boolean) {
+        dataStore.edit { it[KEY_KEEP_SCREEN_ON] = enabled }
     }
 
     suspend fun setBibleLastPosition(translationId: String, bookNumber: Int, chapter: Int) {

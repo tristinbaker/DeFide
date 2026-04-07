@@ -59,6 +59,24 @@ private val DarkColors = darkColorScheme(
     outline            = Color(0xFF4A4540),
 )
 
+private val AmoledColors = darkColorScheme(
+    primary            = GoldLight,
+    onPrimary          = Color(0xFF3D2800),
+    primaryContainer   = Color(0xFF553A00),
+    onPrimaryContainer = GoldLight,
+    secondary          = Color(0xFF8BA3D4),
+    onSecondary        = Color(0xFF0A1A40),
+    secondaryContainer = Color(0xFF0D0D0D),
+    onSecondaryContainer = Color(0xFFD0DCFF),
+    background         = Color.Black,
+    onBackground       = Color(0xFFEAE4D8),
+    surface            = Color.Black,
+    onSurface          = Color(0xFFEAE4D8),
+    surfaceVariant     = Color(0xFF0D0D0D),
+    onSurfaceVariant   = Color(0xFFB8B0A4),
+    outline            = Color(0xFF2A2A2A),
+)
+
 private val AppTypography = Typography(
     displayLarge  = TextStyle(fontFamily = FontFamily.Serif,  fontWeight = FontWeight.Bold,   fontSize = 57.sp, lineHeight = 64.sp),
     displayMedium = TextStyle(fontFamily = FontFamily.Serif,  fontWeight = FontWeight.Bold,   fontSize = 45.sp, lineHeight = 52.sp),
@@ -81,13 +99,14 @@ fun DeFideTheme(
     theme: AppTheme = AppTheme.SYSTEM,
     content: @Composable () -> Unit,
 ) {
-    val dark = when (theme) {
-        AppTheme.LIGHT -> false
-        AppTheme.DARK -> true
-        AppTheme.SYSTEM -> isSystemInDarkTheme()
+    val colorScheme = when (theme) {
+        AppTheme.LIGHT   -> LightColors
+        AppTheme.DARK    -> DarkColors
+        AppTheme.AMOLED  -> AmoledColors
+        AppTheme.SYSTEM  -> if (isSystemInDarkTheme()) DarkColors else LightColors
     }
     MaterialTheme(
-        colorScheme = if (dark) DarkColors else LightColors,
+        colorScheme = colorScheme,
         typography = AppTypography,
         content = content,
     )

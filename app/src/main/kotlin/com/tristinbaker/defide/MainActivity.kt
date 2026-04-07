@@ -1,8 +1,10 @@
 package com.tristinbaker.defide
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.tristinbaker.defide.data.preferences.UserPreferencesRepository
@@ -18,8 +20,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             val prefs by prefsRepository.preferences.collectAsState(initial = com.tristinbaker.defide.data.preferences.UserPreferences())
+            if (prefs.keepScreenOn) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            } else {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            }
             DeFideTheme(theme = prefs.theme) {
                 DeFideApp()
             }

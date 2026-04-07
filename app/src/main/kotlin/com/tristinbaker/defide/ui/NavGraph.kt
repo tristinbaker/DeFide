@@ -172,7 +172,7 @@ private fun DeFideAppContent(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet {
+            ModalDrawerSheet(drawerContainerColor = androidx.compose.material3.MaterialTheme.colorScheme.background) {
                 Text(
                     "De Fide",
                     modifier = Modifier.padding(start = 28.dp, top = 24.dp, bottom = 16.dp),

@@ -94,4 +94,8 @@ class SettingsViewModel @Inject constructor(
     fun setBibleStreakGoal(goal: Int) {
         viewModelScope.launch { prefsRepository.setBibleStreakGoal(goal) }
     }
+
+    fun setKeepScreenOn(enabled: Boolean) {
+        viewModelScope.launch { prefsRepository.setKeepScreenOn(enabled) }
+    }
 }

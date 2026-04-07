@@ -28,6 +28,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -124,12 +125,29 @@ fun SettingsScreen(
                                     AppTheme.SYSTEM -> R.string.theme_system
                                     AppTheme.LIGHT  -> R.string.theme_light
                                     AppTheme.DARK   -> R.string.theme_dark
+                                    AppTheme.AMOLED -> R.string.theme_amoled
                                 }),
                                 style = MaterialTheme.typography.bodyMedium,
                                 modifier = Modifier.padding(start = 8.dp),
                             )
                         }
                     }
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        stringResource(R.string.keep_screen_on_label),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Switch(
+                        checked = prefs.keepScreenOn,
+                        onCheckedChange = { viewModel.setKeepScreenOn(it) },
+                    )
                 }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
@@ -291,7 +309,7 @@ fun SettingsScreen(
             item {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("De Fide", style = MaterialTheme.typography.bodyMedium)
-                    Text("Version 1.3.0", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Version 1.3.1", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(
                         stringResource(R.string.about_tagline),
                         style = MaterialTheme.typography.bodySmall,
@@ -303,6 +321,28 @@ fun SettingsScreen(
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 4.dp),
+                    )
+                }
+            }
+            item {
+                HorizontalDivider()
+                SectionHeader(stringResource(R.string.section_donate))
+            }
+            item {
+                val uriHandler = LocalUriHandler.current
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        stringResource(R.string.about_donate_note),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Text(
+                        text = stringResource(R.string.about_donate_label),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier
+                            .padding(top = 4.dp)
+                            .clickable { uriHandler.openUri("https://liberapay.com/tristinbaker_/") },
                     )
                 }
             }

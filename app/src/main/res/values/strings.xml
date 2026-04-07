@@ -25,9 +25,11 @@
     <string name="theme_system">System</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
+    <string name="theme_amoled">AMOLED Black</string>
     <string name="section_language">Language</string>
     <string name="translate_cta">Want to add or improve a translation? Contribute on Weblate.</string>
     <string name="section_bible_translation">Bible Translation</string>
+    <string name="keep_screen_on_label">Keep screen on while using app</string>
     <string name="section_notifications">Notifications</string>
     <string name="novena_reminder_label">Novena reminder</string>
     <string name="daily_at">Daily at %s</string>
@@ -40,6 +42,9 @@
     <string name="section_about">About</string>
     <string name="about_tagline">Free and open-source. No tracking, no accounts, no internet required.</string>
     <string name="about_bible_note">All included Bible translations are public domain or license-free, keeping De Fide fully FOSS-compatible.</string>
+    <string name="section_donate">Donate</string>
+    <string name="about_donate_note">De Fide is and always will be completely free. This option was added by request. Please do not feel any obligation.</string>
+    <string name="about_donate_label">Donate (completely optional)</string>
 
     <!-- Novena reminder dialog -->
     <string name="novena_reminder_dialog_title">Novena reminder time</string>
