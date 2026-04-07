@@ -16,3 +16,4 @@ local.properties
 !debug.keystore
 app/build/
 pipeline.log
+porcap/
