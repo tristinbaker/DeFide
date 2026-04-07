@@ -50,15 +50,29 @@ class BibleDao @Inject constructor(private val db: SQLiteDatabase) {
         ).firstOrNull { toVerse() }
 
     fun getVerseOfDay(translationId: String, epochDay: Long): Verse? {
-        val count = db.rawQuery(
-            "SELECT COUNT(*) FROM verses v JOIN books b ON v.book_id = b.id WHERE b.translation_id = ?",
+        // Pick a book by cycling through books one per day, then pick a verse within
+        // that book so adjacent days are always in different books.
+        val bookCount = db.rawQuery(
+            "SELECT COUNT(*) FROM books WHERE translation_id = ?",
             arrayOf(translationId),
         ).use { if (it.moveToFirst()) it.getLong(0) else 0L }
-        if (count == 0L) return null
-        val offset = epochDay % count
+        if (bookCount == 0L) return null
+        val bookOffset = epochDay % bookCount
+        val bookId = db.rawQuery(
+            "SELECT id FROM books WHERE translation_id = ? ORDER BY book_number LIMIT 1 OFFSET ?",
+            arrayOf(translationId, bookOffset.toString()),
+        ).use { if (it.moveToFirst()) it.getLong(0) else return null }
+
+        val verseCount = db.rawQuery(
+            "SELECT COUNT(*) FROM verses WHERE book_id = ?",
+            arrayOf(bookId.toString()),
+        ).use { if (it.moveToFirst()) it.getLong(0) else 0L }
+        if (verseCount == 0L) return null
+        val verseOffset = (epochDay / bookCount) % verseCount
+
         return db.rawQuery(
-            "SELECT v.* FROM verses v JOIN books b ON v.book_id = b.id WHERE b.translation_id = ? ORDER BY b.id, v.chapter, v.verse LIMIT 1 OFFSET ?",
-            arrayOf(translationId, offset.toString()),
+            "SELECT * FROM verses WHERE book_id = ? ORDER BY chapter, verse LIMIT 1 OFFSET ?",
+            arrayOf(bookId.toString(), verseOffset.toString()),
         ).firstOrNull { toVerse() }
     }
 
