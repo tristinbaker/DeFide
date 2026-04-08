@@ -160,20 +160,33 @@ fun SettingsScreen(
                     "pt-BR" to "Português (Brasil)",
                     "pt-PT" to "Português (Portugal)",
                 )
-                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
-                    languages.forEach { (code, label) ->
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            RadioButton(
-                                selected = prefs.appLanguage == code,
-                                onClick = { viewModel.setAppLanguage(code) },
-                            )
-                            Text(
-                                text = label,
-                                style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier.padding(start = 8.dp),
+                var languageDropdownExpanded by remember { mutableStateOf(false) }
+                val selectedLanguageLabel = languages.firstOrNull { it.first == prefs.appLanguage }?.second ?: prefs.appLanguage
+                ExposedDropdownMenuBox(
+                    expanded = languageDropdownExpanded,
+                    onExpandedChange = { languageDropdownExpanded = it },
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                ) {
+                    OutlinedTextField(
+                        value = selectedLanguageLabel,
+                        onValueChange = {},
+                        readOnly = true,
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = languageDropdownExpanded) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .menuAnchor(MenuAnchorType.PrimaryNotEditable),
+                    )
+                    ExposedDropdownMenu(
+                        expanded = languageDropdownExpanded,
+                        onDismissRequest = { languageDropdownExpanded = false },
+                    ) {
+                        languages.forEach { (code, label) ->
+                            DropdownMenuItem(
+                                text = { Text(label) },
+                                onClick = {
+                                    viewModel.setAppLanguage(code)
+                                    languageDropdownExpanded = false
+                                },
                             )
                         }
                     }
