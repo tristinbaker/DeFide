@@ -32,7 +32,7 @@ Builds:
       - yes
   - versionName: 1.3.1
     versionCode: 6
-    commit: PLACEHOLDER
+    commit: 8445f123e5eb0e66bd0d3e5f17f00f04eb7c5eab
     subdir: app
     gradle:
       - yes
