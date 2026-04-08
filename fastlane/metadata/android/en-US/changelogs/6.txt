@@ -1,0 +1,6 @@
+• Rosary diagram redesign: new compact layout with selectable Classic/Compact style
+• AMOLED Black theme option
+• Keep Screen On toggle
+• Donation link (completely optional)
+• Portuguese localization fixes: capitalized day and month names, language-aware mystery names
+• Settings: Weblate translation link

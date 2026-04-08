@@ -25,6 +25,8 @@
     <string name="theme_system">Sistema</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Escuro</string>
+    <string name="theme_amoled">Preto AMOLED</string>
+    <string name="keep_screen_on_label">Manter tela ligada ao usar o app</string>
     <string name="section_language">Idioma</string>
     <string name="translate_cta">Quer adicionar ou melhorar uma tradução? Contribua no Weblate.</string>
     <string name="section_bible_translation">Tradução da Bíblia</string>
@@ -40,6 +42,9 @@
     <string name="section_about">Sobre</string>
     <string name="about_tagline">Gratuito e de código aberto. Sem rastreamento, sem contas, sem necessidade de internet.</string>
     <string name="about_bible_note">Todas as traduções bíblicas incluídas são de domínio público ou sem licença, mantendo De Fide totalmente compatível com FOSS.</string>
+    <string name="section_donate">Doação</string>
+    <string name="about_donate_note">De Fide é e sempre será completamente gratuito. Por favor, não se sinta obrigado.</string>
+    <string name="about_donate_label">Doar</string>
 
     <!-- Novena reminder dialog -->
     <string name="novena_reminder_dialog_title">Horário do lembrete de novena</string>
@@ -105,6 +110,8 @@
     <string name="ordinal_third">Terceiro</string>
     <string name="ordinal_fourth">Quarto</string>
     <string name="ordinal_fifth">Quinto</string>
+    <string name="rosary_diagram_classic">Clássico</string>
+    <string name="rosary_diagram_compact">Compacto</string>
     <string name="action_back">Voltar</string>
     <string name="action_complete">Concluir</string>
     <string name="action_next">Próximo</string>

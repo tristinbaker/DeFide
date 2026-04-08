@@ -43,8 +43,8 @@
     <string name="about_tagline">Free and open-source. No tracking, no accounts, no internet required.</string>
     <string name="about_bible_note">All included Bible translations are public domain or license-free, keeping De Fide fully FOSS-compatible.</string>
     <string name="section_donate">Donate</string>
-    <string name="about_donate_note">De Fide is and always will be completely free. This option was added by request. Please do not feel any obligation.</string>
-    <string name="about_donate_label">Donate (completely optional)</string>
+    <string name="about_donate_note">De Fide is and always will be completely free. Please do not feel any obligation.</string>
+    <string name="about_donate_label">Donate</string>
 
     <!-- Novena reminder dialog -->
     <string name="novena_reminder_dialog_title">Novena reminder time</string>
@@ -103,6 +103,8 @@
     <!-- Rosary screen -->
     <string name="rosary_title">Rosary</string>
     <string name="select_mystery">Select a Mystery</string>
+    <string name="rosary_diagram_classic">Classic</string>
+    <string name="rosary_diagram_compact">Compact</string>
     <string name="today_mystery_prefix">✦ Today — %s</string>
     <string name="the_nth_mystery">The %s Mystery</string>
     <string name="ordinal_first">First</string>

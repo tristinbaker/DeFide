@@ -4,13 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tristinbaker.defide.data.model.Mystery
 import com.tristinbaker.defide.data.model.MysteryBead
+import com.tristinbaker.defide.data.preferences.RosaryDiagramStyle
 import com.tristinbaker.defide.data.preferences.UserPreferencesRepository
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import com.tristinbaker.defide.data.repository.PrayerRepository
 import com.tristinbaker.defide.data.repository.RosaryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
@@ -51,16 +57,28 @@ class RosaryViewModel @Inject constructor(
     private val _prayerTitles = MutableStateFlow<Map<String, String>>(emptyMap())
     val prayerTitles: StateFlow<Map<String, String>> = _prayerTitles.asStateFlow()
 
+    val diagramStyle: StateFlow<RosaryDiagramStyle> = prefsRepository.preferences
+        .map { it.rosaryDiagramStyle }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), RosaryDiagramStyle.CLASSIC)
+
+    fun setDiagramStyle(style: RosaryDiagramStyle) {
+        viewModelScope.launch { prefsRepository.setRosaryDiagramStyle(style) }
+    }
+
     private val _sessionId = MutableStateFlow<String?>(null)
     private var currentLanguage = "en"
 
     init {
         viewModelScope.launch {
-            currentLanguage = prefsRepository.preferences.first().appLanguage
-            _mysteries.value = repository.getMysteries(currentLanguage)
-            val prayers = prayerRepository.getAll(currentLanguage)
-            _prayerTexts.value = prayers.associate { it.id to it.body }
-            _prayerTitles.value = prayers.associate { it.id to it.title }
+            prefsRepository.preferences
+                .distinctUntilChangedBy { it.appLanguage }
+                .collectLatest { prefs ->
+                    currentLanguage = prefs.appLanguage
+                    _mysteries.value = repository.getMysteries(currentLanguage)
+                    val prayers = prayerRepository.getAll(currentLanguage)
+                    _prayerTexts.value = prayers.associate { it.id to it.body }
+                    _prayerTitles.value = prayers.associate { it.id to it.title }
+                }
         }
     }
 

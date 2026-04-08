@@ -11,6 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 enum class AppTheme { SYSTEM, LIGHT, DARK, AMOLED }
+enum class RosaryDiagramStyle { CLASSIC, COMPACT }
 
 data class UserPreferences(
     val theme: AppTheme = AppTheme.SYSTEM,
@@ -22,6 +23,7 @@ data class UserPreferences(
     val bibleLastBookNumber: Int = 0,
     val bibleLastChapter: Int = 0,
     val keepScreenOn: Boolean = false,
+    val rosaryDiagramStyle: RosaryDiagramStyle = RosaryDiagramStyle.CLASSIC,
 )
 
 @Singleton
@@ -38,6 +40,7 @@ class UserPreferencesRepository @Inject constructor(
         private val KEY_BIBLE_LAST_BOOK = intPreferencesKey("bible_last_book")
         private val KEY_BIBLE_LAST_CHAPTER = intPreferencesKey("bible_last_chapter")
         private val KEY_KEEP_SCREEN_ON = androidx.datastore.preferences.core.booleanPreferencesKey("keep_screen_on")
+        private val KEY_ROSARY_DIAGRAM = stringPreferencesKey("rosary_diagram_style")
     }
 
     val preferences: Flow<UserPreferences> = dataStore.data.map { prefs ->
@@ -51,6 +54,7 @@ class UserPreferencesRepository @Inject constructor(
             bibleLastBookNumber = prefs[KEY_BIBLE_LAST_BOOK] ?: 0,
             bibleLastChapter = prefs[KEY_BIBLE_LAST_CHAPTER] ?: 0,
             keepScreenOn = prefs[KEY_KEEP_SCREEN_ON] ?: false,
+            rosaryDiagramStyle = prefs[KEY_ROSARY_DIAGRAM]?.let { runCatching { RosaryDiagramStyle.valueOf(it) }.getOrNull() } ?: RosaryDiagramStyle.CLASSIC,
         )
     }
 
@@ -76,6 +80,10 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setKeepScreenOn(enabled: Boolean) {
         dataStore.edit { it[KEY_KEEP_SCREEN_ON] = enabled }
+    }
+
+    suspend fun setRosaryDiagramStyle(style: RosaryDiagramStyle) {
+        dataStore.edit { it[KEY_ROSARY_DIAGRAM] = style.name }
     }
 
     suspend fun setBibleLastPosition(translationId: String, bookNumber: Int, chapter: Int) {
