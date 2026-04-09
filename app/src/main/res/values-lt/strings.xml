@@ -57,6 +57,8 @@
     <string name="novena_in_progress">Nebaigta</string>
     <string name="novena_section_completed">Baigta</string>
     <string name="novena_empty">Jokia novena dar nebuvo pradėta.</string>
+    <string name="novena_not_available">Novenos jūsų kalba dar nėra. Galite padėti prisidėdami prie vertimų — atidarykite pull request GitHub su išverstu novenas.json failu.</string>
+    <string name="novena_contribute_action">Atidaryti GitHub</string>
     <string name="nav_home">Namai</string>
     <string name="nav_rosary">Rožinis</string>
     <string name="nav_bible">Biblija</string>

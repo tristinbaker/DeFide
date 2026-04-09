@@ -157,6 +157,8 @@ fun SettingsScreen(
             item {
                 val languages = listOf(
                     "en" to "English",
+                    "fr" to "Français",
+                    "lt" to "Lietuvių",
                     "pt-BR" to "Português (Brasil)",
                     "pt-PT" to "Português (Portugal)",
                 )
@@ -215,6 +217,14 @@ fun SettingsScreen(
                     "pt-PT" -> listOf(
                         Triple("porcap",   "Bíblia dos Capuchinhos",        "Tradução da Difusora Bíblica (Capuchinhos)"),
                         Triple("vulgate",  "Vulgata Latina",                "Texto latino original de São Jerónimo"),
+                    )
+                    "fr" -> listOf(
+                        Triple("crampon",  "Bible Crampon 1923",            "Traduction catholique française"),
+                        Triple("vulgate",  "Vulgate Latine",                "Texte latin original de saint Jérôme"),
+                    )
+                    "lt" -> listOf(
+                        Triple("rk1998",  "Biblija (RK, K1998)",            "Katalikiška lietuviška Biblija"),
+                        Triple("vulgate", "Vulgata Latina",                  "Originarinis lotyniškas šv. Jeronimo tekstas"),
                     )
                     else -> listOf(
                         Triple("dra",        "Douay-Rheims (1899)",            "Traditional Catholic translation"),

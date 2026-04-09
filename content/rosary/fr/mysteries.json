@@ -1,0 +1,150 @@
+[
+  {
+    "id": "joyful",
+    "name": "Mystères Joyeux",
+    "traditional_days": "Lundi, Samedi",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "L'Annonciation",
+        "scripture": "Luc 1:26–38",
+        "meditation": "L'ange Gabriel annonce à Marie qu'elle concevra et enfantera le Fils de Dieu. Marie accepte humblement la volonté de Dieu : « Voici la servante du Seigneur ; qu'il me soit fait selon ta parole. » Priez pour la vertu d'humilité."
+      },
+      {
+        "number": 2,
+        "title": "La Visitation",
+        "scripture": "Luc 1:39–56",
+        "meditation": "Marie se hâte de rendre visite à sa cousine Élisabeth, qui, remplie du Saint-Esprit, s'écrie : « Tu es bénie entre toutes les femmes, et le fruit de tes entrailles est béni ! » L'enfant Jean tressaillit de joie dans le sein de sa mère. Priez pour la vertu de charité envers le prochain."
+      },
+      {
+        "number": 3,
+        "title": "La Nativité",
+        "scripture": "Luc 2:1–20",
+        "meditation": "Jésus naît dans une étable à Bethléem, enveloppé de langes et couché dans une mangeoire, car il n'y avait pas de place pour eux dans l'hôtellerie. Des anges annoncent la bonne nouvelle à de pauvres bergers. Priez pour la vertu de pauvreté d'esprit et le détachement des biens de ce monde."
+      },
+      {
+        "number": 4,
+        "title": "La Présentation au Temple",
+        "scripture": "Luc 2:22–38",
+        "meditation": "Marie et Joseph présentent l'enfant Jésus au Temple selon la Loi de Moïse. Le saint vieillard Siméon prend l'enfant dans ses bras et prophétise qu'Il sera la lumière des nations, et qu'une épée transpercera l'âme de Marie. Priez pour la vertu d'obéissance et de fidélité à la loi de Dieu."
+      },
+      {
+        "number": 5,
+        "title": "Le Recouvrement de Jésus au Temple",
+        "scripture": "Luc 2:41–52",
+        "meditation": "Jésus, âgé de douze ans, s'étant attardé à Jérusalem, est retrouvé par Marie et Joseph après trois jours dans le Temple, assis au milieu des docteurs, les écoutant et les interrogeant. Il leur dit qu'il doit s'occuper des affaires de son Père. Priez pour la vertu du zèle pour les choses de Dieu."
+      }
+    ]
+  },
+  {
+    "id": "sorrowful",
+    "name": "Mystères Douloureux",
+    "traditional_days": "Mardi, Vendredi",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "L'Agonie à Gethsémani",
+        "scripture": "Luc 22:39–46",
+        "meditation": "Jésus prie au jardin de Gethsémani, son âme triste jusqu'à la mort. Il sue du sang et un ange vient le réconforter. Pourtant il dit : « Non pas ma volonté, mais la tienne. » Priez pour la vertu de contrition pour nos péchés."
+      },
+      {
+        "number": 2,
+        "title": "La Flagellation",
+        "scripture": "Jean 19:1 ; Isaïe 53:5",
+        "meditation": "Jésus est attaché à une colonne et cruellement flagellé par les soldats romains. C'est par ses meurtrissures que nous sommes guéris. Il endure cela par amour pour nous et pour la réparation des péchés d'impureté. Priez pour la vertu de pureté et de mortification."
+      },
+      {
+        "number": 3,
+        "title": "Le Couronnement d'épines",
+        "scripture": "Matthieu 27:28–29",
+        "meditation": "Les soldats tressent une couronne d'épines et l'enfoncent sur la tête de Jésus, lui mettent un roseau dans la main et le raillent comme Roi des Juifs. Il accepte cette humiliation pour nous. Priez pour la vertu de courage et de force morale."
+      },
+      {
+        "number": 4,
+        "title": "Le Portement de la Croix",
+        "scripture": "Jean 19:17 ; Luc 23:26–31",
+        "meditation": "Jésus porte sa Croix dans les rues de Jérusalem jusqu'au Calvaire, tombant sous son poids. Il rencontre sa Mère en chemin. Simon de Cyrène est contraint de l'aider à porter la Croix. Priez pour la vertu de patience dans le portement de nos croix quotidiennes."
+      },
+      {
+        "number": 5,
+        "title": "La Crucifixion et la Mort",
+        "scripture": "Jean 19:18–30",
+        "meditation": "Jésus est cloué sur la Croix entre deux larrons. De la Croix, il pardonne à ses ennemis, confie sa Mère au disciple bien-aimé et remet son esprit entre les mains du Père. Dans un grand cri, il rend l'esprit. Priez pour la vertu de persévérance finale et d'une sainte mort."
+      }
+    ]
+  },
+  {
+    "id": "glorious",
+    "name": "Mystères Glorieux",
+    "traditional_days": "Mercredi, Dimanche",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "La Résurrection",
+        "scripture": "Marc 16:1–8 ; Jean 20:1–18",
+        "meditation": "Le troisième jour, Jésus ressuscite des morts, victorieux du péché, de la mort et du démon. Le tombeau est vide. Il apparaît d'abord à Marie-Madeleine, puis aux disciples. La mort est vaincue pour toujours. Priez pour la vertu de foi en la résurrection."
+      },
+      {
+        "number": 2,
+        "title": "L'Ascension",
+        "scripture": "Luc 24:50–51 ; Actes 1:9–11",
+        "meditation": "Quarante jours après la Résurrection, Jésus conduit ses disciples à Béthanie, les bénit et est élevé au ciel. Deux anges disent aux disciples qu'il reviendra de la même manière. Priez pour la vertu d'espérance et le désir du ciel."
+      },
+      {
+        "number": 3,
+        "title": "La Pentecôte",
+        "scripture": "Actes 2:1–11",
+        "meditation": "Le jour de la Pentecôte, les Apôtres et Marie sont réunis en prière lorsque soudain survient un vent violent et des langues de feu se posent sur chacun d'eux. Ils sont remplis du Saint-Esprit et commencent à parler en diverses langues. L'Église est née. Priez pour les dons du Saint-Esprit."
+      },
+      {
+        "number": 4,
+        "title": "L'Assomption de Marie",
+        "scripture": "Apocalypse 12:1 ; (tradition)",
+        "meditation": "À la fin de sa vie terrestre, la Bienheureuse Vierge Marie, préservée de la corruption du tombeau, est élevée corps et âme dans la gloire céleste, pour régner comme Reine aux côtés de son Fils. Priez pour la vertu de dévotion à Marie et la grâce d'une sainte mort."
+      },
+      {
+        "number": 5,
+        "title": "Le Couronnement de Marie",
+        "scripture": "Apocalypse 12:1 ; Judith 15:9",
+        "meditation": "Marie est couronnée Reine du ciel et de la terre, Reine des anges et des saints, par son Fils Jésus-Christ. Elle intercède sans cesse pour nous devant le trône de Dieu. Priez pour la grâce de persévérance afin de partager sa gloire."
+      }
+    ]
+  },
+  {
+    "id": "luminous",
+    "name": "Mystères Lumineux",
+    "traditional_days": "Jeudi",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "Le Baptême de Jésus au Jourdain",
+        "scripture": "Matthieu 3:13–17",
+        "meditation": "Jésus vient trouver Jean au Jourdain et est baptisé. Les cieux s'ouvrent, l'Esprit-Saint descend comme une colombe, et la voix du Père se fait entendre : « Celui-ci est mon Fils bien-aimé, en qui j'ai mis toute mon affection. » Jésus consacre les eaux du baptême. Priez pour la fidélité à vos propres promesses baptismales."
+      },
+      {
+        "number": 2,
+        "title": "Les Noces de Cana",
+        "scripture": "Jean 2:1–11",
+        "meditation": "Aux noces de Cana, Marie dit à Jésus : « Ils n'ont plus de vin », et instruit les serviteurs : « Faites tout ce qu'il vous dira. » Jésus change l'eau en vin, son premier miracle, manifestant sa gloire. Priez pour la grâce de faire confiance à l'intercession de Marie et d'obéir aux commandements du Seigneur."
+      },
+      {
+        "number": 3,
+        "title": "La Proclamation du Royaume",
+        "scripture": "Marc 1:14–15 ; Matthieu 5–7",
+        "meditation": "Jésus proclame la venue du Royaume de Dieu et appelle tous à la conversion et à la foi en l'Évangile. Il enseigne les Béatitudes et la voie de la miséricorde. Priez pour l'ouverture à la conversion et le courage de vivre l'Évangile."
+      },
+      {
+        "number": 4,
+        "title": "La Transfiguration",
+        "scripture": "Luc 9:28–36",
+        "meditation": "Jésus emmène Pierre, Jacques et Jean sur le mont Thabor, où il est transfiguré devant eux, son visage brillant comme le soleil et ses vêtements blancs comme la lumière. Moïse et Élie apparaissent avec lui. Le Père dit : « Celui-ci est mon Fils bien-aimé ; écoutez-le. » Priez pour la grâce de la contemplation et le désir de la gloire éternelle."
+      },
+      {
+        "number": 5,
+        "title": "L'Institution de l'Eucharistie",
+        "scripture": "Matthieu 26:26–28 ; Luc 22:19–20",
+        "meditation": "À la dernière Cène, Jésus prend du pain et du vin et dit : « Ceci est mon Corps... Ceci est mon Sang. » Il commande aux Apôtres : « Faites ceci en mémoire de moi. » Il nous donne lui-même, son Corps, son Sang, son Âme et sa Divinité, en nourriture pour nos âmes. Priez pour le respect de l'Eucharistie et une communion fréquente et digne."
+      }
+    ]
+  }
+]

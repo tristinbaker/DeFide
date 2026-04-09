@@ -72,6 +72,8 @@
     <string name="novena_in_progress">In Progress</string>
     <string name="novena_section_completed">Completed</string>
     <string name="novena_empty">No novenas started yet.</string>
+    <string name="novena_not_available">Novenas are not yet available in your language. You can help by contributing translations — open a pull request on GitHub with a translated novenas.json file.</string>
+    <string name="novena_contribute_action">Open GitHub</string>
 
     <!-- Navigation drawer -->
     <string name="nav_home">Home</string>

@@ -57,6 +57,8 @@
     <string name="novena_in_progress">En cours</string>
     <string name="novena_section_completed">Terminées</string>
     <string name="novena_empty">Aucune neuvaine encore commencée.</string>
+    <string name="novena_not_available">Les neuvaines ne sont pas encore disponibles dans votre langue. Vous pouvez nous aider en contribuant des traductions — ouvrez une pull request sur GitHub avec un fichier novenas.json traduit.</string>
+    <string name="novena_contribute_action">Ouvrir GitHub</string>
     <string name="nav_home">Menu de navigation</string>
     <string name="nav_rosary">Rosaire</string>
     <string name="nav_bible">Bible</string>

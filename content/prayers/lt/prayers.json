@@ -1,0 +1,50 @@
+[
+  {
+    "id": "apostles-creed",
+    "title": "Apaštalų tikėjimo išpažinimas",
+    "body": "Tikiu Dievą, visagalį Tėvą, dangaus ir žemės Sutvėrėją, ir Jėzų Kristų, vienatinį jo Sūnų, mūsų Viešpatį, kuris prasidėjo iš Šventosios Dvasios, gimė iš Mergelės Marijos, kentėjo prie Poncijaus Piloto, buvo nukryžiuotas, numiręs ir palaidotas; nužengė į pragarus; trečią dieną kėlėsi iš numirusių; įžengė į dangų; sėdi visagalio Dievo Tėvo dešinėje; iš ten ateis gyvųjų ir mirusiųjų teisti. Tikiu Šventąją Dvasią, šventąją visuotinę Bažnyčią, šventųjų bendravimą, nuodėmių atleidimą, kūno prisikėlimą ir amžinąjį gyvenimą. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "creed", "faith"]
+  },
+  {
+    "id": "our-father",
+    "title": "Tėve mūsų",
+    "body": "Tėve mūsų, kuris esi danguje, teesie šventas tavo vardas, teateinie tavo karalystė, teesie tavo valia kaip danguje, taip ir žemėje. Kasdienės mūsų duonos duok mums šiandien ir atleisk mums mūsų kaltes, kaip ir mes atleidžiame savo kaltininkams, ir nevesk mūsų į pagundymą, bet gelbėk mus nuo pikto. Amen.",
+    "source": "Mato 6:9–13",
+    "category": "rosary",
+    "tags": ["rosary", "morning", "evening", "meals"]
+  },
+  {
+    "id": "hail-mary",
+    "title": "Sveika, Marija",
+    "body": "Sveika, Marija, malonės pilnoji! Viešpats su tavimi. Tu pagirta tarp moterų, ir pagirtas tavo įsčių vaisius Jėzus. Šventoji Marija, Dievo Motina, melski už mus nusidėjėlius dabar ir mūsų mirties valandą. Amen.",
+    "source": "Luko 1:28, 42",
+    "category": "rosary",
+    "tags": ["rosary", "marian"]
+  },
+  {
+    "id": "glory-be",
+    "title": "Garbė Dievui",
+    "body": "Garbė Dievui Tėvui, Sūnui ir Šventajai Dvasiai. Kaip buvo pradžioje, dabar ir visados, ir per amžius. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "morning", "evening"]
+  },
+  {
+    "id": "fatima-prayer",
+    "title": "Fatimos malda",
+    "body": "O mano Jėzau, atleisk mums mūsų nuodėmes, apsaugok mus nuo pragaro ugnies, nuvesk į dangų visas sielas, ypač tas, kurioms labiausiai reikia tavo gailestingumo. Amen.",
+    "source": "Duota Fatimos Dievo Motinos, 1917",
+    "category": "rosary",
+    "tags": ["rosary", "marian", "mercy"]
+  },
+  {
+    "id": "hail-holy-queen",
+    "title": "Sveika, Karaliene",
+    "body": "Sveika, Karaliene, Gailestingumo Motina, mūsų gyvenime, saldybe ir viltie, sveika! Tavęs šaukiamės, ištremtieji Ievos vaikai; tavęs ilgimės, verkdami ir vaitodami šiame ašarų klonyje. Tai mūsų Užtarėja, gailestingomis akimis pažvelk į mus, ir po šios tremties parodyk mums Jėzų, palaimintą tavo įsčių vaisių. O gailestingoji, o maloniosios, o saldžioji Mergelė Marija! Melski už mus, šventoji Dievo Motina, kad taptume verti Kristaus pažadų. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "marian"]
+  }
+]

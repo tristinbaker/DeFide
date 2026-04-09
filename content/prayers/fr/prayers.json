@@ -1,0 +1,50 @@
+[
+  {
+    "id": "apostles-creed",
+    "title": "Symbole des Apôtres",
+    "body": "Je crois en Dieu, le Père tout-puissant, Créateur du ciel et de la terre. Et en Jésus-Christ, son Fils unique, notre Seigneur, qui a été conçu du Saint-Esprit, est né de la Vierge Marie, a souffert sous Ponce Pilate, a été crucifié, est mort et a été enseveli, est descendu aux enfers, le troisième jour est ressuscité des morts, est monté aux cieux, est assis à la droite de Dieu le Père tout-puissant, d'où il viendra juger les vivants et les morts. Je crois au Saint-Esprit, à la sainte Église catholique, à la communion des saints, à la rémission des péchés, à la résurrection de la chair, à la vie éternelle. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "creed", "faith"]
+  },
+  {
+    "id": "our-father",
+    "title": "Notre Père",
+    "body": "Notre Père, qui es aux cieux, que ton nom soit sanctifié, que ton règne vienne, que ta volonté soit faite sur la terre comme au ciel. Donne-nous aujourd'hui notre pain de ce jour. Pardonne-nous nos offenses, comme nous pardonnons aussi à ceux qui nous ont offensés. Et ne nous soumets pas à la tentation, mais délivre-nous du mal. Amen.",
+    "source": "Matthieu 6:9–13",
+    "category": "rosary",
+    "tags": ["rosary", "morning", "evening", "meals"]
+  },
+  {
+    "id": "hail-mary",
+    "title": "Je vous salue, Marie",
+    "body": "Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous. Vous êtes bénie entre toutes les femmes et Jésus, le fruit de vos entrailles, est béni. Sainte Marie, Mère de Dieu, priez pour nous pécheurs, maintenant et à l'heure de notre mort. Amen.",
+    "source": "Luc 1:28, 42",
+    "category": "rosary",
+    "tags": ["rosary", "marian"]
+  },
+  {
+    "id": "glory-be",
+    "title": "Gloire au Père",
+    "body": "Gloire au Père, et au Fils, et au Saint-Esprit. Comme il était au commencement, maintenant et toujours, dans les siècles des siècles. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "morning", "evening"]
+  },
+  {
+    "id": "fatima-prayer",
+    "title": "Prière de Fatima",
+    "body": "Ô mon Jésus, pardonnez-nous nos péchés, préservez-nous du feu de l'enfer, conduisez au ciel toutes les âmes, surtout celles qui ont le plus besoin de votre miséricorde. Amen.",
+    "source": "Donnée par Notre-Dame de Fatima, 1917",
+    "category": "rosary",
+    "tags": ["rosary", "marian", "mercy"]
+  },
+  {
+    "id": "hail-holy-queen",
+    "title": "Salve Regina",
+    "body": "Je vous salue, Reine, Mère de miséricorde, notre vie, notre douceur et notre espérance. Enfants d'Ève, exilés, nous vous crions. Vers vous nous soupirons, gémissant et pleurant dans cette vallée de larmes. Tournez vers nous, notre avocate, vos regards miséricordieux. Et après cet exil, montrez-nous Jésus, le fruit béni de vos entrailles. Ô clémente, ô compatissante, ô douce Vierge Marie ! Priez pour nous, sainte Mère de Dieu, afin que nous devenions dignes des promesses de Jésus-Christ. Amen.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "marian"]
+  }
+]

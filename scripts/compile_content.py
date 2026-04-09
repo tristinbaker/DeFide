@@ -342,6 +342,8 @@ _TRANSLATION_BOOK_ID_OFFSET = {
     "web-c":      4001,
     "ave-maria":  5001,
     "porcap":     6001,
+    "crampon":    7001,
+    "rk1998":     8001,
 }
 
 # Portuguese display names for Ave-Maria, keyed by DR filename (no extension).
@@ -498,6 +500,161 @@ _PORCAP_BOOK_NAMES = {
     "3 John":           "3 João",
     "Jude":             "Judas",
     "Apocalypse":       "Apocalipse",
+}
+
+
+# French display names for Crampon, keyed by DR filename (no extension).
+_FR_BOOK_NAMES = {
+    "Genesis":          "Genèse",
+    "Exodus":           "Exode",
+    "Leviticus":        "Lévitique",
+    "Numbers":          "Nombres",
+    "Deuteronomy":      "Deutéronome",
+    "Josue":            "Josué",
+    "Judges":           "Juges",
+    "Ruth":             "Ruth",
+    "1 Kings":          "1 Samuel",
+    "2 Kings":          "2 Samuel",
+    "3 Kings":          "1 Rois",
+    "4 Kings":          "2 Rois",
+    "1 Paralipomenon":  "1 Chroniques",
+    "2 Paralipomenon":  "2 Chroniques",
+    "1 Esdras":         "Esdras",
+    "2 Esdras":         "Néhémie",
+    "Tobias":           "Tobie",
+    "Judith":           "Judith",
+    "Esther":           "Esther",
+    "1 Machabees":      "1 Maccabées",
+    "2 Machabees":      "2 Maccabées",
+    "Job":              "Job",
+    "Psalms":           "Psaumes",
+    "Proverbs":         "Proverbes",
+    "Ecclesiastes":     "Ecclésiaste",
+    "Canticles":        "Cantique des Cantiques",
+    "Wisdom":           "Sagesse",
+    "Ecclesiasticus":   "Siracide",
+    "Isaias":           "Isaïe",
+    "Jeremias":         "Jérémie",
+    "Lamentations":     "Lamentations",
+    "Baruch":           "Baruch",
+    "Ezechiel":         "Ézéchiel",
+    "Daniel":           "Daniel",
+    "Osee":             "Osée",
+    "Joel":             "Joël",
+    "Amos":             "Amos",
+    "Abdias":           "Abdias",
+    "Jonas":            "Jonas",
+    "Micheas":          "Michée",
+    "Nahum":            "Nahoum",
+    "Habacuc":          "Habacuc",
+    "Sophonias":        "Sophonie",
+    "Aggeus":           "Aggée",
+    "Zacharias":        "Zacharie",
+    "Malachias":        "Malachie",
+    "Matthew":          "Matthieu",
+    "Mark":             "Marc",
+    "Luke":             "Luc",
+    "John":             "Jean",
+    "Acts":             "Actes des Apôtres",
+    "Romans":           "Romains",
+    "1 Corinthians":    "1 Corinthiens",
+    "2 Corinthians":    "2 Corinthiens",
+    "Galatians":        "Galates",
+    "Ephesians":        "Éphésiens",
+    "Philippians":      "Philippiens",
+    "Colossians":       "Colossiens",
+    "1 Thessalonians":  "1 Thessaloniciens",
+    "2 Thessalonians":  "2 Thessaloniciens",
+    "1 Timothy":        "1 Timothée",
+    "2 Timothy":        "2 Timothée",
+    "Titus":            "Tite",
+    "Philemon":         "Philémon",
+    "Hebrews":          "Hébreux",
+    "James":            "Jacques",
+    "1 Peter":          "1 Pierre",
+    "2 Peter":          "2 Pierre",
+    "1 John":           "1 Jean",
+    "2 John":           "2 Jean",
+    "3 John":           "3 Jean",
+    "Jude":             "Jude",
+    "Apocalypse":       "Apocalypse",
+}
+
+
+_LT_BOOK_NAMES = {
+    "Genesis":          "Pradžios knyga",
+    "Exodus":           "Išėjimo knyga",
+    "Leviticus":        "Kunigų knyga",
+    "Numbers":          "Skaičių knyga",
+    "Deuteronomy":      "Pakartoto Įstatymo knyga",
+    "Josue":            "Jozuės knyga",
+    "Judges":           "Teisėjų knyga",
+    "Ruth":             "Rutos knyga",
+    "1 Kings":          "1 Samuelio knyga",
+    "2 Kings":          "2 Samuelio knyga",
+    "3 Kings":          "1 Karalių knyga",
+    "4 Kings":          "2 Karalių knyga",
+    "1 Paralipomenon":  "1 Kronikų knyga",
+    "2 Paralipomenon":  "2 Kronikų knyga",
+    "1 Esdras":         "Ezdro knyga",
+    "2 Esdras":         "Nehemijo knyga",
+    "Tobias":           "Tobito knyga",
+    "Judith":           "Juditos knyga",
+    "Esther":           "Esteros knyga",
+    "1 Machabees":      "1 Makabiejų knyga",
+    "2 Machabees":      "2 Makabiejų knyga",
+    "Job":              "Jobo knyga",
+    "Psalms":           "Psalmių knyga",
+    "Proverbs":         "Patarlių knyga",
+    "Ecclesiastes":     "Koheleto knyga",
+    "Canticles":        "Giesmių Giesmė",
+    "Wisdom":           "Išminties knyga",
+    "Ecclesiasticus":   "Siracido knyga",
+    "Isaias":           "Izaijo knyga",
+    "Jeremias":         "Jeremijo knyga",
+    "Lamentations":     "Raudų knyga",
+    "Baruch":           "Barucho knyga",
+    "Ezechiel":         "Ezekielio knyga",
+    "Daniel":           "Danieliaus knyga",
+    "Osee":             "Ozėjo knyga",
+    "Joel":             "Joelio knyga",
+    "Amos":             "Amoso knyga",
+    "Abdias":           "Abdijo knyga",
+    "Jonas":            "Jonos knyga",
+    "Micheas":          "Michėjo knyga",
+    "Nahum":            "Nahumo knyga",
+    "Habacuc":          "Habakuko knyga",
+    "Sophonias":        "Sofonijo knyga",
+    "Aggeus":           "Agėjo knyga",
+    "Zacharias":        "Zacharijo knyga",
+    "Malachias":        "Malachijo knyga",
+    "Matthew":          "Evangelija pagal Matą",
+    "Mark":             "Evangelija pagal Morkų",
+    "Luke":             "Evangelija pagal Luką",
+    "John":             "Evangelija pagal Joną",
+    "Acts":             "Apaštalų darbai",
+    "Romans":           "Laiškas romiečiams",
+    "1 Corinthians":    "Pirmasis laiškas korintiečiams",
+    "2 Corinthians":    "Antrasis laiškas korintiečiams",
+    "Galatians":        "Laiškas galatams",
+    "Ephesians":        "Laiškas efeziečiams",
+    "Philippians":      "Laiškas filipiečiams",
+    "Colossians":       "Laiškas kolosiečiams",
+    "1 Thessalonians":  "Pirmasis laiškas tesalonikiečiams",
+    "2 Thessalonians":  "Antrasis laiškas tesalonikiečiams",
+    "1 Timothy":        "Pirmasis laiškas Timotiejui",
+    "2 Timothy":        "Antrasis laiškas Timotiejui",
+    "Titus":            "Laiškas Titui",
+    "Philemon":         "Laiškas Filemonui",
+    "Hebrews":          "Laiškas žydams",
+    "James":            "Jokūbo laiškas",
+    "1 Peter":          "Pirmasis Petro laiškas",
+    "2 Peter":          "Antrasis Petro laiškas",
+    "1 John":           "Pirmasis Jono laiškas",
+    "2 John":           "Antrasis Jono laiškas",
+    "3 John":           "Trečiasis Jono laiškas",
+    "Jude":             "Judo laiškas",
+    "Apocalypse":       "Apreiškimas Jonui",
 }
 
 
@@ -842,6 +999,12 @@ def main() -> None:
         print("Compiling Bible (Bíblia dos Capuchinhos — European Portuguese)...")
         compile_dr_format(conn, "porcap", lang="pt-PT", book_full_names=_PORCAP_BOOK_NAMES)
 
+        print("Compiling Bible (Crampon 1923 — French)...")
+        compile_dr_format(conn, "crampon", lang="fr", book_full_names=_FR_BOOK_NAMES)
+
+        print("Compiling Bible (Biblija RK K1998 — Lithuanian)...")
+        compile_dr_format(conn, "rk1998", lang="lt", book_full_names=_LT_BOOK_NAMES)
+
         print("Compiling Catechism...")
         compile_catechism(conn)
 
@@ -849,16 +1012,21 @@ def main() -> None:
         compile_prayers(conn, "en")
         compile_prayers(conn, "pt-BR")
         compile_prayers(conn, "pt-PT")
+        compile_prayers(conn, "fr")
+        compile_prayers(conn, "lt")
 
         print("Compiling Novenas...")
         compile_novenas(conn, "en")
         compile_novenas(conn, "pt-BR")
         compile_novenas(conn, "pt-PT")
+        compile_novenas(conn, "fr")
 
         print("Compiling Rosary...")
         compile_rosary(conn, "en")
         compile_rosary(conn, "pt-BR")
         compile_rosary(conn, "pt-PT")
+        compile_rosary(conn, "fr")
+        compile_rosary(conn, "lt")
 
         conn.commit()
         size_kb = os.path.getsize(OUT_DB) // 1024

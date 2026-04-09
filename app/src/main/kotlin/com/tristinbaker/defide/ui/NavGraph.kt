@@ -83,6 +83,7 @@ private fun rememberDrawerItems() = listOf(
 
 private const val CCC_URL_EN = "https://usccb.cld.bz/Catechism-of-the-Catholic-Church2/7"
 private const val CCC_URL_PT = "https://www.vatican.va/archive/cathechism_po/index_new/prima-pagina-cic_po.html"
+private const val CCC_URL_FR = "https://www.vatican.va/archive/FRA0013/_INDEX.HTM"
 
 @Composable
 private fun LocaleWrapper(language: String, content: @Composable () -> Unit) {
@@ -113,7 +114,11 @@ fun DeFideApp() {
     val settingsViewModel: SettingsViewModel = androidx.hilt.navigation.compose.hiltViewModel()
     val prefs by settingsViewModel.preferences.collectAsState()
 
-    val cccUrl = if (prefs.appLanguage.startsWith("pt")) CCC_URL_PT else CCC_URL_EN
+    val cccUrl = when {
+        prefs.appLanguage.startsWith("pt") -> CCC_URL_PT
+        prefs.appLanguage == "fr"          -> CCC_URL_FR
+        else                               -> CCC_URL_EN
+    }
 
     LocaleWrapper(prefs.appLanguage) {
         DeFideAppContent(

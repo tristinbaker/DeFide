@@ -1,0 +1,150 @@
+[
+  {
+    "id": "joyful",
+    "name": "Džiaugsmingosios paslaptys",
+    "traditional_days": "Pirmadienis, Šeštadienis",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "Apreiškimas",
+        "scripture": "Lk 1:26–38",
+        "meditation": "Angelas Gabrielius praneša Marijai, kad ji pradės ir pagimdys Dievo Sūnų. Marija nuolankiai priima Dievo valią: „Štai aš Viešpaties tarnaitė, tebūna man pagal tavo žodį.“ Melskite dėl nuolankumo dorybės."
+      },
+      {
+        "number": 2,
+        "title": "Aplankymas",
+        "scripture": "Lk 1:39–56",
+        "meditation": "Marija skuba aplankyti savo giminaitę Elzbietą, kuri, kupina Šventosios Dvasios, sušunka: „Tu palaiminta tarp moterų, ir pagirtas tavo įsčių vaisius!“ Kūdikis Jonas iš džiaugsmo pašoka motinos įsčiose. Melskite dėl artimo meilės dorybės."
+      },
+      {
+        "number": 3,
+        "title": "Gimimas",
+        "scripture": "Lk 2:1–20",
+        "meditation": "Jėzus gimsta tvarte Betliejuje, suvystytas vystyklais ir paguldytas ėdžiose, nes jiems nebuvo vietos užeigoje. Angelai skelbia gerąją naujieną piemenims. Melskite dėl dvasinio neturto dorybės ir atsiskyrimų nuo pasaulio dalykų."
+      },
+      {
+        "number": 4,
+        "title": "Paaukojimas šventykloje",
+        "scripture": "Lk 2:22–38",
+        "meditation": "Marija ir Juozapas pristato kūdikį Jėzų šventykloje pagal Mozės įstatymą. Šventasis Simeonas ima vaiką į rankas ir pranašauja, kad Jis bus tautų šviesa, o Marijos sielą pervers kalavijas. Melskite dėl paklusnumo ir ištikimybės Dievo įstatymui dorybės."
+      },
+      {
+        "number": 5,
+        "title": "Jėzus surandamas šventykloje",
+        "scripture": "Lk 2:41–52",
+        "meditation": "Dvylikametis Jėzus, pasilikęs Jeruzalėje, Marijos ir Juozapo surandamas po trijų dienų šventykloje, sėdintis tarp mokytojų, klausantis jų ir juos klausinėjantis. Jis jiems sako, kad privalo rūpintis savo Tėvo reikalais. Melskite dėl uolumo Dievo reikaluose dorybės."
+      }
+    ]
+  },
+  {
+    "id": "sorrowful",
+    "name": "Skausmingosios paslaptys",
+    "traditional_days": "Antradienis, Penktadienis",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "Malda Getsemane",
+        "scripture": "Lk 22:39–46",
+        "meditation": "Jėzus meldžiasi Getsemane sode, jo siela nuliūdusi iki mirties. Jis krauju prakaituoja ir angelas ateina jį sustiprinti. Tačiau jis sako: „Ne mano valia, bet tavo.“ Melskite dėl gailesčio už mūsų nuodėmes dorybės."
+      },
+      {
+        "number": 2,
+        "title": "Plakimas prie stulpo",
+        "scripture": "Jn 19:1 ; Iz 53:5",
+        "meditation": "Jėzus pririšamas prie stulpo ir žiauriai plakamas romėnų karių. Jo žaizdomis esame išgydyti. Jis tai iškentė iš meilės mums ir kaip atlyginimas už netyrumo nuodėmes. Melskite dėl tyrumo ir mortifikacijos dorybės."
+      },
+      {
+        "number": 3,
+        "title": "Vainikavimas erškėčiais",
+        "scripture": "Mt 27:28–29",
+        "meditation": "Kariai nupina erškėčių vainiką ir uždeda jį ant Jėzaus galvos, įduoda jam į ranką nendrę ir tyčiojasi iš jo kaip iš žydų karaliaus. Jis prisiima šį pažeminimą dėl mūsų. Melskite dėl drąsos ir moralinio tvirtumo dorybės."
+      },
+      {
+        "number": 4,
+        "title": "Kryžiaus nešimas",
+        "scripture": "Jn 19:17 ; Lk 23:26–31",
+        "meditation": "Jėzus neša savo Kryžių Jeruzalės gatvėmis į Golgotą, krisdamas po jo svoriu. Jis sutinka savo Motiną kelyje. Kirenietis Simonas priverčiamas padėti jam nešti Kryžių. Melskite dėl kantrybės nešant kasdieninius kryžius dorybės."
+      },
+      {
+        "number": 5,
+        "title": "Nukryžiavimas ir mirtis",
+        "scripture": "Jn 19:18–30",
+        "meditation": "Jėzus prikalamas prie Kryžiaus tarp dviejų plėšikų. Nuo Kryžiaus jis atleidžia savo priešams, patiki savo Motiną mylimajam mokiniui ir atiduoda savo dvasią Tėvo rankoms. Garsiai sušukęs jis atidavė dvasią. Melskite dėl galutinio ištvermingumo ir švento mirties dorybės."
+      }
+    ]
+  },
+  {
+    "id": "glorious",
+    "name": "Garbingosios paslaptys",
+    "traditional_days": "Trečiadienis, Sekmadienis",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "Prisikėlimas",
+        "scripture": "Mk 16:1–8 ; Jn 20:1–18",
+        "meditation": "Trečią dieną Jėzus prisikelia iš numirusių, nugalėjęs nuodėmę, mirtį ir velnią. Kapas tuščias. Jis pirmiausia pasirodo Marijai Magdalietei, paskui mokiniams. Mirtis nugalėta amžinai. Melskite dėl tikėjimo į prisikėlimą dorybės."
+      },
+      {
+        "number": 2,
+        "title": "Žengimas į dangų",
+        "scripture": "Lk 24:50–51 ; Apd 1:9–11",
+        "meditation": "Keturiasdešimt dienų po Prisikėlimo Jėzus nuveda mokinius į Betaniją, laimina juos ir yra paimamas į dangų. Du angelai sako mokiniams, kad jis sugrįš tokiu pat būdu. Melskite dėl vilties ir ilgesio dangaus dorybės."
+      },
+      {
+        "number": 3,
+        "title": "Šventosios Dvasios atsiuntimas",
+        "scripture": "Apd 2:1–11",
+        "meditation": "Sekminių dieną apaštalai ir Marija susirinkę meldžiasi, kai staiga pasigirsta ūžesys kaip stipraus vėjo gūsis, ir liežuviai tarsi ugniniai nusileido ant kiekvieno iš jų. Jie prisipildo Šventosios Dvasios ir pradeda kalbėti įvairiomis kalbomis. Bažnyčia yra gimusi. Melskite dėl Šventosios Dvasios dovanų."
+      },
+      {
+        "number": 4,
+        "title": "Marijos ėmimas į dangų",
+        "scripture": "Apr 12:1 ; (tradicija)",
+        "meditation": "Pasibaigus žemiškajam gyvenimui, Palaimintoji Mergelė Marija, apsaugota nuo kapo skilimo, paimama su kūnu ir siela į dangaus garbę, kad karaliautų kaip Karalienė šalia savo Sūnaus. Melskite dėl pamaldumo Marijai ir švento mirties malonės."
+      },
+      {
+        "number": 5,
+        "title": "Marijos vainikavimas",
+        "scripture": "Apr 12:1 ; Jdt 15:9",
+        "meditation": "Marija vainikuojama Dangaus ir žemės Karaliene, Angelų ir Šventųjų Karaliene, jos Sūnaus Jėzaus Kristaus. Ji be paliovos užtaria mus prieš Dievo sostą. Melskite dėl ištvermingumo malonės, kad dalyvautume jos garbėje."
+      }
+    ]
+  },
+  {
+    "id": "luminous",
+    "name": "Šviesos paslaptys",
+    "traditional_days": "Ketvirtadienis",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "Jėzaus krikštas Jordane",
+        "scripture": "Mt 3:13–17",
+        "meditation": "Jėzus ateina pas Joną prie Jordano ir yra pakrikštijamas. Dangūs atsiveria, Šventoji Dvasia nusileido kaip balandis, ir pasigirsta Tėvo balsas: „Šitas yra mano mylimasis Sūnus, kuriuo aš gėriuosi.“ Jėzus pašventina krikšto vandenis. Melskite dėl ištikimybės savo krikšto pažadams."
+      },
+      {
+        "number": 2,
+        "title": "Vestuvės Kanoje",
+        "scripture": "Jn 2:1–11",
+        "meditation": "Vestuvėse Kanoje Marija sako Jėzui: „Jie nebeturi vyno,“ ir nurodo tarnams: „Darykite, ką tik jis jums lieps.“ Jėzus paverčia vandenį vynu, pirmasis jo stebuklas, apreikšdamas savo garbę. Melskite dėl malonės pasitikėti Marijos užtarimu ir paklusti Viešpaties įsakymams."
+      },
+      {
+        "number": 3,
+        "title": "Dangaus karalystės skelbimas",
+        "scripture": "Mk 1:14–15 ; Mt 5–7",
+        "meditation": "Jėzus skelbia Dievo karalystės atėjimą ir kviečia visus atsiversti ir tikėti Evangelija. Jis moko palaiminimų ir gailestingumo kelio. Melskite dėl atvirumo atsivertimui ir drąsos gyventi Evangelija."
+      },
+      {
+        "number": 4,
+        "title": "Atsimainymas",
+        "scripture": "Lk 9:28–36",
+        "meditation": "Jėzus paima Petrą, Jokūbą ir Joną ant Taboro kalno, kur jis atsimaino jų akivaizdoje: jo veidas spindi kaip saulė, o drabužiai balti kaip šviesa. Su juo pasirodo Mozė ir Elijas. Tėvas sako: „Šitas yra mano mylimasis Sūnus; jo klausykite.“ Melskite dėl kontempliacijos malonės ir noro amžinosios garbės."
+      },
+      {
+        "number": 5,
+        "title": "Eucharistijos įsteigimas",
+        "scripture": "Mt 26:26–28 ; Lk 22:19–20",
+        "meditation": "Paskutinės vakarienės metu Jėzus ima duoną ir vyną ir sako: „Tai yra mano Kūnas... Tai yra mano Kraujas.“ Jis liepia apaštalams: „Tai darykite mano atminimui.“ Jis mums duoda save patį – savo Kūną, Kraują, Sielą ir Dievystę – kaip maistą mūsų sieloms. Melskite dėl pagarbos Eucharistijai ir dažnos, vertingos Komunijos."
+      }
+    ]
+  }
+]

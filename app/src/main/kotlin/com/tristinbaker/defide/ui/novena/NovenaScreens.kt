@@ -29,9 +29,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tristinbaker.defide.R
@@ -45,6 +48,7 @@ fun NovenaListScreen(
     viewModel: NovenaViewModel = hiltViewModel(),
 ) {
     val novenas by viewModel.novenas.collectAsState()
+    val uriHandler = LocalUriHandler.current
 
     Scaffold(
         topBar = {
@@ -64,6 +68,26 @@ fun NovenaListScreen(
             )
         },
     ) { padding ->
+        if (novenas.isEmpty()) {
+            Column(
+                modifier = Modifier.fillMaxSize().padding(padding).padding(32.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    stringResource(R.string.novena_not_available),
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                )
+                Spacer(Modifier.height(16.dp))
+                OutlinedButton(onClick = {
+                    uriHandler.openUri("https://github.com/tristinbaker/DeFide")
+                }) {
+                    Text(stringResource(R.string.novena_contribute_action))
+                }
+            }
+            return@Scaffold
+        }
         LazyColumn(contentPadding = padding, modifier = Modifier.fillMaxSize()) {
             items(novenas) { novena ->
                 Column(
