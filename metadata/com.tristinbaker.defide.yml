@@ -46,7 +46,7 @@ Builds:
 
   - versionName: 1.3.3
     versionCode: 8
-    commit: PLACEHOLDER
+    commit: 2ef5d2d1f74f8552dc97edc15cbbdeb764e3c535
     subdir: app
     gradle:
       - yes
