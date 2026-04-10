@@ -7,6 +7,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.tristinbaker.defide.data.preferences.AppTheme
+import com.tristinbaker.defide.data.preferences.RosaryOrder
 import com.tristinbaker.defide.data.preferences.UserPreferences
 import com.tristinbaker.defide.data.preferences.UserPreferencesRepository
 import kotlinx.coroutines.flow.first
@@ -95,5 +96,9 @@ class SettingsViewModel @Inject constructor(
 
     fun setKeepScreenOn(enabled: Boolean) {
         viewModelScope.launch { prefsRepository.setKeepScreenOn(enabled) }
+    }
+
+    fun setRosaryOrder(order: RosaryOrder) {
+        viewModelScope.launch { prefsRepository.setRosaryOrder(order) }
     }
 }

@@ -21,9 +21,9 @@ class RosaryContentDao @Inject constructor(private val db: SQLiteDatabase) {
         db.rawQuery("SELECT * FROM mysteries WHERE id = ? AND language = ?", arrayOf(id, language))
             .firstOrNull { toMystery() }
 
-    fun getBeads(mysteryId: String, language: String = "en"): List<MysteryBead> =
+    fun getBeads(mysteryId: String, language: String = "en", variant: String = "dominican"): List<MysteryBead> =
         db.rawQuery(
-            "SELECT * FROM mystery_beads WHERE mystery_id = ? AND language = ? ORDER BY position",
-            arrayOf(mysteryId, language),
+            "SELECT * FROM mystery_beads WHERE mystery_id = ? AND language = ? AND variant = ? ORDER BY position",
+            arrayOf(mysteryId, language, variant),
         ).mapRows { toMysteryBead() }
 }

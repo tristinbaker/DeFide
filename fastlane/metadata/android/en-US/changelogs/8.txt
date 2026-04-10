@@ -1,0 +1,3 @@
+• Fátima Rosary order for pt-PT: different opening (Deus in adjutorium + Gloria), Ó Maria Concebida per decade, 3 closing Hail Marys — selectable in Settings
+• Rosary bead diagram: 60-bead physical layout matches a real rosary; Our Father beads are now visually larger
+• Counter shows bead position (✝ for cross, 1–60 for beads)

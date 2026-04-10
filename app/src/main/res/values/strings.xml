@@ -107,6 +107,10 @@
     <string name="select_mystery">Select a Mystery</string>
     <string name="rosary_diagram_classic">Classic</string>
     <string name="rosary_diagram_compact">Compact</string>
+    <string name="section_rosary">Rosary</string>
+    <string name="rosary_order_label">Rosary Order</string>
+    <string name="rosary_order_dominican">Dominican</string>
+    <string name="rosary_order_fatima">Fátima</string>
     <string name="today_mystery_prefix">✦ Today — %s</string>
     <string name="the_nth_mystery">The %s Mystery</string>
     <string name="ordinal_first">First</string>

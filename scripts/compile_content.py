@@ -316,6 +316,7 @@ def create_schema(conn: sqlite3.Connection) -> None:
             id                 INTEGER PRIMARY KEY,
             mystery_id         TEXT NOT NULL,
             language           TEXT NOT NULL DEFAULT 'en',
+            variant            TEXT NOT NULL DEFAULT 'dominican',
             position           INTEGER NOT NULL,
             prayer_id          TEXT,
             mystery_number     INTEGER,
@@ -327,7 +328,7 @@ def create_schema(conn: sqlite3.Connection) -> None:
         -- Indexes for fast chapter / book lookups
         CREATE INDEX IF NOT EXISTS idx_verses_book_chapter ON verses(book_id, chapter);
         CREATE INDEX IF NOT EXISTS idx_books_translation ON books(translation_id, book_number);
-        CREATE INDEX IF NOT EXISTS idx_mystery_beads_mystery ON mystery_beads(mystery_id, language, position);
+        CREATE INDEX IF NOT EXISTS idx_mystery_beads_mystery ON mystery_beads(mystery_id, language, variant, position);
         CREATE INDEX IF NOT EXISTS idx_novena_days_novena ON novena_days(novena_id, day_number);
     """)
 
@@ -863,7 +864,7 @@ def compile_novenas(conn: sqlite3.Connection, lang: str) -> None:
     print(f"  Novenas ({lang}): {len(novenas)} entries loaded.")
 
 
-def compile_rosary(conn: sqlite3.Connection, lang: str) -> None:
+def compile_rosary(conn: sqlite3.Connection, lang: str, variant: str = "dominican") -> None:
     path = os.path.join(CONTENT_DIR, "rosary", lang, "mysteries.json")
     if not os.path.exists(path):
         print(f"  SKIP: content/rosary/{lang}/mysteries.json not found.")
@@ -872,11 +873,7 @@ def compile_rosary(conn: sqlite3.Connection, lang: str) -> None:
     with open(path) as f:
         mystery_sets = json.load(f)
 
-    # Rosary bead sequence per mystery set:
-    # Intro (6 beads): Apostles' Creed, Our Father, 3x Hail Mary (with intentions), Glory Be
-    # Per mystery (14 beads): Mystery announcement (no prayer), Our Father, 10x Hail Mary, Glory Be, Fatima Prayer
-    # Closing (1 bead): Hail Holy Queen
-    # (prayer_id, mystery_title / intention)
+    # ── Sequence definitions ──────────────────────────────────────────────────
     INTRO_EN = [
         ("apostles-creed", None),
         ("our-father",     None),
@@ -893,79 +890,83 @@ def compile_rosary(conn: sqlite3.Connection, lang: str) -> None:
         ("hail-mary",      "Por um aumento em Caridade"),
         ("glory-be",       None),
     ]
-    INTRO = INTRO_PT if lang in ("pt-BR", "pt-PT") else INTRO_EN
+    # Fátima opening: Deus in adjutorium + Glory Be (no Our Father or Hail Marys)
+    INTRO_FATIMA_PT = [
+        ("deus-in-adjutorium", None),
+        ("glory-be",           None),
+    ]
+    # Fátima closing: 3 Hail Marys (faith/hope/charity) then Hail Holy Queen
+    CLOSING_FATIMA_PT = [
+        ("hail-mary",       "Por um aumento em Fé"),
+        ("hail-mary",       "Por um aumento em Esperança"),
+        ("hail-mary",       "Por um aumento em Caridade"),
+        ("hail-holy-queen", None),
+    ]
+
+    if variant == "fatima":
+        INTRO = INTRO_FATIMA_PT
+        CLOSING = CLOSING_FATIMA_PT
+        EXTRA_DECADE = ["oh-maria-concebida", "fatima-prayer"]
+    else:
+        INTRO = INTRO_PT if lang in ("pt-BR", "pt-PT") else INTRO_EN
+        CLOSING = [("hail-holy-queen", None)]
+        EXTRA_DECADE = ["fatima-prayer"]
+
+    # ── Insert beads ──────────────────────────────────────────────────────────
+    def insert_bead(ms_id, pos, prayer_id, mystery_title=None, mystery_number=None,
+                    mystery_scripture=None, mystery_meditation=None):
+        conn.execute(
+            """INSERT INTO mystery_beads
+               (mystery_id, language, variant, position, prayer_id, mystery_title,
+                mystery_number, mystery_scripture, mystery_meditation)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (ms_id, lang, variant, pos, prayer_id, mystery_title,
+             mystery_number, mystery_scripture, mystery_meditation),
+        )
 
     total_beads = 0
     for ms in mystery_sets:
+        # mysteries rows are shared across variants; only insert once per (id, language)
         conn.execute(
-            "INSERT INTO mysteries (id, language, name, traditional_days) VALUES (?, ?, ?, ?)",
+            "INSERT OR IGNORE INTO mysteries (id, language, name, traditional_days) VALUES (?, ?, ?, ?)",
             (ms["id"], lang, ms["name"], ms.get("traditional_days")),
         )
 
         position = 1
+
         for prayer_id, intention in INTRO:
-            conn.execute(
-                "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_title) VALUES (?, ?, ?, ?, ?)",
-                (ms["id"], lang, position, prayer_id, intention),
-            )
+            insert_bead(ms["id"], position, prayer_id, mystery_title=intention)
             position += 1
 
         for m in ms["mysteries"]:
-            # Mystery announcement bead — dedicated page, no prayer
-            conn.execute(
-                """INSERT INTO mystery_beads
-                   (mystery_id, language, position, prayer_id, mystery_number, mystery_title,
-                    mystery_scripture, mystery_meditation)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                (ms["id"], lang, position, None, m["number"],
-                 m["title"], m.get("scripture"), m.get("meditation")),
-            )
+            # Mystery announcement — dedicated page, no prayer_id
+            insert_bead(ms["id"], position, None,
+                        mystery_number=m["number"], mystery_title=m["title"],
+                        mystery_scripture=m.get("scripture"), mystery_meditation=m.get("meditation"))
             position += 1
 
-            # Our Father bead — prayer only
-            conn.execute(
-                "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
-                (ms["id"], lang, position, "our-father", m["number"]),
-            )
+            insert_bead(ms["id"], position, "our-father", mystery_number=m["number"])
             position += 1
 
             for _ in range(10):
-                conn.execute(
-                    "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
-                    (ms["id"], lang, position, "hail-mary", m["number"]),
-                )
+                insert_bead(ms["id"], position, "hail-mary", mystery_number=m["number"])
                 position += 1
 
-            conn.execute(
-                "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
-                (ms["id"], lang, position, "glory-be", m["number"]),
-            )
+            insert_bead(ms["id"], position, "glory-be", mystery_number=m["number"])
             position += 1
 
-            if lang == "pt-PT":
-                conn.execute(
-                    "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
-                    (ms["id"], lang, position, "oh-maria-concebida", m["number"]),
-                )
+            for prayer_id in EXTRA_DECADE:
+                insert_bead(ms["id"], position, prayer_id, mystery_number=m["number"])
                 position += 1
 
-            conn.execute(
-                "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id, mystery_number) VALUES (?, ?, ?, ?, ?)",
-                (ms["id"], lang, position, "fatima-prayer", m["number"]),
-            )
+        for prayer_id, intention in CLOSING:
+            insert_bead(ms["id"], position, prayer_id, mystery_title=intention)
             position += 1
-
-        # Closing
-        conn.execute(
-            "INSERT INTO mystery_beads (mystery_id, language, position, prayer_id) VALUES (?, ?, ?, ?)",
-            (ms["id"], lang, position, "hail-holy-queen"),
-        )
-        position += 1
 
         total_beads += position - 1
-        print(f"  {ms['name']}: {position - 1} beads")
+        print(f"  {ms['name']} ({variant}): {position - 1} beads")
 
-    print(f"  Rosary ({lang}): {len(mystery_sets)} mystery sets, {total_beads} total beads.")
+    print(f"  Rosary ({lang}, {variant}): {len(mystery_sets)} mystery sets, {total_beads} total beads.")
 
 
 def main() -> None:
@@ -1025,6 +1026,7 @@ def main() -> None:
         compile_rosary(conn, "en")
         compile_rosary(conn, "pt-BR")
         compile_rosary(conn, "pt-PT")
+        compile_rosary(conn, "pt-PT", variant="fatima")
         compile_rosary(conn, "fr")
         compile_rosary(conn, "lt")
 

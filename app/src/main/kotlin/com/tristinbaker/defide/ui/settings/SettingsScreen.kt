@@ -50,6 +50,7 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tristinbaker.defide.R
 import com.tristinbaker.defide.data.preferences.AppTheme
+import com.tristinbaker.defide.data.preferences.RosaryOrder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -252,6 +253,41 @@ fun SettingsScreen(
                 }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
+            if (prefs.appLanguage == "pt-PT") {
+                item {
+                    SectionHeader(stringResource(R.string.section_rosary))
+                }
+                item {
+                    Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+                        Text(
+                            stringResource(R.string.rosary_order_label),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(bottom = 4.dp),
+                        )
+                        RosaryOrder.entries.forEach { order ->
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                RadioButton(
+                                    selected = prefs.rosaryOrder == order,
+                                    onClick = { viewModel.setRosaryOrder(order) },
+                                )
+                                Text(
+                                    text = stringResource(when (order) {
+                                        RosaryOrder.DOMINICAN -> R.string.rosary_order_dominican
+                                        RosaryOrder.FATIMA    -> R.string.rosary_order_fatima
+                                    }),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    modifier = Modifier.padding(start = 8.dp),
+                                )
+                            }
+                        }
+                    }
+                    HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
+                }
+            }
             item {
                 SectionHeader(stringResource(R.string.section_notifications))
             }
@@ -332,7 +368,7 @@ fun SettingsScreen(
             item {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("De Fide", style = MaterialTheme.typography.bodyMedium)
-                    Text("Version 1.3.1", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Version 1.3.3", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(
                         stringResource(R.string.about_tagline),
                         style = MaterialTheme.typography.bodySmall,

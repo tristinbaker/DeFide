@@ -101,6 +101,10 @@
     <string name="ordinal_fifth">Quinto</string>
     <string name="rosary_diagram_classic">Clássico</string>
     <string name="rosary_diagram_compact">Compacto</string>
+    <string name="section_rosary">Rosário</string>
+    <string name="rosary_order_label">Ordem do Rosário</string>
+    <string name="rosary_order_dominican">Dominicana</string>
+    <string name="rosary_order_fatima">Fátima</string>
     <string name="action_back">Voltar</string>
     <string name="action_complete">Concluir</string>
     <string name="action_next">Seguinte</string>

@@ -32,6 +32,14 @@
     "tags": ["rosary", "morning", "evening"]
   },
   {
+    "id": "deus-in-adjutorium",
+    "title": "Deus, Vinde em Meu Auxílio",
+    "body": "Deus, vinde em meu auxílio.\nSenhor, socorrei-me depressa.",
+    "source": "Salmo 70,2",
+    "category": "rosary",
+    "tags": ["rosary", "opening"]
+  },
+  {
     "id": "oh-maria-concebida",
     "title": "Ó Maria Concebida Sem Pecado",
     "body": "Ó Maria concebida sem pecado,\nRogai por nós, que recorremos a vós.",

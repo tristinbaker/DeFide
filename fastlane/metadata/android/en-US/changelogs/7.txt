@@ -1,7 +1,7 @@
 • French language support: UI, Bible (Crampon 1923), Rosary, Novenas
 • Lithuanian language support: UI, Bible (RK K1998), Rosary
 • Language selector is now a dropdown (replaces radio buttons)
-• Rosary diagram redesign: Classic and Compact styles, selectable in toolbar
+• Rosary diagram: 60-bead physical layout matches a real rosary; counter shows bead position (✝ for cross)
 • Verse of the Day now cycles through all books
 • Novenas: languages without translations show a GitHub contribute prompt
 • Bug fixes: mystery names and month capitalization in Portuguese

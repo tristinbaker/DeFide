@@ -12,6 +12,7 @@ import javax.inject.Singleton
 
 enum class AppTheme { SYSTEM, LIGHT, DARK, AMOLED }
 enum class RosaryDiagramStyle { CLASSIC, COMPACT }
+enum class RosaryOrder { DOMINICAN, FATIMA }
 
 data class UserPreferences(
     val theme: AppTheme = AppTheme.SYSTEM,
@@ -24,6 +25,7 @@ data class UserPreferences(
     val bibleLastChapter: Int = 0,
     val keepScreenOn: Boolean = false,
     val rosaryDiagramStyle: RosaryDiagramStyle = RosaryDiagramStyle.CLASSIC,
+    val rosaryOrder: RosaryOrder = RosaryOrder.DOMINICAN,
 )
 
 @Singleton
@@ -41,6 +43,7 @@ class UserPreferencesRepository @Inject constructor(
         private val KEY_BIBLE_LAST_CHAPTER = intPreferencesKey("bible_last_chapter")
         private val KEY_KEEP_SCREEN_ON = androidx.datastore.preferences.core.booleanPreferencesKey("keep_screen_on")
         private val KEY_ROSARY_DIAGRAM = stringPreferencesKey("rosary_diagram_style")
+        private val KEY_ROSARY_ORDER   = stringPreferencesKey("rosary_order")
     }
 
     val preferences: Flow<UserPreferences> = dataStore.data.map { prefs ->
@@ -55,6 +58,7 @@ class UserPreferencesRepository @Inject constructor(
             bibleLastChapter = prefs[KEY_BIBLE_LAST_CHAPTER] ?: 0,
             keepScreenOn = prefs[KEY_KEEP_SCREEN_ON] ?: false,
             rosaryDiagramStyle = prefs[KEY_ROSARY_DIAGRAM]?.let { runCatching { RosaryDiagramStyle.valueOf(it) }.getOrNull() } ?: RosaryDiagramStyle.CLASSIC,
+            rosaryOrder = prefs[KEY_ROSARY_ORDER]?.let { runCatching { RosaryOrder.valueOf(it) }.getOrNull() } ?: RosaryOrder.DOMINICAN,
         )
     }
 
@@ -84,6 +88,10 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setRosaryDiagramStyle(style: RosaryDiagramStyle) {
         dataStore.edit { it[KEY_ROSARY_DIAGRAM] = style.name }
+    }
+
+    suspend fun setRosaryOrder(order: RosaryOrder) {
+        dataStore.edit { it[KEY_ROSARY_ORDER] = order.name }
     }
 
     suspend fun setBibleLastPosition(translationId: String, bookNumber: Int, chapter: Int) {
