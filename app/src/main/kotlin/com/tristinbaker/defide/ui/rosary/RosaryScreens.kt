@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tristinbaker.defide.R
 import com.tristinbaker.defide.data.preferences.RosaryDiagramStyle
+import com.tristinbaker.defide.data.preferences.RosaryOrder
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -130,9 +131,12 @@ fun RosarySessionScreen(
     val beads by viewModel.beads.collectAsState()
     val position by viewModel.currentPosition.collectAsState()
     val currentPhysicalBead by viewModel.currentPhysicalBead.collectAsState()
+    val visitedPhysBeads by viewModel.visitedPhysBeads.collectAsState()
     val prayerTexts by viewModel.prayerTexts.collectAsState()
     val prayerTitles by viewModel.prayerTitles.collectAsState()
     val diagramStyle by viewModel.diagramStyle.collectAsState()
+    val rosaryOrder by viewModel.rosaryOrder.collectAsState()
+    val isFatima = rosaryOrder == RosaryOrder.FATIMA
 
     LaunchedEffect(mysteryId) { viewModel.startSession(mysteryId) }
 
@@ -145,7 +149,7 @@ fun RosarySessionScreen(
 
     val counterText = when (currentPhysicalBead) {
         -1   -> "\u271d / 60"
-        else -> "${currentPhysicalBead + 1} / 60"
+        else -> "${visitedPhysBeads.size} / 60"
     }
 
     Scaffold(
@@ -284,6 +288,8 @@ fun RosarySessionScreen(
             if (beads.isNotEmpty()) {
                 RosaryBeadIndicator(
                     currentPhysicalBead = currentPhysicalBead,
+                    visitedPhysBeads = visitedPhysBeads,
+                    isFatima = isFatima,
                     style = diagramStyle,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -331,19 +337,23 @@ fun RosarySessionScreen(
 @Composable
 private fun RosaryBeadIndicator(
     currentPhysicalBead: Int,
+    visitedPhysBeads: Set<Int>,
+    isFatima: Boolean,
     style: RosaryDiagramStyle,
     modifier: Modifier = Modifier,
 ) {
     if (style == RosaryDiagramStyle.CLASSIC) {
-        RosaryBeadIndicatorClassic(currentPhysicalBead, modifier)
+        RosaryBeadIndicatorClassic(currentPhysicalBead, visitedPhysBeads, isFatima, modifier)
     } else {
-        RosaryBeadIndicatorCompact(currentPhysicalBead, modifier)
+        RosaryBeadIndicatorCompact(currentPhysicalBead, visitedPhysBeads, isFatima, modifier)
     }
 }
 
 @Composable
 private fun RosaryBeadIndicatorClassic(
     currentPhysicalBead: Int,
+    visitedPhysBeads: Set<Int>,
+    isFatima: Boolean,
     modifier: Modifier = Modifier,
 ) {
     // Physical layout: 60 beads (0-59) + cross (-1)
@@ -360,7 +370,8 @@ private fun RosaryBeadIndicatorClassic(
 
     fun isLargeBead(physBead: Int) =
         physBead == 0 || physBead == 4 ||
-        (physBead in 15..48 && (physBead - 15) % 11 == 0)
+        (physBead in 15..48 && (physBead - 15) % 11 == 0) ||
+        (isFatima && physBead == 59)
 
     Canvas(modifier = modifier) {
         val cx        = size.width / 2f
@@ -417,7 +428,7 @@ private fun RosaryBeadIndicatorClassic(
         for (physBead in 0 until 60) {
             val pos       = beadPos(physBead)
             val isCurrent = physBead == currentPhysicalBead
-            val isPast    = currentPhysicalBead >= 0 && physBead < currentPhysicalBead
+            val isPast    = physBead in visitedPhysBeads && !isCurrent
             val large     = isLargeBead(physBead)
             val beadR     = when {
                 isCurrent && large  -> rCurrentLarge
@@ -437,6 +448,8 @@ private fun RosaryBeadIndicatorClassic(
 @Composable
 private fun RosaryBeadIndicatorCompact(
     currentPhysicalBead: Int,
+    visitedPhysBeads: Set<Int>,
+    isFatima: Boolean,
     modifier: Modifier = Modifier,
 ) {
     // Physical layout: 60 beads (0-59) + cross (-1)
@@ -453,7 +466,8 @@ private fun RosaryBeadIndicatorCompact(
 
     fun isLargeBead(physBead: Int) =
         physBead == 0 || physBead == 4 ||
-        (physBead in 15..48 && (physBead - 15) % 11 == 0)
+        (physBead in 15..48 && (physBead - 15) % 11 == 0) ||
+        (isFatima && physBead == 59)
 
     Canvas(modifier = modifier) {
         val W = size.width
@@ -558,7 +572,7 @@ private fun RosaryBeadIndicatorCompact(
         for (physBead in 0 until 60) {
             val pos       = beadPos(physBead)
             val isCurrent = physBead == currentPhysicalBead
-            val isPast    = currentPhysicalBead >= 0 && physBead < currentPhysicalBead
+            val isPast    = physBead in visitedPhysBeads && !isCurrent
             val large     = isLargeBead(physBead)
             val beadR     = when {
                 isCurrent && large  -> rCurrentLarge

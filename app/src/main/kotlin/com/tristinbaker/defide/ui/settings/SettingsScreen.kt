@@ -383,28 +383,6 @@ fun SettingsScreen(
                     )
                 }
             }
-            item {
-                HorizontalDivider()
-                SectionHeader(stringResource(R.string.section_donate))
-            }
-            item {
-                val uriHandler = LocalUriHandler.current
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        stringResource(R.string.about_donate_note),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Text(
-                        text = stringResource(R.string.about_donate_label),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier
-                            .padding(top = 4.dp)
-                            .clickable { uriHandler.openUri("https://liberapay.com/tristinbaker_/") },
-                    )
-                }
-            }
         }
     }
 }

@@ -62,31 +62,32 @@ class RosaryViewModel @Inject constructor(
     private var currentRosaryOrder: RosaryOrder = RosaryOrder.DOMINICAN
 
     /**
-     * Dominican order — 77 steps (0..76).
-     *  -1  = cross / Creed               (step 0)
-     *   0  = Our Father tail bead        (step 1)
-     *  1–3 = 3 intro Hail Marys          (steps 2–4)
-     *   4  = Our Father decade 1         (steps 5–7: Glory Be on chain + announcement + Our Father)
-     *  5–14  = Hail Marys decade 1       (Glory Be + Fatima share bead 14)
-     *  15, 26, 37, 48 = Our Father beads decades 2–5 (on loop)
-     *  16–25, 27–36, 38–47, 49–58 = Hail Mary beads
-     *  59 = connector junction           (last step: Hail Holy Queen)
+     * Dominican order — 78 steps (0..77).
+     *  -1  = cross / Creed                  (step 0)
+     *   0  = Our Father tail bead           (step 1)
+     *  1–3 = 3 intro Hail Marys             (steps 2–4)
+     *   4  = connector bead                 (step 5: last intro Glory Be)
+     *   4, 15, 26, 37, 48 = Our Father beads (announcement=within 0, Our Father=within 1 share big bead)
+     *  5–14, 16–25, 27–36, 38–47, 49–58 = Hail Mary beads only (within 2..11)
+     *  15, 26, 37, 48, 59 = extras (Glory Be + Fatima prayer) on next big bead (within 12,13)
+     *  59 = junction                         (last step: Hail Holy Queen)
      */
     private fun physicalBeadForDominican(stepIndex: Int): Int {
         val lastStep = _beads.value.lastIndex
         return when {
             stepIndex == 0        -> -1
             stepIndex in 1..4     -> stepIndex - 1
+            stepIndex == 5        -> 4              // last intro Glory Be on connector bead
             stepIndex == lastStep -> 59
             else -> {
-                val loopStep = stepIndex - 5
+                val loopStep = stepIndex - 6        // step 6 = announcement m1 → loopStep 0
                 val decade   = loopStep / 14
                 val within   = loopStep % 14
                 val start    = 4 + decade * 11
                 when {
-                    within <= 1     -> start
-                    within in 2..11 -> start + (within - 1)
-                    else            -> start + 10
+                    within <= 1     -> start             // announcement + Our Father on big bead
+                    within in 2..11 -> start + (within - 1)  // Hail Marys 1–10 on small beads
+                    else            -> start + 11        // Glory Be + extras → next Our Father bead
                 }
             }
         }
@@ -94,31 +95,33 @@ class RosaryViewModel @Inject constructor(
 
     /**
      * Fátima order — 81 steps (0..80).
-     *  -1  = cross / Deus in adjutorium  (step 0)
-     *   0  = Our Father tail bead        (step 1: Gloria)
-     *   4  = Our Father decade 1         (steps 2–3: announcement + Our Father)
-     *  5–14  = Hail Marys decade 1       (Gloria + Ó Maria + Fatima prayer share bead 14)
-     *  15, 26, 37, 48 = Our Father beads decades 2–5
-     *  …
-     *  1–3 = closing 3 Hail Marys        (steps 77–79, traversing tail back towards cross)
-     *  59 = connector junction           (last step: Hail Holy Queen)
+     *  -1  = cross / opening prayer          (step 0)
+     *  59  = junction                        (step 1: intro Glory Be; steps 2–3: announcement + Our Father)
+     *  58→49 = Hail Marys decade 1           (counterclockwise)
+     *  48, 37, 26, 15 = Our Father beads decades 2–5 (also hold extras + announcement of next decade)
+     *  47→38, 36→27, 25→16, 14→5 = Hail Mary beads decades 2–5
+     *   4  = connector tail bead             (decade 5 extras: Glory Be, Ó Maria, Fátima prayer)
+     *  3→1 = closing 3 Hail Marys            (steps 77–79, traversing tail toward cross)
+     *   0  = Our Father tail bead            (last step: Hail Holy Queen / Salve Regina)
      */
     private fun physicalBeadForFatima(stepIndex: Int): Int {
         val lastStep = _beads.value.lastIndex  // = 80
         return when {
             stepIndex == 0                    -> -1
-            stepIndex == 1                    -> 0
-            stepIndex == lastStep             -> 59
-            stepIndex > lastStep - 4          -> stepIndex - (lastStep - 4)  // steps 77–79 → physBeads 1–3
+            stepIndex == 1                    -> 59  // intro Glory Be at junction (on loop)
+            stepIndex == lastStep             -> 0   // Hail Holy Queen on the far tail bead
+            stepIndex > lastStep - 4          -> lastStep - stepIndex  // steps 77–79 → physBeads 3–1 (toward cross)
             else -> {
+                // Counterclockwise: steps 2..76 = 75 steps = 5 decades × 15
+                // Decade 0: announcement + OurFather at junction (59), HMs 58→49, extras on 48
+                // Decades 1–4: announcement + OurFather at 48/37/26/15, HMs going down, extras on next big bead
                 val loopStep = stepIndex - 2
                 val decade   = loopStep / 15
                 val within   = loopStep % 15
-                val start    = 4 + decade * 11
                 when {
-                    within <= 1     -> start
-                    within in 2..11 -> start + (within - 1)
-                    else            -> start + 10
+                    within <= 1     -> if (decade == 0) 59 else 59 - 11 * decade
+                    within in 2..11 -> (60 - 11 * decade) - within
+                    else            -> 59 - 11 * (decade + 1)  // extras → next Our Father bead (48/37/26/15/4)
                 }
             }
         }
@@ -133,6 +136,15 @@ class RosaryViewModel @Inject constructor(
     val currentPhysicalBead: StateFlow<Int> = _currentPosition
         .map { physicalBeadFor(it) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), -1)
+
+    /** Set of physBead indices (0–59) visited so far. Used for diagram colouring. */
+    val visitedPhysBeads: StateFlow<Set<Int>> = _currentPosition
+        .map { pos -> (0..pos).mapNotNull { physicalBeadFor(it).takeIf { it >= 0 } }.toSet() }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
+
+    val rosaryOrder: StateFlow<RosaryOrder> = prefsRepository.preferences
+        .map { it.rosaryOrder }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), RosaryOrder.DOMINICAN)
 
     val diagramStyle: StateFlow<RosaryDiagramStyle> = prefsRepository.preferences
         .map { it.rosaryDiagramStyle }
@@ -169,7 +181,14 @@ class RosaryViewModel @Inject constructor(
         viewModelScope.launch {
             val prefs = prefsRepository.preferences.first()
             val variant = prefs.rosaryOrder.name.lowercase()
-            _beads.value = repository.getBeads(mysteryId, prefs.appLanguage, variant)
+            val beads = repository.getBeads(mysteryId, prefs.appLanguage, variant)
+            if (beads.isNotEmpty()) {
+                _beads.value = beads
+            } else {
+                // Language doesn't support this order variant — fall back to Dominican
+                currentRosaryOrder = RosaryOrder.DOMINICAN
+                _beads.value = repository.getBeads(mysteryId, prefs.appLanguage, "dominican")
+            }
             _currentPosition.value = 0
             _sessionId.value = repository.startSession(mysteryId)
         }
