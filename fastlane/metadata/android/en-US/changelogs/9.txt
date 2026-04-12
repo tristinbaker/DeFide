@@ -1,0 +1,4 @@
+• Fátima Rosary order (pt-PT): corrected bead mapping — Hail Marys now land on small beads, all other prayers on the nearest large bead
+• Rosary falls back to Dominican order when the selected order has no beads for the current language (fixes blank screen for English + Fátima)
+• Lithuanian translation update
+• Fixed Portuguese date format on the home screen: "11 de Abril" instead of "Abril 11"
