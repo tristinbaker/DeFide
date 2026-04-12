@@ -51,6 +51,13 @@ Builds:
     gradle:
       - yes
 
+  - versionName: 1.4.0
+    versionCode: 9
+    commit: 56e788a525d5717673e9211fc451556a19f34e5b
+    subdir: app
+    gradle:
+      - yes
+
 AllowedAPKSigningKeys: 99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010
 
 AutoUpdateMode: Version
