@@ -59,9 +59,16 @@ fun HomeScreen(
 
     val today = LocalDate.now()
     val dateLocale = Locale.forLanguageTag(appLanguage)
-    val dateText = today.format(DateTimeFormatter.ofPattern("EEEE, MMMM d", dateLocale))
+    val datePattern = if (appLanguage.startsWith("pt")) "EEEE, d 'de' MMMM" else "EEEE, MMMM d"
+    val dateText = today.format(DateTimeFormatter.ofPattern(datePattern, dateLocale))
         .split(", ")
-        .joinToString(", ") { it.replaceFirstChar { c -> c.uppercase() } }
+        .joinToString(", ") { part ->
+            val words = part.split(" ")
+            words.mapIndexed { i, w ->
+                if (i == 0 || i == words.lastIndex) w.replaceFirstChar { it.uppercase() }
+                else w
+            }.joinToString(" ")
+        }
     val yearText = today.format(DateTimeFormatter.ofPattern("yyyy", dateLocale))
 
     Scaffold(
