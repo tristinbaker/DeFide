@@ -582,6 +582,84 @@ _FR_BOOK_NAMES = {
 }
 
 
+# Classical Latin names for the Clementine Vulgate, keyed by DR filename.
+_LA_BOOK_NAMES = {
+    "Genesis":          "Genesis",
+    "Exodus":           "Exodus",
+    "Leviticus":        "Leviticus",
+    "Numbers":          "Numeri",
+    "Deuteronomy":      "Deuteronomium",
+    "Josue":            "Iosue",
+    "Judges":           "Iudicum",
+    "Ruth":             "Ruth",
+    "1 Kings":          "I Regum",
+    "2 Kings":          "II Regum",
+    "3 Kings":          "III Regum",
+    "4 Kings":          "IV Regum",
+    "1 Paralipomenon":  "I Paralipomenon",
+    "2 Paralipomenon":  "II Paralipomenon",
+    "1 Esdras":         "I Esdrae",
+    "2 Esdras":         "II Esdrae",
+    "Tobias":           "Tobias",
+    "Judith":           "Iudith",
+    "Esther":           "Esther",
+    "1 Machabees":      "I Machabaeorum",
+    "2 Machabees":      "II Machabaeorum",
+    "Job":              "Iob",
+    "Psalms":           "Psalmi",
+    "Proverbs":         "Proverbia",
+    "Ecclesiastes":     "Ecclesiastes",
+    "Canticles":        "Canticum Canticorum",
+    "Wisdom":           "Sapientia",
+    "Ecclesiasticus":   "Ecclesiasticus",
+    "Isaias":           "Isaias",
+    "Jeremias":         "Ieremias",
+    "Lamentations":     "Threni",
+    "Baruch":           "Baruch",
+    "Ezechiel":         "Ezechiel",
+    "Daniel":           "Daniel",
+    "Osee":             "Osee",
+    "Joel":             "Ioel",
+    "Amos":             "Amos",
+    "Abdias":           "Abdias",
+    "Jonas":            "Ionas",
+    "Micheas":          "Micheas",
+    "Nahum":            "Nahum",
+    "Habacuc":          "Habacuc",
+    "Sophonias":        "Sophonias",
+    "Aggeus":           "Aggaeus",
+    "Zacharias":        "Zacharias",
+    "Malachias":        "Malachias",
+    "Matthew":          "Matthaeus",
+    "Mark":             "Marcus",
+    "Luke":             "Lucas",
+    "John":             "Ioannes",
+    "Acts":             "Actus Apostolorum",
+    "Romans":           "Ad Romanos",
+    "1 Corinthians":    "Ad Corinthios I",
+    "2 Corinthians":    "Ad Corinthios II",
+    "Galatians":        "Ad Galatas",
+    "Ephesians":        "Ad Ephesios",
+    "Philippians":      "Ad Philippenses",
+    "Colossians":       "Ad Colossenses",
+    "1 Thessalonians":  "Ad Thessalonicenses I",
+    "2 Thessalonians":  "Ad Thessalonicenses II",
+    "1 Timothy":        "Ad Timotheum I",
+    "2 Timothy":        "Ad Timotheum II",
+    "Titus":            "Ad Titum",
+    "Philemon":         "Ad Philemonem",
+    "Hebrews":          "Ad Hebraeos",
+    "James":            "Epistola Iacobi",
+    "1 Peter":          "Epistola Petri I",
+    "2 Peter":          "Epistola Petri II",
+    "1 John":           "Epistola Ioannis I",
+    "2 John":           "Epistola Ioannis II",
+    "3 John":           "Epistola Ioannis III",
+    "Jude":             "Epistola Iudae",
+    "Apocalypse":       "Apocalypsis",
+}
+
+
 _LT_BOOK_NAMES = {
     "Genesis":          "Pradžios knyga",
     "Exodus":           "Išėjimo knyga",
@@ -986,7 +1064,7 @@ def main() -> None:
         compile_dr_format(conn, "dra", lang="en")
 
         print("Compiling Bible (Latin Vulgate)...")
-        compile_dr_format(conn, "vulgate", lang="la")
+        compile_dr_format(conn, "vulgate", lang="la", book_full_names=_LA_BOOK_NAMES)
 
         print("Compiling Bible (Latin Vulgate — English Translation)...")
         compile_dr_format(conn, "vulgate-et", lang="en")

@@ -34,6 +34,10 @@ Updated:
 
 - Added Novena a Nossa Senhora de Fátima for pt-PT (9 days, feast May 13)
 
+Fixed:
+- Rosary diagram style (Classic / Compact) is now a setting in the Settings screen instead of buttons shown during every prayer session
+- Bible book names now display in Latin when the Latin Vulgate is selected, regardless of the app language (e.g. "Matthaeus", "Psalmi", "Numeri" instead of English)
+
 Technical:
 - Content database rebuilt and versioned (v19)
 - Portuguese locale corrected from generic `pt` to `pt-BR` throughout (strings, content dirs, database language column, preferences)

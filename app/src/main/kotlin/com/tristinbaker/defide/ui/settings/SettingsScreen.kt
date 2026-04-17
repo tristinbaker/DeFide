@@ -8,8 +8,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -50,6 +52,7 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tristinbaker.defide.R
 import com.tristinbaker.defide.data.preferences.AppTheme
+import com.tristinbaker.defide.data.preferences.RosaryDiagramStyle
 import com.tristinbaker.defide.data.preferences.RosaryOrder
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -253,12 +256,38 @@ fun SettingsScreen(
                 }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
-            if (prefs.appLanguage == "pt-PT") {
-                item {
-                    SectionHeader(stringResource(R.string.section_rosary))
-                }
-                item {
-                    Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+            item {
+                SectionHeader(stringResource(R.string.section_rosary))
+            }
+            item {
+                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+                    Text(
+                        stringResource(R.string.rosary_diagram_label),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(bottom = 4.dp),
+                    )
+                    RosaryDiagramStyle.entries.forEach { style ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            RadioButton(
+                                selected = prefs.rosaryDiagramStyle == style,
+                                onClick = { viewModel.setRosaryDiagramStyle(style) },
+                            )
+                            Text(
+                                text = stringResource(when (style) {
+                                    RosaryDiagramStyle.CLASSIC  -> R.string.rosary_diagram_classic
+                                    RosaryDiagramStyle.COMPACT  -> R.string.rosary_diagram_compact
+                                }),
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.padding(start = 8.dp),
+                            )
+                        }
+                    }
+                    if (prefs.appLanguage == "pt-PT") {
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             stringResource(R.string.rosary_order_label),
                             style = MaterialTheme.typography.bodySmall,
@@ -285,8 +314,8 @@ fun SettingsScreen(
                             }
                         }
                     }
-                    HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
                 }
+                HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
             item {
                 SectionHeader(stringResource(R.string.section_notifications))

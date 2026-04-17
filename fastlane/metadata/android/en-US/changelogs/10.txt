@@ -1,0 +1,3 @@
+• Rosary diagram style (Classic / Compact) moved to Settings — no longer shown as buttons during every prayer session
+• Latin Vulgate now shows Bible book names in Latin (e.g. Matthaeus, Psalmi, Numeri) instead of English, regardless of app language
+• French and Simplified Chinese translation updates

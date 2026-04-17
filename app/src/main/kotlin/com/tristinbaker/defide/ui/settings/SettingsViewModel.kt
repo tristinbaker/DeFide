@@ -7,6 +7,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.tristinbaker.defide.data.preferences.AppTheme
+import com.tristinbaker.defide.data.preferences.RosaryDiagramStyle
 import com.tristinbaker.defide.data.preferences.RosaryOrder
 import com.tristinbaker.defide.data.preferences.UserPreferences
 import com.tristinbaker.defide.data.preferences.UserPreferencesRepository
@@ -100,5 +101,9 @@ class SettingsViewModel @Inject constructor(
 
     fun setRosaryOrder(order: RosaryOrder) {
         viewModelScope.launch { prefsRepository.setRosaryOrder(order) }
+    }
+
+    fun setRosaryDiagramStyle(style: RosaryDiagramStyle) {
+        viewModelScope.launch { prefsRepository.setRosaryDiagramStyle(style) }
     }
 }
