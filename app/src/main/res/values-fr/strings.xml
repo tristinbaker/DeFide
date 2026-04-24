@@ -130,4 +130,5 @@
     <string name="section_rosary">Rosaire</string>
     <string name="rosary_order_label">Ordre du Rosaire</string>
     <string name="rosary_order_dominican">Dominicain</string>
+    <string name="rosary_diagram_label">Style de diagramme du chapelet</string>
 </resources>
