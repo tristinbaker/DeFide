@@ -67,7 +67,7 @@ Builds:
 
   - versionName: 1.6.0
     versionCode: 11
-    commit: 7c4867ce70b4294ebafa2959cb325d23474c6a00
+    commit: 10bc77877f64647760c5ee204b517ea033ba6f4f
     subdir: app
     gradle:
       - yes
