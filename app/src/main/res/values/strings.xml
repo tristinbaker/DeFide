@@ -112,6 +112,7 @@
     <string name="rosary_order_label">Rosary Order</string>
     <string name="rosary_order_dominican">Dominican</string>
     <string name="rosary_order_fatima">Fátima</string>
+    <string name="rosary_haptic_label">Haptic feedback on bead navigation</string>
     <string name="today_mystery_prefix">✦ Today — %s</string>
     <string name="the_nth_mystery">The %s Mystery</string>
     <string name="ordinal_first">First</string>

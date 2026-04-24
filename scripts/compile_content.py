@@ -345,6 +345,7 @@ _TRANSLATION_BOOK_ID_OFFSET = {
     "porcap":     6001,
     "crampon":    7001,
     "rk1998":     8001,
+    "platense":   9001,
 }
 
 # Portuguese display names for Ave-Maria, keyed by DR filename (no extension).
@@ -501,6 +502,84 @@ _PORCAP_BOOK_NAMES = {
     "3 John":           "3 João",
     "Jude":             "Judas",
     "Apocalypse":       "Apocalipse",
+}
+
+
+# Spanish display names for Platense (Straubinger), keyed by DR filename (no extension).
+_ES_BOOK_NAMES = {
+    "Genesis":          "Génesis",
+    "Exodus":           "Éxodo",
+    "Leviticus":        "Levítico",
+    "Numbers":          "Números",
+    "Deuteronomy":      "Deuteronomio",
+    "Josue":            "Josué",
+    "Judges":           "Jueces",
+    "Ruth":             "Rut",
+    "1 Kings":          "1 Samuel",
+    "2 Kings":          "2 Samuel",
+    "3 Kings":          "1 Reyes",
+    "4 Kings":          "2 Reyes",
+    "1 Paralipomenon":  "1 Crónicas",
+    "2 Paralipomenon":  "2 Crónicas",
+    "1 Esdras":         "Esdras",
+    "2 Esdras":         "Nehemías",
+    "Tobias":           "Tobías",
+    "Judith":           "Judit",
+    "Esther":           "Ester",
+    "1 Machabees":      "1 Macabeos",
+    "2 Machabees":      "2 Macabeos",
+    "Job":              "Job",
+    "Psalms":           "Salmos",
+    "Proverbs":         "Proverbios",
+    "Ecclesiastes":     "Eclesiastés",
+    "Canticles":        "Cantar de los Cantares",
+    "Wisdom":           "Sabiduría",
+    "Ecclesiasticus":   "Eclesiástico",
+    "Isaias":           "Isaías",
+    "Jeremias":         "Jeremías",
+    "Lamentations":     "Lamentaciones",
+    "Baruch":           "Baruc",
+    "Ezechiel":         "Ezequiel",
+    "Daniel":           "Daniel",
+    "Osee":             "Oseas",
+    "Joel":             "Joel",
+    "Amos":             "Amós",
+    "Abdias":           "Abdías",
+    "Jonas":            "Jonás",
+    "Micheas":          "Miqueas",
+    "Nahum":            "Nahúm",
+    "Habacuc":          "Habacuc",
+    "Sophonias":        "Sofonías",
+    "Aggeus":           "Ageo",
+    "Zacharias":        "Zacarías",
+    "Malachias":        "Malaquías",
+    "Matthew":          "San Mateo",
+    "Mark":             "San Marcos",
+    "Luke":             "San Lucas",
+    "John":             "San Juan",
+    "Acts":             "Hechos de los Apóstoles",
+    "Romans":           "Romanos",
+    "1 Corinthians":    "1 Corintios",
+    "2 Corinthians":    "2 Corintios",
+    "Galatians":        "Gálatas",
+    "Ephesians":        "Efesios",
+    "Philippians":      "Filipenses",
+    "Colossians":       "Colosenses",
+    "1 Thessalonians":  "1 Tesalonicenses",
+    "2 Thessalonians":  "2 Tesalonicenses",
+    "1 Timothy":        "1 Timoteo",
+    "2 Timothy":        "2 Timoteo",
+    "Titus":            "Tito",
+    "Philemon":         "Filemón",
+    "Hebrews":          "Hebreos",
+    "James":            "Santiago",
+    "1 Peter":          "1 Pedro",
+    "2 Peter":          "2 Pedro",
+    "1 John":           "1 Juan",
+    "2 John":           "2 Juan",
+    "3 John":           "3 Juan",
+    "Jude":             "Judas",
+    "Apocalypse":       "Apocalipsis",
 }
 
 
@@ -1084,6 +1163,9 @@ def main() -> None:
         print("Compiling Bible (Biblija RK K1998 — Lithuanian)...")
         compile_dr_format(conn, "rk1998", lang="lt", book_full_names=_LT_BOOK_NAMES)
 
+        print("Compiling Bible (Biblia Platense — Spanish)...")
+        compile_dr_format(conn, "platense", lang="es", book_full_names=_ES_BOOK_NAMES)
+
         print("Compiling Catechism...")
         compile_catechism(conn)
 
@@ -1093,12 +1175,14 @@ def main() -> None:
         compile_prayers(conn, "pt-PT")
         compile_prayers(conn, "fr")
         compile_prayers(conn, "lt")
+        compile_prayers(conn, "es")
 
         print("Compiling Novenas...")
         compile_novenas(conn, "en")
         compile_novenas(conn, "pt-BR")
         compile_novenas(conn, "pt-PT")
         compile_novenas(conn, "fr")
+        compile_novenas(conn, "es")
 
         print("Compiling Rosary...")
         compile_rosary(conn, "en")
@@ -1107,8 +1191,16 @@ def main() -> None:
         compile_rosary(conn, "pt-PT", variant="fatima")
         compile_rosary(conn, "fr")
         compile_rosary(conn, "lt")
+        compile_rosary(conn, "es")
 
         conn.commit()
+
+        print("Optimizing FTS indexes...")
+        conn.isolation_level = None
+        conn.execute("INSERT INTO verses_fts(verses_fts) VALUES('optimize')")
+        conn.execute("INSERT INTO prayers_fts(prayers_fts) VALUES('optimize')")
+        conn.execute("VACUUM")
+
         size_kb = os.path.getsize(OUT_DB) // 1024
         print(f"\nDone. Output: {OUT_DB} ({size_kb} KB)")
     except Exception as e:

@@ -48,3 +48,17 @@ Technical:
 - Added Bíblia dos Capuchinhos (PorCap) as the pt-PT Bible translation; extracted from SWORD module via scripts/extract_porcap.py
 - Switching to Português (Portugal) now automatically selects Bíblia dos Capuchinhos
 - Added European Portuguese book name table (_PORCAP_BOOK_NAMES) with regional orthography (Génesis, Deuteronómio, Crónicas, Filémon, etc.)
+
+Added:
+- Verse of the Day home screen widget — shows today's verse in your selected translation; tap to open the app
+- Rosary haptic feedback setting: vibrate on bead navigation (Back/Next/Complete), toggleable in Settings under Rosary
+- Equal-width Back/Next buttons spanning the full bottom of the rosary session screen; Back button now shows a left arrow icon
+- Spanish (Español) language support
+- Added Biblia Platense (Straubinger, 1948) as the Spanish Bible translation — a Catholic translation in the public domain, extracted from the SpaPlatense SWORD module
+- Spanish prayers, novenas (Sagrado Corazón, San José), and rosary mysteries
+- Switching to Español now automatically selects Biblia Platense
+- Added Spanish book name table (_ES_BOOK_NAMES)
+
+Technical:
+- Content database bumped to v24
+- Added scripts/extract_platense.py to extract the SpaPlatense SWORD module

@@ -112,6 +112,7 @@
     <string name="ordinal_fifth">Quinto</string>
     <string name="rosary_diagram_classic">Clássico</string>
     <string name="rosary_diagram_compact">Compacto</string>
+    <string name="rosary_haptic_label">Vibração ao navegar pelas contas</string>
     <string name="action_back">Voltar</string>
     <string name="action_complete">Concluir</string>
     <string name="action_next">Próximo</string>

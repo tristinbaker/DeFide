@@ -87,6 +87,7 @@
     <string name="rosary_order_label">Rožinio eiga</string>
     <string name="rosary_order_dominican">Dominikoniškas</string>
     <string name="rosary_order_fatima">Fatimos</string>
+    <string name="rosary_haptic_label">Vibracija naršant karoliukus</string>
     <string name="today_mystery_prefix">✦ Šiandien — %s</string>
     <string name="the_nth_mystery">%s Dalis</string>
     <string name="ordinal_first">Pirmas</string>

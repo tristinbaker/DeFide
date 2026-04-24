@@ -11,6 +11,8 @@ import com.tristinbaker.defide.data.preferences.RosaryDiagramStyle
 import com.tristinbaker.defide.data.preferences.RosaryOrder
 import com.tristinbaker.defide.data.preferences.UserPreferences
 import com.tristinbaker.defide.data.preferences.UserPreferencesRepository
+import androidx.glance.appwidget.GlanceAppWidgetManager
+import com.tristinbaker.defide.widget.VotdWidget
 import kotlinx.coroutines.flow.first
 import com.tristinbaker.defide.worker.NovenaReminderWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,6 +42,7 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             prefsRepository.setAppLanguage(language)
             val defaultTranslation = when (language) {
+                "es"    -> "platense"
                 "pt-BR" -> "ave-maria"
                 "pt-PT" -> "porcap"
                 "fr"    -> "crampon"
@@ -47,11 +50,21 @@ class SettingsViewModel @Inject constructor(
                 else    -> "dra"
             }
             prefsRepository.setBibleTranslation(defaultTranslation)
+            refreshVotdWidget()
         }
     }
 
     fun setBibleTranslation(translationId: String) {
-        viewModelScope.launch { prefsRepository.setBibleTranslation(translationId) }
+        viewModelScope.launch {
+            prefsRepository.setBibleTranslation(translationId)
+            refreshVotdWidget()
+        }
+    }
+
+    private suspend fun refreshVotdWidget() {
+        GlanceAppWidgetManager(context)
+            .getGlanceIds(VotdWidget::class.java)
+            .forEach { VotdWidget().update(context, it) }
     }
 
     fun setNovenaNotificationTime(time: String) {
@@ -105,5 +118,9 @@ class SettingsViewModel @Inject constructor(
 
     fun setRosaryDiagramStyle(style: RosaryDiagramStyle) {
         viewModelScope.launch { prefsRepository.setRosaryDiagramStyle(style) }
+    }
+
+    fun setRosaryHapticFeedback(enabled: Boolean) {
+        viewModelScope.launch { prefsRepository.setRosaryHapticFeedback(enabled) }
     }
 }

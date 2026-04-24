@@ -33,6 +33,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -135,6 +137,8 @@ fun RosarySessionScreen(
     val diagramStyle by viewModel.diagramStyle.collectAsState()
     val rosaryOrder by viewModel.rosaryOrder.collectAsState()
     val isFatima = rosaryOrder == RosaryOrder.FATIMA
+    val hapticEnabled by viewModel.hapticFeedback.collectAsState()
+    val haptic = LocalHapticFeedback.current
 
     LaunchedEffect(mysteryId) { viewModel.startSession(mysteryId) }
 
@@ -285,16 +289,37 @@ fun RosarySessionScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 16.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                    .padding(horizontal = 8.dp, vertical = 12.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                OutlinedButton(onClick = { viewModel.back() }) { Text(stringResource(R.string.action_back)) }
+                OutlinedButton(
+                    onClick = {
+                        if (hapticEnabled) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        viewModel.back()
+                    },
+                    modifier = Modifier.weight(1f),
+                ) {
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                    Text(" ${stringResource(R.string.action_back)}")
+                }
                 if (isLast) {
-                    Button(onClick = { viewModel.completeSession(onFinished) }) {
+                    Button(
+                        onClick = {
+                            if (hapticEnabled) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            viewModel.completeSession(onFinished)
+                        },
+                        modifier = Modifier.weight(1f),
+                    ) {
                         Text(stringResource(R.string.action_complete))
                     }
                 } else {
-                    Button(onClick = { viewModel.advance() }) {
+                    Button(
+                        onClick = {
+                            if (hapticEnabled) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            viewModel.advance()
+                        },
+                        modifier = Modifier.weight(1f),
+                    ) {
                         Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
                         Text(" ${stringResource(R.string.action_next)}")
                     }

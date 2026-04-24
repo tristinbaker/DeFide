@@ -1,0 +1,210 @@
+[
+  {
+    "id": "apostles-creed",
+    "title": "Credo de los Apóstoles",
+    "body": "Creo en Dios, Padre todopoderoso, Creador del cielo y de la tierra. Creo en Jesucristo, su único Hijo, Nuestro Señor, que fue concebido por obra y gracia del Espíritu Santo, nació de santa María Virgen, padeció bajo el poder de Poncio Pilato, fue crucificado, muerto y sepultado, descendió a los infiernos, al tercer día resucitó de entre los muertos, subió a los cielos y está sentado a la derecha de Dios, Padre todopoderoso. Desde allí ha de venir a juzgar a vivos y muertos. Creo en el Espíritu Santo, la santa Iglesia católica, la comunión de los santos, el perdón de los pecados, la resurrección de la carne y la vida eterna. Amén.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "creed", "faith"]
+  },
+  {
+    "id": "our-father",
+    "title": "Padre Nuestro (Oración del Señor)",
+    "body": "Padre nuestro, que estás en el cielo, santificado sea tu Nombre; venga a nosotros tu reino; hágase tu voluntad en la tierra como en el cielo. Danos hoy nuestro pan de cada día; perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden; no nos dejes caer en la tentación, y líbranos del mal. Amén.",
+    "source": "Mateo 6:9–13",
+    "category": "rosary",
+    "tags": ["rosary", "morning", "evening", "meals"]
+  },
+  {
+    "id": "hail-mary",
+    "title": "Ave María",
+    "body": "Dios te salve, María, llena eres de gracia; el Señor es contigo. Bendita tú eres entre todas las mujeres, y bendito es el fruto de tu vientre, Jesús. Santa María, Madre de Dios, ruega por nosotros pecadores, ahora y en la hora de nuestra muerte. Amén.",
+    "source": "Lucas 1:28, 42",
+    "category": "rosary",
+    "tags": ["rosary", "marian"]
+  },
+  {
+    "id": "glory-be",
+    "title": "Gloria (Doxología)",
+    "body": "Gloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "morning", "evening"]
+  },
+  {
+    "id": "fatima-prayer",
+    "title": "Oración de Fátima (Oh, Jesús mío)",
+    "body": "Oh Jesús mío, perdona nuestros pecados, líbranos del fuego del infierno, lleva al cielo a todas las almas, especialmente a las más necesitadas de tu misericordia. Amén.",
+    "source": "Dada por Nuestra Señora de Fátima, 1917",
+    "category": "rosary",
+    "tags": ["rosary", "marian", "mercy"]
+  },
+  {
+    "id": "hail-holy-queen",
+    "title": "Salve Regina",
+    "body": "Dios te salve, Reina y Madre de misericordia, vida, dulzura y esperanza nuestra. Dios te salve. A ti llamamos los desterrados hijos de Eva; a ti suspiramos, gimiendo y llorando en este valle de lágrimas. Ea, pues, Señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos; y después de este destierro, muéstranos a Jesús, fruto bendito de tu vientre. ¡Oh clementísima, oh piadosa, oh dulce Virgen María! Ruega por nosotros, santa Madre de Dios, para que seamos dignos de alcanzar las promesas de Jesucristo. Amén.",
+    "source": null,
+    "category": "rosary",
+    "tags": ["rosary", "marian"]
+  },
+  {
+    "id": "morning-offering",
+    "title": "Ofrenda de la Mañana",
+    "body": "Oh Jesús, por el Inmaculado Corazón de María, te ofrezco mis oraciones, obras, alegrías y sufrimientos de este día en unión con el Santo Sacrificio de la Misa que se celebra en todo el mundo. Los ofrezco por todas las intenciones de tu Sagrado Corazón: la salvación de las almas, la reparación por los pecados y la reunión de todos los cristianos. Los ofrezco por las intenciones de nuestros obispos y de todos los Apóstoles de la Oración, y en particular por las recomendadas por nuestro Santo Padre este mes. Amén.",
+    "source": null,
+    "category": "morning",
+    "tags": ["morning", "offering", "daily"]
+  },
+  {
+    "id": "act-of-contrition",
+    "title": "Acto de Contrición",
+    "body": "Dios mío, me arrepiento de todo corazón de haberte ofendido, y detesto todos mis pecados, porque con ellos merezco tus castigos, pero sobre todo porque te ofenden a ti, que eres todo bien y digno de todo mi amor. Propongo firmemente, con tu gracia, confesar mis pecados, hacer la penitencia debida y enmendar mi vida. Amén.",
+    "source": null,
+    "category": "penitential",
+    "tags": ["penitential", "confession", "evening", "contrition"]
+  },
+  {
+    "id": "act-of-faith",
+    "title": "Acto de Fe",
+    "body": "Dios mío, creo firmemente que eres un solo Dios en tres Personas divinas: Padre, Hijo y Espíritu Santo. Creo que tu Hijo divino se hizo hombre y murió por nuestros pecados, y que ha de venir a juzgar a vivos y muertos. Creo estas verdades y todas las que enseña la santa Iglesia Católica, porque tú las has revelado, y tú no puedes engañar ni ser engañado. Amén.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["faith", "daily", "devotional"]
+  },
+  {
+    "id": "act-of-hope",
+    "title": "Acto de Esperanza",
+    "body": "Dios mío, confiando en tu omnipotencia, en tu infinita misericordia y en tus promesas, espero obtener el perdón de mis pecados, el auxilio de tu gracia y la vida eterna, por los méritos de Jesucristo, mi Señor y Redentor. Amén.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["hope", "daily", "devotional", "anxiety", "depression"]
+  },
+  {
+    "id": "act-of-love",
+    "title": "Acto de Amor (Acto de Caridad)",
+    "body": "Dios mío, te amo sobre todas las cosas, con toda mi alma y con todo mi corazón, porque eres todo bien y digno de todo amor. Amo a mi prójimo como a mí mismo por amor a ti. Perdono a todos los que me han ofendido y pido perdón a todos los que he ofendido. Amén.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["love", "charity", "daily", "devotional", "forgiveness"]
+  },
+  {
+    "id": "memorare",
+    "title": "Memorare",
+    "body": "Acordaos, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu auxilio y reclamando tu socorro, haya sido abandonado. Animado con esta confianza, a ti acudo, oh Virgen de las vírgenes, Madre mía. A ti me acerco y ante ti me postro, pecador arrepentido. No desdeñes mis súplicas, oh Madre del Verbo encarnado, antes bien, escúchalas y acógelas favorablemente. Amén.",
+    "source": "Atribuido a San Bernardo de Claraval",
+    "category": "marian",
+    "tags": ["marian", "intercession", "anxiety", "grief", "hope"]
+  },
+  {
+    "id": "anima-christi",
+    "title": "Ánima Christi (Alma de Cristo)",
+    "body": "Alma de Cristo, santifícame. Cuerpo de Cristo, sálvame. Sangre de Cristo, embriágame. Agua del costado de Cristo, lávame. Pasión de Cristo, confórtame. Oh buen Jesús, óyeme. Dentro de tus llagas, escóndeme. No permitas que me aparte de ti. Del maligno enemigo, defiéndeme. En la hora de mi muerte, llámame. Y mándame ir a ti, para que con tus santos te alabe por los siglos de los siglos. Amén.",
+    "source": "Siglo XIV, atribuido a varios autores",
+    "category": "devotional",
+    "tags": ["eucharist", "passion", "devotional", "after-communion"]
+  },
+  {
+    "id": "prayer-before-meals",
+    "title": "Bendición de la Mesa",
+    "body": "Bendícenos, Señor, y bendice estos alimentos que vamos a recibir de tu generosidad, por Cristo nuestro Señor. Amén.",
+    "source": null,
+    "category": "meals",
+    "tags": ["meals", "gratitude", "daily"]
+  },
+  {
+    "id": "grace-after-meals",
+    "title": "Acción de Gracias después de la Mesa",
+    "body": "Te damos gracias por todos tus beneficios, oh Dios omnipotente, que vives y reinas por siempre; y las almas de los fieles difuntos, por la misericordia de Dios, descansen en paz. Amén.",
+    "source": null,
+    "category": "meals",
+    "tags": ["meals", "gratitude", "daily"]
+  },
+  {
+    "id": "guardian-angel",
+    "title": "Oración al Ángel de la Guarda",
+    "body": "Ángel de Dios, que eres mi custodio, pues la bondad divina me ha encomendado a ti, ilumíname, guárdame, dirígeme y gobiérname en este día. Amén.",
+    "source": null,
+    "category": "morning",
+    "tags": ["morning", "guardian-angel", "protection", "daily", "children"]
+  },
+  {
+    "id": "prayer-st-michael",
+    "title": "Oración a San Miguel Arcángel",
+    "body": "San Miguel Arcángel, defiéndenos en la batalla. Sé nuestro amparo contra la perversidad y las asechanzas del demonio. Que Dios le reprima, pedimos suplicantes; y tú, Príncipe de la milicia celestial, arroja al infierno con el poder divino a Satanás y a los demás espíritus malignos que vagan por el mundo para la perdición de las almas. Amén.",
+    "source": "Papa León XIII, 1886",
+    "category": "saints",
+    "tags": ["spiritual-warfare", "protection", "saints", "evening"]
+  },
+  {
+    "id": "eternal-rest",
+    "title": "Eterno Descanso (De Profundis)",
+    "body": "Dales, Señor, el descanso eterno, y brille para ellos la luz perpetua. Descansen en paz. Amén. Que sus almas y las almas de todos los fieles difuntos, por la misericordia de Dios, descansen en paz. Amén.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["dead", "grief", "mourning", "purgatory", "mercy"]
+  },
+  {
+    "id": "prayer-for-the-sick",
+    "title": "Oración por los Enfermos",
+    "body": "Oh Padre de misericordias y Dios de todo consuelo, mira con compasión a tu siervo en su tiempo de enfermedad. Concede sabiduría y habilidad a quienes lo cuidan. Consuélalo con tu presencia y renueva sus fuerzas. Que este sufrimiento sirva para el aumento de la gracia, y hágase tu santa voluntad. Por Cristo nuestro Señor. Amén.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["sick", "healing", "suffering", "hospital"]
+  },
+  {
+    "id": "prayer-for-vocations",
+    "title": "Oración por las Vocaciones",
+    "body": "Señor de la mies, envía obreros a tu mies. Inspira a hombres y mujeres a ofrecerse para servir como sacerdotes y religiosos. Dales el valor para seguir tu llamado, la sabiduría para discernir tu voluntad y la fe para perseverar. Fortalece a los que sirven, consuela a los que sufren y renueva en todos nosotros la disponibilidad para servir donde seamos necesarios. Por Cristo nuestro Señor. Amén.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["vocations", "priesthood", "religious-life", "discernment"]
+  },
+  {
+    "id": "prayer-in-anxiety",
+    "title": "Oración en Tiempo de Ansiedad",
+    "body": "Oh Señor, estoy angustiado y agobiado más allá de lo que puedo soportar solo. Echa sobre ti todos mis cuidados, pues tú cuidas de mí. Concédeme la gracia de confiar en tu Providencia, sabiendo que nada está fuera de tu poder y misericordia. Calma mi corazón ansioso como calmaste las olas del mar. Que tu paz, que supera todo entendimiento, guarde mi corazón y mi mente en Cristo Jesús. Amén.",
+    "source": "cf. 1 Pedro 5:7; Filipenses 4:7",
+    "category": "devotional",
+    "tags": ["anxiety", "peace", "trust", "suffering", "mental-health"]
+  },
+  {
+    "id": "prayer-in-grief",
+    "title": "Oración en Tiempo de Dolor",
+    "body": "Oh Dios de todo consuelo, te presento mi pena y mi dolor. Tú conoces mi sufrimiento, pues no eres ajeno a la pérdida: tu Hijo lloró ante la tumba de Lázaro. Sostenme ahora en mi duelo. Dame la fe para creer en la resurrección y la esperanza de que quienes mueren en ti no se pierden, sino que son transformados. Hasta ese día del reencuentro, consuélame con tu presencia. Amén.",
+    "source": "cf. Juan 11:35; 1 Tesalonicenses 4:13–14",
+    "category": "devotional",
+    "tags": ["grief", "mourning", "loss", "death", "suffering"]
+  },
+  {
+    "id": "prayer-in-depression",
+    "title": "Oración en Tiempo de Oscuridad",
+    "body": "Señor Jesús, que clamaste desde la Cruz, yo también me siento abandonado. La oscuridad que me rodea es pesada y la luz parece lejana. No me sueltes, aunque no pueda sentirte cerca. Como el Salmista clamó a ti desde las profundidades, así te clamo yo. Escucha mi voz. Recuérdame que no desprecias al afligido, ni le ocultas tu rostro. Hazme conocer tu presencia también aquí, en el valle de sombra. Amén.",
+    "source": "cf. Salmo 22; Salmo 130",
+    "category": "devotional",
+    "tags": ["depression", "suffering", "darkness", "mental-health", "loneliness"]
+  },
+  {
+    "id": "prayer-for-the-family",
+    "title": "Oración por la Familia",
+    "body": "Señor Dios, de quien recibe su nombre toda familia, mira a nuestra familia con amor. Manténnos fieles los unos a los otros en los momentos de prueba. Ayúdanos a perdonar como tú nos has perdonado. Llena nuestro hogar con tu paz, nuestros corazones con tu amor y nuestras vidas con tu gracia. Que la Sagrada Familia de Nazaret sea nuestro modelo y patrono. Por Cristo nuestro Señor. Amén.",
+    "source": null,
+    "category": "devotional",
+    "tags": ["family", "marriage", "home", "children", "peace"]
+  },
+  {
+    "id": "prayer-compline",
+    "title": "Oración de la Noche (Completas)",
+    "body": "Visita, te suplicamos, oh Señor, esta morada y aleja de ella todas las asechanzas del enemigo. Que tus santos ángeles habiten en ella para guardarnos en paz, y que tu bendición esté siempre sobre nosotros. Por Cristo nuestro Señor. Amén.",
+    "source": "Del Oficio Divino",
+    "category": "evening",
+    "tags": ["evening", "night", "protection", "daily"]
+  },
+  {
+    "id": "prayer-st-joseph",
+    "title": "Oración a San José",
+    "body": "Oh bienaventurado José, fiel custodio y padre adoptivo del Hijo de Dios, recuerda la tierna caridad con que abrazaste al Niño Jesús y el cuidado diligente con que guardaste a la Sagrada Familia. Por el amor que les profesabas, protege a los fieles que acuden a ti en sus tribulaciones. Intercede por nosotros ante el trono de Dios, para que se nos conceda tu fortaleza, tu prudencia y tu confianza en la Providencia. Amén.",
+    "source": null,
+    "category": "saints",
+    "tags": ["st-joseph", "saints", "fathers", "workers", "protection", "family", "vocations"]
+  }
+]

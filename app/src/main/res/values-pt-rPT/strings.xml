@@ -105,6 +105,7 @@
     <string name="rosary_order_label">Ordem do Terço</string>
     <string name="rosary_order_dominican">Dominicana</string>
     <string name="rosary_order_fatima">Fátima</string>
+    <string name="rosary_haptic_label">Vibração ao navegar pelas contas</string>
     <string name="action_back">Voltar</string>
     <string name="action_complete">Concluir</string>
     <string name="action_next">Seguinte</string>

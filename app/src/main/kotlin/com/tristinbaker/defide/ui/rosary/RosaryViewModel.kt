@@ -150,6 +150,10 @@ class RosaryViewModel @Inject constructor(
         .map { it.rosaryDiagramStyle }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), RosaryDiagramStyle.CLASSIC)
 
+    val hapticFeedback: StateFlow<Boolean> = prefsRepository.preferences
+        .map { it.rosaryHapticFeedback }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), true)
+
     fun setDiagramStyle(style: RosaryDiagramStyle) {
         viewModelScope.launch { prefsRepository.setRosaryDiagramStyle(style) }
     }

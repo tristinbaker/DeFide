@@ -161,6 +161,7 @@ fun SettingsScreen(
             item {
                 val languages = listOf(
                     "en" to "English",
+                    "es" to "Español",
                     "fr" to "Français",
                     "lt" to "Lietuvių",
                     "pt-BR" to "Português (Brasil)",
@@ -214,6 +215,10 @@ fun SettingsScreen(
             item {
                 // Content-level decision: which translations are relevant per language
                 val translations = when (prefs.appLanguage) {
+                    "es" -> listOf(
+                        Triple("platense", "Biblia Platense (Straubinger)", "Traducción católica de Juan Straubinger"),
+                        Triple("vulgate",  "Vulgata Latina",               "Texto latino original de San Jerónimo"),
+                    )
                     "pt-BR" -> listOf(
                         Triple("ave-maria", "Bíblia Ave-Maria",             "Tradução católica brasileira"),
                         Triple("vulgate",   "Vulgata Latina",               "Texto latino original de São Jerônimo"),
@@ -314,6 +319,22 @@ fun SettingsScreen(
                             }
                         }
                     }
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        stringResource(R.string.rosary_haptic_label),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Switch(
+                        checked = prefs.rosaryHapticFeedback,
+                        onCheckedChange = { viewModel.setRosaryHapticFeedback(it) },
+                    )
                 }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }

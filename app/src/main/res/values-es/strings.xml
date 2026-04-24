@@ -89,6 +89,7 @@
     <string name="rosary_order_label">Orden del Rosario</string>
     <string name="rosary_order_dominican">Dominicano</string>
     <string name="rosary_order_fatima">Fátima</string>
+    <string name="rosary_haptic_label">Vibración al navegar entre cuentas</string>
     <string name="today_mystery_prefix">✦ Hoy — %s</string>
     <string name="the_nth_mystery">El Misterio %s</string>
     <string name="ordinal_first">Primero</string>
@@ -128,6 +129,6 @@
     <string name="htu_settings_4">Habilita recordatorios diarios de novena bajo Notificaciones.</string>
     <plurals name="days">
         <item quantity="one">%d día</item>
-        <item quantity="many">%d días</item>
+        <item quantity="other">%d días</item>
     </plurals>
 </resources>

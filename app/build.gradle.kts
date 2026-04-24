@@ -106,6 +106,9 @@ dependencies {
     // DataStore
     implementation(libs.datastore.preferences)
 
+    // Glance (home screen widget)
+    implementation(libs.glance.appwidget)
+
     // WorkManager
     implementation(libs.workmanager)
     implementation(libs.hilt.work)

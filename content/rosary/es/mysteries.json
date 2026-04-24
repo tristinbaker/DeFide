@@ -1,0 +1,150 @@
+[
+  {
+    "id": "joyful",
+    "name": "Misterios Gozosos",
+    "traditional_days": "Lunes, Sábado",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "La Anunciación",
+        "scripture": "Lucas 1:26–38",
+        "meditation": "El Ángel Gabriel anuncia a María que concebirá y dará a luz al Hijo de Dios. María acepta humildemente la voluntad de Dios: «He aquí la esclava del Señor; hágase en mí según tu palabra.» Pedir la virtud de la humildad."
+      },
+      {
+        "number": 2,
+        "title": "La Visitación",
+        "scripture": "Lucas 1:39–56",
+        "meditation": "María se apresura a visitar a su prima Isabel, que llena del Espíritu Santo exclama: «Bendita tú eres entre las mujeres, y bendito el fruto de tu vientre.» El niño Juan salta de alegría en el seno materno. Pedir la virtud de la caridad hacia el prójimo."
+      },
+      {
+        "number": 3,
+        "title": "El Nacimiento de Jesús",
+        "scripture": "Lucas 2:1–20",
+        "meditation": "Jesús nace en un establo de Belén, envuelto en pañales y acostado en un pesebre, porque no había lugar para ellos en la posada. Los ángeles anuncian la buena nueva a los humildes pastores. Pedir la virtud de la pobreza de espíritu y el desapego de las cosas del mundo."
+      },
+      {
+        "number": 4,
+        "title": "La Presentación en el Templo",
+        "scripture": "Lucas 2:22–38",
+        "meditation": "María y José presentan al Niño Jesús en el Templo conforme a la Ley de Moisés. El anciano Simeón toma al niño en brazos y profetiza que será luz de las naciones, y que una espada traspasará el alma de María. Pedir la virtud de la obediencia y la fidelidad a la Ley de Dios."
+      },
+      {
+        "number": 5,
+        "title": "El Niño Jesús Hallado en el Templo",
+        "scripture": "Lucas 2:41–52",
+        "meditation": "Jesús, de doce años, se queda en Jerusalén; María y José lo encuentran después de tres días en el Templo, sentado entre los doctores, escuchándolos y preguntándoles. Él les dice que debe estar en las cosas de su Padre. Pedir la virtud del celo por las cosas de Dios."
+      }
+    ]
+  },
+  {
+    "id": "sorrowful",
+    "name": "Misterios Dolorosos",
+    "traditional_days": "Martes, Viernes",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "La Oración en el Huerto",
+        "scripture": "Lucas 22:39–46",
+        "meditation": "Jesús ora en el Huerto de Getsemaní, con el alma triste hasta la muerte. Suda sangre y un ángel viene a confortarle. Sin embargo dice: «No se haga mi voluntad, sino la tuya.» Pedir la virtud de la contrición por nuestros pecados."
+      },
+      {
+        "number": 2,
+        "title": "La Flagelación",
+        "scripture": "Juan 19:1; Isaías 53:5",
+        "meditation": "Jesús es atado a una columna y cruelmente azotado por los soldados romanos. Por sus llagas somos curados. Soporta esto por amor a nosotros y por reparar los pecados de impureza. Pedir la virtud de la pureza y la mortificación."
+      },
+      {
+        "number": 3,
+        "title": "La Coronación de Espinas",
+        "scripture": "Mateo 27:28–29",
+        "meditation": "Los soldados trenzan una corona de espinas y la oprimen sobre la cabeza de Jesús, ponen una caña en su mano y le escarnecen como Rey de los judíos. Él acepta esta humillación por nosotros. Pedir la virtud de la fortaleza y el valor moral."
+      },
+      {
+        "number": 4,
+        "title": "Jesús con la Cruz a Cuestas",
+        "scripture": "Juan 19:17; Lucas 23:26–31",
+        "meditation": "Jesús lleva su Cruz por las calles de Jerusalén hasta el Calvario, cayendo bajo su peso. Se encuentra con su Madre en el camino. Simón de Cirene es obligado a ayudarle a cargar la Cruz. Pedir la virtud de la paciencia en el llevar nuestra cruz diaria."
+      },
+      {
+        "number": 5,
+        "title": "La Crucifixión y Muerte",
+        "scripture": "Juan 19:18–30",
+        "meditation": "Jesús es clavado en la Cruz entre dos ladrones. Desde la Cruz perdona a sus enemigos, encomienda su Madre al discípulo amado y entrega su espíritu en manos del Padre. Con un gran grito exhala el último suspiro. Pedir la virtud de la perseverancia final y una muerte santa."
+      }
+    ]
+  },
+  {
+    "id": "glorious",
+    "name": "Misterios Gloriosos",
+    "traditional_days": "Miércoles, Domingo",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "La Resurrección",
+        "scripture": "Marcos 16:1–8; Juan 20:1–18",
+        "meditation": "Al tercer día Jesús resucita de entre los muertos, victorioso sobre el pecado, la muerte y el demonio. El sepulcro está vacío. Se aparece primero a María Magdalena y luego a los discípulos. La muerte ha sido vencida para siempre. Pedir la virtud de la fe en la resurrección."
+      },
+      {
+        "number": 2,
+        "title": "La Ascensión",
+        "scripture": "Lucas 24:50–51; Hechos 1:9–11",
+        "meditation": "Cuarenta días después de la Resurrección, Jesús lleva a sus discípulos a Betania, los bendice y es llevado al cielo. Dos ángeles dicen a los discípulos que volverá del mismo modo. Pedir la virtud de la esperanza y el anhelo del cielo."
+      },
+      {
+        "number": 3,
+        "title": "La Venida del Espíritu Santo",
+        "scripture": "Hechos 2:1–11",
+        "meditation": "El día de Pentecostés, los Apóstoles y María están reunidos en oración cuando de repente se produce un gran viento y lenguas de fuego se posan sobre cada uno de ellos. Quedan llenos del Espíritu Santo y comienzan a hablar en distintas lenguas. Nace la Iglesia. Pedir los dones del Espíritu Santo."
+      },
+      {
+        "number": 4,
+        "title": "La Asunción de María",
+        "scripture": "Apocalipsis 12:1; (tradición)",
+        "meditation": "Al final de su vida terrena, la Santísima Virgen María, preservada de la corrupción del sepulcro, es asumida en cuerpo y alma a la gloria celestial, para reinar como Reina junto a su Hijo. Pedir la virtud de la devoción a María y la gracia de una muerte santa."
+      },
+      {
+        "number": 5,
+        "title": "La Coronación de María",
+        "scripture": "Apocalipsis 12:1; Judit 15:9",
+        "meditation": "María es coronada Reina del Cielo y de la Tierra, Reina de los Ángeles y de los Santos, por su Hijo Jesucristo. Intercede sin cesar por nosotros ante el trono de Dios. Pedir la gracia de la perseverancia para participar de su gloria."
+      }
+    ]
+  },
+  {
+    "id": "luminous",
+    "name": "Misterios Luminosos (Misterios de Luz)",
+    "traditional_days": "Jueves",
+    "mysteries": [
+      {
+        "number": 1,
+        "title": "El Bautismo de Jesús en el Jordán",
+        "scripture": "Mateo 3:13–17",
+        "meditation": "Jesús se acerca a Juan en el Jordán y es bautizado. Los cielos se abren, el Espíritu Santo desciende como paloma y se oye la voz del Padre: «Este es mi Hijo amado, en quien me complazco.» Jesús consagra las aguas del bautismo. Pedir fidelidad a las propias promesas bautismales."
+      },
+      {
+        "number": 2,
+        "title": "Las Bodas de Caná",
+        "scripture": "Juan 2:1–11",
+        "meditation": "En las bodas de Caná, María dice a Jesús: «No tienen vino», e instruye a los servidores: «Haced lo que Él os diga.» Jesús convierte el agua en vino, su primer milagro, manifestando así su gloria. Pedir la gracia de confiar en la intercesión de María y obedecer los mandatos del Señor."
+      },
+      {
+        "number": 3,
+        "title": "El Anuncio del Reino de Dios",
+        "scripture": "Marcos 1:14–15; Mateo 5–7",
+        "meditation": "Jesús proclama la llegada del Reino de Dios y llama a todos a la conversión y a creer en el Evangelio. Enseña las Bienaventuranzas y el camino de la misericordia. Pedir la apertura a la conversión y el valor para vivir el Evangelio."
+      },
+      {
+        "number": 4,
+        "title": "La Transfiguración",
+        "scripture": "Lucas 9:28–36",
+        "meditation": "Jesús lleva a Pedro, Santiago y Juan al monte Tabor, donde se transfigura ante ellos: su rostro resplandece como el sol y sus vestidos se vuelven blancos como la luz. Con Él aparecen Moisés y Elías. El Padre dice: «Este es mi Hijo amado; escuchadle.» Pedir la gracia de la contemplación y el deseo de la gloria eterna."
+      },
+      {
+        "number": 5,
+        "title": "La Institución de la Eucaristía",
+        "scripture": "Mateo 26:26–28; Lucas 22:19–20",
+        "meditation": "En la Última Cena, Jesús toma el pan y el vino y dice: «Esto es mi Cuerpo... Esta es mi Sangre.» Manda a los Apóstoles: «Haced esto en memoria mía.» Nos da a sí mismo, su Cuerpo, Sangre, Alma y Divinidad, como alimento de nuestras almas. Pedir la reverencia por la Eucaristía y la comunión frecuente y digna."
+      }
+    ]
+  }
+]

@@ -127,6 +127,7 @@
         <item quantity="other">%d jours</item>
     </plurals>
     <string name="rosary_order_fatima">Fátima</string>
+    <string name="rosary_haptic_label">Vibration lors de la navigation entre les grains</string>
     <string name="section_rosary">Rosaire</string>
     <string name="rosary_order_label">Ordre du Rosaire</string>
     <string name="rosary_order_dominican">Dominicain</string>
