@@ -60,4 +60,4 @@ Prayers, novenas, and rosary meditations live in the `content/` directory as JSO
 
 ## License
 
-GNU Affero General Public License v3.0 — see [LICENSE](LICENSE).
+GNU Affero General Public License v3.0 only — see [LICENSE](LICENSE).
