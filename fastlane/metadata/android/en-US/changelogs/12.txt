@@ -1,0 +1,7 @@
+Fixed:
+- Verse of the Day widget can now be resized to a smaller footprint on your home screen
+- App version shown in Settings now matches the actual app version
+- Prayer tag filter now shows readable names instead of raw identifiers (e.g. "Guardian Angel" instead of "guardian-angel")
+- Mark as Prayed button now shows "Prayed Today" and disables after being tapped; it remembers across sessions if you already prayed that prayer today
+- Fixed missing Lithuanian translation for the Devotional prayer category
+- Fixed a crash / blank screen caused by tapping Complete rapidly at the end of a Rosary session: multiple taps could fire multiple back-navigations, blowing past the rosary screen into an unrecoverable state

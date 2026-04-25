@@ -11,6 +11,7 @@
     <string name="search_prayers_hint">Chercher des prières…</string>
     <string name="tag_label">Étiquette</string>
     <string name="mark_as_prayed">Marquer comme priée</string>
+    <string name="prayed_today">Priée aujourd\'hui</string>
     <string name="settings_title">Paramètres</string>
     <string name="section_appearance">Apparence</string>
     <string name="theme_system">Système</string>

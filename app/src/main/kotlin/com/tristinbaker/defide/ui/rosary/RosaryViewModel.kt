@@ -161,6 +161,9 @@ class RosaryViewModel @Inject constructor(
     private val _sessionId = MutableStateFlow<String?>(null)
     private var currentLanguage = "en"
 
+    private val _completing = MutableStateFlow(false)
+    val completing: StateFlow<Boolean> = _completing.asStateFlow()
+
     init {
         viewModelScope.launch {
             prefsRepository.preferences
@@ -211,6 +214,8 @@ class RosaryViewModel @Inject constructor(
     }
 
     fun completeSession(onDone: () -> Unit) {
+        if (_completing.value) return
+        _completing.value = true
         viewModelScope.launch {
             _sessionId.value?.let { repository.completeSession(it) }
             onDone()

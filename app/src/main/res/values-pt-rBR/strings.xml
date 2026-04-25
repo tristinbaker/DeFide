@@ -18,6 +18,7 @@
     <string name="search_prayers_hint">Buscar orações...</string>
     <string name="tag_label">Categoria</string>
     <string name="mark_as_prayed">Marcar como Rezada</string>
+    <string name="prayed_today">Rezada hoje</string>
 
     <!-- Settings -->
     <string name="settings_title">Configurações</string>

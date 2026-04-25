@@ -11,6 +11,7 @@
     <string name="search_prayers_hint">Buscar oraciones…</string>
     <string name="tag_label">Etiqueta</string>
     <string name="mark_as_prayed">Marcar como rezado</string>
+    <string name="prayed_today">Rezado hoy</string>
     <string name="settings_title">Ajustes</string>
     <string name="section_appearance">Apariencia</string>
     <string name="theme_system">Sistema</string>

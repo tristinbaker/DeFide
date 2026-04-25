@@ -43,15 +43,65 @@ import com.tristinbaker.defide.R
 @Composable
 private fun localizedCategory(category: String): String {
     val resId = when (category) {
-        "rosary"      -> R.string.category_rosary
-        "morning"     -> R.string.category_morning
-        "evening"     -> R.string.category_evening
-        "marian"      -> R.string.category_marian
-        "meals"       -> R.string.category_meals
-        "penitential" -> R.string.category_penitential
-        "devotional"  -> R.string.category_devotional
-        "saints"      -> R.string.category_saints
-        else          -> return category
+        "rosary"           -> R.string.category_rosary
+        "morning"          -> R.string.category_morning
+        "evening"          -> R.string.category_evening
+        "marian"           -> R.string.category_marian
+        "meals"            -> R.string.category_meals
+        "penitential"      -> R.string.category_penitential
+        "devotional"       -> R.string.category_devotional
+        "saints"           -> R.string.category_saints
+        "after-communion"  -> R.string.tag_after_communion
+        "anxiety"          -> R.string.tag_anxiety
+        "charity"          -> R.string.tag_charity
+        "children"         -> R.string.tag_children
+        "confession"       -> R.string.tag_confession
+        "contrition"       -> R.string.tag_contrition
+        "creed"            -> R.string.tag_creed
+        "daily"            -> R.string.tag_daily
+        "darkness"         -> R.string.tag_darkness
+        "dead"             -> R.string.tag_dead
+        "death"            -> R.string.tag_death
+        "depression"       -> R.string.tag_depression
+        "discernment"      -> R.string.tag_discernment
+        "eucharist"        -> R.string.tag_eucharist
+        "faith"            -> R.string.tag_faith
+        "family"           -> R.string.tag_family
+        "fathers"          -> R.string.tag_fathers
+        "forgiveness"      -> R.string.tag_forgiveness
+        "gratitude"        -> R.string.tag_gratitude
+        "grief"            -> R.string.tag_grief
+        "guardian-angel"   -> R.string.tag_guardian_angel
+        "healing"          -> R.string.tag_healing
+        "home"             -> R.string.tag_home
+        "hope"             -> R.string.tag_hope
+        "hospital"         -> R.string.tag_hospital
+        "intercession"     -> R.string.tag_intercession
+        "loneliness"       -> R.string.tag_loneliness
+        "loss"             -> R.string.tag_loss
+        "love"             -> R.string.tag_love
+        "marriage"         -> R.string.tag_marriage
+        "mental-health"    -> R.string.tag_mental_health
+        "mercy"            -> R.string.tag_mercy
+        "mourning"         -> R.string.tag_mourning
+        "night"            -> R.string.tag_night
+        "offering"         -> R.string.tag_offering
+        "opening"          -> R.string.tag_opening
+        "passion"          -> R.string.tag_passion
+        "peace"            -> R.string.tag_peace
+        "priesthood"       -> R.string.tag_priesthood
+        "protection"       -> R.string.tag_protection
+        "purgatory"        -> R.string.tag_purgatory
+        "religious-life"   -> R.string.tag_religious_life
+        "sick"             -> R.string.tag_sick
+        "spiritual-warfare"-> R.string.tag_spiritual_warfare
+        "st-joseph"        -> R.string.tag_st_joseph
+        "suffering"        -> R.string.tag_suffering
+        "trust"            -> R.string.tag_trust
+        "vocations"        -> R.string.tag_vocations
+        "workers"          -> R.string.tag_workers
+        else               -> return category.replace('-', ' ')
+            .split(' ').joinToString(" ") { it.replaceFirstChar(Char::uppercaseChar) }
     }
     return stringResource(resId)
 }
@@ -156,6 +206,7 @@ fun PrayerDetailScreen(
     viewModel: PrayerViewModel = hiltViewModel(),
 ) {
     val prayer by viewModel.detail.collectAsState()
+    val prayedToday by viewModel.prayedToday.collectAsState()
     LaunchedEffect(prayerId) { viewModel.loadDetail(prayerId) }
 
     Scaffold(
@@ -179,8 +230,12 @@ fun PrayerDetailScreen(
                     Button(
                         onClick = { viewModel.logPrayer(it.id) },
                         modifier = Modifier.padding(top = 24.dp),
+                        enabled = !prayedToday,
                     ) {
-                        Text(stringResource(R.string.mark_as_prayed))
+                        Text(
+                            if (prayedToday) stringResource(R.string.prayed_today)
+                            else stringResource(R.string.mark_as_prayed)
+                        )
                     }
                 }
             }

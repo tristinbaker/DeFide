@@ -17,4 +17,7 @@ interface PrayerLogDao {
 
     @Query("SELECT COUNT(*) FROM prayer_log WHERE prayer_id = :prayerId")
     suspend fun getCountForPrayer(prayerId: String): Int
+
+    @Query("SELECT COUNT(*) FROM prayer_log WHERE prayer_id = :prayerId AND prayed_at >= :sinceMs")
+    suspend fun getCountForPrayerSince(prayerId: String, sinceMs: Long): Int
 }

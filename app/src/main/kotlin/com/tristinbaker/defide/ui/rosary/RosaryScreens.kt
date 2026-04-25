@@ -138,6 +138,7 @@ fun RosarySessionScreen(
     val rosaryOrder by viewModel.rosaryOrder.collectAsState()
     val isFatima = rosaryOrder == RosaryOrder.FATIMA
     val hapticEnabled by viewModel.hapticFeedback.collectAsState()
+    val completing by viewModel.completing.collectAsState()
     val haptic = LocalHapticFeedback.current
 
     LaunchedEffect(mysteryId) { viewModel.startSession(mysteryId) }
@@ -309,6 +310,7 @@ fun RosarySessionScreen(
                             viewModel.completeSession(onFinished)
                         },
                         modifier = Modifier.weight(1f),
+                        enabled = !completing,
                     ) {
                         Text(stringResource(R.string.action_complete))
                     }

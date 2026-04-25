@@ -418,7 +418,11 @@ fun SettingsScreen(
             item {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("De Fide", style = MaterialTheme.typography.bodyMedium)
-                    Text("Version 1.3.3", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    val context = LocalContext.current
+                    val versionName = remember {
+                        context.packageManager.getPackageInfo(context.packageName, 0).versionName
+                    }
+                    Text("Version $versionName", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(
                         stringResource(R.string.about_tagline),
                         style = MaterialTheme.typography.bodySmall,

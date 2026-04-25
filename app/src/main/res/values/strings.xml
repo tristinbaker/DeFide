@@ -18,6 +18,7 @@
     <string name="search_prayers_hint">Search prayers…</string>
     <string name="tag_label">Tag</string>
     <string name="mark_as_prayed">Mark as Prayed</string>
+    <string name="prayed_today">Prayed Today</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -84,7 +85,7 @@
     <string name="nav_novenas">Novenas</string>
     <string name="nav_settings">Settings</string>
 
-    <!-- Prayer categories -->
+    <!-- Prayer categories / tags -->
     <string name="category_rosary">Rosary</string>
     <string name="category_morning">Morning</string>
     <string name="category_evening">Evening</string>
@@ -93,6 +94,55 @@
     <string name="category_penitential">Penitential</string>
     <string name="category_devotional">Devotional</string>
     <string name="category_saints">Saints</string>
+    <string name="tag_after_communion">After Communion</string>
+    <string name="tag_anxiety">Anxiety</string>
+    <string name="tag_charity">Charity</string>
+    <string name="tag_children">Children</string>
+    <string name="tag_confession">Confession</string>
+    <string name="tag_contrition">Contrition</string>
+    <string name="tag_creed">Creed</string>
+    <string name="tag_daily">Daily</string>
+    <string name="tag_darkness">Darkness</string>
+    <string name="tag_dead">For the Dead</string>
+    <string name="tag_death">Death</string>
+    <string name="tag_depression">Depression</string>
+    <string name="tag_discernment">Discernment</string>
+    <string name="tag_eucharist">Eucharist</string>
+    <string name="tag_faith">Faith</string>
+    <string name="tag_family">Family</string>
+    <string name="tag_fathers">Fathers</string>
+    <string name="tag_forgiveness">Forgiveness</string>
+    <string name="tag_gratitude">Gratitude</string>
+    <string name="tag_grief">Grief</string>
+    <string name="tag_guardian_angel">Guardian Angel</string>
+    <string name="tag_healing">Healing</string>
+    <string name="tag_home">Home</string>
+    <string name="tag_hope">Hope</string>
+    <string name="tag_hospital">Hospital</string>
+    <string name="tag_intercession">Intercession</string>
+    <string name="tag_loneliness">Loneliness</string>
+    <string name="tag_loss">Loss</string>
+    <string name="tag_love">Love</string>
+    <string name="tag_marriage">Marriage</string>
+    <string name="tag_mental_health">Mental Health</string>
+    <string name="tag_mercy">Mercy</string>
+    <string name="tag_mourning">Mourning</string>
+    <string name="tag_night">Night</string>
+    <string name="tag_offering">Offering</string>
+    <string name="tag_opening">Opening</string>
+    <string name="tag_passion">Passion</string>
+    <string name="tag_peace">Peace</string>
+    <string name="tag_priesthood">Priesthood</string>
+    <string name="tag_protection">Protection</string>
+    <string name="tag_purgatory">Purgatory</string>
+    <string name="tag_religious_life">Religious Life</string>
+    <string name="tag_sick">For the Sick</string>
+    <string name="tag_spiritual_warfare">Spiritual Warfare</string>
+    <string name="tag_st_joseph">St. Joseph</string>
+    <string name="tag_suffering">Suffering</string>
+    <string name="tag_trust">Trust</string>
+    <string name="tag_vocations">Vocations</string>
+    <string name="tag_workers">Workers</string>
 
     <!-- Home screen -->
     <string name="verse_of_the_day">Verse of the Day</string>

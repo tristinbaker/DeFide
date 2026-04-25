@@ -30,6 +30,9 @@ class PrayerViewModel @Inject constructor(
     private val _detail = MutableStateFlow<Prayer?>(null)
     val detail: StateFlow<Prayer?> = _detail.asStateFlow()
 
+    private val _prayedToday = MutableStateFlow(false)
+    val prayedToday: StateFlow<Boolean> = _prayedToday.asStateFlow()
+
     private var currentLanguage: String = "en"
 
     init {
@@ -63,10 +66,14 @@ class PrayerViewModel @Inject constructor(
         viewModelScope.launch {
             val lang = prefsRepository.preferences.first().appLanguage
             _detail.value = repository.getById(id, lang)
+            _prayedToday.value = repository.hasPrayedToday(id)
         }
     }
 
     fun logPrayer(id: String) {
-        viewModelScope.launch { repository.logPrayer(id) }
+        viewModelScope.launch {
+            repository.logPrayer(id)
+            _prayedToday.value = true
+        }
     }
 }

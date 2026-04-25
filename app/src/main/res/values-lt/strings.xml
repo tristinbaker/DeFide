@@ -11,6 +11,7 @@
     <string name="search_prayers_hint">Ieškoti maldų…</string>
     <string name="tag_label">Žymė</string>
     <string name="mark_as_prayed">Pažymėti kaip sumelsta</string>
+    <string name="prayed_today">Šiandien sukalbėta</string>
     <string name="settings_title">Nustatymai</string>
     <string name="section_appearance">Išvaizda</string>
     <string name="theme_system">Sistemos</string>
@@ -72,6 +73,7 @@
     <string name="category_marian">Marijos</string>
     <string name="category_meals">Maisto</string>
     <string name="category_penitential">Atgailos</string>
+    <string name="category_devotional">Pamaldumas</string>
     <string name="category_saints">Šventieji</string>
     <string name="verse_of_the_day">Dienos eilutė</string>
     <string name="todays_rosary">Šiandienos rožinis</string>
