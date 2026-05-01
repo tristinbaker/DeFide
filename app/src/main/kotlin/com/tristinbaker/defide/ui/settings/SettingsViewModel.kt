@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.tristinbaker.defide.data.preferences.AppFont
 import com.tristinbaker.defide.data.preferences.AppTheme
 import com.tristinbaker.defide.data.preferences.RosaryDiagramStyle
 import com.tristinbaker.defide.data.preferences.RosaryOrder
@@ -38,6 +39,10 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch { prefsRepository.setTheme(theme) }
     }
 
+    fun setAppFont(font: AppFont) {
+        viewModelScope.launch { prefsRepository.setAppFont(font) }
+    }
+
     fun setAppLanguage(language: String) {
         viewModelScope.launch {
             prefsRepository.setAppLanguage(language)
@@ -47,6 +52,7 @@ class SettingsViewModel @Inject constructor(
                 "pt-PT" -> "porcap"
                 "fr"    -> "crampon"
                 "lt"    -> "rk1998"
+                "zh-CN" -> "sg"
                 else    -> "dra"
             }
             prefsRepository.setBibleTranslation(defaultTranslation)

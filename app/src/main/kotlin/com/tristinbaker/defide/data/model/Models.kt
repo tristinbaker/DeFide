@@ -76,3 +76,14 @@ data class MysteryBead(
     val mysteryScripture: String?,
     val mysteryMeditation: String?,
 )
+
+@Immutable
+data class Saint(
+    val id: String,
+    val name: String,
+    val feastDate: String?,
+    val shortBio: String,
+    val fullBio: String,
+    val patronage: String?,
+    val category: String,
+)

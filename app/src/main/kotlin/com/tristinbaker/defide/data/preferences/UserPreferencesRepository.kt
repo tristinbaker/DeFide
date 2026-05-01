@@ -11,11 +11,13 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 enum class AppTheme { SYSTEM, LIGHT, DARK, AMOLED }
+enum class AppFont { SERIF, SYSTEM, SANS_SERIF }
 enum class RosaryDiagramStyle { CLASSIC, COMPACT }
 enum class RosaryOrder { DOMINICAN, FATIMA }
 
 data class UserPreferences(
     val theme: AppTheme = AppTheme.SYSTEM,
+    val appFont: AppFont = AppFont.SERIF,
     val appLanguage: String = "en",
     val bibleTranslationId: String = "dra",
     val novenaNotificationTime: String = "",   // "HH:MM" or empty = disabled
@@ -35,6 +37,7 @@ class UserPreferencesRepository @Inject constructor(
 ) {
     companion object {
         private val KEY_THEME = stringPreferencesKey("theme")
+        private val KEY_APP_FONT = stringPreferencesKey("app_font")
         private val KEY_APP_LANGUAGE = stringPreferencesKey("app_language")
         private val KEY_BIBLE_TRANSLATION = stringPreferencesKey("bible_translation")
         private val KEY_NOVENA_NOTIFICATION_TIME = stringPreferencesKey("novena_notification_time")
@@ -43,14 +46,15 @@ class UserPreferencesRepository @Inject constructor(
         private val KEY_BIBLE_LAST_BOOK = intPreferencesKey("bible_last_book")
         private val KEY_BIBLE_LAST_CHAPTER = intPreferencesKey("bible_last_chapter")
         private val KEY_KEEP_SCREEN_ON = androidx.datastore.preferences.core.booleanPreferencesKey("keep_screen_on")
-        private val KEY_ROSARY_DIAGRAM  = stringPreferencesKey("rosary_diagram_style")
-        private val KEY_ROSARY_ORDER    = stringPreferencesKey("rosary_order")
-        private val KEY_ROSARY_HAPTIC   = androidx.datastore.preferences.core.booleanPreferencesKey("rosary_haptic_feedback")
+        private val KEY_ROSARY_DIAGRAM   = stringPreferencesKey("rosary_diagram_style")
+        private val KEY_ROSARY_ORDER     = stringPreferencesKey("rosary_order")
+        private val KEY_ROSARY_HAPTIC    = androidx.datastore.preferences.core.booleanPreferencesKey("rosary_haptic_feedback")
     }
 
     val preferences: Flow<UserPreferences> = dataStore.data.map { prefs ->
         UserPreferences(
             theme = prefs[KEY_THEME]?.let { runCatching { AppTheme.valueOf(it) }.getOrNull() } ?: AppTheme.SYSTEM,
+            appFont = prefs[KEY_APP_FONT]?.let { runCatching { AppFont.valueOf(it) }.getOrNull() } ?: AppFont.SERIF,
             appLanguage = prefs[KEY_APP_LANGUAGE] ?: "en",
             bibleTranslationId = prefs[KEY_BIBLE_TRANSLATION] ?: "dra",
             novenaNotificationTime = prefs[KEY_NOVENA_NOTIFICATION_TIME] ?: "",
@@ -67,6 +71,10 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setTheme(theme: AppTheme) {
         dataStore.edit { it[KEY_THEME] = theme.name }
+    }
+
+    suspend fun setAppFont(font: AppFont) {
+        dataStore.edit { it[KEY_APP_FONT] = font.name }
     }
 
     suspend fun setAppLanguage(language: String) {

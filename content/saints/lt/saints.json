@@ -1,0 +1,479 @@
+[
+  {
+    "id": "mary",
+    "name": "Blessed Virgin Mary",
+    "feast_date": "August 15 (Assumption)",
+    "short_bio": "Mother of Jesus Christ, venerated as the Queen of Heaven and the greatest of all saints.",
+    "full_bio": "The Blessed Virgin Mary is the mother of Jesus Christ, the Son of God. She was conceived without original sin (the Immaculate Conception) and remained a virgin throughout her life. Mary consented to God's plan of salvation, bore the Son of God, accompanied him throughout his ministry, and stood at the foot of the Cross. After the Resurrection and Ascension she remained with the apostles until the day of Pentecost. Her Assumption into heaven, body and soul, was defined as dogma in 1950. She is invoked under countless titles, Mother of God, Our Lady of the Rosary, Our Lady of Lourdes, and many more, and is the subject of the most widespread Marian devotion in the Church.",
+    "patronage": "The universal Church, all Christians, mothers",
+    "category": "virgin"
+  },
+  {
+    "id": "joseph",
+    "name": "Saint Joseph",
+    "feast_date": "March 19",
+    "short_bio": "Husband of the Virgin Mary, foster-father of Jesus, and patron of the universal Church.",
+    "full_bio": "Saint Joseph was a carpenter of Nazareth, a just and righteous man of the House of David, chosen by God to be the husband of the Virgin Mary and the foster-father of Jesus. He protected the Holy Family in Egypt during the flight from Herod and raised Jesus with tenderness and care. Though silent in the Gospels, his fidelity, humility, and fatherly protection make him one of the most beloved saints. Pope Pius IX declared him patron of the universal Church in 1870. He is also patron of workers, families, and of a happy death.",
+    "patronage": "Universal Church, workers, families, dying persons",
+    "category": "confessor"
+  },
+  {
+    "id": "peter",
+    "name": "Saint Peter",
+    "feast_date": "June 29",
+    "short_bio": "First of the apostles, Prince of the Apostles, first pope, martyred in Rome around AD 67.",
+    "full_bio": "Born Simon Bar-Jonah, a fisherman from Bethsaida, Peter was called by Jesus to be the first of the Twelve Apostles. Jesus gave him the name Cephas (Peter, meaning rock) and declared he would build his Church upon him. Despite his denial of Christ on the night of the Passion, Peter repented and was confirmed as shepherd of the whole flock after the Resurrection. He presided over the early Church in Jerusalem, authored two New Testament letters, and eventually led the Church in Rome, where he was martyred, crucified upside down, around AD 67 under Nero.",
+    "patronage": "Popes, fishermen, Rome",
+    "category": "apostle"
+  },
+  {
+    "id": "paul",
+    "name": "Saint Paul",
+    "feast_date": "June 29",
+    "short_bio": "Apostle of the Gentiles, great missionary, author of fourteen epistles, martyred in Rome.",
+    "full_bio": "Born Saul of Tarsus, Paul was a Pharisee and persecutor of Christians who was dramatically converted on the road to Damascus when he encountered the risen Christ. He became the great Apostle to the Gentiles, undertaking three missionary journeys throughout the Mediterranean world and founding churches across Asia Minor, Greece, and beyond. His letters, fourteen epistles in the New Testament, form the theological backbone of Christian doctrine. He was arrested in Jerusalem, appealed to Caesar, and was eventually martyred in Rome, traditionally by beheading, around the same time as Peter.",
+    "patronage": "Missionaries, theologians, writers, journalists",
+    "category": "apostle"
+  },
+  {
+    "id": "john-apostle",
+    "name": "Saint John the Apostle",
+    "feast_date": "December 27",
+    "short_bio": "The beloved disciple, author of the Fourth Gospel and Revelation, the only apostle not martyred.",
+    "full_bio": "John the son of Zebedee was one of the three apostles closest to Jesus. Called the 'Beloved Disciple,' he reclined next to Jesus at the Last Supper and was the only apostle present at the Crucifixion, to whom Jesus entrusted his mother Mary. John wrote the Fourth Gospel, three epistles, and the Book of Revelation. He lived to old age in Ephesus, where tradition holds he cared for the Virgin Mary. He is the only one of the Twelve who died a natural death rather than martyrdom.",
+    "patronage": "Theologians, writers, artists, love",
+    "category": "apostle"
+  },
+  {
+    "id": "mary-magdalene",
+    "name": "Saint Mary Magdalene",
+    "feast_date": "July 22",
+    "short_bio": "First witness to the Resurrection, called the Apostle to the Apostles.",
+    "full_bio": "Mary Magdalene was a devoted follower of Jesus from whom, the Gospels tell us, seven demons had been cast out. She was present at the Crucifixion and at the burial of Jesus. On the morning of the Resurrection she was the first person to whom the risen Christ appeared, and he entrusted her to announce the good news to the apostles, earning her the title 'Apostle to the Apostles.' Her feast was elevated to a solemnity by Pope Francis in 2016. Tradition in the East holds that she later preached in Ephesus; tradition in the West places her in Provence.",
+    "patronage": "Women, repentant sinners, hairdressers, perfumers",
+    "category": "confessor"
+  },
+  {
+    "id": "stephen",
+    "name": "Saint Stephen",
+    "feast_date": "December 26",
+    "short_bio": "First Christian martyr, one of the seven deacons, stoned to death in Jerusalem.",
+    "full_bio": "Stephen was one of the seven deacons appointed by the Apostles to care for the material needs of the early Jerusalem community. He was known for his wisdom and the power of his preaching. Accused of blasphemy, he was brought before the Sanhedrin and delivered a long speech tracing Israel's history of rejecting God's messengers. He was then taken outside the city and stoned to death, becoming the first Christian martyr (protomartyr). As he died he prayed, 'Lord, do not hold this sin against them', while Saul of Tarsus watched approvingly. His death preceded the conversion of that same Saul.",
+    "patronage": "Deacons, altar servers, stonemasons",
+    "category": "martyr"
+  },
+  {
+    "id": "francis-assisi",
+    "name": "Saint Francis of Assisi",
+    "feast_date": "October 4",
+    "short_bio": "Founder of the Franciscan Order, the Poor Man of Assisi, patron of ecology and animals.",
+    "full_bio": "Giovanni di Pietro di Bernardone, known as Francis, was born in Assisi around 1181. After a youth of pleasure and a brief military career, he experienced a profound conversion and embraced radical poverty, becoming a beggar in Assisi and repairing churches. He attracted followers and founded the Order of Friars Minor (Franciscans), whose rule was approved by Pope Innocent III. A mystic and poet, he received the stigmata, the wounds of Christ, on Mount La Verna in 1224. His Canticle of the Sun is one of the earliest works of Italian literature. He died in 1226 and was canonized in 1228. Pope Francis took his name in Francis's honor.",
+    "patronage": "Animals, ecology, Italy, merchants",
+    "category": "confessor"
+  },
+  {
+    "id": "clare-assisi",
+    "name": "Saint Clare of Assisi",
+    "feast_date": "August 11",
+    "short_bio": "Founder of the Poor Clares, a close disciple of Francis, a great contemplative.",
+    "full_bio": "Clare Offreduccio was an aristocratic young woman from Assisi who, inspired by Francis's preaching, fled her family home at night and embraced religious poverty. Francis received her vows and she founded the Order of Poor Ladies (now Poor Clares), a life of strict poverty, prayer, and contemplation. She resisted papal pressure to accept property and secured the Privilege of Poverty, the right to own nothing, from Pope Innocent III. When she was too ill to attend Mass, she would see visions of the liturgy on the wall of her cell; for this she was named patron of television. She was canonized in 1255.",
+    "patronage": "Television, needlework, clairvoyance, laundry",
+    "category": "virgin"
+  },
+  {
+    "id": "thomas-aquinas",
+    "name": "Saint Thomas Aquinas",
+    "feast_date": "January 28",
+    "short_bio": "Dominican friar, Angelic Doctor, greatest theologian of the Catholic Church.",
+    "full_bio": "Thomas Aquinas was born in southern Italy around 1225 to a noble family. Against his family's wishes he joined the Dominican Order and studied under Albertus Magnus in Cologne. He became the most systematic and influential theologian in Catholic history, synthesizing Aristotelian philosophy with Christian theology in his masterwork Summa Theologica. Known as the 'Angelic Doctor,' his intellectual gifts were matched by a deep contemplative life. It is said that near the end of his life, in a mystical experience before the crucifix, he heard Christ say, 'You have written well of me, Thomas. What reward will you have?' and Thomas replied, 'None other than yourself, Lord.' He died in 1274 and was canonized in 1323.",
+    "patronage": "Students, scholars, theologians, universities",
+    "category": "doctor"
+  },
+  {
+    "id": "ignatius-loyola",
+    "name": "Saint Ignatius of Loyola",
+    "feast_date": "July 31",
+    "short_bio": "Founder of the Society of Jesus (Jesuits), author of the Spiritual Exercises.",
+    "full_bio": "Iñigo López de Loyola was a Basque nobleman and soldier whose leg was shattered by a cannonball at the Battle of Pamplona in 1521. During his long recovery he read lives of the saints and was profoundly converted. He spent a year in prayer and penance at Manresa, during which he wrote the Spiritual Exercises, a structured program of prayer and discernment still used worldwide. He gathered companions in Paris, including Francis Xavier, and founded the Society of Jesus (Jesuits) in 1540, which became one of the most influential religious orders in the Church. The Jesuits pioneered education, foreign missions, and the Counter-Reformation. He was canonized in 1622.",
+    "patronage": "Jesuits, spiritual directors, soldiers, retreats",
+    "category": "confessor"
+  },
+  {
+    "id": "teresa-avila",
+    "name": "Saint Teresa of Avila",
+    "feast_date": "October 15",
+    "short_bio": "Reformer of the Carmelites, Doctor of the Church, mystic and author of The Interior Castle.",
+    "full_bio": "Teresa of Avila (Teresa de Jesús) was born in Avila, Spain in 1515. After entering the Carmelite Order she spent years in spiritual mediocrity until a deep conversion in her forties launched her into extraordinary mystical experience. She founded the Discalced Carmelite Reform, establishing convents of strict contemplative life across Spain, often against fierce opposition. Her spiritual writings, especially The Interior Castle, The Way of Perfection, and her autobiography, are classics of mystical theology. She was the first woman to be declared Doctor of the Church (1970). She died in 1582 and was canonized in 1622.",
+    "patronage": "Spain, religious, people suffering from illness",
+    "category": "doctor"
+  },
+  {
+    "id": "john-cross",
+    "name": "Saint John of the Cross",
+    "feast_date": "December 14",
+    "short_bio": "Spanish mystic, Doctor of the Church, co-founder of the Discalced Carmelites with Teresa of Avila.",
+    "full_bio": "Juan de Yepes Álvarez was born in Fontiveros, Spain in 1542. A mystic of extraordinary depth, he collaborated with Teresa of Avila to reform the Carmelite Order, founding the Discalced Carmelites. Imprisoned and tortured by his own brethren for nine months in Toledo, he escaped and composed some of the finest Spanish poetry ever written, including The Dark Night of the Soul and The Spiritual Canticle. His theology of the soul's ascent to union with God through purification and surrender remains foundational for Catholic mystical theology. He was declared a Doctor of the Church in 1926.",
+    "patronage": "Mystics, contemplatives, poets",
+    "category": "doctor"
+  },
+  {
+    "id": "dominic",
+    "name": "Saint Dominic",
+    "feast_date": "August 8",
+    "short_bio": "Founder of the Order of Preachers (Dominicans), promoter of the Rosary.",
+    "full_bio": "Domingo de Guzmán was born in Castile around 1170. He encountered the Cathar heresy in southern France and realized that the Church needed preachers who could refute heresy through knowledge and holy example. He founded the Order of Preachers (Dominicans), mendicant friars dedicated to preaching and study. He is closely associated with the Rosary, tradition holds that the Blessed Virgin appeared to him and gave him the Rosary as a weapon against heresy. His order became one of the great intellectual orders of the Church, producing Thomas Aquinas and Albert the Great. He died in 1221 and was canonized in 1234.",
+    "patronage": "Astronomers, the Dominican Republic",
+    "category": "confessor"
+  },
+  {
+    "id": "benedict",
+    "name": "Saint Benedict of Nursia",
+    "feast_date": "July 11",
+    "short_bio": "Father of Western monasticism, founder of the Benedictine Order, patron of Europe.",
+    "full_bio": "Benedict was born in Nursia, Italy around 480. After studies in Rome he became a hermit at Subiaco, attracted many followers, and eventually founded twelve monasteries. He settled at Monte Cassino, where he wrote his famous Rule, the Regula Benedicti, a moderate and humane guide for monastic life built on prayer (Ora), work (Labora), and community. The Rule became the foundation of Western monasticism. His motto 'Pax' (Peace) and the Benedictine commitment to stability, hospitality, and the sanctification of ordinary life shaped European civilization profoundly. He was proclaimed patron of Europe by Pope Paul VI in 1964.",
+    "patronage": "Europe, monks, farmers, engineers, students",
+    "category": "confessor"
+  },
+  {
+    "id": "scholastica",
+    "name": "Saint Scholastica",
+    "feast_date": "February 10",
+    "short_bio": "Twin sister of Benedict, founder of the first Benedictine community for women.",
+    "full_bio": "Scholastica was the twin sister of Saint Benedict. Consecrated to God from early childhood, she founded and led a convent at Plombariola, near Monte Cassino. Once a year she and Benedict would meet to discuss spiritual matters. At one of their last meetings, legend says she begged him to stay through the night to continue their conversation; when he refused, she bowed her head in prayer, and a violent storm arose that made departure impossible. Three days later Benedict had a vision of her soul ascending to heaven in the form of a dove. She died around AD 543, and Benedict was buried beside her at Monte Cassino.",
+    "patronage": "Nuns, women in religious life, convulsive children",
+    "category": "virgin"
+  },
+  {
+    "id": "augustine",
+    "name": "Saint Augustine of Hippo",
+    "feast_date": "August 28",
+    "short_bio": "Bishop of Hippo, Doctor of the Church, author of the Confessions and The City of God.",
+    "full_bio": "Aurelius Augustinus was born in Thagaste, North Africa in 354. His mother Monica prayed tirelessly for his conversion as he pursued worldly ambition and lived with a mistress for years. After years of searching through Manichaeism and Neoplatonism, he was converted by the preaching of Ambrose of Milan and baptized on Easter 387. He returned to Africa, became bishop of Hippo, and spent thirty-five years defending the faith against Donatism and Pelagianism. His Confessions, the first great autobiography in Western literature, and his monumental The City of God are among the most influential books ever written. He died as the Vandals besieged Hippo in 430.",
+    "patronage": "Theologians, brewers, printers, sore eyes",
+    "category": "doctor"
+  },
+  {
+    "id": "monica",
+    "name": "Saint Monica",
+    "feast_date": "August 27",
+    "short_bio": "Mother of Augustine, a model of persevering prayer and Christian motherhood.",
+    "full_bio": "Monica was born in North Africa around 331. A devout Christian woman, she was married to Patricius, a pagan official with a quick temper, who was converted before his death. Her greatest anguish was the wayward life of her brilliant son Augustine. For seventeen years she prayed and wept for his conversion, following him to Rome and then Milan. When Augustine returned to the Church, she is said to have told Ambrose that she would not have wept had she known what God was preparing. She died at Ostia on the return journey to Africa, just months after Augustine's baptism. Her life is a testimony to the power of a mother's prayer.",
+    "patronage": "Mothers, married women, difficult marriages, alcoholics",
+    "category": "confessor"
+  },
+  {
+    "id": "ambrose",
+    "name": "Saint Ambrose",
+    "feast_date": "December 7",
+    "short_bio": "Bishop of Milan, Doctor of the Church, defender of orthodoxy against Arianism.",
+    "full_bio": "Ambrose was born around 340 to a Roman noble family and rose to become governor of Liguria-Aemilia. When the Bishop of Milan died in 374, Ambrose, though not yet baptized, was elected bishop by acclamation of the people. Baptized, ordained, and consecrated bishop all within a week, he gave away his wealth, studied theology intensively, and became one of the great bishops of the ancient Church. He stood firm against Arianism, refused to hand over basilicas to Arian emperors, and publicly held Emperor Theodosius accountable for the massacre at Thessalonica. He baptized Augustine in 387. A Doctor of the Church, he shaped both theology and liturgical music.",
+    "patronage": "Beekeepers, bishops, learning, candlemakers",
+    "category": "doctor"
+  },
+  {
+    "id": "jerome",
+    "name": "Saint Jerome",
+    "feast_date": "September 30",
+    "short_bio": "Doctor of the Church, biblical scholar, translator of the Bible into Latin (the Vulgate).",
+    "full_bio": "Eusebius Hieronymus was born around 345 in Stridon, Dalmatia. A brilliant scholar, he was baptized in Rome and spent years in the Syrian desert as an ascetic. He returned to Rome where Pope Damasus commissioned him to revise the Latin Bible. His translation of the entire Bible from the original Hebrew and Greek, the Latin Vulgate, became the official Bible of the Western Church for over a millennium. He also wrote extensive biblical commentaries, hagiographies, and polemical works. He was irascible and quarrelsome by nature, and his relationship with Augustine was often tense. He lived his last decades at Bethlehem, where he died around 420.",
+    "patronage": "Librarians, translators, biblical scholars",
+    "category": "doctor"
+  },
+  {
+    "id": "anthony-padua",
+    "name": "Saint Anthony of Padua",
+    "feast_date": "June 13",
+    "short_bio": "Franciscan friar, Doctor of the Church, one of the most popular saints, wonder-worker.",
+    "full_bio": "Fernando Martins de Bulhões was born in Lisbon, Portugal around 1195. He joined the Augustinian Order, then was so inspired by the martyrdom of the first Franciscan martyrs in Morocco that he joined the Franciscans hoping to be martyred himself. Forced by illness to remain in Italy, he was discovered to be a gifted preacher and theologian, Francis of Assisi called him 'my bishop.' He preached throughout northern Italy and southern France with enormous effect, converting sinners and heretics. Known as a wonder-worker even in his lifetime, he died at only thirty-five in 1231 and was canonized within a year. He is invoked for lost items.",
+    "patronage": "Lost items, the poor, Portugal, Padua, travelers",
+    "category": "doctor"
+  },
+  {
+    "id": "patrick",
+    "name": "Saint Patrick",
+    "feast_date": "March 17",
+    "short_bio": "Apostle of Ireland, missionary bishop, patron saint of Ireland.",
+    "full_bio": "Patricius was born in Roman Britain around 385. At sixteen he was kidnapped by Irish pirates and enslaved in Ireland for six years, during which his faith deepened through prayer. He escaped, returned to Britain, and after years of study became a bishop. He returned to Ireland as a missionary against the wishes of some in the Church who considered him unsuitable, but his mission transformed the country. In his Confessio he describes a lifelong struggle with self-doubt, but an unshakeable trust that God had called him. He established churches, ordained clergy, and by his death around 461 had effectively converted the island. The shamrock legend stems from his use of it to explain the Trinity.",
+    "patronage": "Ireland, Nigeria, engineers, ophthalmologists",
+    "category": "bishop"
+  },
+  {
+    "id": "nicholas",
+    "name": "Saint Nicholas of Myra",
+    "feast_date": "December 6",
+    "short_bio": "Bishop of Myra, protector of children, sailors, and the poor; the original Santa Claus.",
+    "full_bio": "Nicholas was born in Patara, Lycia (now Turkey) in the late 3rd century. He became bishop of Myra and attended the Council of Nicaea in 325. He was known for his extraordinary generosity, most famously, tossing bags of gold through a poor man's window on three successive nights to provide dowries for his three daughters. This act of secret generosity gave rise to the tradition of gift-giving in his name. He was imprisoned under Diocletian's persecution and released by Constantine. Sailors and children in particular venerated him. His remains were brought to Bari, Italy in 1087, where the Basilica di San Nicola was built in his honor.",
+    "patronage": "Children, sailors, merchants, pharmacists",
+    "category": "bishop"
+  },
+  {
+    "id": "catherine-siena",
+    "name": "Saint Catherine of Siena",
+    "feast_date": "April 29",
+    "short_bio": "Dominican tertiary, Doctor of the Church, who persuaded Pope Gregory XI to return from Avignon to Rome.",
+    "full_bio": "Caterina di Giacomo di Benincasa was born in Siena in 1347, the twenty-fourth of twenty-five children. From early childhood she experienced visions and mystical gifts. She became a Dominican tertiary and devoted herself to serving the poor and sick in Siena's hospitals. Her letters, 382 of them have survived, range from tender notes of spiritual direction to forceful exhortations to popes and kings. She persuaded Pope Gregory XI to return the papacy to Rome after nearly seventy years in Avignon, calling him 'babbo mio' (my dear father). She received the stigmata. Her Dialogue is one of the great mystical texts of the Middle Ages. She was declared a Doctor of the Church in 1970.",
+    "patronage": "Italy, Rome, nurses, fire prevention",
+    "category": "doctor"
+  },
+  {
+    "id": "joan-arc",
+    "name": "Saint Joan of Arc",
+    "feast_date": "May 30",
+    "short_bio": "French national heroine who led armies under divine guidance, martyred at nineteen, canonized in 1920.",
+    "full_bio": "Jeanne d'Arc was born in Domrémy, France around 1412 to a farming family. From the age of thirteen she heard voices she identified as Saints Michael, Catherine, and Margaret, directing her to drive the English from France and see the Dauphin crowned king. Against all odds she was given command of the French army, lifted the siege of Orléans, and saw Charles VII crowned at Reims. Captured by the Burgundians and sold to the English, she was tried for heresy and witchcraft in a politically driven ecclesiastical court and burned at the stake on May 30, 1431, at age nineteen. She was declared innocent in 1456, beatified in 1909, and canonized in 1920. She is a patron of France.",
+    "patronage": "France, soldiers, prisoners, people ridiculed for piety",
+    "category": "martyr"
+  },
+  {
+    "id": "therese-lisieux",
+    "name": "Saint Thérèse of Lisieux",
+    "feast_date": "October 1",
+    "short_bio": "Carmelite nun, Doctor of the Church, the Little Flower whose 'Little Way' inspires millions.",
+    "full_bio": "Marie-Françoise-Thérèse Martin was born in Alençon, France in 1873. She entered the Carmelite convent at Lisieux at fifteen after a special papal audience with Leo XIII, and spent the rest of her short life in an obscure life of prayer and service. She died of tuberculosis at twenty-four. Her autobiography, The Story of a Soul, published after her death, became one of the most widely read spiritual books of the 20th century. Her 'Little Way', finding holiness in small, everyday acts done with great love, made her spirituality accessible to ordinary people everywhere. She was declared a Doctor of the Church in 1997.",
+    "patronage": "Missions, florists, France, AIDS patients",
+    "category": "doctor"
+  },
+  {
+    "id": "maximilian-kolbe",
+    "name": "Saint Maximilian Kolbe",
+    "feast_date": "August 14",
+    "short_bio": "Polish Franciscan martyr who gave his life in place of a stranger at Auschwitz.",
+    "full_bio": "Rajmund Kolbe was born in Poland in 1894. He became a Franciscan friar and founded the Militia Immaculatae, a worldwide Marian movement, and the Niepokalanów, City of the Immaculate, the largest Franciscan friary in the world. He operated a publishing house, radio station, and was a pioneer in Catholic media. Arrested by the Gestapo in 1941, he was sent to Auschwitz. When a prisoner was selected for death by starvation as a reprisal, Kolbe volunteered to take his place. He survived two weeks in the starvation bunker, encouraging the other prisoners, before being killed by lethal injection on August 14, 1941. He was canonized as a martyr in 1982.",
+    "patronage": "Prisoners, families, journalists, pro-life movement",
+    "category": "martyr"
+  },
+  {
+    "id": "faustina",
+    "name": "Saint Faustina Kowalska",
+    "feast_date": "October 5",
+    "short_bio": "Polish mystic, apostle of Divine Mercy, who recorded the Divine Mercy devotion in her Diary.",
+    "full_bio": "Helena Kowalska was born in Poland in 1905. She entered the Congregation of the Sisters of Our Lady of Mercy and took the name Faustina. From 1931 onward she received a series of visions of Jesus Christ, who revealed to her the devotion to Divine Mercy and asked her to record these revelations in her Diary. The central image shows Christ with two rays of red and white light, representing blood and water, flowing from his heart. Despite misunderstanding and even temporary suppression of the devotion during her lifetime, Divine Mercy Sunday (the Sunday after Easter) was declared universal for the Church by Pope John Paul II in 2000. She died of tuberculosis in 1938 and was canonized in 2000.",
+    "patronage": "Mercy, those seeking God's mercy",
+    "category": "virgin"
+  },
+  {
+    "id": "padre-pio",
+    "name": "Saint Pio of Pietrelcina",
+    "feast_date": "September 23",
+    "short_bio": "Italian Capuchin friar who bore the stigmata for fifty years, known for his spiritual gifts.",
+    "full_bio": "Francesco Forgione was born in Pietrelcina, Italy in 1887. He became a Capuchin Franciscan friar and was ordained a priest in 1910. In 1918 he received the visible stigmata, wounds corresponding to those of Christ, which he bore for fifty years until his death in 1968, making him the first stigmatized priest in Church history. Pilgrims came in vast numbers to his confessional at San Giovanni Rotondo, where he spent up to sixteen hours a day hearing confessions. He founded the Casa Sollievo della Sofferenza (House for the Relief of Suffering), a hospital. Stories of bilocation, reading of hearts, and miracles of healing surrounded him throughout his life. He was canonized in 2002.",
+    "patronage": "Stress relief, January blues, Pietrelcina",
+    "category": "confessor"
+  },
+  {
+    "id": "john-paul-ii",
+    "name": "Saint John Paul II",
+    "feast_date": "October 22",
+    "short_bio": "264th Pope, the Great, who helped end communism and proclaimed a culture of life.",
+    "full_bio": "Karol Józef Wojtyła was born in Wadowice, Poland in 1920. He survived Nazi and Communist occupation, studied underground, and was ordained a priest in 1946. He became the youngest bishop in Poland, then Archbishop of Kraków, and in 1978 was elected the first non-Italian pope in 455 years. His twenty-seven-year pontificate was one of the most influential in history. He survived an assassination attempt in 1981, which he attributed to Our Lady of Fatima. He traveled to 129 countries, canonized over 500 saints, issued the Catechism of the Catholic Church, and played a decisive role in ending Soviet communism. He died on April 2, 2005, and was canonized in 2014.",
+    "patronage": "World Youth Day, Poland, families",
+    "category": "confessor"
+  },
+  {
+    "id": "thomas-more",
+    "name": "Saint Thomas More",
+    "feast_date": "June 22",
+    "short_bio": "Lord Chancellor of England, martyr who died rather than endorse Henry VIII's divorce.",
+    "full_bio": "Thomas More was born in London in 1478. A brilliant lawyer, humanist, and friend of Erasmus, he rose to become Lord Chancellor of England under Henry VIII, the highest judicial office in the realm. When Henry sought to divorce Catherine of Aragon and declare himself head of the Church in England, More resigned and refused to sign the Oath of Supremacy. He was imprisoned in the Tower of London for fifteen months and beheaded on July 6, 1535. His last words were reported to be, 'I die the King's good servant, but God's first.' He was canonized in 1935. Robert Bolt's play A Man for All Seasons dramatized his life.",
+    "patronage": "Lawyers, politicians, civil servants, difficult marriages",
+    "category": "martyr"
+  },
+  {
+    "id": "lawrence",
+    "name": "Saint Lawrence",
+    "feast_date": "August 10",
+    "short_bio": "Roman deacon martyred in 258 by being roasted on a gridiron.",
+    "full_bio": "Lawrence was one of the seven deacons of Rome under Pope Sixtus II. When the Emperor Valerian ordered the execution of the clergy in 258, Sixtus was killed, and Lawrence was commanded to surrender the Church's treasures within three days. Lawrence gathered the poor, the lame, the blind, and the suffering of Rome and presented them to the prefect, saying, 'Here is the treasure of the Church.' He was tortured and martyred by being burned alive on a large iron gridiron. The story holds that he said to his torturers, 'Turn me over, I'm done on this side,' showing extraordinary courage and even humor in martyrdom. He became one of the most venerated martyrs of Rome.",
+    "patronage": "Librarians, cooks, comedians, poor",
+    "category": "martyr"
+  },
+  {
+    "id": "sebastian",
+    "name": "Saint Sebastian",
+    "feast_date": "January 20",
+    "short_bio": "Roman soldier and martyr, a favorite subject of Christian art, tied to a tree and shot with arrows.",
+    "full_bio": "Sebastian was an officer in the Roman imperial army under Diocletian. A Christian who kept his faith secret, he used his position to encourage and assist imprisoned Christians, converting many soldiers and even noble Romans. When his faith was discovered, Diocletian ordered him tied to a stake and shot with arrows by Mauritanian archers. Left for dead, he survived and was nursed back to health by the widow Irene. Far from fleeing, he confronted Diocletian directly, accusing him of persecuting Christians, and was beaten to death with clubs around AD 288. His image, bound to a post, pierced with arrows, became one of the most reproduced in Western art.",
+    "patronage": "Athletes, soldiers, archers, police",
+    "category": "martyr"
+  },
+  {
+    "id": "agnes",
+    "name": "Saint Agnes",
+    "feast_date": "January 21",
+    "short_bio": "Roman virgin-martyr of the early Church, martyred at around thirteen years of age.",
+    "full_bio": "Agnes was a young Roman noblewoman who, according to tradition, consecrated her virginity to Christ at an early age. When a Roman official's son sought her in marriage and she refused, she was denounced as a Christian. She was reportedly sent to a house of ill repute, but her virginity was miraculously protected. She was then condemned to be burned, but the flames did not touch her, and she was finally beheaded around AD 304. Her name means 'lamb' in Latin, and she is depicted with a lamb as her symbol. On her feast day the Pope blesses two lambs in Rome; their wool is used for the palliums worn by archbishops.",
+    "patronage": "Girls, chastity, victims of abuse, gardeners",
+    "category": "martyr"
+  },
+  {
+    "id": "cecilia",
+    "name": "Saint Cecilia",
+    "feast_date": "November 22",
+    "short_bio": "Roman virgin-martyr and patron of musicians.",
+    "full_bio": "Cecilia was a Roman noblewoman of the early Church who was forced into a marriage with a pagan named Valerian. On their wedding day, tradition says she told him she was under the protection of an angel. She converted Valerian and his brother Tiburtius, both of whom were later martyred. She herself was condemned and attempts were made to suffocate her; when this failed she was struck three times with a sword but survived for three days, using the time to give her possessions to the poor. She died around AD 230. She is often depicted playing an organ, and the founding of the Pontifical Institute of Sacred Music in Rome on her feast day in 1584 confirmed her patronage of musicians.",
+    "patronage": "Musicians, composers, singers, organ builders",
+    "category": "martyr"
+  },
+  {
+    "id": "lucy",
+    "name": "Saint Lucy",
+    "feast_date": "December 13",
+    "short_bio": "Sicilian virgin-martyr, patron of those with eye conditions and of light.",
+    "full_bio": "Lucy was a young noblewoman from Syracuse, Sicily who secretly distributed her dowry to the poor after a miraculous healing at the tomb of Agatha. Her pagan suitor, enraged, denounced her as a Christian to the governor. According to tradition, she was condemned to a house of ill repute but could not be moved when soldiers tried to drag her there, as immovable as if rooted to the ground. She was tortured, her eyes put out, and she died by the sword around AD 304. Her name means 'light' and she is depicted holding her eyes on a plate. In Scandinavia her feast (coinciding near the winter solstice) is celebrated with candlelit processions.",
+    "patronage": "Blind people, eye problems, authors, the light",
+    "category": "martyr"
+  },
+  {
+    "id": "elizabeth-hungary",
+    "name": "Saint Elizabeth of Hungary",
+    "feast_date": "November 17",
+    "short_bio": "Thirteenth-century princess who gave her life to serving the poor after her husband's death.",
+    "full_bio": "Elizabeth was born in 1207 to King Andrew II of Hungary. At fourteen she married Ludwig IV of Thuringia in a union of great mutual affection. She bore three children and spent her wealth feeding the hungry, building a hospital, and serving the sick and poor personally. When Ludwig died on the Crusades in 1227, Elizabeth was expelled from court by her brother-in-law. She entered the Franciscan third order, gave away her remaining goods, and spent the last three years of her life caring for the poor in a hospice she founded at Marburg. She died at twenty-four in 1231, exhausted by her labors, and was canonized just four years later.",
+    "patronage": "Beggars, bakers, charities, the homeless",
+    "category": "confessor"
+  },
+  {
+    "id": "francis-sales",
+    "name": "Saint Francis de Sales",
+    "feast_date": "January 24",
+    "short_bio": "Bishop of Geneva, Doctor of the Church, Apostle of the Chablais, author of Introduction to the Devout Life.",
+    "full_bio": "Francis de Sales was born in Thorens, Savoy in 1567. Despite his father's plans for a legal career, he became a priest and was sent to reconvert the Chablais region of Savoy, then largely Calvinist. By writing pamphlets slipped under doors and patient preaching he is credited with converting tens of thousands. He became Bishop of Geneva and co-founded the Order of the Visitation with Jane Frances de Chantal. His Introduction to the Devout Life, written for lay people, showed that holiness was not only for monks but for everyone, fathers, lawyers, married women. Known for his extraordinary gentleness, he was declared Doctor of the Church in 1877 and patron of journalists in 1923.",
+    "patronage": "Journalists, writers, the deaf, educators",
+    "category": "doctor"
+  },
+  {
+    "id": "vincent-paul",
+    "name": "Saint Vincent de Paul",
+    "feast_date": "September 27",
+    "short_bio": "Founder of the Lazarists and Daughters of Charity, patron of charitable works and the poor.",
+    "full_bio": "Vincent de Paul was born in Gascony, France around 1581. After ordination he eventually came under the influence of spiritual directors in Paris and underwent a transformation from a worldly priest seeking advancement to a tireless servant of the poor. He organized works of charity among the galley slaves, the poor of rural France, and the urban destitute of Paris. He founded the Congregation of the Mission (Lazarists) to preach missions to the rural poor, and co-founded the Daughters of Charity with Louise de Marillac, the first religious order of women living and working in the world rather than in cloisters. He reorganized seminary education in France. He died in 1660 and was canonized in 1737.",
+    "patronage": "Charitable societies, hospitals, prisoners",
+    "category": "confessor"
+  },
+  {
+    "id": "john-bosco",
+    "name": "Saint John Bosco",
+    "feast_date": "January 31",
+    "short_bio": "Founder of the Salesians, patron of youth and educators, known as Don Bosco.",
+    "full_bio": "Giovanni Melchiorre Bosco was born near Turin, Italy in 1815. He grew up in deep poverty but managed to receive an education through the support of a local priest. Ordained in 1841, he became aware of the plight of homeless working-class boys flooding into industrializing Turin, and began gathering them for catechism, education, and recreation. He founded the Salesian Society (named for Francis de Sales) to educate young men in schools and trade workshops, and the Daughters of Mary Help of Christians for young women. His preventive system of education, built on reason, religion, and loving-kindness, was revolutionary. He died in 1888 and was canonized in 1934.",
+    "patronage": "Youth, editors, laborers, apprentices",
+    "category": "confessor"
+  },
+  {
+    "id": "bernadette",
+    "name": "Saint Bernadette Soubirous",
+    "feast_date": "April 16",
+    "short_bio": "French visionary to whom Our Lady appeared at Lourdes in 1858.",
+    "full_bio": "Marie-Bernarde Soubirous was born in Lourdes, France in 1844 to a poor miller's family. In February 1858, beginning at age fourteen, she received eighteen apparitions of a beautiful lady in the Massabielle grotto. The lady identified herself on the feast of the Annunciation as 'the Immaculate Conception' and directed Bernadette to dig in the earth, revealing a spring whose waters have been associated with many miraculous healings. Despite intense questioning by church and civil authorities, Bernadette maintained her account consistently throughout her life. She became a nun at Nevers, where she lived the rest of her life in suffering and humility. She died in 1879 and was canonized in 1933. Lourdes is now one of the most visited pilgrimage sites in the world.",
+    "patronage": "Sick persons, poverty, Lourdes, shepherdesses",
+    "category": "virgin"
+  },
+  {
+    "id": "montfort",
+    "name": "Saint Louis de Montfort",
+    "feast_date": "April 28",
+    "short_bio": "French missionary priest, Marian theologian, author of True Devotion to Mary.",
+    "full_bio": "Louis-Marie Grignion de Montfort was born in Montfort-sur-Meu, France in 1673. Ordained in 1700, he became an itinerant missionary preacher in western France, known for his fiery preaching and care for the poor. His greatest legacy is his Marian theology, particularly True Devotion to the Blessed Virgin, a program of consecrating oneself completely to Jesus through Mary. The manuscript lay hidden in a box for a century and was discovered in 1842; it has since influenced millions, including Pope John Paul II who took Montfort's motto 'Totus Tuus' (Totally Yours) as his papal motto. Montfort also founded the Company of Mary (Montfortians) and the Daughters of Wisdom. He died in 1716 and was canonized in 1947.",
+    "patronage": "Marian devotion, missionaries",
+    "category": "confessor"
+  },
+  {
+    "id": "alphonsus",
+    "name": "Saint Alphonsus Liguori",
+    "feast_date": "August 1",
+    "short_bio": "Founder of the Redemptorists, Doctor of the Church, moral theologian and mystic.",
+    "full_bio": "Alphonsus Maria de' Liguori was born near Naples in 1696. A brilliant lawyer who never lost a case, he abandoned his legal career after a court defeat he considered providential, and was ordained a priest in 1726. He founded the Congregation of the Most Holy Redeemer (Redemptorists) to preach missions to the rural poor of southern Italy. His moral theology, marked by a compassionate middle way between rigorism and laxism, shaped Catholic confessional practice. A prolific writer, his Glories of Mary and Visits to the Blessed Sacrament remain popular devotional works. Despite a painful last years of illness and spiritual desolation, he continued writing until his death in 1787. He was canonized in 1839 and declared a Doctor of the Church in 1871.",
+    "patronage": "Moral theologians, confessors",
+    "category": "doctor"
+  },
+  {
+    "id": "robert-bellarmine",
+    "name": "Saint Robert Bellarmine",
+    "feast_date": "September 17",
+    "short_bio": "Jesuit cardinal, Doctor of the Church, chief theologian of the Counter-Reformation.",
+    "full_bio": "Roberto Bellarmino was born in Montepulciano, Italy in 1542. He became a Jesuit, studied at the Gregorian University, and became the principal Catholic controversialist of the Counter-Reformation, writing his massive Disputations Against the Heretics of This Age. He taught at Louvain and later became a cardinal and Archbishop of Capua. His relationship with Galileo was nuanced, he asked Galileo to present his heliocentric theory as a hypothesis rather than proven fact, and treated him with personal respect. He wrote a famous catechism used throughout the Catholic world. Known for his personal humility despite his high office, he gave away his furniture to the poor and refused all privilege. He was declared a Doctor of the Church in 1931.",
+    "patronage": "Catechists, canon lawyers, controversialists",
+    "category": "doctor"
+  },
+  {
+    "id": "philip-neri",
+    "name": "Saint Philip Neri",
+    "feast_date": "May 26",
+    "short_bio": "Founder of the Oratorians, the Apostle of Rome, known for his joyful wit and holiness.",
+    "full_bio": "Filippo Romolo Neri was born in Florence in 1515. He came to Rome as a young man and spent eighteen years as a layman working among the city's poor, pilgrim youth, and sick. He was ordained a priest in 1551 and eventually founded the Congregation of the Oratory (Oratorians), a community of secular clergy who gathered laypeople for prayer, spiritual reading, and sacred music. He is credited with making Rome a center of the Counter-Reformation through joy rather than severity. Stories of his playful wit and ability to see through pretension abound, he reportedly shaved half his beard before meeting a great dignitary. He was known for mystical ecstasies and was beloved by all classes of Roman society. He died in 1595 and was canonized in 1622.",
+    "patronage": "Rome, US Army special forces, humor",
+    "category": "confessor"
+  },
+  {
+    "id": "charles-borromeo",
+    "name": "Saint Charles Borromeo",
+    "feast_date": "November 4",
+    "short_bio": "Archbishop of Milan, key figure in the Council of Trent, exemplary pastor of the Counter-Reformation.",
+    "full_bio": "Carlo Borromeo was born in 1538 into one of the great families of northern Italy. His uncle became Pope Pius IV and made the twenty-two-year-old Charles a cardinal and Secretary of State, despite the fact that he was not yet a priest. Charles used his position to reconvene and bring to conclusion the Council of Trent (1545-1563). Ordained a priest and bishop, he became Archbishop of Milan and was the most energetic pastoral reformer of the Counter-Reformation, visiting his vast diocese regularly, establishing schools and seminaries, feeding the poor, and personally ministering to the sick during the plague of 1576. He died exhausted at forty-six in 1584 and was canonized in 1610.",
+    "patronage": "Catechists, seminarians, bishops, apple orchards",
+    "category": "bishop"
+  },
+  {
+    "id": "john-fisher",
+    "name": "Saint John Fisher",
+    "feast_date": "June 22",
+    "short_bio": "Bishop of Rochester, martyr, scholar who died with Thomas More for rejecting Henry VIII's supremacy.",
+    "full_bio": "John Fisher was born in Beverley, Yorkshire around 1469. He became the greatest English biblical scholar of his age and Chancellor of Cambridge University. As Bishop of Rochester, he was known for his pastoral care, his learning, and his uncompromising defense of the faith against Lutheranism. When Henry VIII sought to divorce Catherine of Aragon, Fisher was the only bishop who publicly opposed the annulment and the break with Rome. He was imprisoned in the Tower of London for refusing to take the Oath of Supremacy. When Pope Paul III made him a cardinal in a last-ditch attempt to save his life, Henry VIII declared it would give him no head to put a hat on. Fisher was beheaded on June 22, 1535, two weeks before Thomas More.",
+    "patronage": "Bishops, universities",
+    "category": "martyr"
+  },
+  {
+    "id": "matthew",
+    "name": "Saint Matthew",
+    "feast_date": "September 21",
+    "short_bio": "Apostle and evangelist, the former tax collector called directly by Jesus.",
+    "full_bio": "Matthew (also called Levi) was a tax collector at Capernaum when Jesus passed by and simply said, 'Follow me.' Matthew rose and followed immediately, then hosted a great banquet for Jesus at his house, which scandalised the Pharisees who objected to Jesus eating with tax collectors and sinners. He is traditionally the author of the First Gospel, written primarily for a Jewish audience and structured around five discourses that mirror the five books of Moses. After Pentecost he preached in Judea and then in the East; tradition and various early sources place his martyrdom in Ethiopia, though details are uncertain.",
+    "patronage": "Accountants, bankers, tax collectors, customs officers",
+    "category": "apostle"
+  },
+  {
+    "id": "luke",
+    "name": "Saint Luke",
+    "feast_date": "October 18",
+    "short_bio": "Evangelist and physician, companion of Paul, author of the Third Gospel and Acts of the Apostles.",
+    "full_bio": "Luke was a Gentile physician and companion of Paul, who mentions him as 'the beloved physician' in Colossians. He is traditionally the author of the Third Gospel and the Acts of the Apostles, together comprising about a quarter of the entire New Testament. His Gospel is especially notable for its emphasis on mercy, prayer, the Holy Spirit, and the role of women. The 'we' passages in Acts indicate he was personally present for portions of Paul's missionary journeys. He is said to have remained with Paul during his final imprisonment in Rome. Tradition holds that he painted portraits of the Virgin Mary, making him patron of painters. He died in old age in Boeotia, Greece.",
+    "patronage": "Physicians, surgeons, artists, painters",
+    "category": "confessor"
+  },
+  {
+    "id": "mark",
+    "name": "Saint Mark",
+    "feast_date": "April 25",
+    "short_bio": "Evangelist, companion of Peter, author of the earliest Gospel.",
+    "full_bio": "John Mark was a Jewish Christian from Jerusalem whose mother's house was a meeting place of the early Church. He accompanied Barnabas and Paul on their first missionary journey but turned back at Perga, which caused a sharp dispute between Paul and Barnabas. Later reconciled with Paul, he was also a close companion of Peter in Rome. The Church Fathers report that Mark's Gospel was written as 'Peter's Gospel', recording Peter's eyewitness accounts. It is the shortest and most action-driven of the four Gospels. Mark later founded the Church in Alexandria, Egypt, and died there as a martyr around AD 68. The winged lion is his symbol.",
+    "patronage": "Venice, lions, notaries, lawyers",
+    "category": "confessor"
+  },
+  {
+    "id": "andrew",
+    "name": "Saint Andrew",
+    "feast_date": "November 30",
+    "short_bio": "Apostle, brother of Peter, the first called, patron of Scotland and Russia.",
+    "full_bio": "Andrew was a fisherman from Bethsaida and a disciple of John the Baptist before becoming the first apostle called by Jesus. He brought his brother Simon Peter to Jesus. In the Gospel of John, it is Andrew who tells Jesus about the boy with five loaves and two fish before the multiplication. After Pentecost, early Christian tradition places him preaching in Scythia (Russia and Ukraine) and in Greece. He is said to have been martyred in Patras, Greece on an X-shaped cross (the saltire), since he declared himself unworthy to be crucified on the same type of cross as his Lord. The saltire of Saint Andrew is the flag of Scotland, where his relics were kept at St Andrews.",
+    "patronage": "Scotland, Russia, Ukraine, fishermen, singers",
+    "category": "apostle"
+  },
+  {
+    "id": "james-greater",
+    "name": "Saint James the Greater",
+    "feast_date": "July 25",
+    "short_bio": "Apostle, son of Zebedee, brother of John, first apostle to be martyred, patron of Spain.",
+    "full_bio": "James son of Zebedee, called 'the Greater' to distinguish him from the other apostle James, was a fisherman from Galilee and one of the three apostles closest to Jesus, present at the Transfiguration and at Gethsemane. He and his brother John were nicknamed 'Sons of Thunder' by Jesus. He was the first of the Twelve to be martyred, beheaded by Herod Agrippa I around AD 44. According to Spanish tradition, James preached in Spain before his martyrdom, and his body was brought there after his death. His shrine at Santiago de Compostela in Galicia became one of the great pilgrimage destinations of medieval Christendom, rivaling Rome and Jerusalem.",
+    "patronage": "Spain, pilgrims, laborers, knights",
+    "category": "apostle"
+  },
+  {
+    "id": "thomas-apostle",
+    "name": "Saint Thomas the Apostle",
+    "feast_date": "July 3",
+    "short_bio": "Apostle known as 'Doubting Thomas,' who proclaimed 'My Lord and my God' upon seeing the risen Christ.",
+    "full_bio": "Thomas, called Didymus (Twin), is remembered in particular for his refusal to believe in the Resurrection until he could touch the wounds of Christ himself. When the risen Jesus appeared and invited Thomas to touch his hands and side, Thomas made the highest Christological declaration in the Gospels: 'My Lord and my God!' Jesus responded, 'Blessed are those who have not seen and have believed.' Thomas is also noted in John's Gospel for his bold declaration of willingness to die with Jesus when he returned to Judea. Tradition, strongly attested in early Christianity, places Thomas as the apostle of India, where the Thomas Christians (Saint Thomas Christians) trace their origin to him. He died a martyr near Chennai.",
+    "patronage": "India, architects, blind people, doubters",
+    "category": "apostle"
+  }
+]

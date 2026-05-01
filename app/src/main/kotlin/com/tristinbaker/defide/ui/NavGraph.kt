@@ -9,6 +9,7 @@ import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Circle
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AlertDialog
@@ -18,7 +19,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDrawerState
@@ -53,6 +53,8 @@ import com.tristinbaker.defide.ui.prayers.PrayerSearchScreen
 import com.tristinbaker.defide.ui.bible.BibleViewModel
 import com.tristinbaker.defide.ui.rosary.RosaryHomeScreen
 import com.tristinbaker.defide.ui.rosary.RosarySessionScreen
+import com.tristinbaker.defide.ui.saints.SaintDetailScreen
+import com.tristinbaker.defide.ui.saints.SaintsListScreen
 import com.tristinbaker.defide.ui.settings.HowToUseScreen
 import com.tristinbaker.defide.ui.settings.SettingsScreen
 import com.tristinbaker.defide.ui.settings.SettingsViewModel
@@ -79,6 +81,7 @@ private fun rememberDrawerItems() = listOf(
     DrawerItem("catechism", stringResource(R.string.nav_catechism), Icons.AutoMirrored.Filled.LibraryBooks),
     DrawerItem("prayers",   stringResource(R.string.nav_prayers),   Icons.Default.Star),
     DrawerItem("novena",    stringResource(R.string.nav_novenas),   Icons.Default.Book),
+    DrawerItem("saints",    stringResource(R.string.nav_saints),    Icons.Default.Person),
 )
 
 private const val CCC_URL_EN = "https://usccb.cld.bz/Catechism-of-the-Catholic-Church2/7"
@@ -129,6 +132,7 @@ fun DeFideApp() {
             showCatechismDialog = showCatechismDialog,
             onShowCatechismDialog = { showCatechismDialog = it },
             cccUrl = cccUrl,
+            language = prefs.appLanguage,
         )
     }
 }
@@ -142,6 +146,7 @@ private fun DeFideAppContent(
     showCatechismDialog: Boolean,
     onShowCatechismDialog: (Boolean) -> Unit,
     cccUrl: String,
+    language: String,
 ) {
     val openDrawer: () -> Unit = { scope.launch { drawerState.open() } }
     val closeDrawer: () -> Unit = { scope.launch { drawerState.close() } }
@@ -219,13 +224,11 @@ private fun DeFideAppContent(
             }
         },
     ) {
-        Scaffold { padding ->
-            DeFideNavHost(
-                navController = navController,
-                openDrawer = openDrawer,
-                padding = padding,
-            )
-        }
+        DeFideNavHost(
+            navController = navController,
+            openDrawer = openDrawer,
+            language = language,
+        )
     }
 }
 
@@ -243,7 +246,7 @@ private fun parseScripture(ref: String): Triple<String, Int, Int>? {
 private fun DeFideNavHost(
     navController: NavHostController,
     openDrawer: () -> Unit,
-    padding: androidx.compose.foundation.layout.PaddingValues,
+    language: String,
 ) {
     // Shared BibleViewModel for scripture → Bible navigation (books read lazily, not collected as state)
     val bibleViewModel: BibleViewModel = androidx.hilt.navigation.compose.hiltViewModel()
@@ -262,7 +265,6 @@ private fun DeFideNavHost(
     NavHost(
         navController = navController,
         startDestination = "home",
-        modifier = Modifier.padding(padding),
     ) {
         // Home
         composable("home") {
@@ -447,6 +449,25 @@ private fun DeFideNavHost(
             NovenaSessionScreen(
                 novenaId = backStack.arguments?.getString("novenaId") ?: "",
                 progressId = backStack.arguments?.getString("progressId") ?: "",
+                onBack = { navController.popBackStack() },
+            )
+        }
+
+        // Saints
+        composable("saints") {
+            SaintsListScreen(
+                onBack = { navController.popBackStack() },
+                onSaintClick = { saintId -> navController.navigate("saint_detail/$saintId") },
+            )
+        }
+        composable(
+            "saint_detail/{saintId}",
+            arguments = listOf(navArgument("saintId") { type = NavType.StringType }),
+        ) { backStack ->
+            val saintId = backStack.arguments?.getString("saintId") ?: return@composable
+            SaintDetailScreen(
+                saintId = saintId,
+                language = language,
                 onBack = { navController.popBackStack() },
             )
         }

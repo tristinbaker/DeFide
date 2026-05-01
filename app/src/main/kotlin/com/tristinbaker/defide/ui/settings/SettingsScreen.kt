@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tristinbaker.defide.R
+import com.tristinbaker.defide.data.preferences.AppFont
 import com.tristinbaker.defide.data.preferences.AppTheme
 import com.tristinbaker.defide.data.preferences.RosaryDiagramStyle
 import com.tristinbaker.defide.data.preferences.RosaryOrder
@@ -166,6 +167,7 @@ fun SettingsScreen(
                     "lt" to "Lietuvių",
                     "pt-BR" to "Português (Brasil)",
                     "pt-PT" to "Português (Portugal)",
+                    "zh-CN" to "中文 (简体)",
                 )
                 var languageDropdownExpanded by remember { mutableStateOf(false) }
                 val selectedLanguageLabel = languages.firstOrNull { it.first == prefs.appLanguage }?.second ?: prefs.appLanguage
@@ -235,6 +237,9 @@ fun SettingsScreen(
                         Triple("rk1998",  "Biblija (RK, K1998)",            "Katalikiška lietuviška Biblija"),
                         Triple("vulgate", "Vulgata Latina",                  "Originarinis lotyniškas šv. Jeronimo tekstas"),
                     )
+                    "zh-CN" -> listOf(
+                        Triple("sg", "思高圣经", "天主教中文圣经译本"),
+                    )
                     else -> listOf(
                         Triple("dra",        "Douay-Rheims (1899)",            "Traditional Catholic translation"),
                         Triple("web-c",      "World English Bible (Catholic)", "Modern English, public domain"),
@@ -256,6 +261,34 @@ fun SettingsScreen(
                                 Text(label, style = MaterialTheme.typography.bodyMedium)
                                 Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
+                        }
+                    }
+                }
+                HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
+            }
+            item {
+                SectionHeader(stringResource(R.string.font_style_label))
+            }
+            item {
+                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+                    AppFont.entries.forEach { font ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            RadioButton(
+                                selected = prefs.appFont == font,
+                                onClick = { viewModel.setAppFont(font) },
+                            )
+                            Text(
+                                text = stringResource(when (font) {
+                                    AppFont.SERIF      -> R.string.font_serif
+                                    AppFont.SYSTEM     -> R.string.font_system
+                                    AppFont.SANS_SERIF -> R.string.font_sans_serif
+                                }),
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.padding(start = 8.dp),
+                            )
                         }
                     }
                 }

@@ -7,12 +7,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.tristinbaker.defide.data.db.user.dao.BibleBookmarkDao
 import com.tristinbaker.defide.data.db.user.dao.BibleChapterReadDao
 import com.tristinbaker.defide.data.db.user.dao.BibleHighlightDao
+import com.tristinbaker.defide.data.db.user.dao.FavoriteSaintDao
 import com.tristinbaker.defide.data.db.user.dao.NovenaProgressDao
 import com.tristinbaker.defide.data.db.user.dao.PrayerLogDao
 import com.tristinbaker.defide.data.db.user.dao.RosarySessionDao
 import com.tristinbaker.defide.data.db.user.entity.BibleBookmarkEntity
 import com.tristinbaker.defide.data.db.user.entity.BibleChapterReadEntity
 import com.tristinbaker.defide.data.db.user.entity.BibleHighlightEntity
+import com.tristinbaker.defide.data.db.user.entity.FavoriteSaintEntity
 import com.tristinbaker.defide.data.db.user.entity.NovenaProgressEntity
 import com.tristinbaker.defide.data.db.user.entity.PrayerLogEntity
 import com.tristinbaker.defide.data.db.user.entity.RosarySessionEntity
@@ -25,8 +27,9 @@ import com.tristinbaker.defide.data.db.user.entity.RosarySessionEntity
         BibleChapterReadEntity::class,
         NovenaProgressEntity::class,
         PrayerLogEntity::class,
+        FavoriteSaintEntity::class,
     ],
-    version = 3,
+    version = 4,
     exportSchema = true,
 )
 abstract class UserDatabase : RoomDatabase() {
@@ -36,6 +39,7 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun bibleChapterReadDao(): BibleChapterReadDao
     abstract fun novenaProgressDao(): NovenaProgressDao
     abstract fun prayerLogDao(): PrayerLogDao
+    abstract fun favoriteSaintDao(): FavoriteSaintDao
 
     companion object {
         val MIGRATION_1_2 = object : Migration(1, 2) {
@@ -70,6 +74,17 @@ abstract class UserDatabase : RoomDatabase() {
                 )
                 db.execSQL("DROP TABLE `bible_chapter_read`")
                 db.execSQL("ALTER TABLE `bible_chapter_read_new` RENAME TO `bible_chapter_read`")
+            }
+        }
+
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """CREATE TABLE IF NOT EXISTS `favorite_saints` (
+                        `saint_id` TEXT NOT NULL,
+                        PRIMARY KEY(`saint_id`)
+                    )"""
+                )
             }
         }
     }

@@ -369,7 +369,7 @@ private fun RosaryBeadIndicatorClassic(
 ) {
     // Physical layout: 60 beads (0-59) + cross (-1)
     // Tail: beads 0-4 (0=Our Father large, 1-3=HM small, 4=Our Father decade 1 large)
-    // Junction: no bead drawn — cord only
+    // Junction: no bead drawn -- cord only
     // Loop: beads 5-58 at ovalPos(1..54); bead 59 (Hail Holy Queen) at ovalPos(0); ovalSlots=55
     val tailCount = 5
     val ovalSlots = 55   // bead 59 at slot 0, beads 5-58 at slots 1-54
@@ -394,9 +394,9 @@ private fun RosaryBeadIndicatorClassic(
         val tailAvail = size.height - junctionY - 4.dp.toPx()
         val tailStep  = tailAvail / (tailCount + 0.5f)
 
-        fun ovalPos(k: Int): Offset {
-            val angle = (PI / 2.0 + 2.0 * PI * k / ovalSlots).toFloat()
-            return Offset(cx + a * cos(angle), oy + b * sin(angle))
+        fun ovalPos(k: Double): Offset {
+            val angle = PI / 2.0 + 2.0 * PI * k / ovalSlots
+            return Offset((cx + a * cos(angle)).toFloat(), (oy + b * sin(angle)).toFloat())
         }
 
         // physBead 0 farthest from junction, physBead 4 closest
@@ -405,10 +405,17 @@ private fun RosaryBeadIndicatorClassic(
             return Offset(cx, junctionY + stepsDown * tailStep)
         }
 
+        val loopCount   = ovalSlots - 1          // 54 loop beads
+        val junctionGap = 1.5                    // angular gap in slots around junction oval
+
         fun beadPos(physBead: Int): Offset = when {
             physBead < tailCount -> tailPos(physBead)
-            physBead == 59       -> ovalPos(0)            // Hail Holy Queen at junction
-            else                 -> ovalPos(physBead - 4) // 5→1 … 58→54
+            physBead == 59       -> ovalPos(0.0)  // Hail Holy Queen at junction
+            else -> {
+                val i = (physBead - 5).toDouble()
+                val t = i / (loopCount - 1)
+                ovalPos(junctionGap + t * (ovalSlots - 2.0 * junctionGap))
+            }
         }
 
         // Cords
@@ -430,10 +437,10 @@ private fun RosaryBeadIndicatorClassic(
         drawRect(crossColor, topLeft = Offset(cx - barW / 2f, crossY - cH * 0.65f), size = Size(barW, cH))
         drawRect(crossColor, topLeft = Offset(cx - cW / 2f,   crossY - cH * 0.40f), size = Size(cW, barW))
 
-        val rSmall        = 3.dp.toPx()
-        val rLarge        = 6.dp.toPx()
-        val rCurrentSmall = 4.8.dp.toPx()
-        val rCurrentLarge = 7.dp.toPx()
+        val rSmall        = 4.dp.toPx()
+        val rLarge        = 7.dp.toPx()
+        val rCurrentSmall = 5.5.dp.toPx()
+        val rCurrentLarge = 8.5.dp.toPx()
         val strokeW       = 1.dp.toPx()
 
         for (physBead in 0 until 60) {
@@ -447,10 +454,27 @@ private fun RosaryBeadIndicatorClassic(
                 large               -> rLarge
                 else                -> rSmall
             }
-            when {
-                isCurrent -> drawCircle(primary, beadR, pos)
-                isPast    -> drawCircle(past,    beadR, pos)
-                else      -> drawCircle(outline, beadR, pos, style = Stroke(strokeW))
+            val beadColor = when {
+                isCurrent -> primary
+                isPast    -> past
+                else      -> null
+            }
+            if (physBead == 59) {
+                val rx = rLarge * 1.5f
+                val ry = rLarge * 1.0f
+                val tl = Offset(pos.x - rx, pos.y - ry)
+                val sz = Size(rx * 2, ry * 2)
+                when {
+                    isCurrent -> drawOval(primary, topLeft = tl, size = sz)
+                    isPast    -> drawOval(past,    topLeft = tl, size = sz)
+                    else      -> drawOval(outline, topLeft = tl, size = sz, style = Stroke(strokeW))
+                }
+            } else {
+                when {
+                    isCurrent -> drawCircle(primary, beadR, pos)
+                    isPast    -> drawCircle(past,    beadR, pos)
+                    else      -> drawCircle(outline, beadR, pos, style = Stroke(strokeW))
+                }
             }
         }
     }
@@ -465,7 +489,7 @@ private fun RosaryBeadIndicatorCompact(
 ) {
     // Physical layout: 60 beads (0-59) + cross (-1)
     // Tail: beads 0-4 (0=Our Father large, 1-3=HM small, 4=Our Father decade 1 large)
-    // Junction: no bead drawn — cord only
+    // Junction: no bead drawn -- cord only
     // Loop: beads 5-58 at perimeterPos(1..54)*spacing; bead 59 (Hail Holy Queen) at perimeterPos(0); ovalSlots=55
     val tailCount = 5
     val ovalSlots = 55   // bead 59 at slot 0, beads 5-58 at slots 1-54
@@ -548,10 +572,18 @@ private fun RosaryBeadIndicatorCompact(
             return Offset(rRight, rTop + cornerR + d)
         }
 
+        val loopCount   = ovalSlots - 1           // 54 loop beads
+        val junctionGap = 1.5f * spacing          // distance gap around junction oval
+        val loopSpan    = totalPerimeter - 2f * junctionGap
+
         fun beadPos(physBead: Int): Offset = when {
             physBead < tailCount -> tailPos(physBead)
-            physBead == 59       -> perimeterPos(0f)              // Hail Holy Queen at junction
-            else                 -> perimeterPos((physBead - 4) * spacing)  // 5→1*s … 58→54*s
+            physBead == 59       -> perimeterPos(0f)  // Hail Holy Queen at junction
+            else -> {
+                val i = (physBead - 5).toFloat()
+                val t = i / (loopCount - 1).toFloat()
+                perimeterPos(junctionGap + t * loopSpan)
+            }
         }
 
         // ── Cords ──────────────────────────────────────────────────────────
@@ -574,10 +606,10 @@ private fun RosaryBeadIndicatorCompact(
         drawRect(crossColor, topLeft = Offset(crossX - cW / 2f,   jY - cH * 0.40f), size = Size(cW, barW))
 
         // ── Beads ──────────────────────────────────────────────────────────
-        val rSmall        = 3.dp.toPx()
-        val rLarge        = 6.dp.toPx()
-        val rCurrentSmall = 5.dp.toPx()
-        val rCurrentLarge = 7.dp.toPx()
+        val rSmall        = 4.dp.toPx()
+        val rLarge        = 7.dp.toPx()
+        val rCurrentSmall = 5.5.dp.toPx()
+        val rCurrentLarge = 8.5.dp.toPx()
         val strokeW       = 1.dp.toPx()
 
         for (physBead in 0 until 60) {
@@ -591,10 +623,27 @@ private fun RosaryBeadIndicatorCompact(
                 large               -> rLarge
                 else                -> rSmall
             }
-            when {
-                isCurrent -> drawCircle(primary, beadR, pos)
-                isPast    -> drawCircle(past,    beadR, pos)
-                else      -> drawCircle(outline, beadR, pos, style = Stroke(strokeW))
+            val beadColor = when {
+                isCurrent -> primary
+                isPast    -> past
+                else      -> null
+            }
+            if (physBead == 59) {
+                val rx = rLarge * 1.0f
+                val ry = rLarge * 1.5f
+                val tl = Offset(pos.x - rx, pos.y - ry)
+                val sz = Size(rx * 2, ry * 2)
+                when {
+                    isCurrent -> drawOval(primary, topLeft = tl, size = sz)
+                    isPast    -> drawOval(past,    topLeft = tl, size = sz)
+                    else      -> drawOval(outline, topLeft = tl, size = sz, style = Stroke(strokeW))
+                }
+            } else {
+                when {
+                    isCurrent -> drawCircle(primary, beadR, pos)
+                    isPast    -> drawCircle(past,    beadR, pos)
+                    else      -> drawCircle(outline, beadR, pos, style = Stroke(strokeW))
+                }
             }
         }
     }

@@ -87,4 +87,21 @@
     <string name="tag_dead">为死者</string>
     <string name="tag_death">死亡</string>
     <string name="tag_depression">抑郁</string>
+    <string name="rosary_junction_label">路口标记样式</string>
+    <string name="rosary_junction_bead">圆珠</string>
+    <string name="rosary_junction_triangle">三角形</string>
+    <string name="font_style_label">字体样式</string>
+    <string name="font_serif">衬线字体（经典）</string>
+    <string name="font_sans_serif">无衬线字体</string>
+    <string name="font_system">系统默认</string>
+    <string name="nav_saints">圣人</string>
+    <string name="saints_title">圣人</string>
+    <string name="saints_favorites_section">我的敬礼</string>
+    <string name="saints_no_favorites">点击圣人旁的星星，将其添加到您的敬礼中。</string>
+    <string name="saints_feast_date_label">庆节</string>
+    <string name="saints_patronage_label">主保</string>
+    <string name="saints_search_hint">搜索圣人…</string>
+    <string name="saints_sort_name">By Name</string>
+    <string name="saints_sort_feast">By Feast Day</string>
+    <string name="saints_not_available">您的语言暂不支持圣人内容。欢迎在 GitHub 上贡献翻译。</string>
 </resources>

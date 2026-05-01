@@ -8,6 +8,7 @@ import com.tristinbaker.defide.data.db.content.dao.BibleDao
 import com.tristinbaker.defide.data.db.content.dao.NovenaContentDao
 import com.tristinbaker.defide.data.db.content.dao.PrayerDao
 import com.tristinbaker.defide.data.db.content.dao.RosaryContentDao
+import com.tristinbaker.defide.data.db.content.dao.SaintsContentDao
 import com.tristinbaker.defide.data.db.user.UserDatabase
 import dagger.Module
 import dagger.Provides
@@ -24,7 +25,7 @@ object DatabaseModule {
     @Singleton
     fun provideUserDatabase(@ApplicationContext context: Context): UserDatabase =
         Room.databaseBuilder(context, UserDatabase::class.java, "defide_user.db")
-            .addMigrations(UserDatabase.MIGRATION_1_2, UserDatabase.MIGRATION_2_3)
+            .addMigrations(UserDatabase.MIGRATION_1_2, UserDatabase.MIGRATION_2_3, UserDatabase.MIGRATION_3_4)
             .build()
 
     @Provides
@@ -45,6 +46,9 @@ object DatabaseModule {
     fun provideRosaryContentDao(db: SQLiteDatabase) = RosaryContentDao(db)
 
     @Provides
+    fun provideSaintsContentDao(db: SQLiteDatabase) = SaintsContentDao(db)
+
+    @Provides
     fun provideRosarySessionDao(db: UserDatabase) = db.rosarySessionDao()
 
     @Provides
@@ -61,4 +65,7 @@ object DatabaseModule {
 
     @Provides
     fun providePrayerLogDao(db: UserDatabase) = db.prayerLogDao()
+
+    @Provides
+    fun provideFavoriteSaintDao(db: UserDatabase) = db.favoriteSaintDao()
 }

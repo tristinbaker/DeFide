@@ -7,6 +7,7 @@ import com.tristinbaker.defide.data.model.Mystery
 import com.tristinbaker.defide.data.model.Novena
 import com.tristinbaker.defide.data.model.NovenaDay
 import com.tristinbaker.defide.data.model.Prayer
+import com.tristinbaker.defide.data.model.Saint
 import com.tristinbaker.defide.data.model.Translation
 import com.tristinbaker.defide.data.model.Verse
 
@@ -74,6 +75,16 @@ fun Cursor.toMysteryBead() = MysteryBead(
     mysteryTitle = getStringOrNull("mystery_title"),
     mysteryScripture = getStringOrNull("mystery_scripture"),
     mysteryMeditation = getStringOrNull("mystery_meditation"),
+)
+
+fun Cursor.toSaint() = Saint(
+    id = getString(getColumnIndexOrThrow("id")),
+    name = getString(getColumnIndexOrThrow("name")),
+    feastDate = getStringOrNull("feast_date"),
+    shortBio = getString(getColumnIndexOrThrow("short_bio")),
+    fullBio = getString(getColumnIndexOrThrow("full_bio")),
+    patronage = getStringOrNull("patronage"),
+    category = getString(getColumnIndexOrThrow("category")),
 )
 
 private fun Cursor.getStringOrNull(column: String): String? {

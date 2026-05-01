@@ -1,0 +1,11 @@
+Added:
+- Saints section: browse 53 well-known Catholic saints with name, feast day, biography, and patronage
+- Favorite saints: star any saint to pin them to the top of the list; favorites persist across app restarts
+- Saints search: filter the list by name or patronage
+- Font style setting in Settings > Appearance: choose Serif (classic), Sans-serif, or System default
+- Status bar color now matches the app header in both light and dark mode
+- Rosary junction style setting in Settings > Rosary: choose Bead or Triangle for the center connector marker
+
+Technical:
+- Content database bumped to v25 (added saints table with 53 saints in 7 languages)
+- User database bumped to v4 (added favorite_saints table)

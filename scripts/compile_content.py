@@ -325,6 +325,21 @@ def create_schema(conn: sqlite3.Connection) -> None:
             mystery_meditation TEXT
         );
 
+        -- Saints
+        CREATE TABLE IF NOT EXISTS saints (
+            id         TEXT NOT NULL,
+            language   TEXT NOT NULL DEFAULT 'en',
+            name       TEXT NOT NULL,
+            feast_date TEXT,
+            short_bio  TEXT NOT NULL,
+            full_bio   TEXT NOT NULL,
+            patronage  TEXT,
+            category   TEXT NOT NULL,
+            PRIMARY KEY (id, language)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_saints_language ON saints(language, name);
+
         -- Indexes for fast chapter / book lookups
         CREATE INDEX IF NOT EXISTS idx_verses_book_chapter ON verses(book_id, chapter);
         CREATE INDEX IF NOT EXISTS idx_books_translation ON books(translation_id, book_number);
@@ -346,6 +361,7 @@ _TRANSLATION_BOOK_ID_OFFSET = {
     "crampon":    7001,
     "rk1998":     8001,
     "platense":   9001,
+    "sg":         10001,
 }
 
 # Portuguese display names for Ave-Maria, keyed by DR filename (no extension).
@@ -816,6 +832,180 @@ _LT_BOOK_NAMES = {
 }
 
 
+# Studium Biblicum (思高圣经) filename -> DR key mapping (only entries that differ).
+_SG_FILENAME_TO_DR = {
+    "Joshua":           "Josue",
+    "1_Samuel":         "1 Kings",
+    "2_Samuel":         "2 Kings",
+    "1_Kings":          "3 Kings",
+    "2_Kings":          "4 Kings",
+    "1_Chronicles":     "1 Paralipomenon",
+    "2_Chronicles":     "2 Paralipomenon",
+    "Ezra":             "1 Esdras",
+    "Nehemiah":         "2 Esdras",
+    "Tobit":            "Tobias",
+    "1_Maccabees":      "1 Machabees",
+    "2_Maccabees":      "2 Machabees",
+    "Song_of_Songs":    "Canticles",
+    "Isaiah":           "Isaias",
+    "Jeremiah":         "Jeremias",
+    "Ezekiel":          "Ezechiel",
+    "Hosea":            "Osee",
+    "Obadiah":          "Abdias",
+    "Jonah":            "Jonas",
+    "Micah":            "Micheas",
+    "Habakkuk":         "Habacuc",
+    "Zephaniah":        "Sophonias",
+    "Haggai":           "Aggeus",
+    "Zechariah":        "Zacharias",
+    "Malachi":          "Malachias",
+    "1_Corinthians":    "1 Corinthians",
+    "2_Corinthians":    "2 Corinthians",
+    "1_Thessalonians":  "1 Thessalonians",
+    "2_Thessalonians":  "2 Thessalonians",
+    "1_Timothy":        "1 Timothy",
+    "2_Timothy":        "2 Timothy",
+    "1_Peter":          "1 Peter",
+    "2_Peter":          "2 Peter",
+    "1_John":           "1 John",
+    "2_John":           "2 John",
+    "3_John":           "3 John",
+    "Revelation":       "Apocalypse",
+}
+
+_ZH_BOOK_NAMES = {
+    "Genesis":          "创世纪",
+    "Exodus":           "出谷纪",
+    "Leviticus":        "肋未纪",
+    "Numbers":          "民数纪",
+    "Deuteronomy":      "申命纪",
+    "Josue":            "若苏厄书",
+    "Judges":           "民长纪",
+    "Ruth":             "卢德传",
+    "1 Kings":          "撒慕尔纪上",
+    "2 Kings":          "撒慕尔纪下",
+    "3 Kings":          "列王纪上",
+    "4 Kings":          "列王纪下",
+    "1 Paralipomenon":  "编年纪上",
+    "2 Paralipomenon":  "编年纪下",
+    "1 Esdras":         "厄斯德拉上",
+    "2 Esdras":         "厄斯德拉下",
+    "Tobias":           "多俾亚传",
+    "Judith":           "友弟德传",
+    "Esther":           "艾斯德尔传",
+    "1 Machabees":      "玛加伯上",
+    "2 Machabees":      "玛加伯下",
+    "Job":              "约伯传",
+    "Psalms":           "圣咏集",
+    "Proverbs":         "箴言",
+    "Ecclesiastes":     "训道篇",
+    "Canticles":        "雅歌",
+    "Wisdom":           "智慧篇",
+    "Ecclesiasticus":   "德训篇",
+    "Isaias":           "依撒意亚",
+    "Jeremias":         "耶肋米亚",
+    "Lamentations":     "哀歌",
+    "Baruch":           "巴路克",
+    "Ezechiel":         "厄则克耳",
+    "Daniel":           "达尼尔",
+    "Osee":             "欧瑟亚",
+    "Joel":             "岳厄尔",
+    "Amos":             "亚毛斯",
+    "Abdias":           "亚北底亚",
+    "Jonas":            "约纳",
+    "Micheas":          "米该亚",
+    "Nahum":            "纳鸿",
+    "Habacuc":          "哈巴谷",
+    "Sophonias":        "索福尼亚",
+    "Aggeus":           "哈盖",
+    "Zacharias":        "匝加利亚",
+    "Malachias":        "玛拉基亚",
+    "Matthew":          "玛窦福音",
+    "Mark":             "马尔谷福音",
+    "Luke":             "路加福音",
+    "John":             "若望福音",
+    "Acts":             "宗徒大事录",
+    "Romans":           "罗马书",
+    "1 Corinthians":    "格林多前书",
+    "2 Corinthians":    "格林多后书",
+    "Galatians":        "加拉达书",
+    "Ephesians":        "厄弗所书",
+    "Philippians":      "斐理伯书",
+    "Colossians":       "哥罗森书",
+    "1 Thessalonians":  "得撒洛尼前书",
+    "2 Thessalonians":  "得撒洛尼后书",
+    "1 Timothy":        "弟茂德前书",
+    "2 Timothy":        "弟茂德后书",
+    "Titus":            "弟铎书",
+    "Philemon":         "费肋孟书",
+    "Hebrews":          "希伯来书",
+    "James":            "雅各伯书",
+    "1 Peter":          "伯多禄前书",
+    "2 Peter":          "伯多禄后书",
+    "1 John":           "若望一书",
+    "2 John":           "若望二书",
+    "3 John":           "若望三书",
+    "Jude":             "犹大书",
+    "Apocalypse":       "默示录",
+}
+
+
+def compile_sg(conn: sqlite3.Connection) -> None:
+    """Compiles the Studium Biblicum (思高圣经) Chinese Catholic Bible."""
+    translation_dir = os.path.join(CONTENT_DIR, "bible", "zh", "sg")
+    books_dir = os.path.join(translation_dir, "books")
+    meta_path = os.path.join(translation_dir, "metadata.json")
+
+    if not os.path.isdir(books_dir):
+        print("  SKIP: content/bible/zh/sg/books not found.")
+        return
+
+    with open(meta_path) as f:
+        meta = json.load(f)
+
+    conn.execute(
+        "INSERT OR REPLACE INTO translations VALUES (?, ?, ?, ?)",
+        (meta["id"], meta["name"], meta["language"], meta["license"]),
+    )
+
+    book_files = sorted(os.listdir(books_dir))
+    verse_rows = []
+    book_id_counter = _TRANSLATION_BOOK_ID_OFFSET["sg"]
+
+    for filename in book_files:
+        if not filename.endswith(".json"):
+            continue
+        sg_name = filename[:-5]
+        dr_name = _SG_FILENAME_TO_DR.get(sg_name, sg_name)
+        if dr_name not in BOOK_MANIFEST:
+            print(f"  WARN: unknown book '{sg_name}' -> '{dr_name}', skipping")
+            continue
+
+        book_number, testament, short_name, _ = BOOK_MANIFEST[dr_name]
+        full_name = _ZH_BOOK_NAMES.get(dr_name, dr_name)
+        book_id = book_id_counter
+        book_id_counter += 1
+
+        conn.execute(
+            "INSERT INTO books VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (book_id, meta["id"], book_number, testament, short_name, full_name, dr_name),
+        )
+
+        with open(os.path.join(books_dir, filename)) as f:
+            data = json.load(f)
+
+        for chapter_str, verses in sorted(data.items(), key=lambda x: int(x[0])):
+            for verse_str, text in sorted(verses.items(), key=lambda x: int(x[0])):
+                verse_rows.append((book_id, int(chapter_str), int(verse_str), text))
+
+    conn.executemany(
+        "INSERT INTO verses (book_id, chapter, verse, text) VALUES (?, ?, ?, ?)",
+        verse_rows,
+    )
+    conn.execute("INSERT INTO verses_fts(verses_fts) VALUES('rebuild')")
+    print(f"  {meta['name']}: {len(verse_rows)} total verses indexed.")
+
+
 def compile_dr_format(
     conn: sqlite3.Connection,
     translation_id: str,
@@ -1126,6 +1316,27 @@ def compile_rosary(conn: sqlite3.Connection, lang: str, variant: str = "dominica
     print(f"  Rosary ({lang}, {variant}): {len(mystery_sets)} mystery sets, {total_beads} total beads.")
 
 
+def compile_saints(conn: sqlite3.Connection, lang: str) -> None:
+    path = os.path.join(CONTENT_DIR, "saints", lang, "saints.json")
+    if not os.path.exists(path):
+        print(f"  SKIP: {path} not found.")
+        return
+    with open(path) as f:
+        saints = json.load(f)
+
+    if not saints:
+        print(f"  SKIP: saints.json ({lang}) is empty.")
+        return
+
+    for s in saints:
+        conn.execute(
+            "INSERT OR REPLACE INTO saints (id, language, name, feast_date, short_bio, full_bio, patronage, category) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            (s["id"], lang, s["name"], s.get("feast_date"), s["short_bio"], s["full_bio"],
+             s.get("patronage"), s["category"]),
+        )
+    print(f"  Saints ({lang}): {len(saints)} entries loaded.")
+
+
 def main() -> None:
     os.makedirs(os.path.dirname(OUT_DB), exist_ok=True)
 
@@ -1166,6 +1377,9 @@ def main() -> None:
         print("Compiling Bible (Biblia Platense — Spanish)...")
         compile_dr_format(conn, "platense", lang="es", book_full_names=_ES_BOOK_NAMES)
 
+        print("Compiling Bible (思高圣经 — Chinese)...")
+        compile_sg(conn)
+
         print("Compiling Catechism...")
         compile_catechism(conn)
 
@@ -1192,6 +1406,15 @@ def main() -> None:
         compile_rosary(conn, "fr")
         compile_rosary(conn, "lt")
         compile_rosary(conn, "es")
+
+        print("Compiling Saints...")
+        compile_saints(conn, "en")
+        compile_saints(conn, "es")
+        compile_saints(conn, "fr")
+        compile_saints(conn, "lt")
+        compile_saints(conn, "pt-BR")
+        compile_saints(conn, "pt-PT")
+        compile_saints(conn, "zh-CN")
 
         conn.commit()
 
