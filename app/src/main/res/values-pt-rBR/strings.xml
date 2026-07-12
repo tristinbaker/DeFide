@@ -131,7 +131,7 @@
     <string name="saints_patronage_label">Padroeiro</string>
     <string name="saints_search_hint">Buscar santos…</string>
     <string name="saints_sort_name">Por nome</string>
-    <string name="saints_sort_feast">By Feast Day</string>
+    <string name="saints_sort_feast">Pelo Dia da Festa</string>
     <string name="saints_not_available">Os Santos ainda não estão disponíveis no seu idioma. Você pode ajudar contribuindo no GitHub.</string>
     <string name="action_back">Voltar</string>
     <string name="action_complete">Concluir</string>
@@ -256,7 +256,7 @@
     <string name="confession_mark_confessed">Eu fiz minha confissão</string>
     <string name="confession_confirm_title">Registrar confissão?</string>
     <string name="confession_confirm_text">Isso vai registrar hoje como sua última confissão e limpar suas anotações pendentes.</string>
-    <string name="confession_confirm">Confirm</string>
+    <string name="confession_confirm">Confirmar</string>
     <string name="confession_no_notes">Sem anotações pendentes.</string>
     <string name="confession_no_records">Nenhuma confissão registrada ainda.</string>
     <string name="confession_last_on">Confissão em %s</string>
@@ -282,7 +282,7 @@
     <string name="lang_pt_BR">Português (Brasil)</string>
     <string name="lang_zh_CN">Chinês (Simplificado)</string>
     <string name="lang_it">Italiano</string>
-    <string name="lang_la">Latim</string>
+    <string name="lang_la">Latina</string>
     <string name="section_rite">Rito</string>
     <string name="rite_modern">Moderno</string>
     <string name="rite_modern_desc">Língua vernácula, segundo as rubricas atualmente em vigor</string>
