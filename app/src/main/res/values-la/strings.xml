@@ -7,7 +7,6 @@
     <string name="loading">Legimus…</string>
     <string name="bible_streak">Biblia Continua</string>
     <string name="rosary_streak">Rosarium Continuum</string>
-
     <!-- Navigation -->
     <string name="nav_home">Domus</string>
     <string name="nav_rosary">Rosarium</string>
@@ -18,7 +17,6 @@
     <string name="nav_novenas">Novenae</string>
     <string name="nav_settings">Optiones</string>
     <string name="nav_saints">Sancti</string>
-
     <!-- Settings -->
     <string name="settings_title">Optiones</string>
     <string name="app_language">Lingua</string>
@@ -40,21 +38,17 @@
     <string name="ordinal_fourth">Quartum</string>
     <string name="ordinal_fifth">Quintum</string>
     <string name="the_nth_mystery">Mysterium %s</string>
-
     <!-- Catechism -->
-    <string name="catechism_dialog_title">Catechismus Elige</string>
+    <string name="catechism_dialog_title">Catechismum Elige</string>
     <string name="catechism_dialog_text">Selige quem catechismum legere:</string>
     <string name="catechism_option_ccc">Catechismus Ecclesiae Catholicae (Online)</string>
     <string name="catechism_option_baltimore">Catechismus Baltimorensis (Offline)</string>
     <string name="catechism_option_compendium">Compendium Catechismi (Offline)</string>
     <string name="compendium_title">Compendium Catechismi</string>
-
     <!-- Divine Office -->
     <string name="divine_office_title">Liturgia Horarum</string>
-
     <!-- Rosary -->
     <string name="rosary_title">Rosarium</string>
-
     <!-- Saints -->
     <string name="saints_title">Sancti</string>
     <string name="saints_favorites_section">Devotiones Meae</string>
@@ -64,11 +58,22 @@
     <string name="saints_sort_name">Secundum Nomen</string>
     <string name="saints_sort_feast">Secundum Festum</string>
     <string name="saints_sort_popularity">Secundum Popularitatem</string>
-
     <!-- General -->
-    <string name="action_cancel">Cancella</string>
-
+    <string name="action_cancel">Interrumpe</string>
     <!-- General -->
     <string name="answer_label">Responsum</string>
     <string name="tap_to_reveal">Tange ut rétegeres</string>
+    <string name="action_open">Aperi</string>
+    <string name="action_delete">Dele</string>
+    <string name="action_ok">Bene</string>
+    <string name="action_save">Conserva</string>
+    <string name="action_turn_off">Extingue</string>
+    <string name="action_all">Omnia</string>
+    <string name="loth_dialog_title">Divinum Officium</string>
+    <string name="prayers_title">Orationes</string>
+    <string name="loth_dialog_text">Volesne Liturgiam Horarum aperire in rete, an extra rete Divinum Officum navigare?</string>
+    <string name="loth_option_online">Liturgia Horarum (Online)</string>
+    <string name="loth_option_offline">Divinum Officium (Offline)</string>
+    <string name="search_prayers_hint">Quaere orationibus…</string>
+    <string name="tag_label">Pittacium</string>
 </resources>
