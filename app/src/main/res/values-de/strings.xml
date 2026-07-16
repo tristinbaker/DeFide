@@ -80,7 +80,7 @@
     <!-- Confession log -->
     <string name="nav_confession">Beichte</string>
     <string name="confession_title">Beichte</string>
-    <string name="confession_notes_title">Pending Notes</string>
+    <string name="confession_notes_title">Austehende Notizen</string>
     <string name="confession_history_title">Vergangene Beichten</string>
     <string name="confession_add_hint">Schreib auf, woran Du Dich erinnern möchtest…</string>
     <string name="confession_add_label">Notiz hinzufügen</string>
@@ -89,7 +89,7 @@
     <string name="confession_confirm_text">Dadurch wird der heutige Tag als Ihre letzte Beichte erfasst und Ihre ausstehenden Notizen werden gelöscht.</string>
     <string name="confession_confirm">Bestätigen</string>
     <string name="confession_no_notes">Keine ausstehenden Notizen.</string>
-    <string name="confession_no_records">No confessions recorded yet.</string>
+    <string name="confession_no_records">Es wurde noch keine Beichte aufgezeichnet.</string>
     <string name="confession_last_on">Beichte am %s</string>
     <string name="confession_delete_record_title">Aufzeichnungen löschen?</string>
     <string name="confession_delete_record_text">Dies löscht die Beichte endgültig aus dem Verlauf.</string>
@@ -98,7 +98,7 @@
     <string name="rosary_intention_hint">Geheimnis %d…</string>
     <string name="rosary_clear_intentions">Alles löschen</string>
     <string name="rosary_save_intentions">Speichern</string>
-    <string name="rosary_your_intention">Intention: %s</string>
+    <string name="rosary_your_intention">Andacht: %s</string>
     <string name="action_ok">OK</string>
     <string name="catechism_option_ccc">Katechismus der Katholischen Kirche (Online)</string>
     <string name="catechism_option_baltimore">Baltimore-Katechismus (Offline)</string>
@@ -158,7 +158,7 @@
     <string name="novena_empty">Noch keine Novene gestartet.</string>
     <string name="novena_not_available">Novenen sind in Ihrer Sprache nicht verfügbar. Sie können helfen, indem Sie Übersetzungen hinzufügen - öffnen Sie einen pull request auf GitHub mit einer übersetzten novenas.json Datei.</string>
     <string name="novena_contribute_action">GitHub öffnen</string>
-    <string name="lang_it">Italien</string>
+    <string name="lang_it">Italienisch</string>
     <string name="rite_traditional_desc">Gebete in Landessprache, Antiphone und Hymnen auf Latein</string>
     <string name="rite_latin">Latein</string>
     <string name="rite_latin_desc">Vollständig Latein, Rubriken von 1962</string>
