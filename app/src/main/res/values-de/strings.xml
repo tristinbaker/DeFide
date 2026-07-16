@@ -115,7 +115,7 @@
     <string name="novena_day">Tag %d</string>
     <string name="novena_mark_complete">Tag als fertig markieren</string>
     <string name="novena_complete_msg">Novene vollendet!</string>
-    <string name="novena_in_progress">Im Gange</string>
+    <string name="novena_in_progress">In Bearbeitung</string>
     <string name="novena_section_completed">Vollendet</string>
     <string name="nav_rosary">Rosenkranz</string>
     <string name="nav_bible">Bibel</string>
@@ -155,9 +155,9 @@
     <string name="lang_pt_PT">Portugiesisch (Portugal)</string>
     <string name="lang_zh_CN">Chinesisch (vereinfacht)</string>
     <string name="lang_la">Latein</string>
-    <string name="novena_empty">Noch keine Novene gestartet.</string>
-    <string name="novena_not_available">Novenen sind in Ihrer Sprache nicht verfügbar. Sie können helfen, indem Sie Übersetzungen hinzufügen - öffnen Sie einen pull request auf GitHub mit einer übersetzten novenas.json Datei.</string>
-    <string name="novena_contribute_action">GitHub öffnen</string>
+    <string name="novena_empty">Noch keine Novenen begonnen.</string>
+    <string name="novena_not_available">Novenen sind in Ihrer Sprache noch nicht verfügbar. Sie können helfen, indem Sie Übersetzungen beisteuern - eröffnen Sie eine pull request auf GitHub mit einer übersetzten novenas.json Datei.</string>
+    <string name="novena_contribute_action">Öffne GitHub</string>
     <string name="lang_it">Italienisch</string>
     <string name="rite_traditional_desc">Gebete in Landessprache, Antiphone und Hymnen auf Latein</string>
     <string name="rite_latin">Latein</string>
