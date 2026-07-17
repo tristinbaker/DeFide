@@ -20,14 +20,14 @@
     <!-- Settings -->
     <string name="settings_title">Optiones</string>
     <string name="app_language">Lingua</string>
-    <string name="lang_en">Anglice</string>
-    <string name="lang_es">Hispanice</string>
-    <string name="lang_fr">Gallice</string>
-    <string name="lang_lt">Lituanice</string>
-    <string name="lang_pt_BR">Portugallice (Brasilia)</string>
-    <string name="lang_pt_PT">Portugallice (Lusitania)</string>
-    <string name="lang_zh_CN">Sinice (Simplificata)</string>
-    <string name="lang_it">Italice</string>
+    <string name="lang_en">Anglica</string>
+    <string name="lang_es">Hispanica</string>
+    <string name="lang_fr">Francogallica</string>
+    <string name="lang_lt">Lithuanica</string>
+    <string name="lang_pt_BR">Lusitana (Brasilia)</string>
+    <string name="lang_pt_PT">Lusitana (Lusitania)</string>
+    <string name="lang_zh_CN">Sinensis (Simplificata)</string>
+    <string name="lang_it">Italica</string>
     <string name="lang_la">Latina</string>
     <string name="rite_modern">Moderna</string>
     <string name="rite_traditional">Traditionis</string>
@@ -76,4 +76,11 @@
     <string name="loth_option_offline">Divinum Officium (Offline)</string>
     <string name="search_prayers_hint">Quaere orationibus…</string>
     <string name="tag_label">Pittacium</string>
+    <string name="prayed_today">Oratus hodie</string>
+    <string name="theme_system">Systematis</string>
+    <string name="theme_light">Clarus</string>
+    <string name="theme_dark">Obscurus</string>
+    <string name="theme_amoled">Furvus AMOLED</string>
+    <string name="theme_dynamic">Dynamicus</string>
+    <string name="section_language">Lingua</string>
 </resources>
