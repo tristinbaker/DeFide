@@ -83,4 +83,12 @@
     <string name="theme_amoled">Furvus AMOLED</string>
     <string name="theme_dynamic">Dynamicus</string>
     <string name="section_language">Lingua</string>
+    <string name="translate_cta">Volesne translationem adiungere vel meliorem facere? Contribue in Weblate.</string>
+    <string name="section_appearance">Species</string>
+    <string name="section_bible_translation">Translatio Bibliorum</string>
+    <string name="section_rite">Ritus</string>
+    <string name="rite_traditional_desc">Orationes in lingua vernacula, antiphonae hymnique in lingua latina</string>
+    <string name="rite_latin_desc">Omnia latine, rubricae anni 1962</string>
+    <string name="rite_modern_desc">Lingua vernacula, rubricae hodiernae</string>
+    <string name="rite_explanatory">Mutat Divinum Officium Rosarium Orationesque.</string>
 </resources>
