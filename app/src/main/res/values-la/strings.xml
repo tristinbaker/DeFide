@@ -91,4 +91,7 @@
     <string name="rite_latin_desc">Omnia latine, rubricae anni 1962</string>
     <string name="rite_modern_desc">Lingua vernacula, rubricae hodiernae</string>
     <string name="rite_explanatory">Mutat Divinum Officium Rosarium Orationesque.</string>
+    <string name="section_notifications">Nuntia</string>
+    <string name="novena_reminder_label">Admonitio Novenae</string>
+    <string name="daily_at">Cotidianus hora %s</string>
 </resources>
