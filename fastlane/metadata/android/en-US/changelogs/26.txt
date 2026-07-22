@@ -1,0 +1,5 @@
+• Fixed Rosary scripture links always opening the English Bible instead of your chosen translation
+• Fixed today's Rosary mystery on the home screen not showing in your chosen language
+• Added a link to the GitHub page when tapping the version number in Settings > About
+• Added a Full Screen option in Settings to hide the status bar for a distraction-free prayer experience
+• Added an Overcoming Sin habit tracker to the home screen: add a habit, track your streak, and log a slip when it happens

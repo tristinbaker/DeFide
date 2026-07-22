@@ -26,6 +26,7 @@
     <string name="translate_cta">Vuoi aggiungere o migliorare una traduzione? Contribuisci su Weblate.</string>
     <string name="section_bible_translation">Traduzione della Bibbia</string>
     <string name="keep_screen_on_label">Mantieni lo schermo acceso mentre usi l\'app</string>
+    <string name="full_screen_label">Nascondi la barra di stato mentre usi l\'app</string>
     <string name="section_notifications">Notifiche</string>
     <string name="novena_reminder_label">Promemoria Novena</string>
     <string name="daily_at">Ogni giorno alle %s</string>
@@ -129,6 +130,11 @@
     <string name="loading">Caricamento…</string>
     <string name="bible_streak">Letture consecutive della Bibbia</string>
     <string name="rosary_streak">Rosari consecutivi</string>
+    <string name="sin_streak_section">Vincere il Peccato</string>
+    <string name="sin_streak_add">Aggiungi un\'Abitudine</string>
+    <string name="sin_streak_add_hint">es. Orgoglio, Maldicenza, Impazienza</string>
+    <string name="sin_streak_relapse_prompt">Ci sei ricaduto oggi?</string>
+    <string name="sin_streak_relapse_button">Sì, ci sono ricaduto oggi</string>
     <string name="bible_bookmarks_hint">Premi a lungo un versetto nel lettore per aggiungerne uno.</string>
     <string name="novena_title">Novene</string>
     <string name="novena_my_novenas">Mie Novene</string>

@@ -151,6 +151,10 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch { prefsRepository.setKeepScreenOn(enabled) }
     }
 
+    fun setFullScreenMode(enabled: Boolean) {
+        viewModelScope.launch { prefsRepository.setFullScreenMode(enabled) }
+    }
+
     fun setRosaryOrder(order: RosaryOrder) {
         viewModelScope.launch { prefsRepository.setRosaryOrder(order) }
     }

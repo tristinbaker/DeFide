@@ -19,8 +19,8 @@ android {
         applicationId = "com.tristinbaker.defide"
         minSdk = 26
         targetSdk = 35
-        versionCode = 25
-        versionName = "2.0.8"
+        versionCode = 26
+        versionName = "2.0.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -26,6 +26,7 @@
     <string name="translate_cta">Wollen Sie eine Übersetzung verbessern oder hinzufügen? Auf Weblate mitwirken.</string>
     <string name="section_bible_translation">Bibelübersetzung</string>
     <string name="keep_screen_on_label">Bildschirm während der Nutzung der App eingeschaltet lassen</string>
+    <string name="full_screen_label">Statusleiste während der Nutzung der App ausblenden</string>
     <string name="section_notifications">Benachrichtigungen</string>
     <string name="novena_reminder_label">Erinnerung für Novenen</string>
     <string name="daily_at">Täglich um %s</string>

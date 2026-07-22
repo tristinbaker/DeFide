@@ -8,6 +8,7 @@ import com.tristinbaker.defide.data.preferences.contentLanguage
 import com.tristinbaker.defide.data.preferences.language
 import com.tristinbaker.defide.data.repository.BibleRepository
 import com.tristinbaker.defide.data.repository.RosaryRepository
+import com.tristinbaker.defide.data.repository.SinHabitRepository
 import com.tristinbaker.defide.ui.rosary.suggestedMysteryId
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -30,11 +32,13 @@ data class VerseOfDay(
     val verse: Int,
 )
 data class TodaysMystery(val id: String, val name: String, val traditionalDays: String?)
+data class SinHabitUi(val id: String, val name: String, val streak: Int)
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val bibleRepository: BibleRepository,
     private val rosaryRepository: RosaryRepository,
+    private val sinHabitRepository: SinHabitRepository,
     private val prefsRepository: UserPreferencesRepository,
 ) : ViewModel() {
 
@@ -59,6 +63,26 @@ class HomeViewModel @Inject constructor(
     val rosaryStreak: StateFlow<Int> = rosaryRepository.getCompletedSessions()
         .map { RosaryRepository.computeRosaryStreak(it) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+
+    val sinHabits: StateFlow<List<SinHabitUi>> = sinHabitRepository.getAll()
+        .map { habits ->
+            habits.map { SinHabitUi(it.id, it.name, SinHabitRepository.computeStreak(it)) }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    fun addSinHabit(name: String) {
+        val trimmed = name.trim()
+        if (trimmed.isEmpty()) return
+        viewModelScope.launch { sinHabitRepository.addHabit(trimmed) }
+    }
+
+    fun logSinRelapse(id: String) {
+        viewModelScope.launch { sinHabitRepository.logRelapse(id) }
+    }
+
+    fun removeSinHabit(id: String) {
+        viewModelScope.launch { sinHabitRepository.removeHabit(id) }
+    }
 
     init {
         viewModelScope.launch {
@@ -89,11 +113,10 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val mysteryId = suggestedMysteryId()
             prefsRepository.preferences
-                .map { it.appRite }
-                .distinctUntilChanged()
-                .collect { rite ->
-                    // Traditional: mystery titles in English; LATIN/MODERN: mystery titles in local language
-                    val mysteryLang = rite.language
+                .distinctUntilChangedBy { it.appRite to it.appLanguage }
+                .collect { prefs ->
+                    // MODERN rite uses the user's appLanguage; TRADITIONAL/LATIN use a fixed rite language
+                    val mysteryLang = if (prefs.appRite == AppRite.MODERN) prefs.appLanguage else prefs.appRite.language
                     rosaryRepository.getMysteries(mysteryLang).find { it.id == mysteryId }?.let {
                         _todaysMystery.value = TodaysMystery(it.id, it.name, it.traditionalDays)
                     }

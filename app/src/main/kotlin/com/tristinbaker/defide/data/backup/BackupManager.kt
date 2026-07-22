@@ -33,6 +33,7 @@ class BackupManager @Inject constructor(
             "novena_progress",
             "prayer_log",
             "favorite_saints",
+            "sin_habits",
         )
     }
 
@@ -68,6 +69,7 @@ class BackupManager @Inject constructor(
         put("bible_last_book_number", prefs.bibleLastBookNumber)
         put("bible_last_chapter", prefs.bibleLastChapter)
         put("keep_screen_on", prefs.keepScreenOn)
+        put("full_screen_mode", prefs.fullScreenMode)
         put("rosary_order", prefs.rosaryOrder.name)
         put("rosary_haptic_feedback", prefs.rosaryHapticFeedback)
         put("rosary_narration_enabled", prefs.rosaryNarrationEnabled)
@@ -87,6 +89,7 @@ class BackupManager @Inject constructor(
         prefsRepository.setNovenaNotificationTime(json.optString("novena_notification_time"))
         prefsRepository.setBibleStreakGoal(json.optInt("bible_streak_goal", 1))
         prefsRepository.setKeepScreenOn(json.optBoolean("keep_screen_on", false))
+        prefsRepository.setFullScreenMode(json.optBoolean("full_screen_mode", false))
         json.optString("rosary_order").takeIf { it.isNotEmpty() }
             ?.let { runCatching { RosaryOrder.valueOf(it) }.getOrNull() }
             ?.let { prefsRepository.setRosaryOrder(it) }

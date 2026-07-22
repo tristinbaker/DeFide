@@ -26,6 +26,7 @@
     <string name="translate_cta">想要添加或改进翻译？在Weblate网站上参与贡献。</string>
     <string name="section_bible_translation">圣经翻译</string>
     <string name="keep_screen_on_label">使用应用程序时保持屏幕为开启状态</string>
+    <string name="full_screen_label">使用应用程序时隐藏状态栏</string>
     <string name="section_notifications">通知</string>
     <string name="novena_reminder_label">九日敬礼</string>
     <string name="daily_at">每日%s</string>

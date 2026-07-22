@@ -24,6 +24,7 @@
     <string name="translate_cta">Хотите добавить или улучшить перевод? Внесите вклад через Weblate.</string>
     <string name="section_bible_translation">Перевод Библии</string>
     <string name="keep_screen_on_label">Не выключать экран при использовании приложения</string>
+    <string name="full_screen_label">Скрывать строку состояния при использовании приложения</string>
     <string name="section_notifications">Уведомления</string>
     <string name="novena_reminder_label">Напоминание о новене</string>
     <string name="daily_at">Ежедневно в %s</string>
@@ -132,6 +133,11 @@
     <string name="loading">Загрузка…</string>
     <string name="bible_streak">Библейская серия</string>
     <string name="rosary_streak">Серия розария</string>
+    <string name="sin_streak_section">Преодоление греха</string>
+    <string name="sin_streak_add">Добавить привычку</string>
+    <string name="sin_streak_add_hint">напр. Гордость, Сплетни, Нетерпение</string>
+    <string name="sin_streak_relapse_prompt">Вы поддались этому сегодня?</string>
+    <string name="sin_streak_relapse_button">Да, я поддался сегодня</string>
     <string name="rosary_title">Розарий</string>
     <string name="select_mystery">Выберите тайну</string>
     <string name="section_rosary">Розарий</string>

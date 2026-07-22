@@ -13,6 +13,7 @@ import com.tristinbaker.defide.data.db.user.dao.FavoriteSaintDao
 import com.tristinbaker.defide.data.db.user.dao.NovenaProgressDao
 import com.tristinbaker.defide.data.db.user.dao.PrayerLogDao
 import com.tristinbaker.defide.data.db.user.dao.RosarySessionDao
+import com.tristinbaker.defide.data.db.user.dao.SinHabitDao
 import com.tristinbaker.defide.data.db.user.entity.BibleBookmarkEntity
 import com.tristinbaker.defide.data.db.user.entity.BibleChapterReadEntity
 import com.tristinbaker.defide.data.db.user.entity.BibleHighlightEntity
@@ -22,6 +23,7 @@ import com.tristinbaker.defide.data.db.user.entity.FavoriteSaintEntity
 import com.tristinbaker.defide.data.db.user.entity.NovenaProgressEntity
 import com.tristinbaker.defide.data.db.user.entity.PrayerLogEntity
 import com.tristinbaker.defide.data.db.user.entity.RosarySessionEntity
+import com.tristinbaker.defide.data.db.user.entity.SinHabitEntity
 
 @Database(
     entities = [
@@ -34,8 +36,9 @@ import com.tristinbaker.defide.data.db.user.entity.RosarySessionEntity
         FavoriteSaintEntity::class,
         ConfessionNoteEntity::class,
         ConfessionRecordEntity::class,
+        SinHabitEntity::class,
     ],
-    version = 5,
+    version = 6,
     exportSchema = true,
 )
 abstract class UserDatabase : RoomDatabase() {
@@ -48,6 +51,7 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun favoriteSaintDao(): FavoriteSaintDao
     abstract fun confessionNoteDao(): ConfessionNoteDao
     abstract fun confessionRecordDao(): ConfessionRecordDao
+    abstract fun sinHabitDao(): SinHabitDao
 
     companion object {
         val MIGRATION_1_2 = object : Migration(1, 2) {
@@ -110,6 +114,20 @@ abstract class UserDatabase : RoomDatabase() {
                     """CREATE TABLE IF NOT EXISTS `confession_records` (
                         `id` TEXT NOT NULL,
                         `made_at` INTEGER NOT NULL,
+                        PRIMARY KEY(`id`)
+                    )"""
+                )
+            }
+        }
+
+        val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """CREATE TABLE IF NOT EXISTS `sin_habits` (
+                        `id` TEXT NOT NULL,
+                        `name` TEXT NOT NULL,
+                        `created_at` INTEGER NOT NULL,
+                        `last_relapse_at` INTEGER,
                         PRIMARY KEY(`id`)
                     )"""
                 )

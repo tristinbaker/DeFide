@@ -50,6 +50,7 @@ data class UserPreferences(
     val bibleLastBookNumber: Int = 0,
     val bibleLastChapter: Int = 0,
     val keepScreenOn: Boolean = false,
+    val fullScreenMode: Boolean = false,
     val rosaryOrder: RosaryOrder = RosaryOrder.DOMINICAN,
     val rosaryHapticFeedback: Boolean = true,
     val rosaryNarrationEnabled: Boolean = false,
@@ -74,6 +75,7 @@ class UserPreferencesRepository @Inject constructor(
         private val KEY_BIBLE_LAST_BOOK = intPreferencesKey("bible_last_book")
         private val KEY_BIBLE_LAST_CHAPTER = intPreferencesKey("bible_last_chapter")
         private val KEY_KEEP_SCREEN_ON = androidx.datastore.preferences.core.booleanPreferencesKey("keep_screen_on")
+        private val KEY_FULL_SCREEN_MODE = androidx.datastore.preferences.core.booleanPreferencesKey("full_screen_mode")
         private val KEY_ROSARY_ORDER     = stringPreferencesKey("rosary_order")
         private val KEY_ROSARY_HAPTIC    = androidx.datastore.preferences.core.booleanPreferencesKey("rosary_haptic_feedback")
         private val KEY_ROSARY_NARRATION = androidx.datastore.preferences.core.booleanPreferencesKey("rosary_narration_enabled")
@@ -100,6 +102,7 @@ class UserPreferencesRepository @Inject constructor(
             bibleLastBookNumber = prefs[KEY_BIBLE_LAST_BOOK] ?: 0,
             bibleLastChapter = prefs[KEY_BIBLE_LAST_CHAPTER] ?: 0,
             keepScreenOn = prefs[KEY_KEEP_SCREEN_ON] ?: false,
+            fullScreenMode = prefs[KEY_FULL_SCREEN_MODE] ?: false,
             rosaryOrder = prefs[KEY_ROSARY_ORDER]?.let { runCatching { RosaryOrder.valueOf(it) }.getOrNull() } ?: RosaryOrder.DOMINICAN,
             rosaryHapticFeedback = prefs[KEY_ROSARY_HAPTIC] ?: true,
             rosaryNarrationEnabled = prefs[KEY_ROSARY_NARRATION] ?: false,
@@ -142,6 +145,10 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setKeepScreenOn(enabled: Boolean) {
         dataStore.edit { it[KEY_KEEP_SCREEN_ON] = enabled }
+    }
+
+    suspend fun setFullScreenMode(enabled: Boolean) {
+        dataStore.edit { it[KEY_FULL_SCREEN_MODE] = enabled }
     }
 
     suspend fun setRosaryOrder(order: RosaryOrder) {

@@ -26,6 +26,7 @@
     <string name="translate_cta">Norite pridėti ar patobulinti vertimą? Prisidėkite svetainėje.</string>
     <string name="section_bible_translation">Biblijos vertimas</string>
     <string name="keep_screen_on_label">Palikti įjungtą ekraną kol naudojamasi programėle</string>
+    <string name="full_screen_label">Slėpti būsenos juostą kol naudojamasi programėle</string>
     <string name="section_notifications">Pranešimai</string>
     <string name="novena_reminder_label">Novenos priminimas</string>
     <string name="daily_at">Kasdien %s</string>
@@ -86,6 +87,11 @@
     <string name="loading">Kraunasi…</string>
     <string name="bible_streak">Biblijos streak\'as</string>
     <string name="rosary_streak">Rožinio streak\'as</string>
+    <string name="sin_streak_section">Nuodėmės Įveikimas</string>
+    <string name="sin_streak_add">Pridėti Įprotį</string>
+    <string name="sin_streak_add_hint">pvz. Puikybė, Apkalbos, Nekantrumas</string>
+    <string name="sin_streak_relapse_prompt">Ar šiandien tam pasidavei?</string>
+    <string name="sin_streak_relapse_button">Taip, šiandien pasidaviau</string>
     <string name="rosary_title">Rožinis</string>
     <string name="select_mystery">Pasirinkti dalį</string>
     <string name="section_rosary">Rožinis</string>

@@ -62,6 +62,7 @@
     <string name="rite_latin_desc">All Latin, 1962 rubrics</string>
     <string name="rite_explanatory">Affects Divine Office, Rosary, and prayers.</string>
     <string name="keep_screen_on_label">Keep screen on while using app</string>
+    <string name="full_screen_label">Hide status bar while using app</string>
     <string name="section_notifications">Notifications</string>
     <string name="novena_reminder_label">Novena reminder</string>
     <string name="daily_at">Daily at %s</string>
@@ -208,6 +209,11 @@
     <string name="loading">Loading\u2026</string>
     <string name="bible_streak">Bible Streak</string>
     <string name="rosary_streak">Rosary Streak</string>
+    <string name="sin_streak_section">Overcoming Sin</string>
+    <string name="sin_streak_add">Add a Habit</string>
+    <string name="sin_streak_add_hint">e.g. Pride, Gossip, Impatience</string>
+    <string name="sin_streak_relapse_prompt">Did you give in to this today?</string>
+    <string name="sin_streak_relapse_button">Yes, I slipped today</string>
 
     <!-- Rosary screen -->
     <string name="rosary_title">Rosary</string>

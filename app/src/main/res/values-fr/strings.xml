@@ -26,6 +26,7 @@
     <string name="translate_cta">Envie d\'ajouter ou d\'améliorer une traduction ? Contribuez sur Weblate.</string>
     <string name="section_bible_translation">Traduction de la Bible</string>
     <string name="keep_screen_on_label">Garder l\'écran allumé en utilisant l\'application</string>
+    <string name="full_screen_label">Masquer la barre d\'état en utilisant l\'application</string>
     <string name="section_notifications">Notifications</string>
     <string name="novena_reminder_label">Rappel de neuvaine</string>
     <string name="daily_at">Tout les jours à %s</string>
@@ -86,6 +87,11 @@
     <string name="loading">Chargement…</string>
     <string name="bible_streak">Série de lectures bibliques</string>
     <string name="rosary_streak">Série de Rosaires</string>
+    <string name="sin_streak_section">Vaincre le Péché</string>
+    <string name="sin_streak_add">Ajouter une Habitude</string>
+    <string name="sin_streak_add_hint">ex. Orgueil, Médisance, Impatience</string>
+    <string name="sin_streak_relapse_prompt">Y avez-vous cédé aujourd\'hui ?</string>
+    <string name="sin_streak_relapse_button">Oui, j\'y ai cédé aujourd\'hui</string>
     <string name="rosary_title">Rosaire</string>
     <string name="select_mystery">Choisir un mystère</string>
     <string name="today_mystery_prefix">✦ Aujourd\'hui — %s</string>

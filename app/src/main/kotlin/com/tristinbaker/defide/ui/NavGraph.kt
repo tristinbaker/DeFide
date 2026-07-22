@@ -462,7 +462,7 @@ private fun DeFideNavHost(
                             it.shortName.equals(bookName, ignoreCase = true) ||
                             it.drName.equals(bookName, ignoreCase = true)
                         } ?: return@launch
-                        navController.navigate("bible/dra/book/${book.bookNumber}/chapter/$chapter?verse=$verse")
+                        navController.navigate("bible/${bibleViewModel.selectedTranslationId.value}/book/${book.bookNumber}/chapter/$chapter?verse=$verse")
                     }
                 },
             )

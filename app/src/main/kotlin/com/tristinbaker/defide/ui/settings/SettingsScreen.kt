@@ -183,6 +183,22 @@ fun SettingsScreen(
                         onCheckedChange = { viewModel.setKeepScreenOn(it) },
                     )
                 }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        stringResource(R.string.full_screen_label),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Switch(
+                        checked = prefs.fullScreenMode,
+                        onCheckedChange = { viewModel.setFullScreenMode(it) },
+                    )
+                }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
             item {
@@ -617,7 +633,15 @@ fun SettingsScreen(
                     val versionName = remember {
                         context.packageManager.getPackageInfo(context.packageName, 0).versionName
                     }
-                    Text("Version $versionName", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    val uriHandler = LocalUriHandler.current
+                    Text(
+                        "Version $versionName",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.clickable {
+                            uriHandler.openUri("https://github.com/tristinbaker/DeFide")
+                        },
+                    )
                     Text(
                         stringResource(R.string.about_tagline),
                         style = MaterialTheme.typography.bodySmall,
