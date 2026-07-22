@@ -286,4 +286,9 @@
         <item quantity="one">%d Tag</item>
         <item quantity="other">%d Tage</item>
     </plurals>
+    <string name="sin_streak_section">Sünden bezwingen</string>
+    <string name="sin_streak_add">Gewohnheit hinzufügen</string>
+    <string name="sin_streak_add_hint">z.B. Hochmut, Geschwätz, Ungeduld</string>
+    <string name="sin_streak_relapse_prompt">Haben Sie dieser Sünde heute nachgegeben?</string>
+    <string name="sin_streak_relapse_button">Ja, heute bin ich ausgerutscht</string>
 </resources>
