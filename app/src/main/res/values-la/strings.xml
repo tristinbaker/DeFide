@@ -94,4 +94,7 @@
     <string name="section_notifications">Nuntia</string>
     <string name="novena_reminder_label">Admonitio Novenae</string>
     <string name="daily_at">Cotidianus hora %s</string>
+    <string name="section_bible_streak">Series lectionum Bibliorum</string>
+    <string name="chapters_per_day_label">Capitula per diem</string>
+    <string name="section_backup">Reponere &amp; Restituere</string>
 </resources>
