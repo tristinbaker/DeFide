@@ -5,8 +5,8 @@
     <string name="todays_rosary">Rosarium Hodiernum</string>
     <string name="pray_the_rosary">Rosarium Orare</string>
     <string name="loading">Legimus…</string>
-    <string name="bible_streak">Biblia Continua</string>
-    <string name="rosary_streak">Rosarium Continuum</string>
+    <string name="bible_streak">Bibliorum Series</string>
+    <string name="rosary_streak">Rosarii Series</string>
     <!-- Navigation -->
     <string name="nav_home">Domus</string>
     <string name="nav_rosary">Rosarium</string>
@@ -97,4 +97,10 @@
     <string name="section_bible_streak">Series lectionum Bibliorum</string>
     <string name="chapters_per_day_label">Capitula per diem</string>
     <string name="section_backup">Reponere &amp; Restituere</string>
+    <string name="today_mystery_prefix">✦ Hodie — %s</string>
+    <string name="office_laudes">Laudes</string>
+    <string name="office_vespers">Vespera</string>
+    <string name="office_matins">Matutinum</string>
+    <string name="office_completorium">Completorium</string>
+    <string name="office_psalms">Psalmi</string>
 </resources>
