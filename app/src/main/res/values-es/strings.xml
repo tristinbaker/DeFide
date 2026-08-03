@@ -292,4 +292,11 @@
     <string name="office_matins">Matinas</string>
     <string name="office_completorium">Completo</string>
     <string name="office_psalms">Salmos</string>
+    <string name="saint_of_the_day">Santo del día</string>
+    <string name="rosary_reminder_label">Recordatorio del rosario</string>
+    <string name="rosary_reminder_dialog_title">Hora del recordatorio del rosario</string>
+    <string name="rosary_reminder_dialog_desc">Elije la hora para tu recordatorio diario del rosario.</string>
+    <string name="rosary_reminder_notification_title">Recordatorio del rosario</string>
+    <string name="rosary_reminder_notification_text">Es hora de rezar el rosario de hoy.</string>
+    <string name="rosary_intention_in_design_label">Mostrar la intención dentro del rosario</string>
 </resources>

@@ -326,4 +326,11 @@
     <string name="rosary_clear_intentions">Clear All</string>
     <string name="rosary_save_intentions">Save</string>
     <string name="rosary_your_intention">Intention: %s</string>
+    <string name="saint_of_the_day">Saint of the Day</string>
+    <string name="rosary_reminder_label">Rosary reminder</string>
+    <string name="rosary_reminder_dialog_title">Rosary reminder time</string>
+    <string name="rosary_reminder_dialog_desc">Choose the hour for your daily rosary reminder.</string>
+    <string name="rosary_reminder_notification_title">Rosary Reminder</string>
+    <string name="rosary_reminder_notification_text">Time to pray today\'s rosary.</string>
+    <string name="rosary_intention_in_design_label">Show intention inside the rosary</string>
 </resources>

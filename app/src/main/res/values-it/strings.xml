@@ -289,4 +289,11 @@
     <string name="htu_settings_3">Imposta il tuo obiettivo di letture consecutive della Bibbia (capitoli per giorno) sotto Letture Consecutive della Bibbia.</string>
     <string name="htu_settings_4">Abilita il promemoria della novena del giorno sotto Notifiche.</string>
     <string name="confession_confirm_text">Questo registrerà quella di oggi come l\'ultima confessione e cancellerà le note in sospeso.</string>
+    <string name="saint_of_the_day">Santo del giorno</string>
+    <string name="rosary_reminder_label">Promemoria Rosario</string>
+    <string name="rosary_reminder_dialog_title">Promemoria del Rosario</string>
+    <string name="rosary_reminder_dialog_desc">Scegli l\'ora per il tuo promemoria del Rosario.</string>
+    <string name="rosary_reminder_notification_title">Promemoria Rosario</string>
+    <string name="rosary_reminder_notification_text">È ora di pregare il Rosario di oggi.</string>
+    <string name="rosary_intention_in_design_label">Mostra l\'intenzione nel Rosario</string>
 </resources>

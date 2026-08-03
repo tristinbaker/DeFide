@@ -141,6 +141,10 @@ class RosaryViewModel @Inject constructor(
         .map { it.rosaryHapticFeedback }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), true)
 
+    val intentionInDesign: StateFlow<Boolean> = prefsRepository.preferences
+        .map { it.rosaryIntentionInDesign }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
     val intentions: StateFlow<List<String>> = prefsRepository.preferences
         .map { it.rosaryIntentions }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), List(5) { "" })

@@ -59,10 +59,12 @@ fun HomeScreen(
     onOpenDrawer: () -> Unit,
     onPrayRosary: (String) -> Unit,
     onVerseClicked: (translationId: String, bookNumber: Int, chapter: Int, verse: Int) -> Unit,
+    onSaintClicked: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val verseOfDay by viewModel.verseOfDay.collectAsState()
     val todaysMystery by viewModel.todaysMystery.collectAsState()
+    val saintOfDay by viewModel.saintOfDay.collectAsState()
     val bibleStreak by viewModel.bibleStreak.collectAsState()
     val rosaryStreak by viewModel.rosaryStreak.collectAsState()
     val sinHabits by viewModel.sinHabits.collectAsState()
@@ -193,6 +195,28 @@ fun HomeScreen(
                         }
                     } else {
                         Text(stringResource(R.string.loading), style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+
+                saintOfDay?.let { saint ->
+                    Spacer(Modifier.height(12.dp))
+                    SectionCard(
+                        title = stringResource(R.string.saint_of_the_day),
+                        onClick = { onSaintClicked(saint.id) },
+                    ) {
+                        Text(
+                            text = saint.name,
+                            style = MaterialTheme.typography.titleSmall,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                        saint.feastDate?.let { date ->
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                text = date,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
                     }
                 }
 

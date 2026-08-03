@@ -132,4 +132,11 @@
     <string name="rosary_clear_intentions">Clear All</string>
     <string name="rosary_save_intentions">Save</string>
     <string name="rosary_your_intention">Intention: %s</string>
+    <string name="saint_of_the_day">今日圣人</string>
+    <string name="rosary_reminder_label">玫瑰经提醒</string>
+    <string name="rosary_reminder_dialog_title">玫瑰经提醒时间</string>
+    <string name="rosary_reminder_dialog_desc">选择您的玫瑰经每日提醒的时间。</string>
+    <string name="rosary_reminder_notification_title">玫瑰经提醒</string>
+    <string name="rosary_reminder_notification_text">该诵念今天的玫瑰经了。</string>
+    <string name="rosary_intention_in_design_label">在念珠图案中显示意向</string>
 </resources>

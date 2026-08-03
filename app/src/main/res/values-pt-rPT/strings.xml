@@ -306,4 +306,11 @@
     <string name="office_matins">Manhãs</string>
     <string name="office_completorium">Completas</string>
     <string name="office_psalms">Salmos</string>
+    <string name="saint_of_the_day">Santo do dia</string>
+    <string name="rosary_reminder_label">Lembrete do terço</string>
+    <string name="rosary_reminder_dialog_title">Horário do lembrete do terço</string>
+    <string name="rosary_reminder_dialog_desc">Escolha a hora para o seu lembrete diário do terço.</string>
+    <string name="rosary_reminder_notification_title">Lembrete do Terço</string>
+    <string name="rosary_reminder_notification_text">É hora de rezar o terço de hoje.</string>
+    <string name="rosary_intention_in_design_label">Mostrar a intenção dentro do terço</string>
 </resources>

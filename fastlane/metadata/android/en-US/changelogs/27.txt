@@ -1,0 +1,6 @@
+• Fixed the Douay-Rheims Bible: re-imported the full translation, restoring missing chapters and correcting verse numbering in Proverbs, Job, and over 20 other books
+• Added swipe gestures to the Rosary: swipe left or right on the prayer to move between beads
+• Added swipe gestures to the Bible reader: swipe left or right to move between chapters
+• Added a Saint of the Day card to the home screen
+• Added an optional daily Rosary reminder notification (Settings → Notifications)
+• Added an option to show your prayer intention inside the rosary design (Settings → Rosary)

@@ -231,4 +231,11 @@
     <string name="rosary_clear_intentions">Clear All</string>
     <string name="rosary_save_intentions">Save</string>
     <string name="rosary_your_intention">Intention: %s</string>
+    <string name="saint_of_the_day">Святой дня</string>
+    <string name="rosary_reminder_label">Напоминание о Розарии</string>
+    <string name="rosary_reminder_dialog_title">Время напоминания о Розарии</string>
+    <string name="rosary_reminder_dialog_desc">Выберите час для ежедневного напоминания о Розарии.</string>
+    <string name="rosary_reminder_notification_title">Напоминание о Розарии</string>
+    <string name="rosary_reminder_notification_text">Пора помолиться сегодняшний Розарий.</string>
+    <string name="rosary_intention_in_design_label">Показывать интенцию внутри Розария</string>
 </resources>

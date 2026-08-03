@@ -45,6 +45,7 @@ data class UserPreferences(
     val appLanguage: String = "en",
     val bibleTranslationId: String = "dra",
     val novenaNotificationTime: String = "",   // "HH:MM" or empty = disabled
+    val rosaryNotificationTime: String = "",   // "HH:MM" or empty = disabled
     val bibleStreakGoal: Int = 1,              // chapters per day to maintain streak
     val bibleLastTranslationId: String = "",
     val bibleLastBookNumber: Int = 0,
@@ -57,6 +58,7 @@ data class UserPreferences(
     val autoBackupFrequency: BackupFrequency = BackupFrequency.OFF,
     val autoBackupFolderUri: String = "",
     val rosaryIntentions: List<String> = List(5) { "" },
+    val rosaryIntentionInDesign: Boolean = false,
     val appRite: AppRite = AppRite.MODERN,
 )
 
@@ -70,6 +72,7 @@ class UserPreferencesRepository @Inject constructor(
         private val KEY_APP_LANGUAGE = stringPreferencesKey("app_language")
         private val KEY_BIBLE_TRANSLATION = stringPreferencesKey("bible_translation")
         private val KEY_NOVENA_NOTIFICATION_TIME = stringPreferencesKey("novena_notification_time")
+        private val KEY_ROSARY_NOTIFICATION_TIME = stringPreferencesKey("rosary_notification_time")
         private val KEY_BIBLE_STREAK_GOAL = intPreferencesKey("bible_streak_goal")
         private val KEY_BIBLE_LAST_TRANSLATION = stringPreferencesKey("bible_last_translation")
         private val KEY_BIBLE_LAST_BOOK = intPreferencesKey("bible_last_book")
@@ -86,6 +89,7 @@ class UserPreferencesRepository @Inject constructor(
         private val KEY_ROSARY_INTENTION_2 = stringPreferencesKey("rosary_intention_2")
         private val KEY_ROSARY_INTENTION_3 = stringPreferencesKey("rosary_intention_3")
         private val KEY_ROSARY_INTENTION_4 = stringPreferencesKey("rosary_intention_4")
+        private val KEY_ROSARY_INTENTION_IN_DESIGN = androidx.datastore.preferences.core.booleanPreferencesKey("rosary_intention_in_design")
         private val KEY_APP_RITE         = stringPreferencesKey("app_rite")
     }
 
@@ -97,6 +101,7 @@ class UserPreferencesRepository @Inject constructor(
             appLanguage = prefs[KEY_APP_LANGUAGE] ?: storedRite.language,
             bibleTranslationId = prefs[KEY_BIBLE_TRANSLATION] ?: "dra",
             novenaNotificationTime = prefs[KEY_NOVENA_NOTIFICATION_TIME] ?: "",
+            rosaryNotificationTime = prefs[KEY_ROSARY_NOTIFICATION_TIME] ?: "",
             bibleStreakGoal = prefs[KEY_BIBLE_STREAK_GOAL] ?: 1,
             bibleLastTranslationId = prefs[KEY_BIBLE_LAST_TRANSLATION] ?: "",
             bibleLastBookNumber = prefs[KEY_BIBLE_LAST_BOOK] ?: 0,
@@ -115,6 +120,7 @@ class UserPreferencesRepository @Inject constructor(
                 prefs[KEY_ROSARY_INTENTION_3] ?: "",
                 prefs[KEY_ROSARY_INTENTION_4] ?: "",
             ),
+            rosaryIntentionInDesign = prefs[KEY_ROSARY_INTENTION_IN_DESIGN] ?: false,
             appRite = prefs[KEY_APP_RITE]?.let { runCatching { AppRite.valueOf(it) }.getOrNull() } ?: AppRite.MODERN,
         )
     }
@@ -137,6 +143,14 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setNovenaNotificationTime(time: String) {
         dataStore.edit { it[KEY_NOVENA_NOTIFICATION_TIME] = time }
+    }
+
+    suspend fun setRosaryNotificationTime(time: String) {
+        dataStore.edit { it[KEY_ROSARY_NOTIFICATION_TIME] = time }
+    }
+
+    suspend fun setRosaryIntentionInDesign(enabled: Boolean) {
+        dataStore.edit { it[KEY_ROSARY_INTENTION_IN_DESIGN] = enabled }
     }
 
     suspend fun setBibleStreakGoal(goal: Int) {

@@ -2,6 +2,7 @@ package com.tristinbaker.defide.ui.bible
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -58,6 +59,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.input.pointer.pointerInput
@@ -428,6 +430,11 @@ fun BibleReaderScreen(
         }
     }
 
+    // The swipe handler lives in pointerInput(Unit), whose lambda is never re-created
+    // on recomposition — read these through rememberUpdatedState or they'd stay stale.
+    val latestChapter by rememberUpdatedState(chapter)
+    val latestChapterCount by rememberUpdatedState(chapterCount)
+
     val verseNumberColor = MaterialTheme.colorScheme.primary
     val verseNumberStyle = remember(verseNumberColor) {
         androidx.compose.ui.text.SpanStyle(color = verseNumberColor, fontSize = androidx.compose.ui.unit.TextUnit(11f, androidx.compose.ui.unit.TextUnitType.Sp))
@@ -446,7 +453,27 @@ fun BibleReaderScreen(
             )
         },
     ) { padding ->
-        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .pointerInput(Unit) {
+                    var dragTotal = 0f
+                    detectHorizontalDragGestures(
+                        onDragStart = { dragTotal = 0f },
+                        onDragEnd = {
+                            val threshold = 64.dp.toPx()
+                            when {
+                                dragTotal <= -threshold && latestChapterCount > 0 && latestChapter < latestChapterCount -> {
+                                    viewModel.markChapterRead(bookNumber, latestChapter)
+                                    onNextChapter()
+                                }
+                                dragTotal >= threshold && latestChapter > 1 -> onPrevChapter()
+                            }
+                        },
+                    ) { _, dragAmount -> dragTotal += dragAmount }
+                },
+        ) {
             LazyColumn(
                 state = listState,
                 modifier = Modifier.fillMaxSize(),

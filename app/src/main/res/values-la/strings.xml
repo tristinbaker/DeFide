@@ -103,4 +103,11 @@
     <string name="office_matins">Matutinum</string>
     <string name="office_completorium">Completorium</string>
     <string name="office_psalms">Psalmi</string>
+    <string name="saint_of_the_day">Sanctus Diei</string>
+    <string name="rosary_reminder_label">Admonitio Rosarii</string>
+    <string name="rosary_reminder_dialog_title">Hora admonitionis Rosarii</string>
+    <string name="rosary_reminder_dialog_desc">Elige horam admonitionis cotidianae Rosarii.</string>
+    <string name="rosary_reminder_notification_title">Admonitio Rosarii</string>
+    <string name="rosary_reminder_notification_text">Tempus est Rosarium hodiernum orare.</string>
+    <string name="rosary_intention_in_design_label">Intentionem in Rosario monstrare</string>
 </resources>

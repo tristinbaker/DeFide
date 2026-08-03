@@ -424,6 +424,7 @@ private fun DeFideNavHost(
                 onVerseClicked = { translationId, bookNumber, chapter, verse ->
                     navController.navigate("bible/$translationId/book/$bookNumber/chapter/$chapter?verse=$verse")
                 },
+                onSaintClicked = { saintId -> navController.navigate("saint_detail/$saintId") },
             )
         }
 

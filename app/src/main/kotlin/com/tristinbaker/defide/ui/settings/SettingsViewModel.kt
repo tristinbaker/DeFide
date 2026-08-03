@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.first
 import com.tristinbaker.defide.worker.BackupWorker
 import com.tristinbaker.defide.worker.NovenaReminderWorker
+import com.tristinbaker.defide.worker.RosaryReminderWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.SharingStarted
@@ -109,11 +110,20 @@ class SettingsViewModel @Inject constructor(
     fun setNovenaNotificationTime(time: String) {
         viewModelScope.launch {
             prefsRepository.setNovenaNotificationTime(time)
-            if (time.isNotEmpty()) scheduleReminder(time) else cancelReminder()
+            if (time.isNotEmpty()) scheduleDailyReminder<NovenaReminderWorker>(time, NovenaReminderWorker.WORK_NAME)
+            else cancelReminder(NovenaReminderWorker.WORK_NAME)
         }
     }
 
-    private fun scheduleReminder(time: String) {
+    fun setRosaryNotificationTime(time: String) {
+        viewModelScope.launch {
+            prefsRepository.setRosaryNotificationTime(time)
+            if (time.isNotEmpty()) scheduleDailyReminder<RosaryReminderWorker>(time, RosaryReminderWorker.WORK_NAME)
+            else cancelReminder(RosaryReminderWorker.WORK_NAME)
+        }
+    }
+
+    private inline fun <reified W : androidx.work.ListenableWorker> scheduleDailyReminder(time: String, workName: String) {
         val parts = time.split(":")
         val hour = parts.getOrNull(0)?.toIntOrNull() ?: return
         val minute = parts.getOrNull(1)?.toIntOrNull() ?: return
@@ -128,19 +138,19 @@ class SettingsViewModel @Inject constructor(
         if (!target.after(now)) target.add(Calendar.DAY_OF_YEAR, 1)
         val initialDelay = target.timeInMillis - now.timeInMillis
 
-        val request = PeriodicWorkRequestBuilder<NovenaReminderWorker>(1, TimeUnit.DAYS)
+        val request = PeriodicWorkRequestBuilder<W>(1, TimeUnit.DAYS)
             .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
             .build()
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
-            NovenaReminderWorker.WORK_NAME,
+            workName,
             ExistingPeriodicWorkPolicy.UPDATE,
             request,
         )
     }
 
-    private fun cancelReminder() {
-        WorkManager.getInstance(context).cancelUniqueWork(NovenaReminderWorker.WORK_NAME)
+    private fun cancelReminder(workName: String) {
+        WorkManager.getInstance(context).cancelUniqueWork(workName)
     }
 
     fun setBibleStreakGoal(goal: Int) {
@@ -165,6 +175,10 @@ class SettingsViewModel @Inject constructor(
 
     fun setRosaryNarrationEnabled(enabled: Boolean) {
         viewModelScope.launch { prefsRepository.setRosaryNarrationEnabled(enabled) }
+    }
+
+    fun setRosaryIntentionInDesign(enabled: Boolean) {
+        viewModelScope.launch { prefsRepository.setRosaryIntentionInDesign(enabled) }
     }
 
     fun setAutoBackupFolder(uri: Uri) {

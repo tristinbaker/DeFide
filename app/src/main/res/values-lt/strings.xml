@@ -184,4 +184,11 @@
     <string name="rosary_clear_intentions">Clear All</string>
     <string name="rosary_save_intentions">Save</string>
     <string name="rosary_your_intention">Intention: %s</string>
+    <string name="saint_of_the_day">Dienos šventasis</string>
+    <string name="rosary_reminder_label">Rožinio priminimas</string>
+    <string name="rosary_reminder_dialog_title">Rožinio priminimo laikas</string>
+    <string name="rosary_reminder_dialog_desc">Pasirinkite jūsų kasdieninio rožinio priminimo valandą.</string>
+    <string name="rosary_reminder_notification_title">Rožinio priminimas</string>
+    <string name="rosary_reminder_notification_text">Laikas melstis šios dienos rožinį.</string>
+    <string name="rosary_intention_in_design_label">Rodyti intenciją rožinyje</string>
 </resources>

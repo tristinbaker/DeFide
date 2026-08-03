@@ -24,17 +24,27 @@ class DeFideApplication : Application(), Configuration.Provider {
     }
 
     private fun createNotificationChannels() {
-        val channel = NotificationChannel(
+        val novenaChannel = NotificationChannel(
             CHANNEL_NOVENA_REMINDERS,
             "Novena Reminders",
             NotificationManager.IMPORTANCE_DEFAULT,
         ).apply {
             description = "Daily reminders for active novenas"
         }
-        getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
+        val rosaryChannel = NotificationChannel(
+            CHANNEL_ROSARY_REMINDERS,
+            "Rosary Reminders",
+            NotificationManager.IMPORTANCE_DEFAULT,
+        ).apply {
+            description = "Daily reminder to pray the rosary"
+        }
+        val manager = getSystemService(NotificationManager::class.java)
+        manager.createNotificationChannel(novenaChannel)
+        manager.createNotificationChannel(rosaryChannel)
     }
 
     companion object {
         const val CHANNEL_NOVENA_REMINDERS = "novena_reminders"
+        const val CHANNEL_ROSARY_REMINDERS = "rosary_reminders"
     }
 }

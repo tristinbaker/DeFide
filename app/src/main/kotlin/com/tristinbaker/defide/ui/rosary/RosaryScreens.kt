@@ -2,7 +2,9 @@ package com.tristinbaker.defide.ui.rosary
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -43,6 +45,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -56,9 +59,11 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tristinbaker.defide.R
@@ -223,6 +228,7 @@ fun RosarySessionScreen(
     val currentMysteryNumber by viewModel.currentMysteryNumber.collectAsState()
     val haptic = LocalHapticFeedback.current
     val narrationEnabled by viewModel.narrationEnabled.collectAsState()
+    val intentionInDesign by viewModel.intentionInDesign.collectAsState()
 
     LaunchedEffect(mysteryId) { viewModel.startSession(mysteryId) }
 
@@ -242,6 +248,12 @@ fun RosarySessionScreen(
 
     val isLast = position == beads.lastIndex && beads.isNotEmpty()
     val isAnnouncementBead = currentBead?.prayerId == null && currentBead?.mysteryTitle != null
+
+    // The swipe handler lives in pointerInput(Unit), whose lambda is never re-created
+    // on recomposition — read these through rememberUpdatedState or they'd stay stale.
+    val latestPosition by rememberUpdatedState(position)
+    val latestIsLast by rememberUpdatedState(isLast)
+    val latestHapticEnabled by rememberUpdatedState(hapticEnabled)
 
     // In Traditional mode pull English titles/scripture from englishBeads (per-mystery, not group).
     val englishTitle: String? = if (currentRite == AppRite.TRADITIONAL) {
@@ -300,6 +312,25 @@ fun RosarySessionScreen(
                 modifier = Modifier
                     .weight(1f)
                     .verticalScroll(rememberScrollState())
+                    .pointerInput(Unit) {
+                        var dragTotal = 0f
+                        detectHorizontalDragGestures(
+                            onDragStart = { dragTotal = 0f },
+                            onDragEnd = {
+                                val threshold = 64.dp.toPx()
+                                when {
+                                    dragTotal <= -threshold && !latestIsLast -> {
+                                        if (latestHapticEnabled) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                        viewModel.advance()
+                                    }
+                                    dragTotal >= threshold && latestPosition > 0 -> {
+                                        if (latestHapticEnabled) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                        viewModel.back()
+                                    }
+                                }
+                            },
+                        ) { _, dragAmount -> dragTotal += dragAmount }
+                    }
                     .padding(horizontal = 24.dp, vertical = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -334,7 +365,7 @@ fun RosarySessionScreen(
                         textAlign = TextAlign.Center,
                     )
                     currentBead.mysteryNumber?.let { num ->
-                        if (num in 1..5) {
+                        if (num in 1..5 && !intentionInDesign) {
                             val intention = intentions.getOrElse(num - 1) { "" }
                             if (intention.isNotBlank()) {
                                 Spacer(Modifier.height(12.dp))
@@ -384,7 +415,7 @@ fun RosarySessionScreen(
                     }
                 } else {
                     val mystNum = currentMysteryNumber
-                    if (mystNum != null && mystNum in 1..5) {
+                    if (mystNum != null && mystNum in 1..5 && !intentionInDesign) {
                         val intention = intentions.getOrElse(mystNum - 1) { "" }
                         if (intention.isNotBlank()) {
                             Text(
@@ -450,10 +481,16 @@ fun RosarySessionScreen(
 
             // --- Bead indicator ---
             if (beads.isNotEmpty()) {
+                val designIntention = if (intentionInDesign) {
+                    currentMysteryNumber?.takeIf { it in 1..5 }
+                        ?.let { intentions.getOrElse(it - 1) { "" } }
+                        ?.takeIf { it.isNotBlank() }
+                } else null
                 RosaryBeadIndicatorCompact(
                     currentPhysicalBead = currentPhysicalBead,
                     visitedPhysBeads = visitedPhysBeads,
                     isFatima = isFatima,
+                    centerText = designIntention,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp),
@@ -511,6 +548,7 @@ private fun RosaryBeadIndicatorCompact(
     visitedPhysBeads: Set<Int>,
     isFatima: Boolean,
     modifier: Modifier = Modifier,
+    centerText: String? = null,
 ) {
     // Physical layout: 60 beads (0-59) + cross (-1)
     // Tail: beads 0-4 (0=Our Father large, 1-3=HM small, 4=Our Father decade 1 large)
@@ -529,164 +567,180 @@ private fun RosaryBeadIndicatorCompact(
         (physBead in 15..48 && (physBead - 15) % 11 == 0) ||
         (isFatima && physBead == 59)
 
-    Canvas(modifier = modifier) {
-        val W = size.width
-        val H = size.height
+    Box(modifier = modifier) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val W = size.width
+            val H = size.height
 
-        // Rounded rectangle
-        val cornerR = minOf(H * 0.30f, W * 0.12f)
-        val rW      = W * 0.62f
-        val rH      = H * 0.76f
-        val rLeft   = 8.dp.toPx()
-        val rTop    = (H - rH) / 2f
-        val rRight  = rLeft + rW
-        val rBottom = rTop + rH
+            // Rounded rectangle
+            val cornerR = minOf(H * 0.30f, W * 0.12f)
+            val rW      = W * 0.62f
+            val rH      = H * 0.76f
+            val rLeft   = 8.dp.toPx()
+            val rTop    = (H - rH) / 2f
+            val rRight  = rLeft + rW
+            val rBottom = rTop + rH
 
-        // Junction: right side, vertically centered
-        val jX = rRight
-        val jY = rTop + rH / 2f
+            // Junction: right side, vertically centered
+            val jX = rRight
+            val jY = rTop + rH / 2f
 
-        // Tail extends horizontally to the right
-        val crossEndX = W - 10.dp.toPx()
-        val tailStep  = (crossEndX - jX) / (tailCount + 2f)
+            // Tail extends horizontally to the right
+            val crossEndX = W - 10.dp.toPx()
+            val tailStep  = (crossEndX - jX) / (tailCount + 2f)
 
-        fun tailPos(physBead: Int): Offset {
-            val x = when (physBead) {
-                0    -> jX + 4.6f * tailStep
-                1    -> jX + 3.7f * tailStep
-                2    -> jX + 3.0f * tailStep
-                3    -> jX + 2.3f * tailStep
-                4    -> jX + 1.4f * tailStep
-                else -> jX + (tailCount - physBead) * tailStep
-            }
-            return Offset(x, jY)
-        }
-
-        val seg1      = rH / 2f - cornerR
-        val seg9      = rH / 2f - cornerR
-        val straightW = rW - 2f * cornerR
-        val straightH = rH - 2f * cornerR
-        val arcLen    = (PI / 2.0 * cornerR).toFloat()
-        val totalPerimeter = seg1 + arcLen + straightW + arcLen + straightH + arcLen + straightW + arcLen + seg9
-        val spacing   = totalPerimeter / ovalSlots
-
-        fun perimeterPos(dist: Float): Offset {
-            var d = dist
-            if (d <= seg1) return Offset(rRight, jY + d)
-            d -= seg1
-            if (d <= arcLen) {
-                val a = (PI / 2.0 * d / arcLen).toFloat()
-                return Offset((rRight - cornerR) + cornerR * cos(a), (rBottom - cornerR) + cornerR * sin(a))
-            }
-            d -= arcLen
-            if (d <= straightW) return Offset(rRight - cornerR - d, rBottom)
-            d -= straightW
-            if (d <= arcLen) {
-                val a = (PI / 2.0 + PI / 2.0 * d / arcLen).toFloat()
-                return Offset((rLeft + cornerR) + cornerR * cos(a), (rBottom - cornerR) + cornerR * sin(a))
-            }
-            d -= arcLen
-            if (d <= straightH) return Offset(rLeft, rBottom - cornerR - d)
-            d -= straightH
-            if (d <= arcLen) {
-                val a = (PI + PI / 2.0 * d / arcLen).toFloat()
-                return Offset((rLeft + cornerR) + cornerR * cos(a), (rTop + cornerR) + cornerR * sin(a))
-            }
-            d -= arcLen
-            if (d <= straightW) return Offset(rLeft + cornerR + d, rTop)
-            d -= straightW
-            if (d <= arcLen) {
-                val a = (-PI / 2.0 + PI / 2.0 * d / arcLen).toFloat()
-                return Offset((rRight - cornerR) + cornerR * cos(a), (rTop + cornerR) + cornerR * sin(a))
-            }
-            d -= arcLen
-            return Offset(rRight, rTop + cornerR + d)
-        }
-
-        val loopCount   = ovalSlots - 1           // 54 loop beads
-        val junctionGap = 1.3f * spacing          // distance gap around junction oval
-        val loopSpan    = totalPerimeter - 2f * junctionGap
-
-        // Weighted spacing: slightly larger gap before/after each Our Father bead (15, 26, 37, 48)
-        val largeLoopBeads = setOf(15, 26, 37, 48)
-        val loopGapMult = 1.2f
-        val loopGaps = FloatArray(53) { i ->
-            val f = i + 5; val t = i + 6
-            if (f in largeLoopBeads || t in largeLoopBeads) loopGapMult else 1.0f
-        }
-        val totalLoopWeight = loopGaps.sum()
-        val loopT = FloatArray(54).also { arr ->
-            arr[0] = 0.0f
-            var cum = 0.0f
-            for (i in 1 until 54) { cum += loopGaps[i - 1]; arr[i] = cum / totalLoopWeight }
-        }
-
-        fun beadPos(physBead: Int): Offset = when {
-            physBead < tailCount -> tailPos(physBead)
-            physBead == 59       -> perimeterPos(0f)  // Hail Holy Queen at junction
-            else -> perimeterPos(junctionGap + loopT[physBead - 5] * loopSpan)
-        }
-
-        // ── Cords ──────────────────────────────────────────────────────────
-        drawRoundRect(
-            color        = cord,
-            topLeft      = Offset(rLeft, rTop),
-            size         = Size(rW, rH),
-            cornerRadius = CornerRadius(cornerR),
-            style        = Stroke(width = 1.dp.toPx()),
-        )
-        drawLine(cord, Offset(jX, jY), tailPos(0), strokeWidth = 1.dp.toPx())
-
-        // Cross at the end of the tail
-        val crossX     = tailPos(0).x + tailStep * 0.85f
-        val cH         = 18.dp.toPx()
-        val cW         = 12.dp.toPx()
-        val barW       = 3.5.dp.toPx()
-        val crossColor = if (currentPhysicalBead == -1) primary else past
-        drawRect(crossColor, topLeft = Offset(crossX - barW / 2f, jY - cH * 0.65f), size = Size(barW, cH))
-        drawRect(crossColor, topLeft = Offset(crossX - cW / 2f,   jY - cH * 0.40f), size = Size(cW, barW))
-
-        // ── Beads ──────────────────────────────────────────────────────────
-        val rSmall        = 4.dp.toPx()
-        val rLarge        = 7.dp.toPx()
-        val rCurrentSmall = 5.5.dp.toPx()
-        val rCurrentLarge = 8.5.dp.toPx()
-        val strokeW       = 1.dp.toPx()
-
-        for (physBead in 0 until 60) {
-            val pos       = beadPos(physBead)
-            val isCurrent = physBead == currentPhysicalBead
-            val isPast    = physBead in visitedPhysBeads && !isCurrent
-            val large     = isLargeBead(physBead)
-            val beadR     = when {
-                isCurrent && large  -> rCurrentLarge
-                isCurrent           -> rCurrentSmall
-                large               -> rLarge
-                else                -> rSmall
-            }
-            val beadColor = when {
-                isCurrent -> primary
-                isPast    -> past
-                else      -> null
-            }
-            if (physBead == 59) {
-                val rx = rLarge * 1.0f
-                val ry = rLarge * 1.4f
-                val tl = Offset(pos.x - rx, pos.y - ry)
-                val sz = Size(rx * 2, ry * 2)
-                when {
-                    isCurrent -> drawOval(primary, topLeft = tl, size = sz)
-                    isPast    -> drawOval(past,    topLeft = tl, size = sz)
-                    else      -> drawOval(outline, topLeft = tl, size = sz, style = Stroke(strokeW))
+            fun tailPos(physBead: Int): Offset {
+                val x = when (physBead) {
+                    0    -> jX + 4.6f * tailStep
+                    1    -> jX + 3.7f * tailStep
+                    2    -> jX + 3.0f * tailStep
+                    3    -> jX + 2.3f * tailStep
+                    4    -> jX + 1.4f * tailStep
+                    else -> jX + (tailCount - physBead) * tailStep
                 }
-            } else {
-                when {
-                    isCurrent -> drawCircle(primary, beadR, pos)
-                    isPast    -> drawCircle(past,    beadR, pos)
-                    else      -> drawCircle(outline, beadR, pos, style = Stroke(strokeW))
+                return Offset(x, jY)
+            }
+
+            val seg1      = rH / 2f - cornerR
+            val seg9      = rH / 2f - cornerR
+            val straightW = rW - 2f * cornerR
+            val straightH = rH - 2f * cornerR
+            val arcLen    = (PI / 2.0 * cornerR).toFloat()
+            val totalPerimeter = seg1 + arcLen + straightW + arcLen + straightH + arcLen + straightW + arcLen + seg9
+            val spacing   = totalPerimeter / ovalSlots
+
+            fun perimeterPos(dist: Float): Offset {
+                var d = dist
+                if (d <= seg1) return Offset(rRight, jY + d)
+                d -= seg1
+                if (d <= arcLen) {
+                    val a = (PI / 2.0 * d / arcLen).toFloat()
+                    return Offset((rRight - cornerR) + cornerR * cos(a), (rBottom - cornerR) + cornerR * sin(a))
+                }
+                d -= arcLen
+                if (d <= straightW) return Offset(rRight - cornerR - d, rBottom)
+                d -= straightW
+                if (d <= arcLen) {
+                    val a = (PI / 2.0 + PI / 2.0 * d / arcLen).toFloat()
+                    return Offset((rLeft + cornerR) + cornerR * cos(a), (rBottom - cornerR) + cornerR * sin(a))
+                }
+                d -= arcLen
+                if (d <= straightH) return Offset(rLeft, rBottom - cornerR - d)
+                d -= straightH
+                if (d <= arcLen) {
+                    val a = (PI + PI / 2.0 * d / arcLen).toFloat()
+                    return Offset((rLeft + cornerR) + cornerR * cos(a), (rTop + cornerR) + cornerR * sin(a))
+                }
+                d -= arcLen
+                if (d <= straightW) return Offset(rLeft + cornerR + d, rTop)
+                d -= straightW
+                if (d <= arcLen) {
+                    val a = (-PI / 2.0 + PI / 2.0 * d / arcLen).toFloat()
+                    return Offset((rRight - cornerR) + cornerR * cos(a), (rTop + cornerR) + cornerR * sin(a))
+                }
+                d -= arcLen
+                return Offset(rRight, rTop + cornerR + d)
+            }
+
+            val loopCount   = ovalSlots - 1           // 54 loop beads
+            val junctionGap = 1.3f * spacing          // distance gap around junction oval
+            val loopSpan    = totalPerimeter - 2f * junctionGap
+
+            // Weighted spacing: slightly larger gap before/after each Our Father bead (15, 26, 37, 48)
+            val largeLoopBeads = setOf(15, 26, 37, 48)
+            val loopGapMult = 1.2f
+            val loopGaps = FloatArray(53) { i ->
+                val f = i + 5; val t = i + 6
+                if (f in largeLoopBeads || t in largeLoopBeads) loopGapMult else 1.0f
+            }
+            val totalLoopWeight = loopGaps.sum()
+            val loopT = FloatArray(54).also { arr ->
+                arr[0] = 0.0f
+                var cum = 0.0f
+                for (i in 1 until 54) { cum += loopGaps[i - 1]; arr[i] = cum / totalLoopWeight }
+            }
+
+            fun beadPos(physBead: Int): Offset = when {
+                physBead < tailCount -> tailPos(physBead)
+                physBead == 59       -> perimeterPos(0f)  // Hail Holy Queen at junction
+                else -> perimeterPos(junctionGap + loopT[physBead - 5] * loopSpan)
+            }
+
+            // ── Cords ──────────────────────────────────────────────────────────
+            drawRoundRect(
+                color        = cord,
+                topLeft      = Offset(rLeft, rTop),
+                size         = Size(rW, rH),
+                cornerRadius = CornerRadius(cornerR),
+                style        = Stroke(width = 1.dp.toPx()),
+            )
+            drawLine(cord, Offset(jX, jY), tailPos(0), strokeWidth = 1.dp.toPx())
+
+            // Cross at the end of the tail
+            val crossX     = tailPos(0).x + tailStep * 0.85f
+            val cH         = 18.dp.toPx()
+            val cW         = 12.dp.toPx()
+            val barW       = 3.5.dp.toPx()
+            val crossColor = if (currentPhysicalBead == -1) primary else past
+            drawRect(crossColor, topLeft = Offset(crossX - barW / 2f, jY - cH * 0.65f), size = Size(barW, cH))
+            drawRect(crossColor, topLeft = Offset(crossX - cW / 2f,   jY - cH * 0.40f), size = Size(cW, barW))
+
+            // ── Beads ──────────────────────────────────────────────────────────
+            val rSmall        = 4.dp.toPx()
+            val rLarge        = 7.dp.toPx()
+            val rCurrentSmall = 5.5.dp.toPx()
+            val rCurrentLarge = 8.5.dp.toPx()
+            val strokeW       = 1.dp.toPx()
+
+            for (physBead in 0 until 60) {
+                val pos       = beadPos(physBead)
+                val isCurrent = physBead == currentPhysicalBead
+                val isPast    = physBead in visitedPhysBeads && !isCurrent
+                val large     = isLargeBead(physBead)
+                val beadR     = when {
+                    isCurrent && large  -> rCurrentLarge
+                    isCurrent           -> rCurrentSmall
+                    large               -> rLarge
+                    else                -> rSmall
+                }
+                val beadColor = when {
+                    isCurrent -> primary
+                    isPast    -> past
+                    else      -> null
+                }
+                if (physBead == 59) {
+                    val rx = rLarge * 1.0f
+                    val ry = rLarge * 1.4f
+                    val tl = Offset(pos.x - rx, pos.y - ry)
+                    val sz = Size(rx * 2, ry * 2)
+                    when {
+                        isCurrent -> drawOval(primary, topLeft = tl, size = sz)
+                        isPast    -> drawOval(past,    topLeft = tl, size = sz)
+                        else      -> drawOval(outline, topLeft = tl, size = sz, style = Stroke(strokeW))
+                    }
+                } else {
+                    when {
+                        isCurrent -> drawCircle(primary, beadR, pos)
+                        isPast    -> drawCircle(past,    beadR, pos)
+                        else      -> drawCircle(outline, beadR, pos, style = Stroke(strokeW))
+                    }
                 }
             }
+        }
+        if (centerText != null) {
+            Text(
+                text = centerText,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .fillMaxWidth(0.62f)
+                    .padding(start = 8.dp)
+                    .padding(horizontal = 16.dp),
+            )
         }
     }
 }
-

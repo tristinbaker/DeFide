@@ -69,11 +69,17 @@ fun SettingsScreen(
     val prefs by viewModel.preferences.collectAsState()
     val context = LocalContext.current
     var showNotificationDialog by remember { mutableStateOf(false) }
+    var showRosaryNotificationDialog by remember { mutableStateOf(false) }
 
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) showNotificationDialog = true
+    }
+    val rosaryNotificationPermissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) showRosaryNotificationDialog = true
     }
 
     val backupLauncher = rememberLauncherForActivityResult(
@@ -112,14 +118,43 @@ fun SettingsScreen(
         }
     }
 
+    fun requestRosaryNotificationPermissionThenShow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                showRosaryNotificationDialog = true
+            } else {
+                rosaryNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            showRosaryNotificationDialog = true
+        }
+    }
+
     if (showNotificationDialog) {
         NotificationTimeDialog(
+            title = stringResource(R.string.novena_reminder_dialog_title),
+            description = stringResource(R.string.novena_reminder_dialog_desc),
             current = prefs.novenaNotificationTime,
             onConfirm = { time ->
                 viewModel.setNovenaNotificationTime(time)
                 showNotificationDialog = false
             },
             onDismiss = { showNotificationDialog = false },
+        )
+    }
+
+    if (showRosaryNotificationDialog) {
+        NotificationTimeDialog(
+            title = stringResource(R.string.rosary_reminder_dialog_title),
+            description = stringResource(R.string.rosary_reminder_dialog_desc),
+            current = prefs.rosaryNotificationTime,
+            onConfirm = { time ->
+                viewModel.setRosaryNotificationTime(time)
+                showRosaryNotificationDialog = false
+            },
+            onDismiss = { showRosaryNotificationDialog = false },
         )
     }
 
@@ -455,6 +490,22 @@ fun SettingsScreen(
                         onCheckedChange = { viewModel.setRosaryNarrationEnabled(it) },
                     )
                 }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        stringResource(R.string.rosary_intention_in_design_label),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Switch(
+                        checked = prefs.rosaryIntentionInDesign,
+                        onCheckedChange = { viewModel.setRosaryIntentionInDesign(it) },
+                    )
+                }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }
             item {
@@ -474,6 +525,25 @@ fun SettingsScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(stringResource(R.string.novena_reminder_label), style = MaterialTheme.typography.bodyMedium)
+                        Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+                HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
+            }
+            item {
+                val label = if (prefs.rosaryNotificationTime.isNotEmpty())
+                    stringResource(R.string.daily_at, prefs.rosaryNotificationTime)
+                else
+                    stringResource(R.string.status_off)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { requestRosaryNotificationPermissionThenShow() }
+                        .padding(horizontal = 16.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(stringResource(R.string.rosary_reminder_label), style = MaterialTheme.typography.bodyMedium)
                         Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
@@ -663,6 +733,8 @@ fun SettingsScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun NotificationTimeDialog(
+    title: String,
+    description: String,
     current: String,
     onConfirm: (String) -> Unit,
     onDismiss: () -> Unit,
@@ -673,11 +745,11 @@ private fun NotificationTimeDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.novena_reminder_dialog_title)) },
+        title = { Text(title) },
         text = {
             Column {
                 Text(
-                    stringResource(R.string.novena_reminder_dialog_desc),
+                    description,
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(bottom = 12.dp),
                 )
