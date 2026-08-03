@@ -5,9 +5,8 @@
     <string name="todays_rosary">Rosarium Hodiernum</string>
     <string name="pray_the_rosary">Rosarium Orare</string>
     <string name="loading">Legimus…</string>
-    <string name="bible_streak">Biblia Continua</string>
-    <string name="rosary_streak">Rosarium Continuum</string>
-
+    <string name="bible_streak">Bibliorum Series</string>
+    <string name="rosary_streak">Rosarii Series</string>
     <!-- Navigation -->
     <string name="nav_home">Domus</string>
     <string name="nav_rosary">Rosarium</string>
@@ -18,18 +17,17 @@
     <string name="nav_novenas">Novenae</string>
     <string name="nav_settings">Optiones</string>
     <string name="nav_saints">Sancti</string>
-
     <!-- Settings -->
     <string name="settings_title">Optiones</string>
     <string name="app_language">Lingua</string>
-    <string name="lang_en">Anglice</string>
-    <string name="lang_es">Hispanice</string>
-    <string name="lang_fr">Gallice</string>
-    <string name="lang_lt">Lituanice</string>
-    <string name="lang_pt_BR">Portugallice (Brasilia)</string>
-    <string name="lang_pt_PT">Portugallice (Lusitania)</string>
-    <string name="lang_zh_CN">Sinice (Simplificata)</string>
-    <string name="lang_it">Italice</string>
+    <string name="lang_en">Anglica</string>
+    <string name="lang_es">Hispanica</string>
+    <string name="lang_fr">Francogallica</string>
+    <string name="lang_lt">Lithuanica</string>
+    <string name="lang_pt_BR">Lusitana (Brasilia)</string>
+    <string name="lang_pt_PT">Lusitana (Lusitania)</string>
+    <string name="lang_zh_CN">Sinensis (Simplificata)</string>
+    <string name="lang_it">Italica</string>
     <string name="lang_la">Latina</string>
     <string name="rite_modern">Moderna</string>
     <string name="rite_traditional">Traditionis</string>
@@ -40,21 +38,17 @@
     <string name="ordinal_fourth">Quartum</string>
     <string name="ordinal_fifth">Quintum</string>
     <string name="the_nth_mystery">Mysterium %s</string>
-
     <!-- Catechism -->
-    <string name="catechism_dialog_title">Catechismus Elige</string>
+    <string name="catechism_dialog_title">Catechismum Elige</string>
     <string name="catechism_dialog_text">Selige quem catechismum legere:</string>
     <string name="catechism_option_ccc">Catechismus Ecclesiae Catholicae (Online)</string>
     <string name="catechism_option_baltimore">Catechismus Baltimorensis (Offline)</string>
     <string name="catechism_option_compendium">Compendium Catechismi (Offline)</string>
     <string name="compendium_title">Compendium Catechismi</string>
-
     <!-- Divine Office -->
     <string name="divine_office_title">Liturgia Horarum</string>
-
     <!-- Rosary -->
     <string name="rosary_title">Rosarium</string>
-
     <!-- Saints -->
     <string name="saints_title">Sancti</string>
     <string name="saints_favorites_section">Devotiones Meae</string>
@@ -64,11 +58,49 @@
     <string name="saints_sort_name">Secundum Nomen</string>
     <string name="saints_sort_feast">Secundum Festum</string>
     <string name="saints_sort_popularity">Secundum Popularitatem</string>
-
     <!-- General -->
-    <string name="action_cancel">Cancella</string>
-
+    <string name="action_cancel">Interrumpe</string>
     <!-- General -->
     <string name="answer_label">Responsum</string>
     <string name="tap_to_reveal">Tange ut rétegeres</string>
+    <string name="action_open">Aperi</string>
+    <string name="action_delete">Dele</string>
+    <string name="action_ok">Bene</string>
+    <string name="action_save">Conserva</string>
+    <string name="action_turn_off">Extingue</string>
+    <string name="action_all">Omnia</string>
+    <string name="loth_dialog_title">Divinum Officium</string>
+    <string name="prayers_title">Orationes</string>
+    <string name="loth_dialog_text">Volesne Liturgiam Horarum aperire in rete, an extra rete Divinum Officum navigare?</string>
+    <string name="loth_option_online">Liturgia Horarum (Online)</string>
+    <string name="loth_option_offline">Divinum Officium (Offline)</string>
+    <string name="search_prayers_hint">Quaere orationibus…</string>
+    <string name="tag_label">Pittacium</string>
+    <string name="prayed_today">Oratus hodie</string>
+    <string name="theme_system">Systematis</string>
+    <string name="theme_light">Clarus</string>
+    <string name="theme_dark">Obscurus</string>
+    <string name="theme_amoled">Furvus AMOLED</string>
+    <string name="theme_dynamic">Dynamicus</string>
+    <string name="section_language">Lingua</string>
+    <string name="translate_cta">Volesne translationem adiungere vel meliorem facere? Contribue in Weblate.</string>
+    <string name="section_appearance">Species</string>
+    <string name="section_bible_translation">Translatio Bibliorum</string>
+    <string name="section_rite">Ritus</string>
+    <string name="rite_traditional_desc">Orationes in lingua vernacula, antiphonae hymnique in lingua latina</string>
+    <string name="rite_latin_desc">Omnia latine, rubricae anni 1962</string>
+    <string name="rite_modern_desc">Lingua vernacula, rubricae hodiernae</string>
+    <string name="rite_explanatory">Mutat Divinum Officium Rosarium Orationesque.</string>
+    <string name="section_notifications">Nuntia</string>
+    <string name="novena_reminder_label">Admonitio Novenae</string>
+    <string name="daily_at">Cotidianus hora %s</string>
+    <string name="section_bible_streak">Series lectionum Bibliorum</string>
+    <string name="chapters_per_day_label">Capitula per diem</string>
+    <string name="section_backup">Reponere &amp; Restituere</string>
+    <string name="today_mystery_prefix">✦ Hodie — %s</string>
+    <string name="office_laudes">Laudes</string>
+    <string name="office_vespers">Vespera</string>
+    <string name="office_matins">Matutinum</string>
+    <string name="office_completorium">Completorium</string>
+    <string name="office_psalms">Psalmi</string>
 </resources>
