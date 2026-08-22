@@ -30,6 +30,17 @@
     <string name="theme_dynamic">Dinâmico</string>
     <string name="keep_screen_on_label">Manter tela ligada ao usar o app</string>
     <string name="full_screen_label">Ocultar barra de status ao usar o app</string>
+    <string name="section_security">Segurança</string>
+    <string name="app_lock_label">Bloquear o app com biometria ou bloqueio de tela</string>
+    <string name="app_lock_timeout_label">Bloquear novamente ao sair do app</string>
+    <string name="app_lock_immediately">Imediatamente</string>
+    <string name="app_lock_one_minute">Após 1 minuto</string>
+    <string name="app_lock_five_minutes">Após 5 minutos</string>
+    <string name="app_lock_fifteen_minutes">Após 15 minutos</string>
+    <string name="app_lock_prompt_title">Desbloquear o De Fide</string>
+    <string name="app_lock_locked_message">Autentique-se para abrir o app</string>
+    <string name="app_lock_unlock_button">Desbloquear</string>
+    <string name="app_lock_unavailable">Configure primeiro um bloqueio de tela ou biometria nas configurações do dispositivo</string>
     <string name="section_language">Idioma</string>
     <string name="translate_cta">Quer adicionar ou melhorar uma tradução? Contribua no Weblate.</string>
     <string name="section_bible_translation">Tradução da Bíblia</string>

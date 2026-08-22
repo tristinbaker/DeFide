@@ -5,6 +5,7 @@
     <!-- No INTERNET permission — fully offline in Phase 1 -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <!-- Required on API 30+ package-visibility rules so TextToSpeech can discover
          and bind to the device's installed TTS engine for Rosary narration. -->

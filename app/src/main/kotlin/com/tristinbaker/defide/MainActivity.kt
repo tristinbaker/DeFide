@@ -2,25 +2,30 @@ package com.tristinbaker.defide
 
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.fragment.app.FragmentActivity
+import com.tristinbaker.defide.data.applock.AppLockManager
 import com.tristinbaker.defide.data.preferences.UserPreferencesRepository
 import com.tristinbaker.defide.ui.DeFideApp
+import com.tristinbaker.defide.ui.applock.AppLockScreen
 import com.tristinbaker.defide.ui.theme.DeFideTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+// FragmentActivity (not ComponentActivity) is required by androidx.biometric's BiometricPrompt.
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
 
     @Inject lateinit var prefsRepository: UserPreferencesRepository
+    @Inject lateinit var appLockManager: AppLockManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +50,27 @@ class MainActivity : ComponentActivity() {
             } else {
                 insetsController.show(WindowInsetsCompat.Type.systemBars())
             }
+            LaunchedEffect(prefs.appLockTimeout) {
+                appLockManager.timeout = prefs.appLockTimeout
+            }
+            val isLocked by appLockManager.isLocked.collectAsState()
             DeFideTheme(theme = prefs.theme, font = prefs.appFont) {
-                DeFideApp()
+                if (prefs.appLockEnabled && isLocked) {
+                    AppLockScreen(onUnlocked = { appLockManager.unlock() })
+                } else {
+                    DeFideApp()
+                }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        appLockManager.onAppForegrounded()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (!isChangingConfigurations) appLockManager.onAppBackgrounded()
     }
 }

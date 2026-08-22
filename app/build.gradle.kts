@@ -160,6 +160,9 @@ dependencies {
     // DataStore
     implementation(libs.datastore.preferences)
 
+    // Biometric (app lock)
+    implementation(libs.androidx.biometric)
+
     // Glance (home screen widget)
     implementation(libs.glance.appwidget)
 

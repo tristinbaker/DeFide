@@ -27,6 +27,17 @@
     <string name="section_bible_translation">Bibelübersetzung</string>
     <string name="keep_screen_on_label">Bildschirm während der Nutzung der App eingeschaltet lassen</string>
     <string name="full_screen_label">Statusleiste während der Nutzung der App ausblenden</string>
+    <string name="section_security">Sicherheit</string>
+    <string name="app_lock_label">App mit Biometrie oder Displaysperre sperren</string>
+    <string name="app_lock_timeout_label">Erneut sperren nach Verlassen der App</string>
+    <string name="app_lock_immediately">Sofort</string>
+    <string name="app_lock_one_minute">Nach 1 Minute</string>
+    <string name="app_lock_five_minutes">Nach 5 Minuten</string>
+    <string name="app_lock_fifteen_minutes">Nach 15 Minuten</string>
+    <string name="app_lock_prompt_title">De Fide entsperren</string>
+    <string name="app_lock_locked_message">Zum Öffnen der App authentifizieren</string>
+    <string name="app_lock_unlock_button">Entsperren</string>
+    <string name="app_lock_unavailable">Richten Sie zuerst eine Displaysperre oder Biometrie in den Geräteeinstellungen ein</string>
     <string name="section_notifications">Benachrichtigungen</string>
     <string name="novena_reminder_label">Erinnerung für Novenen</string>
     <string name="daily_at">Täglich um %s</string>

@@ -8,8 +8,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.tristinbaker.defide.data.applock.AppLockManager
 import com.tristinbaker.defide.data.backup.BackupManager
 import com.tristinbaker.defide.data.preferences.AppFont
+import com.tristinbaker.defide.data.preferences.AppLockTimeout
 import com.tristinbaker.defide.data.preferences.AppRite
 import com.tristinbaker.defide.data.preferences.AppTheme
 import com.tristinbaker.defide.data.preferences.BackupFrequency
@@ -39,6 +41,7 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val prefsRepository: UserPreferencesRepository,
     private val backupManager: BackupManager,
+    private val appLockManager: AppLockManager,
     @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
@@ -226,5 +229,18 @@ class SettingsViewModel @Inject constructor(
 
     fun setAppRite(rite: AppRite) {
         viewModelScope.launch { prefsRepository.setAppRite(rite) }
+    }
+
+    fun setAppLockEnabled(enabled: Boolean) {
+        viewModelScope.launch {
+            prefsRepository.setAppLockEnabled(enabled)
+            // The user just made this choice in an open session, so don't lock
+            // them out immediately; the lock engages on the next launch/background.
+            if (enabled) appLockManager.unlock()
+        }
+    }
+
+    fun setAppLockTimeout(timeout: AppLockTimeout) {
+        viewModelScope.launch { prefsRepository.setAppLockTimeout(timeout) }
     }
 }

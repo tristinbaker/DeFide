@@ -27,6 +27,17 @@
     <string name="section_bible_translation">圣经翻译</string>
     <string name="keep_screen_on_label">使用应用程序时保持屏幕为开启状态</string>
     <string name="full_screen_label">使用应用程序时隐藏状态栏</string>
+    <string name="section_security">安全</string>
+    <string name="app_lock_label">使用生物识别或屏幕锁定来锁定应用</string>
+    <string name="app_lock_timeout_label">离开应用后重新锁定</string>
+    <string name="app_lock_immediately">立即</string>
+    <string name="app_lock_one_minute">1 分钟后</string>
+    <string name="app_lock_five_minutes">5 分钟后</string>
+    <string name="app_lock_fifteen_minutes">15 分钟后</string>
+    <string name="app_lock_prompt_title">解锁 De Fide</string>
+    <string name="app_lock_locked_message">请验证身份以打开应用</string>
+    <string name="app_lock_unlock_button">解锁</string>
+    <string name="app_lock_unavailable">请先在设备设置中设置屏幕锁定或生物识别</string>
     <string name="section_notifications">通知</string>
     <string name="novena_reminder_label">九日敬礼</string>
     <string name="daily_at">每日%s</string>

@@ -16,6 +16,12 @@ enum class AppFont { SERIF, SYSTEM, SANS_SERIF }
 enum class RosaryOrder { DOMINICAN, FATIMA }
 enum class BackupFrequency { OFF, DAILY, WEEKLY, MONTHLY }
 enum class AppRite { MODERN, TRADITIONAL, LATIN }
+enum class AppLockTimeout(val millis: Long) {
+    IMMEDIATELY(0L),
+    ONE_MINUTE(60_000L),
+    FIVE_MINUTES(300_000L),
+    FIFTEEN_MINUTES(900_000L),
+}
 
 val AppRite.language: String
     get() = when (this) {
@@ -60,6 +66,8 @@ data class UserPreferences(
     val rosaryIntentions: List<String> = List(5) { "" },
     val rosaryIntentionInDesign: Boolean = false,
     val appRite: AppRite = AppRite.MODERN,
+    val appLockEnabled: Boolean = false,
+    val appLockTimeout: AppLockTimeout = AppLockTimeout.IMMEDIATELY,
 )
 
 @Singleton
@@ -91,6 +99,8 @@ class UserPreferencesRepository @Inject constructor(
         private val KEY_ROSARY_INTENTION_4 = stringPreferencesKey("rosary_intention_4")
         private val KEY_ROSARY_INTENTION_IN_DESIGN = androidx.datastore.preferences.core.booleanPreferencesKey("rosary_intention_in_design")
         private val KEY_APP_RITE         = stringPreferencesKey("app_rite")
+        private val KEY_APP_LOCK_ENABLED = androidx.datastore.preferences.core.booleanPreferencesKey("app_lock_enabled")
+        private val KEY_APP_LOCK_TIMEOUT = stringPreferencesKey("app_lock_timeout")
     }
 
     val preferences: Flow<UserPreferences> = dataStore.data.map { prefs ->
@@ -122,6 +132,8 @@ class UserPreferencesRepository @Inject constructor(
             ),
             rosaryIntentionInDesign = prefs[KEY_ROSARY_INTENTION_IN_DESIGN] ?: false,
             appRite = prefs[KEY_APP_RITE]?.let { runCatching { AppRite.valueOf(it) }.getOrNull() } ?: AppRite.MODERN,
+            appLockEnabled = prefs[KEY_APP_LOCK_ENABLED] ?: false,
+            appLockTimeout = prefs[KEY_APP_LOCK_TIMEOUT]?.let { runCatching { AppLockTimeout.valueOf(it) }.getOrNull() } ?: AppLockTimeout.IMMEDIATELY,
         )
     }
 
@@ -183,6 +195,14 @@ class UserPreferencesRepository @Inject constructor(
 
     suspend fun setAutoBackupFolderUri(uri: String) {
         dataStore.edit { it[KEY_AUTO_BACKUP_FOLDER_URI] = uri }
+    }
+
+    suspend fun setAppLockEnabled(enabled: Boolean) {
+        dataStore.edit { it[KEY_APP_LOCK_ENABLED] = enabled }
+    }
+
+    suspend fun setAppLockTimeout(timeout: AppLockTimeout) {
+        dataStore.edit { it[KEY_APP_LOCK_TIMEOUT] = timeout.name }
     }
 
     suspend fun setAppRite(rite: AppRite) {

@@ -1,0 +1,2 @@
+• Added optional app lock: require biometrics or your phone's screen lock to open the app, with a configurable re-lock delay (#86)
+• Added Novena to St. Jude, patron of hopeless causes (#84, thanks @NoelJacob)

@@ -27,6 +27,17 @@
     <string name="section_bible_translation">Traducción de la Biblia</string>
     <string name="keep_screen_on_label">Mantener la pantalla encendida mientras se usa la app</string>
     <string name="full_screen_label">Ocultar la barra de estado mientras se usa la app</string>
+    <string name="section_security">Seguridad</string>
+    <string name="app_lock_label">Bloquear la app con biometría o bloqueo de pantalla</string>
+    <string name="app_lock_timeout_label">Volver a bloquear al salir de la app</string>
+    <string name="app_lock_immediately">Inmediatamente</string>
+    <string name="app_lock_one_minute">Después de 1 minuto</string>
+    <string name="app_lock_five_minutes">Después de 5 minutos</string>
+    <string name="app_lock_fifteen_minutes">Después de 15 minutos</string>
+    <string name="app_lock_prompt_title">Desbloquear De Fide</string>
+    <string name="app_lock_locked_message">Autentícate para abrir la app</string>
+    <string name="app_lock_unlock_button">Desbloquear</string>
+    <string name="app_lock_unavailable">Configura primero un bloqueo de pantalla o biometría en los ajustes del dispositivo</string>
     <string name="section_notifications">Notificaciones</string>
     <string name="novena_reminder_label">Recordatorio de novena</string>
     <string name="daily_at">Diariamente a las %s</string>

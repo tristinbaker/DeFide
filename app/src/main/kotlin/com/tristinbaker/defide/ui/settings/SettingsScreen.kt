@@ -6,6 +6,7 @@ import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.biometric.BiometricManager
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -54,10 +55,12 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tristinbaker.defide.R
 import com.tristinbaker.defide.data.preferences.AppFont
+import com.tristinbaker.defide.data.preferences.AppLockTimeout
 import com.tristinbaker.defide.data.preferences.AppRite
 import com.tristinbaker.defide.data.preferences.AppTheme
 import com.tristinbaker.defide.data.preferences.BackupFrequency
 import com.tristinbaker.defide.data.preferences.RosaryOrder
+import com.tristinbaker.defide.ui.applock.APP_LOCK_AUTHENTICATORS
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -233,6 +236,79 @@ fun SettingsScreen(
                         checked = prefs.fullScreenMode,
                         onCheckedChange = { viewModel.setFullScreenMode(it) },
                     )
+                }
+                HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
+            }
+            item {
+                SectionHeader(stringResource(R.string.section_security))
+            }
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        stringResource(R.string.app_lock_label),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Switch(
+                        checked = prefs.appLockEnabled,
+                        onCheckedChange = { enabled ->
+                            val canAuthenticate = BiometricManager.from(context)
+                                .canAuthenticate(APP_LOCK_AUTHENTICATORS) == BiometricManager.BIOMETRIC_SUCCESS
+                            if (enabled && !canAuthenticate) {
+                                Toast.makeText(context, R.string.app_lock_unavailable, Toast.LENGTH_LONG).show()
+                            } else {
+                                viewModel.setAppLockEnabled(enabled)
+                            }
+                        },
+                    )
+                }
+                if (prefs.appLockEnabled) {
+                    Text(
+                        stringResource(R.string.app_lock_timeout_label),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                    )
+                    val timeoutLabels = mapOf(
+                        AppLockTimeout.IMMEDIATELY to stringResource(R.string.app_lock_immediately),
+                        AppLockTimeout.ONE_MINUTE to stringResource(R.string.app_lock_one_minute),
+                        AppLockTimeout.FIVE_MINUTES to stringResource(R.string.app_lock_five_minutes),
+                        AppLockTimeout.FIFTEEN_MINUTES to stringResource(R.string.app_lock_fifteen_minutes),
+                    )
+                    var timeoutDropdownExpanded by remember { mutableStateOf(false) }
+                    ExposedDropdownMenuBox(
+                        expanded = timeoutDropdownExpanded,
+                        onExpandedChange = { timeoutDropdownExpanded = it },
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                    ) {
+                        OutlinedTextField(
+                            value = timeoutLabels.getValue(prefs.appLockTimeout),
+                            onValueChange = {},
+                            readOnly = true,
+                            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = timeoutDropdownExpanded) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .menuAnchor(MenuAnchorType.PrimaryNotEditable),
+                        )
+                        ExposedDropdownMenu(
+                            expanded = timeoutDropdownExpanded,
+                            onDismissRequest = { timeoutDropdownExpanded = false },
+                        ) {
+                            AppLockTimeout.entries.forEach { timeout ->
+                                DropdownMenuItem(
+                                    text = { Text(timeoutLabels.getValue(timeout)) },
+                                    onClick = {
+                                        viewModel.setAppLockTimeout(timeout)
+                                        timeoutDropdownExpanded = false
+                                    },
+                                )
+                            }
+                        }
+                    }
                 }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }

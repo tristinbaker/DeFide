@@ -27,6 +27,17 @@
     <string name="section_bible_translation">Biblijos vertimas</string>
     <string name="keep_screen_on_label">Palikti įjungtą ekraną kol naudojamasi programėle</string>
     <string name="full_screen_label">Slėpti būsenos juostą kol naudojamasi programėle</string>
+    <string name="section_security">Sauga</string>
+    <string name="app_lock_label">Užrakinti programėlę biometrija arba ekrano užraktu</string>
+    <string name="app_lock_timeout_label">Užrakinti iš naujo išėjus iš programėlės</string>
+    <string name="app_lock_immediately">Iš karto</string>
+    <string name="app_lock_one_minute">Po 1 minutės</string>
+    <string name="app_lock_five_minutes">Po 5 minučių</string>
+    <string name="app_lock_fifteen_minutes">Po 15 minučių</string>
+    <string name="app_lock_prompt_title">Atrakinti „De Fide“</string>
+    <string name="app_lock_locked_message">Autentifikuokitės, kad atidarytumėte programėlę</string>
+    <string name="app_lock_unlock_button">Atrakinti</string>
+    <string name="app_lock_unavailable">Pirmiausia įrenginio nustatymuose nustatykite ekrano užraktą arba biometriją</string>
     <string name="section_notifications">Pranešimai</string>
     <string name="novena_reminder_label">Novenos priminimas</string>
     <string name="daily_at">Kasdien %s</string>
