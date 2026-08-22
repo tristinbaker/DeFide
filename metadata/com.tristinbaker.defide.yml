@@ -190,9 +190,17 @@ Builds:
     gradle:
       - yes
 
+  - versionName: 2.1.1
+    versionCode: 28
+    commit: a6dc0462b719d71d8708658be5d4f2a0a732b507
+    subdir: app
+    submodules: true
+    gradle:
+      - yes
+
 AllowedAPKSigningKeys: 99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 2.1.0
-CurrentVersionCode: 27
+CurrentVersion: 2.1.1
+CurrentVersionCode: 28
