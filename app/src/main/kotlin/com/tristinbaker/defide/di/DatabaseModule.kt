@@ -13,6 +13,7 @@ import com.tristinbaker.defide.data.db.content.dao.PrayerDao
 import com.tristinbaker.defide.data.db.content.dao.RosaryContentDao
 import com.tristinbaker.defide.data.db.content.dao.SaintsContentDao
 import com.tristinbaker.defide.data.db.user.UserDatabase
+import com.tristinbaker.defide.data.db.userbible.UserBibleDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,7 +38,7 @@ object DatabaseModule {
         contentDatabase.db
 
     @Provides
-    fun provideBibleDao(db: SQLiteDatabase) = BibleDao(db)
+    fun provideBibleDao(db: SQLiteDatabase, userBibles: UserBibleDatabase) = BibleDao(db, userBibles)
 
     @Provides
     fun providePrayerDao(db: SQLiteDatabase) = PrayerDao(db)

@@ -10,6 +10,9 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.tristinbaker.defide.data.applock.AppLockManager
 import com.tristinbaker.defide.data.backup.BackupManager
+import com.tristinbaker.defide.data.db.userbible.UserBibleDatabase
+import com.tristinbaker.defide.data.db.userbible.UserBibleImporter
+import com.tristinbaker.defide.data.model.Translation
 import com.tristinbaker.defide.data.preferences.AppFont
 import com.tristinbaker.defide.data.preferences.AppLockTimeout
 import com.tristinbaker.defide.data.preferences.AppRite
@@ -29,10 +32,14 @@ import com.tristinbaker.defide.worker.NovenaReminderWorker
 import com.tristinbaker.defide.worker.RosaryReminderWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -42,6 +49,8 @@ class SettingsViewModel @Inject constructor(
     private val prefsRepository: UserPreferencesRepository,
     private val backupManager: BackupManager,
     private val appLockManager: AppLockManager,
+    private val userBibles: UserBibleDatabase,
+    private val bibleImporter: UserBibleImporter,
     @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
@@ -50,6 +59,57 @@ class SettingsViewModel @Inject constructor(
 
     private val _backupMessage = MutableSharedFlow<String>()
     val backupMessage: SharedFlow<String> = _backupMessage.asSharedFlow()
+
+    private val _importedBibles = MutableStateFlow<List<Translation>>(emptyList())
+    val importedBibles: StateFlow<List<Translation>> = _importedBibles.asStateFlow()
+
+    private val _bibleImporting = MutableStateFlow(false)
+    val bibleImporting: StateFlow<Boolean> = _bibleImporting.asStateFlow()
+
+    init {
+        viewModelScope.launch { refreshImportedBibles() }
+    }
+
+    private suspend fun refreshImportedBibles() {
+        _importedBibles.value = withContext(Dispatchers.IO) { userBibles.getTranslations() }
+    }
+
+    fun importBible(uri: Uri, name: String) {
+        if (_bibleImporting.value) return
+        viewModelScope.launch {
+            _bibleImporting.value = true
+            val result = bibleImporter.import(uri, name)
+            _bibleImporting.value = false
+            result.fold(
+                onSuccess = { imported ->
+                    refreshImportedBibles()
+                    prefsRepository.setBibleTranslation(imported.translationId)
+                    refreshVotdWidget()
+                    _backupMessage.emit(
+                        context.getString(
+                            com.tristinbaker.defide.R.string.bible_import_success,
+                            imported.bookCount,
+                            imported.verseCount,
+                        )
+                    )
+                },
+                onFailure = {
+                    _backupMessage.emit(context.getString(com.tristinbaker.defide.R.string.bible_import_failed))
+                },
+            )
+        }
+    }
+
+    fun deleteImportedBible(translationId: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { userBibles.deleteTranslation(translationId) }
+            refreshImportedBibles()
+            val prefs = prefsRepository.preferences.first()
+            if (prefs.bibleTranslationId == translationId) {
+                setBibleTranslation(defaultTranslationFor(prefs.appLanguage))
+            }
+        }
+    }
 
     fun backup(uri: Uri) {
         viewModelScope.launch {
@@ -82,19 +142,20 @@ class SettingsViewModel @Inject constructor(
     fun setAppLanguage(language: String) {
         viewModelScope.launch {
             prefsRepository.setAppLanguage(language)
-            val defaultTranslation = when (language) {
-                "es"    -> "platense"
-                "pt-BR" -> "ave-maria"
-                "pt-PT" -> "porcap"
-                "fr"    -> "crampon"
-                "lt"    -> "rk1998"
-                "zh-CN" -> "sg"
-                "it"    -> "mar"
-                else    -> "dra"
-            }
-            prefsRepository.setBibleTranslation(defaultTranslation)
+            prefsRepository.setBibleTranslation(defaultTranslationFor(language))
             refreshVotdWidget()
         }
+    }
+
+    private fun defaultTranslationFor(language: String): String = when (language) {
+        "es"    -> "platense"
+        "pt-BR" -> "ave-maria"
+        "pt-PT" -> "porcap"
+        "fr"    -> "crampon"
+        "lt"    -> "rk1998"
+        "zh-CN" -> "sg"
+        "it"    -> "mar"
+        else    -> "dra"
     }
 
     fun setBibleTranslation(translationId: String) {

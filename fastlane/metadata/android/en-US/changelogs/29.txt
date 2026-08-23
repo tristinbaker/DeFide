@@ -1,0 +1,2 @@
+• Added Bible translation import: load your own translation from a JSON file in Settings → Bible Translation, with full-text search, Verse of the Day, bookmarks, highlights, and reading progress
+• Re-import under the same name to update an imported translation, or remove it again at any time

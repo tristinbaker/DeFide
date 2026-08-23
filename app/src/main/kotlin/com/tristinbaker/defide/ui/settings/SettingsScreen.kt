@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
@@ -28,8 +29,10 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
@@ -58,6 +61,7 @@ import com.tristinbaker.defide.data.preferences.AppFont
 import com.tristinbaker.defide.data.preferences.AppLockTimeout
 import com.tristinbaker.defide.data.preferences.AppRite
 import com.tristinbaker.defide.data.preferences.AppTheme
+import com.tristinbaker.defide.data.model.Translation
 import com.tristinbaker.defide.data.preferences.BackupFrequency
 import com.tristinbaker.defide.data.preferences.RosaryOrder
 import com.tristinbaker.defide.ui.applock.APP_LOCK_AUTHENTICATORS
@@ -454,6 +458,15 @@ fun SettingsScreen(
                         Triple("vulgate-et", "Latin Vulgate (English)",        "English translation of the Latin Vulgate"),
                     )
                 }
+                val importedBibles by viewModel.importedBibles.collectAsState()
+                val bibleImporting by viewModel.bibleImporting.collectAsState()
+                var pendingBibleUri by remember { mutableStateOf<android.net.Uri?>(null) }
+                var bibleDeleteCandidate by remember { mutableStateOf<Translation?>(null) }
+                val importBibleLauncher = rememberLauncherForActivityResult(
+                    ActivityResultContracts.OpenDocument()
+                ) { uri ->
+                    if (uri != null) pendingBibleUri = uri
+                }
                 Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
                     translations.forEach { (id, label, subtitle) ->
                         Row(
@@ -470,6 +483,108 @@ fun SettingsScreen(
                             }
                         }
                     }
+                    importedBibles.forEach { translation ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            RadioButton(
+                                selected = prefs.bibleTranslationId == translation.id,
+                                onClick = { viewModel.setBibleTranslation(translation.id) },
+                            )
+                            Column(
+                                modifier = Modifier
+                                    .padding(start = 8.dp)
+                                    .weight(1f),
+                            ) {
+                                Text(translation.name, style = MaterialTheme.typography.bodyMedium)
+                                Text(
+                                    stringResource(R.string.bible_imported_subtitle),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                            }
+                            IconButton(onClick = { bibleDeleteCandidate = translation }) {
+                                Icon(
+                                    Icons.Default.Delete,
+                                    contentDescription = stringResource(R.string.action_delete),
+                                )
+                            }
+                        }
+                    }
+                    OutlinedButton(
+                        onClick = {
+                            importBibleLauncher.launch(
+                                arrayOf("application/json", "text/plain", "application/octet-stream")
+                            )
+                        },
+                        enabled = !bibleImporting,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                    ) { Text(stringResource(R.string.bible_import_button)) }
+                    if (bibleImporting) {
+                        LinearProgressIndicator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp),
+                        )
+                    }
+                    Text(
+                        text = stringResource(R.string.bible_import_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(vertical = 4.dp),
+                    )
+                }
+                pendingBibleUri?.let { uri ->
+                    var importName by remember(uri) { mutableStateOf("") }
+                    AlertDialog(
+                        onDismissRequest = { pendingBibleUri = null },
+                        title = { Text(stringResource(R.string.bible_import_name_title)) },
+                        text = {
+                            OutlinedTextField(
+                                value = importName,
+                                onValueChange = { importName = it },
+                                singleLine = true,
+                                label = { Text(stringResource(R.string.bible_import_name_hint)) },
+                            )
+                        },
+                        confirmButton = {
+                            TextButton(
+                                enabled = importName.isNotBlank(),
+                                onClick = {
+                                    viewModel.importBible(uri, importName)
+                                    pendingBibleUri = null
+                                },
+                            ) { Text(stringResource(R.string.bible_import_confirm)) }
+                        },
+                        dismissButton = {
+                            TextButton(onClick = { pendingBibleUri = null }) {
+                                Text(stringResource(R.string.action_cancel))
+                            }
+                        },
+                    )
+                }
+                bibleDeleteCandidate?.let { translation ->
+                    AlertDialog(
+                        onDismissRequest = { bibleDeleteCandidate = null },
+                        title = { Text(stringResource(R.string.bible_import_delete_title)) },
+                        text = { Text(stringResource(R.string.bible_import_delete_message, translation.name)) },
+                        confirmButton = {
+                            TextButton(
+                                onClick = {
+                                    viewModel.deleteImportedBible(translation.id)
+                                    bibleDeleteCandidate = null
+                                },
+                            ) { Text(stringResource(R.string.action_delete)) }
+                        },
+                        dismissButton = {
+                            TextButton(onClick = { bibleDeleteCandidate = null }) {
+                                Text(stringResource(R.string.action_cancel))
+                            }
+                        },
+                    )
                 }
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
             }

@@ -46,6 +46,8 @@ class BibleScreensTest {
         composeRule.setContent {
             BibleHomeScreen(
                 onBookSelected = { _, _ -> },
+                onBookmarksSelected = {},
+                onVerseSelected = { _, _, _, _ -> },
                 onOpenDrawer = {},
                 viewModel = viewModel,
             )
@@ -71,6 +73,8 @@ class BibleScreensTest {
         composeRule.setContent {
             BibleHomeScreen(
                 onBookSelected = { _, bookNumber -> selectedBook = bookNumber },
+                onBookmarksSelected = {},
+                onVerseSelected = { _, _, _, _ -> },
                 onOpenDrawer = {},
                 viewModel = viewModel,
             )

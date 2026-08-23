@@ -53,6 +53,16 @@
     <string name="section_language">Language</string>
     <string name="translate_cta">Want to add or improve a translation? Contribute on Weblate.</string>
     <string name="section_bible_translation">Bible Translation</string>
+    <string name="bible_import_button">Import translation (JSON)</string>
+    <string name="bible_import_hint">Accepts a JSON file organized as testament, book, chapter, verse (for example the NRSVUE JSON dump).</string>
+    <string name="bible_import_name_title">Name this translation</string>
+    <string name="bible_import_name_hint">e.g. NRSVUE</string>
+    <string name="bible_import_confirm">Import</string>
+    <string name="bible_import_success">Imported %1$d books (%2$d verses)</string>
+    <string name="bible_import_failed">Import failed. The file is not a supported Bible JSON.</string>
+    <string name="bible_imported_subtitle">Imported translation</string>
+    <string name="bible_import_delete_title">Remove translation?</string>
+    <string name="bible_import_delete_message">“%1$s” and all of its verses will be removed from the app.</string>
     <string name="section_rite">Rite</string>
     <string name="rite_modern">Modern</string>
     <string name="rite_modern_desc">Local language, current rubrics</string>
